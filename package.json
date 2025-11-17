@@ -1,14 +1,13 @@
 {
   "name": "scorepredictorpro",
   "version": "1.0.0",
-  "description": "Sports predictor scraper + frontend",
-  "main": "index.js",
-  "type": "commonjs",
+  "description": "Sports score predictor with daily scraping",
+  "main": "scraper.js",
   "scripts": {
-    "build-stats": "node scripts/build-all-stats.js"
+    "build-stats": "node scraper.js"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "node-fetch": "^3.3.2"
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0"
   }
 }
