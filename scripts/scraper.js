@@ -1,202 +1,308 @@
 // scripts/scraper.js
-// Node 20-compatible scraper for TeamRankings stat pages
-// Single stat page per league -> we derive both team list + stats from it.
+// Real multi-metric scraper for TeamRankings with advanced indices
+// Works with Node 16+ using axios + cheerio.
+// Output:
+//   data/all-teams.json
+//   data/all-stats.json
 
 const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-//
-// ---- LEAGUE CONFIG ----
-// Using more reliable stat pages.
-// NFL + NCAAF now use POINTS PER GAME instead of offensive-efficiency.
-//
-const LEAGUES = {
+const DATA_DIR = path.join(__dirname, "..", "data");
+const ALL_TEAMS_PATH = path.join(DATA_DIR, "all-teams.json");
+const ALL_STATS_PATH = path.join(DATA_DIR, "all-stats.json");
+
+// Make sure data/ exists
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+// --- League + metric URLs ---
+// These are standard TeamRankings stat pages. If one ever 404s,
+// tweak just that URL.
+const LEAGUE_CONFIG = {
   NFL: {
-    statsUrl: "https://www.teamrankings.com/nfl/stat/points-per-game",
-    basePpg: 22  // typical avg points per team
+    metrics: {
+      offEff: "https://www.teamrankings.com/nfl/stat/offensive-efficiency",
+      defEff: "https://www.teamrankings.com/nfl/stat/defensive-efficiency",
+      pace:  "https://www.teamrankings.com/nfl/stat/plays-per-game",
+      ppg:   "https://www.teamrankings.com/nfl/stat/points-per-game",
+      oppPpg:"https://www.teamrankings.com/nfl/stat/opponent-points-per-game",
+      sos:   "https://www.teamrankings.com/nfl/stat/schedule-strength"
+    },
+    primaryMetric: "offEff"
   },
   NBA: {
-    statsUrl: "https://www.teamrankings.com/nba/stat/offensive-efficiency",
-    basePpg: 114
+    metrics: {
+      offEff: "https://www.teamrankings.com/nba/stat/offensive-efficiency",
+      defEff: "https://www.teamrankings.com/nba/stat/defensive-efficiency",
+      pace:  "https://www.teamrankings.com/nba/stat/possessions-per-game",
+      ppg:   "https://www.teamrankings.com/nba/stat/points-per-game",
+      oppPpg:"https://www.teamrankings.com/nba/stat/opponent-points-per-game",
+      sos:   "https://www.teamrankings.com/nba/stat/schedule-strength"
+    },
+    primaryMetric: "offEff"
   },
   MLB: {
-    statsUrl: "https://www.teamrankings.com/mlb/stat/runs-per-game",
-    basePpg: 4.5
+    metrics: {
+      // Baseball is more about runs than "efficiency"
+      offEff: "https://www.teamrankings.com/mlb/stat/runs-per-game",
+      defEff: "https://www.teamrankings.com/mlb/stat/opponent-runs-per-game",
+      pace:  "https://www.teamrankings.com/mlb/stat/at-bats-per-game",
+      ppg:   "https://www.teamrankings.com/mlb/stat/runs-per-game",
+      oppPpg:"https://www.teamrankings.com/mlb/stat/opponent-runs-per-game",
+      sos:   "https://www.teamrankings.com/mlb/stat/schedule-strength"
+    },
+    primaryMetric: "offEff"
   },
   NCAAF: {
-    statsUrl: "https://www.teamrankings.com/college-football/stat/points-per-game",
-    basePpg: 29
+    metrics: {
+      offEff: "https://www.teamrankings.com/college-football/stat/offensive-efficiency",
+      defEff: "https://www.teamrankings.com/college-football/stat/defensive-efficiency",
+      pace:  "https://www.teamrankings.com/college-football/stat/plays-per-game",
+      ppg:   "https://www.teamrankings.com/college-football/stat/points-per-game",
+      oppPpg:"https://www.teamrankings.com/college-football/stat/opponent-points-per-game",
+      sos:   "https://www.teamrankings.com/college-football/stat/schedule-strength"
+    },
+    primaryMetric: "offEff"
   },
   NCAAB: {
-    statsUrl: "https://www.teamrankings.com/ncaa-basketball/stat/offensive-efficiency",
-    basePpg: 71
+    metrics: {
+      offEff: "https://www.teamrankings.com/ncaa-basketball/stat/offensive-efficiency",
+      defEff: "https://www.teamrankings.com/ncaa-basketball/stat/defensive-efficiency",
+      pace:  "https://www.teamrankings.com/ncaa-basketball/stat/possessions-per-game",
+      ppg:   "https://www.teamrankings.com/ncaa-basketball/stat/points-per-game",
+      oppPpg:"https://www.teamrankings.com/ncaa-basketball/stat/opponent-points-per-game",
+      sos:   "https://www.teamrankings.com/ncaa-basketball/stat/schedule-strength"
+    },
+    primaryMetric: "offEff"
   }
 };
 
-//
-// ---- UTILS ----
-//
-
+// --- HTTP helper ---
 async function fetchHtml(url) {
-  console.log(`   🌐 GET ${url}`);
+  console.log("   ↳ GET", url);
   const res = await axios.get(url, {
     headers: {
       "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+        "(KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      Accept: "text/html,application/xhtml+xml"
     },
     timeout: 30000
   });
-  if (res.status !== 200) {
-    throw new Error(`HTTP ${res.status} for ${url}`);
-  }
   return res.data;
 }
 
-/**
- * Parse a TeamRankings stat table.
- * We look for a table whose header row contains "Team" and at least
- * one numeric column; we use that numeric column as "value".
- */
-function parseTeamRankingsStatTable(html, leagueKey, basePpg) {
+// --- Generic table scraper ---
+// For a given TeamRankings stat page, grab team name from first <a> in each row
+// and the LAST numeric value in that row as the metric value.
+function scrapeMetricFromHtml(html) {
   const $ = cheerio.load(html);
+  const stats = {};
 
-  let bestStats = {};
-  let bestCount = 0;
+  let foundAny = false;
 
-  $("table").each((_, table) => {
-    const $table = $(table);
+  $("table").each((ti, table) => {
+    $(table)
+      .find("tbody tr")
+      .each((i, row) => {
+        const $row = $(row);
+        const tds = $row.find("td");
+        if (!tds.length) return;
 
-    // grab header cells
-    const headers = [];
-    $table.find("thead tr th").each((i, th) => {
-      headers.push($(th).text().trim());
-    });
+        const link = $row.find("a").first();
+        const teamName = link.text().trim();
+        if (!teamName) return;
 
-    // find team column
-    const teamColIdx = headers.findIndex((h) =>
-      h.toLowerCase().includes("team")
-    );
-    if (teamColIdx === -1) return;
+        let value = NaN;
+        tds.each((ci, cell) => {
+          const txt = $(cell).text().trim().replace(/,/g, "");
+          const num = parseFloat(txt);
+          if (!Number.isNaN(num)) {
+            value = num;
+          }
+        });
 
-    // find a likely numeric stat column
-    let valueColIdx = -1;
-    headers.forEach((h, idx) => {
-      const lower = h.toLowerCase();
-      if (
-        lower.includes("offensive efficiency") ||
-        lower.includes("points per game") ||
-        lower.includes("runs per game") ||
-        lower.includes("pts/g") ||
-        lower.includes("off")
-      ) {
-        valueColIdx = idx;
-      }
-    });
+        if (!Number.isNaN(value)) {
+          stats[teamName] = value;
+          foundAny = true;
+        }
+      });
 
-    // if we didn't find a clear numeric column, pick the last column
-    if (valueColIdx === -1 && headers.length >= 3) {
-      valueColIdx = headers.length - 1;
-    }
-    if (valueColIdx === -1) return;
-
-    const stats = {};
-    let rowCount = 0;
-
-    $table.find("tbody tr").each((__, row) => {
-      const cells = $(row).find("td");
-      if (cells.length <= Math.max(teamColIdx, valueColIdx)) return;
-
-      const rawTeam = $(cells[teamColIdx]).text().trim();
-      const rawVal = $(cells[valueColIdx]).text().trim();
-      if (!rawTeam) return;
-
-      const val = parseFloat(rawVal.replace(/[^0-9.\-]/g, ""));
-      if (isNaN(val)) return;
-
-      // basic normalization:
-      // - NFL/NCAAF/MLB using PPG/RPG, val is already "points per game"
-      // - NBA/NCAAB offensive efficiency is points per 100 poss; convert
-      let ppg = val;
-      if (["NBA", "NCAAB"].includes(leagueKey)) {
-        // approximate: points per 100 poss -> divide by ~1.0 (no strong correction)
-        // you can tweak later if you want to convert to per-game more precisely.
-        ppg = (val / 100) * basePpg || basePpg;
-      }
-
-      stats[rawTeam] = {
-        off_index: val,   // use the stat as the offense index
-        def_index: 1.0,   // neutral placeholders; frontend still uses these
-        pace_index: 1.0,
-        sos_index: 1.0,
-        form_index: 1.0,
-        ppg: ppg,
-        opp_ppg: basePpg  // neutral opponent scoring baseline
-      };
-      rowCount++;
-    });
-
-    if (rowCount > bestCount) {
-      bestStats = stats;
-      bestCount = rowCount;
+    if (foundAny) {
+      // we found a valid table; stop scanning other tables
+      return false;
     }
   });
 
-  if (!bestCount) {
-    throw new Error(`No valid stat table found for ${leagueKey}`);
-  }
-
-  console.log(`   📊 Parsed ${bestCount} teams for ${leagueKey}`);
-  return bestStats;
+  return stats;
 }
 
-//
-// ---- MAIN SCRAPER ----
-//
+// --- Normalization helpers ---
+// Map raw metric values to an index range [minTarget, maxTarget]
+// so the prediction model doesn't explode.
+function buildIndex(rawMap, { minTarget = 0.9, maxTarget = 1.1, invert = false } = {}) {
+  const entries = Object.entries(rawMap).filter(([, v]) => Number.isFinite(v));
+  if (!entries.length) return {};
+
+  const values = entries.map(([, v]) => v);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+
+  const result = {};
+  for (const [team, raw] of entries) {
+    // normalized in [0,1]
+    let t = (raw - min) / range;
+    if (invert) {
+      // lower raw is better -> higher index
+      t = 1 - t;
+    }
+    const idx = minTarget + (maxTarget - minTarget) * t;
+    result[team] = idx;
+  }
+  return result;
+}
+
+// Compute simple league averages for fallback PPG/oppPPG
+function averageOfMap(rawMap) {
+  const vals = Object.values(rawMap).filter((v) => Number.isFinite(v));
+  if (!vals.length) return 0;
+  const sum = vals.reduce((a, b) => a + b, 0);
+  return sum / vals.length;
+}
+
+// --- Per-league scraper ---
+async function scrapeLeague(leagueKey, cfg) {
+  console.log(`\n🟦 Scraping ${leagueKey}…`);
+
+  const metricMaps = {}; // e.g. metricMaps.offEff = { team: value }
+
+  // 1) Scrape every metric page for this league
+  for (const [metricName, url] of Object.entries(cfg.metrics)) {
+    try {
+      const html = await fetchHtml(url);
+      const map = scrapeMetricFromHtml(html);
+      const count = Object.keys(map).length;
+      console.log(`   ✔ ${metricName}: ${count} teams`);
+      metricMaps[metricName] = map;
+    } catch (err) {
+      console.error(`   ❌ Failed metric ${metricName} for ${leagueKey}:`, err.message);
+      metricMaps[metricName] = {};
+    }
+  }
+
+  // 2) Build set of all teams that appear anywhere
+  const teamSet = new Set();
+  for (const map of Object.values(metricMaps)) {
+    for (const team of Object.keys(map)) {
+      teamSet.add(team);
+    }
+  }
+
+  const teams = Array.from(teamSet).sort();
+  console.log(`   ➜ Total teams detected for ${leagueKey}: ${teams.length}`);
+
+  // 3) Build indices
+
+  const offRaw = metricMaps.offEff || {};
+  const defRaw = metricMaps.defEff || {};
+  const paceRaw = metricMaps.pace || {};
+  const ppgRaw = metricMaps.ppg || {};
+  const oppRaw = metricMaps.oppPpg || {};
+  const sosRaw = metricMaps.sos || {};
+
+  const leaguePpgAvg = averageOfMap(ppgRaw);
+  const leagueOppAvg = averageOfMap(oppRaw);
+
+  const offIndexMap = buildIndex(offRaw, { minTarget: 0.9, maxTarget: 1.1, invert: false });
+
+  // Defensive: lower is better -> invert=true
+  const defIndexMap =
+    Object.keys(defRaw).length > 0
+      ? buildIndex(defRaw, { minTarget: 0.9, maxTarget: 1.1, invert: true })
+      : {};
+
+  // Pace: keep range tight, doesn't need huge impact
+  const paceIndexMap =
+    Object.keys(paceRaw).length > 0
+      ? buildIndex(paceRaw, { minTarget: 0.95, maxTarget: 1.05, invert: false })
+      : {};
+
+  // Strength of schedule: higher schedule strength → harder → index slightly > 1
+  const sosIndexMap =
+    Object.keys(sosRaw).length > 0
+      ? buildIndex(sosRaw, { minTarget: 0.95, maxTarget: 1.05, invert: false })
+      : {};
+
+  // Form index: based on scoring margin (PPG - Opp PPG)
+  const formRaw = {};
+  for (const team of teamSet) {
+    const pf = ppgRaw[team];
+    const pa = oppRaw[team];
+    if (Number.isFinite(pf) && Number.isFinite(pa)) {
+      formRaw[team] = pf - pa;
+    }
+  }
+  const formIndexMap =
+    Object.keys(formRaw).length > 0
+      ? buildIndex(formRaw, { minTarget: 0.9, maxTarget: 1.1, invert: false })
+      : {};
+
+  // 4) Build final per-team objects
+  const leagueStats = {};
+
+  for (const team of teamSet) {
+    const ppg = Number.isFinite(ppgRaw[team]) ? ppgRaw[team] : leaguePpgAvg;
+    const opp_ppg = Number.isFinite(oppRaw[team]) ? oppRaw[team] : leagueOppAvg;
+
+    leagueStats[team] = {
+      league: leagueKey,
+      team,
+
+      // indices
+      off_index: offIndexMap[team] || 1.0,
+      def_index: defIndexMap[team] || 1.0,
+      pace_index: paceIndexMap[team] || 1.0,
+      sos_index: sosIndexMap[team] || 1.0,
+      form_index: formIndexMap[team] || 1.0,
+
+      // real scoring numbers
+      ppg: Number.isFinite(ppg) ? ppg : 0,
+      opp_ppg: Number.isFinite(opp_ppg) ? opp_ppg : 0
+    };
+  }
+
+  return { teams, stats: leagueStats };
+}
+
+// --- MAIN ---
 (async () => {
-  console.log("🟦 SCRAPER STARTED");
+  console.log("🚀 ADVANCED SCRAPER STARTED");
 
   const allTeams = {};
   const allStats = {};
 
-  for (const [leagueKey, cfg] of Object.entries(LEAGUES)) {
-    try {
-      console.log(`\n➡️ Scraping ${leagueKey}…`);
-
-      const html = await fetchHtml(cfg.statsUrl);
-      const statsObj = parseTeamRankingsStatTable(html, leagueKey, cfg.basePpg);
-
-      // team list is just the keys of the stats object
-      const teamNames = Object.keys(statsObj).sort((a, b) =>
-        a.localeCompare(b)
-      );
-
-      allTeams[leagueKey] = teamNames;
-      allStats[leagueKey] = statsObj;
-
-      console.log(`✔ ${leagueKey}: ${teamNames.length} teams scraped`);
-    } catch (err) {
-      console.error(`❌ Error scraping ${leagueKey}:`, err.message);
-      allTeams[leagueKey] = allTeams[leagueKey] || [];
-      allStats[leagueKey] = allStats[leagueKey] || {};
+  try {
+    for (const [leagueKey, cfg] of Object.entries(LEAGUE_CONFIG)) {
+      const { teams, stats } = await scrapeLeague(leagueKey, cfg);
+      allTeams[leagueKey] = teams;
+      allStats[leagueKey] = stats;
     }
+
+    fs.writeFileSync(ALL_TEAMS_PATH, JSON.stringify(allTeams, null, 2));
+    fs.writeFileSync(ALL_STATS_PATH, JSON.stringify(allStats, null, 2));
+
+    console.log("\n✅ Scrape complete. Files updated:");
+    console.log("   ", ALL_TEAMS_PATH);
+    console.log("   ", ALL_STATS_PATH);
+    console.log("Done.");
+  } catch (err) {
+    console.error("\n❌ SCRAPER FAILED");
+    console.error(err);
+    process.exit(1);
   }
-
-  // ensure data dir
-  const dataDir = path.join(__dirname, "..", "data");
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-
-  const teamsPath = path.join(dataDir, "all-teams.json");
-  const statsPath = path.join(dataDir, "all-stats.json");
-
-  fs.writeFileSync(teamsPath, JSON.stringify(allTeams, null, 2));
-  fs.writeFileSync(statsPath, JSON.stringify(allStats, null, 2));
-
-  console.log("\n✅ Scrape complete. Files updated:");
-  console.log("   " + teamsPath);
-  console.log("   " + statsPath);
 })();
