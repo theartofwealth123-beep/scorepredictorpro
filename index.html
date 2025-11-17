@@ -3,31 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sports Score Predictor</title>
+  <title>ScorePredictor Pro</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #4338ca 100%);
+      background: radial-gradient(circle at top, #1e40af 0%, #0f172a 55%, #020617 100%);
       min-height: 100vh;
       padding: 20px;
       color: white;
     }
     .container { max-width: 1200px; margin: 0 auto; }
-    .header { text-align: center; margin-bottom: 20px; }
-    h1 { font-size: 2.2rem; margin-bottom: 8px; }
-    .subtitle { color: #93c5fd; font-size: 1rem; }
 
-    /* Top bar */
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
     .brand {
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       font-size: 0.95rem;
       text-transform: uppercase;
       opacity: 0.9;
@@ -71,6 +67,153 @@
       margin-left: 6px;
       background: rgba(16, 185, 129, 0.2);
       border: 1px solid rgba(16, 185, 129, 0.6);
+    }
+
+    .header { text-align: center; margin-bottom: 18px; }
+    h1 { font-size: 2.2rem; margin-bottom: 8px; }
+    .subtitle { color: #93c5fd; font-size: 0.95rem; opacity: 0.9; }
+
+    .paywall-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(251, 191, 36, 0.8);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+    .paywall-title { font-size: 1.2rem; margin-bottom: 6px; }
+    .paywall-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 14px;
+    }
+    .paywall-list {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 14px;
+      padding-left: 18px;
+    }
+    .paywall-list li { margin-bottom: 4px; }
+    .paywall-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(52, 211, 153, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.7);
+      margin-bottom: 8px;
+    }
+    .trial-status {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+
+    .input-section {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; }
+    label { font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+    select {
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      color: white;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+    select option { background: #020617; color: white; }
+    .predict-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #22c55e 0%, #3b82f6 40%, #8b5cf6 100%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+    }
+    .predict-btn:hover { transform: scale(1.02); }
+
+    .results { display: none; }
+    .results.show { display: block; }
+
+    .score-card {
+      background: radial-gradient(circle at top left, #22c55e 0%, #15803d 40%, #064e3b 100%);
+      border-radius: 22px;
+      padding: 26px;
+      margin-bottom: 24px;
+      text-align: center;
+      box-shadow: 0 22px 50px rgba(0,0,0,0.6);
+    }
+    .confidence {
+      display: inline-block;
+      background: rgba(15, 23, 42, 0.35);
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      border: 1px solid rgba(15, 23, 42, 0.6);
+    }
+    .scores {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .team-score {
+      background: rgba(15, 23, 42, 0.35);
+      border-radius: 15px;
+      padding: 18px;
+    }
+    .team-name { font-size: 1.05rem; margin-bottom: 4px; }
+    .score { font-size: 2.8rem; font-weight: 800; }
+    .winner-info { text-align: center; }
+    .winner-name { font-size: 1.4rem; font-weight: 800; margin: 6px 0; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+    .stat-card h3 { font-size: 1.05rem; margin-bottom: 12px; }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      font-size: 0.9rem;
+    }
+    .stat-row:last-child { border-bottom: none; }
+
+    .methodology {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
     }
 
     /* Auth modal */
@@ -135,141 +278,6 @@
       min-height: 1em;
     }
 
-    /* Paywall card */
-    .paywall-card {
-      background: rgba(15, 23, 42, 0.8);
-      border-radius: 20px;
-      padding: 24px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(251, 191, 36, 0.8);
-    }
-    .paywall-title { font-size: 1.2rem; margin-bottom: 6px; }
-    .paywall-subtitle {
-      font-size: 0.9rem;
-      opacity: 0.85;
-      margin-bottom: 14px;
-    }
-    .paywall-list {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-bottom: 14px;
-      padding-left: 18px;
-    }
-    .paywall-list li { margin-bottom: 4px; }
-    .paywall-badge {
-      display: inline-block;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      background: rgba(52, 211, 153, 0.2);
-      border: 1px solid rgba(52, 211, 153, 0.7);
-      margin-bottom: 8px;
-    }
-    .trial-status {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-
-    /* App inputs */
-    .input-section {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .form-group { display: flex; flex-direction: column; }
-    label { font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
-    select {
-      padding: 10px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      font-size: 0.9rem;
-    }
-    select option { background: #1e3a8a; color: white; }
-    .predict-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .predict-btn:hover { transform: scale(1.02); }
-    .results { display: none; }
-    .results.show { display: block; }
-
-    .score-card {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-    .confidence {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 18px;
-      border-radius: 20px;
-      margin: 16px 0;
-      font-size: 0.9rem;
-    }
-    .scores {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 20px;
-      align-items: center;
-      margin-top: 20px;
-    }
-    .team-score {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 15px;
-      padding: 22px;
-    }
-    .team-name { font-size: 1.1rem; margin-bottom: 8px; }
-    .score { font-size: 3rem; font-weight: bold; }
-    .winner-info { text-align: center; }
-    .winner-name { font-size: 1.6rem; font-weight: bold; margin: 6px 0; }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .stat-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 22px;
-    }
-    .stat-card h3 { font-size: 1.2rem; margin-bottom: 14px; }
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.9rem;
-    }
-
-    .methodology {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 22px;
-      font-size: 0.9rem;
-    }
-
     @media (max-width: 768px) {
       h1 { font-size: 1.7rem; }
       .scores { grid-template-columns: 1fr; }
@@ -288,7 +296,7 @@
 
     <div class="header">
       <h1>⚡ Sports Score Predictor</h1>
-      <p class="subtitle">Advanced Statistical Analysis & Predictions (Members Only)</p>
+      <p class="subtitle">Advanced statistical predictions across NFL, NBA, MLB, NCAAF & NCAAB</p>
     </div>
 
     <!-- PAYWALL SCREEN -->
@@ -301,8 +309,8 @@
           or use your admin login for unlimited access.
         </p>
         <ul class="paywall-list">
-          <li>Unlimited score predictions for NFL, NBA, MLB, NCAAF, and NCAAB.</li>
-          <li>League-aware model using efficiency, pace, and strength of schedule.</li>
+          <li>Unlimited predictions for NFL, NBA, MLB, NCAAF, and NCAAB.</li>
+          <li>Model blends efficiency, pace, strength of schedule & form.</li>
           <li>Admin-controlled access – keep your edge private.</li>
         </ul>
         <button class="btn btn-primary" onclick="openAuthModal('signup')">Start Free Trial</button>
@@ -353,17 +361,17 @@
             <div class="team-score">
               <div class="team-name" id="homeTeamName"></div>
               <div class="score" id="homeScore"></div>
-              <div style="opacity: 0.8;">Home</div>
+              <div style="opacity:0.8;">Home</div>
             </div>
             <div class="winner-info">
-              <div style="opacity: 0.8;">Winner</div>
+              <div style="opacity:0.8;">Winner</div>
               <div class="winner-name" id="winner"></div>
-              <div style="opacity: 0.8;" id="spread"></div>
+              <div style="opacity:0.8;" id="spread"></div>
             </div>
             <div class="team-score">
               <div class="team-name" id="awayTeamName"></div>
               <div class="score" id="awayScore"></div>
-              <div style="opacity: 0.8;">Away</div>
+              <div style="opacity:0.8;">Away</div>
             </div>
           </div>
         </div>
@@ -380,13 +388,8 @@
         </div>
 
         <div class="methodology">
-          <h3>Prediction Methodology</h3>
-          <p>
-            The model uses league-adjusted offensive and defensive indices, pace,
-            strength of schedule, recent form, and home advantage to estimate expected
-            points and allocate them between teams.
-          </p>
-          <p id="reasoningText" style="margin-top:10px; opacity:0.9;"></p>
+          <h3>Model Explanation</h3>
+          <p id="reasoningText" style="margin-top:8px; opacity:0.9;"></p>
         </div>
       </div>
     </div>
@@ -425,14 +428,14 @@
 
     function getUsers() {
       try { return JSON.parse(localStorage.getItem("sp_users") || "{}"); }
-      catch { return {}; }
+      catch (e) { return {}; }
     }
     function saveUsers(users) {
       localStorage.setItem("sp_users", JSON.stringify(users));
     }
     function getCurrentUser() {
       try { return JSON.parse(localStorage.getItem("sp_currentUser") || "null"); }
-      catch { return null; }
+      catch (e) { return null; }
     }
     function setCurrentUser(user) {
       if (user) localStorage.setItem("sp_currentUser", JSON.stringify(user));
@@ -442,22 +445,23 @@
     }
     function isTrialActive(user) {
       if (!user || !user.trialStart) return false;
-      const start = new Date(user.trialStart).getTime();
-      const now = Date.now();
-      const diffDays = (now - start) / (1000 * 60 * 60 * 24);
+      var start = new Date(user.trialStart).getTime();
+      var now = Date.now();
+      var diffDays = (now - start) / (1000 * 60 * 60 * 24);
       return diffDays < TRIAL_DAYS;
     }
     function remainingTrialText(user) {
       if (!user || !user.trialStart) return "No trial started yet.";
-      const start = new Date(user.trialStart).getTime();
-      const now = Date.now();
-      const diffMs = start + TRIAL_DAYS * 24 * 60 * 60 * 1000 - now;
+      var start = new Date(user.trialStart).getTime();
+      var now = Date.now();
+      var expiry = start + TRIAL_DAYS * 24 * 60 * 60 * 1000;
+      var diffMs = expiry - now;
       if (diffMs <= 0) return "Your free trial has expired.";
-      const remainingDays = diffMs / (1000 * 60 * 60 * 24);
-      const days = Math.floor(remainingDays);
-      const hours = Math.floor((remainingDays - days) * 24);
-      if (days <= 0) return `Trial active: about ${hours}h left`;
-      return `Trial active: about ${days}d ${hours}h left`;
+      var remainingDays = diffMs / (1000 * 60 * 60 * 24);
+      var days = Math.floor(remainingDays);
+      var hours = Math.floor((remainingDays - days) * 24);
+      if (days <= 0) return "Trial active: about " + hours + "h left";
+      return "Trial active: about " + days + "d " + hours + "h left";
     }
     function userHasAccess(user) {
       if (!user) return false;
@@ -467,43 +471,47 @@
       return false;
     }
     function renderAuthUI() {
-      const user = getCurrentUser();
-      const authControls = document.getElementById("authControls");
-      const paywallTrialText = document.getElementById("trialStatusText");
+      var user = getCurrentUser();
+      var authControls = document.getElementById("authControls");
+      var paywallTrialText = document.getElementById("trialStatusText");
       if (!authControls) return;
 
       if (!user) {
-        authControls.innerHTML = `
-          <button class="btn btn-outline" onclick="openAuthModal('login')">Log in</button>
-          <button class="btn btn-primary" onclick="openAuthModal('signup')">Start Free Trial</button>
-        `;
+        var html = "";
+        html += '<button class="btn btn-outline" onclick="openAuthModal(\'login\')">Log in</button>';
+        html += '<button class="btn btn-primary" onclick="openAuthModal(\'signup\')">Start Free Trial</button>';
+        authControls.innerHTML = html;
         if (paywallTrialText) {
           paywallTrialText.textContent = "Not signed in. Create an account to start your free 3-day trial.";
         }
       } else {
-        const accessText = userHasAccess(user)
-          ? (isTrialActive(user) && !user.isSubscribed && !user.isAdmin
-              ? remainingTrialText(user)
-              : (user.isSubscribed ? "Subscription active." : "Admin access."))
-          : "No active trial or subscription.";
+        var accessText;
+        if (userHasAccess(user)) {
+          if (isTrialActive(user) && !user.isSubscribed && !user.isAdmin) {
+            accessText = remainingTrialText(user);
+          } else {
+            accessText = user.isSubscribed ? "Subscription active." : "Admin access.";
+          }
+        } else {
+          accessText = "No active trial or subscription.";
+        }
 
-        const roleBadge = user.isAdmin
-          ? '<span class="badge">Admin</span>'
-          : user.isSubscribed
-          ? '<span class="badge">Subscriber</span>'
-          : isTrialActive(user)
-          ? '<span class="badge">Trial</span>'
-          : "";
+        var roleBadge = "";
+        if (user.isAdmin) {
+          roleBadge = '<span class="badge">Admin</span>';
+        } else if (user.isSubscribed) {
+          roleBadge = '<span class="badge">Subscriber</span>';
+        } else if (isTrialActive(user)) {
+          roleBadge = '<span class="badge">Trial</span>';
+        }
 
-        authControls.innerHTML = `
-          <div class="user-label">
-            Signed in as ${user.email}${roleBadge}
-          </div>
-          ${!user.isSubscribed && !user.isAdmin ? `
-            <button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe now</button>
-          ` : ""}
-          <button class="btn btn-danger" onclick="logout()">Log out</button>
-        `;
+        var html2 = '';
+        html2 += '<div class="user-label">Signed in as ' + user.email + roleBadge + '</div>';
+        if (!user.isSubscribed && !user.isAdmin) {
+          html2 += '<button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe now</button>';
+        }
+        html2 += '<button class="btn btn-danger" onclick="logout()">Log out</button>';
+        authControls.innerHTML = html2;
 
         if (paywallTrialText) {
           paywallTrialText.textContent = accessText;
@@ -511,9 +519,9 @@
       }
     }
     function checkAccessAndRender() {
-      const user = getCurrentUser();
-      const appContent = document.getElementById("appContent");
-      const paywall = document.getElementById("paywall");
+      var user = getCurrentUser();
+      var appContent = document.getElementById("appContent");
+      var paywall = document.getElementById("paywall");
       if (!appContent || !paywall) return;
       if (userHasAccess(user)) {
         appContent.style.display = "block";
@@ -525,13 +533,13 @@
     }
     function openAuthModal(mode) {
       authMode = mode || "login";
-      const backdrop = document.getElementById("authModalBackdrop");
-      const title = document.getElementById("authModalTitle");
-      const desc = document.getElementById("authModalDesc");
-      const primaryBtn = document.getElementById("authPrimaryBtn");
-      const toggleText = document.getElementById("authToggleText");
-      const toggleLink = document.getElementById("authToggleLink");
-      const error = document.getElementById("authError");
+      var backdrop = document.getElementById("authModalBackdrop");
+      var title = document.getElementById("authModalTitle");
+      var desc = document.getElementById("authModalDesc");
+      var primaryBtn = document.getElementById("authPrimaryBtn");
+      var toggleText = document.getElementById("authToggleText");
+      var toggleLink = document.getElementById("authToggleLink");
+      var error = document.getElementById("authError");
 
       document.getElementById("authEmail").value = "";
       document.getElementById("authPassword").value = "";
@@ -558,27 +566,28 @@
       document.getElementById("authModalBackdrop").classList.remove("show");
     }
     function toggleAuthMode() {
-      authMode = authMode === "login" ? "signup" : "login";
+      if (authMode === "login") authMode = "signup";
+      else authMode = "login";
       openAuthModal(authMode);
     }
     function handleAuthSubmit() {
-      const email = document.getElementById("authEmail").value.trim().toLowerCase();
-      const password = document.getElementById("authPassword").value;
-      const error = document.getElementById("authError");
+      var email = document.getElementById("authEmail").value.trim().toLowerCase();
+      var password = document.getElementById("authPassword").value;
+      var error = document.getElementById("authError");
       error.textContent = "";
       if (!email || !password) {
         error.textContent = "Please enter email and password.";
         return;
       }
-      const users = getUsers();
+      var users = getUsers();
       if (authMode === "signup") {
         if (users[email]) {
           error.textContent = "An account with this email already exists. Try signing in.";
           return;
         }
-        const newUser = {
-          email,
-          password,
+        var newUser = {
+          email: email,
+          password: password,
           isAdmin: email === ADMIN_EMAIL,
           isSubscribed: false,
           trialStart: new Date().toISOString()
@@ -588,7 +597,7 @@
         setCurrentUser(newUser);
         closeAuthModal();
       } else {
-        const existing = users[email];
+        var existing = users[email];
         if (!existing || existing.password !== password) {
           error.textContent = "Invalid email or password.";
           return;
@@ -604,9 +613,9 @@
       setCurrentUser(null);
     }
     function fakeSubscribe() {
-      const user = getCurrentUser();
-      if (!user) return openAuthModal("signup");
-      const users = getUsers();
+      var user = getCurrentUser();
+      if (!user) { openAuthModal("signup"); return; }
+      var users = getUsers();
       user.isSubscribed = true;
       users[user.email] = user;
       saveUsers(users);
@@ -614,8 +623,8 @@
       alert("Subscription activated (demo). In production this would happen after payment.");
     }
 
-    /************* LEAGUE PARAMS (FOR PREDICTION) *************/
-    const LEAGUE_PARAMS = {
+    /************* LEAGUE PARAMS *************/
+    var LEAGUE_PARAMS = {
       NFL:  { homeAdv: 2.3, spreadVol: 9.5 },
       NBA:  { homeAdv: 2.8, spreadVol: 13 },
       MLB:  { homeAdv: 0.4, spreadVol: 3 },
@@ -624,13 +633,13 @@
     };
 
     /************* TEAM LISTS (data/all-teams.json) *************/
-    let ALL_TEAMS = {};
-    let teamsLoaded = false;
+    var ALL_TEAMS = {};
+    var teamsLoaded = false;
 
     async function loadAllTeams() {
-      const leagueSel = document.getElementById('league');
-      const homeSel = document.getElementById('homeTeam');
-      const awaySel = document.getElementById('awayTeam');
+      var leagueSel = document.getElementById('league');
+      var homeSel = document.getElementById('homeTeam');
+      var awaySel = document.getElementById('awayTeam');
       if (!leagueSel || !homeSel || !awaySel) return;
 
       homeSel.innerHTML = '<option value="">Loading teams…</option>';
@@ -639,14 +648,15 @@
       awaySel.disabled = true;
 
       try {
-        const res = await fetch('all-teams.json'); // same folder as index.html
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        // IMPORTANT: matches /data/all-teams.json in repo root
+        var res = await fetch('/data/all-teams.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
         ALL_TEAMS = data || {};
         teamsLoaded = true;
 
         if (!ALL_TEAMS[leagueSel.value]) {
-          const leagues = Object.keys(ALL_TEAMS);
+          var leagues = Object.keys(ALL_TEAMS);
           if (leagues.length) leagueSel.value = leagues[0];
         }
 
@@ -660,47 +670,52 @@
     }
 
     function populateTeamDropdowns() {
-      const leagueSel = document.getElementById('league');
-      const homeSel = document.getElementById('homeTeam');
-      const awaySel = document.getElementById('awayTeam');
+      var leagueSel = document.getElementById('league');
+      var homeSel = document.getElementById('homeTeam');
+      var awaySel = document.getElementById('awayTeam');
       if (!leagueSel || !homeSel || !awaySel) return;
 
-      const league = leagueSel.value;
-      const teams = ALL_TEAMS[league] || [];
+      var league = leagueSel.value;
+      var teams = ALL_TEAMS[league] || [];
 
       homeSel.innerHTML = '<option value="">Select Home Team</option>';
       awaySel.innerHTML = '<option value="">Select Away Team</option>';
 
-      teams.forEach(name => {
-        const optH = document.createElement('option');
+      for (var i = 0; i < teams.length; i++) {
+        var name = teams[i];
+
+        var optH = document.createElement('option');
         optH.value = name;
         optH.textContent = name;
         homeSel.appendChild(optH);
 
-        const optA = document.createElement('option');
+        var optA = document.createElement('option');
         optA.value = name;
         optA.textContent = name;
         awaySel.appendChild(optA);
-      });
+      }
 
       homeSel.disabled = false;
       awaySel.disabled = false;
     }
 
-    /************* FETCH TEAM STATS FROM NETLIFY FUNCTION *************/
+    /************* FETCH TEAM STATS (Netlify function) *************/
     async function fetchTeamStats(league, teamName) {
-      const url = `/.netlify/functions/team-stats?league=${encodeURIComponent(league)}&team=${encodeURIComponent(teamName)}`;
-      const res = await fetch(url);
+      var url = "/.netlify/functions/team-stats?league=" +
+        encodeURIComponent(league) +
+        "&team=" + encodeURIComponent(teamName);
+      var res = await fetch(url);
       if (!res.ok) {
-        throw new Error(`Stats API error for ${teamName}: ${res.status} ${res.statusText}`);
+        throw new Error("Stats API error for " + teamName + ": " + res.status + " " + res.statusText);
       }
-      const data = await res.json();
+      var data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      const required = ["off_index", "def_index", "pace_index", "sos_index", "form_index", "ppg", "opp_ppg"];
-      for (const key of required) {
+      var required = ["off_index", "def_index", "pace_index", "sos_index", "form_index", "ppg", "opp_ppg"];
+      for (var i = 0; i < required.length; i++) {
+        var key = required[i];
         if (typeof data[key] !== "number") {
-          throw new Error(`Missing or invalid "${key}" in stats response for ${teamName}`);
+          throw new Error('Missing or invalid "' + key + '" in stats response for ' + teamName);
         }
       }
 
@@ -718,24 +733,23 @@
       };
     }
 
-    /************* PREDICTION MODEL (ADVANCED) *************/
+    /************* PREDICTION MODEL *************/
     function predictFromStats(home, away, league) {
-      const params = LEAGUE_PARAMS[league] || { homeAdv: 0, spreadVol: 10 };
+      var params = LEAGUE_PARAMS[league] || { homeAdv: 0, spreadVol: 10 };
 
-      // Base total: average of both real PPG
-      const totalPpg = (home.ppg + away.ppg) || 0;
-      const baseTotal = totalPpg || 2 * 20; // fallback
+      // Base total = avg actual PPG
+      var totalPpg = (home.ppg + away.ppg) || 0;
+      var baseTotal = totalPpg || 40; // fallback
 
-      // Pace & SOS environment multipliers
-      const avgPaceIdx = (home.pace_index + away.pace_index) / 2 || 1.0;
-      const avgSosIdx  = (home.sos_index + away.sos_index) / 2 || 1.0;
+      var avgPaceIdx = (home.pace_index + away.pace_index) / 2 || 1.0;
+      var avgSosIdx  = (home.sos_index + away.sos_index) / 2 || 1.0;
 
-      const paceFactor = 1 + (avgPaceIdx - 1) * 0.7;
-      const sosFactor  = 1 + (avgSosIdx - 1) * 0.4;
+      var paceFactor = 1 + (avgPaceIdx - 1) * 0.7;
+      var sosFactor  = 1 + (avgSosIdx - 1) * 0.4;
 
-      let envTotal = baseTotal * paceFactor * sosFactor;
+      var envTotal = baseTotal * paceFactor * sosFactor;
 
-      // Guardrails: keep totals in sane ranges by league
+      // Guardrails
       if (league === "NFL" || league === "NCAAF") {
         if (envTotal < 20) envTotal = 20;
         if (envTotal > 80) envTotal = 80;
@@ -747,35 +761,31 @@
         if (envTotal > 16) envTotal = 16;
       }
 
-      // Off vs Def interaction
-      const offVsDefHome = home.off_index / (away.def_index || 1);
-      const offVsDefAway = away.off_index / (home.def_index || 1);
+      var offVsDefHome = home.off_index / (away.def_index || 1);
+      var offVsDefAway = away.off_index / (home.def_index || 1);
 
-      // Raw scoring weights including form + actual scoring profile
-      const ppgHome = home.ppg || 1;
-      const ppgAway = away.ppg || 1;
-      const ppgSum = ppgHome + ppgAway;
+      var ppgHome = home.ppg || 1;
+      var ppgAway = away.ppg || 1;
+      var ppgSum = ppgHome + ppgAway;
 
-      let rawHome = offVsDefHome * home.form_index * (ppgHome / ppgSum);
-      let rawAway = offVsDefAway * away.form_index * (ppgAway / ppgSum);
+      var rawHome = offVsDefHome * home.form_index * (ppgHome / ppgSum);
+      var rawAway = offVsDefAway * away.form_index * (ppgAway / ppgSum);
 
       if (!isFinite(rawHome) || rawHome <= 0) rawHome = 1;
       if (!isFinite(rawAway) || rawAway <= 0) rawAway = 1;
 
-      // Amplify mismatch more heavily for college (big blowouts)
-      let exponent = 1.25; // pro leagues
+      var exponent = 1.25;
       if (league === "NCAAF" || league === "NCAAB") exponent = 1.7;
 
-      const weightHome = Math.pow(rawHome, exponent);
-      const weightAway = Math.pow(rawAway, exponent);
+      var weightHome = Math.pow(rawHome, exponent);
+      var weightAway = Math.pow(rawAway, exponent);
+      var weightSum = weightHome + weightAway || 1;
 
-      const weightSum = weightHome + weightAway || 1;
-      let shareHome = weightHome / weightSum;
-      let shareAway = weightAway / weightSum;
+      var shareHome = weightHome / weightSum;
+      var shareAway = weightAway / weightSum;
 
-      // Convert shares into points + home-field edge
-      let homeScore = envTotal * shareHome + params.homeAdv / 2;
-      let awayScore = envTotal * shareAway - params.homeAdv / 2;
+      var homeScore = envTotal * shareHome + params.homeAdv / 2;
+      var awayScore = envTotal * shareAway - params.homeAdv / 2;
 
       if (homeScore < 0) homeScore = 0;
       if (awayScore < 0) awayScore = 0;
@@ -783,41 +793,41 @@
       homeScore = Math.round(homeScore * 10) / 10;
       awayScore = Math.round(awayScore * 10) / 10;
 
-      const spread = Math.abs(homeScore - awayScore);
-      const winner = homeScore >= awayScore ? home.team : away.team;
+      var spread = Math.abs(homeScore - awayScore);
+      var winner = homeScore >= awayScore ? home.team : away.team;
 
-      let confidence;
-      const vol = params.spreadVol || 10;
+      var confidence;
+      var vol = params.spreadVol || 10;
       if (spread >= vol * 0.8) confidence = "High";
       else if (spread >= vol * 0.4) confidence = "Medium";
       else confidence = "Low";
 
       return {
-        homeScore,
-        awayScore,
-        winner,
-        spread,
-        confidence,
+        homeScore: homeScore,
+        awayScore: awayScore,
+        winner: winner,
+        spread: spread,
+        confidence: confidence,
         debug: {
-          baseTotal,
-          envTotal,
-          avgPaceIdx,
-          avgSosIdx,
-          offVsDefHome,
-          offVsDefAway,
-          rawHome,
-          rawAway,
-          shareHome,
-          shareAway
+          baseTotal: baseTotal,
+          envTotal: envTotal,
+          avgPaceIdx: avgPaceIdx,
+          avgSosIdx: avgSosIdx,
+          offVsDefHome: offVsDefHome,
+          offVsDefAway: offVsDefAway,
+          rawHome: rawHome,
+          rawAway: rawAway,
+          shareHome: shareHome,
+          shareAway: shareAway
         }
       };
     }
 
     /************* PREDICT BUTTON HANDLER *************/
     async function predictScore() {
-      const league = document.getElementById('league').value;
-      const homeTeam = document.getElementById('homeTeam').value.trim();
-      const awayTeam = document.getElementById('awayTeam').value.trim();
+      var league = document.getElementById('league').value;
+      var homeTeam = document.getElementById('homeTeam').value.trim();
+      var awayTeam = document.getElementById('awayTeam').value.trim();
       if (!homeTeam || !awayTeam) {
         alert('Select both teams from the dropdowns.');
         return;
@@ -828,12 +838,17 @@
       }
       try {
         document.getElementById('confidence').textContent = 'Loading stats...';
-        const [homeStats, awayStats] = await Promise.all([
+        var resultsDiv = document.getElementById('results');
+
+        var statsPromises = [
           fetchTeamStats(league, homeTeam),
           fetchTeamStats(league, awayTeam)
-        ]);
+        ];
+        var stats = await Promise.all(statsPromises);
+        var homeStats = stats[0];
+        var awayStats = stats[1];
 
-        const result = predictFromStats(homeStats, awayStats, league);
+        var result = predictFromStats(homeStats, awayStats, league);
 
         document.getElementById('confidence').textContent = result.confidence + ' confidence';
         document.getElementById('homeTeamName').textContent = homeStats.team + " (Home)";
@@ -844,40 +859,40 @@
         document.getElementById('spread').textContent = 'Spread: ' + result.spread.toFixed(1);
 
         document.getElementById('homeStatsTitle').textContent = homeStats.team + ' Profile';
-        document.getElementById('homeStats').innerHTML = `
-          <div class="stat-row"><span>Off Index</span><span>${homeStats.off_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>Def Index</span><span>${homeStats.def_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>Pace Index</span><span>${homeStats.pace_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>SOS Index</span><span>${homeStats.sos_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>Form Index</span><span>${homeStats.form_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>PPG</span><span>${homeStats.ppg.toFixed(1)}</span></div>
-          <div class="stat-row"><span>Opp PPG</span><span>${homeStats.opp_ppg.toFixed(1)}</span></div>
-        `;
-        document.getElementById('awayStatsTitle').textContent = awayStats.team + ' Profile';
-        document.getElementById('awayStats').innerHTML = `
-          <div class="stat-row"><span>Off Index</span><span>${awayStats.off_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>Def Index</span><span>${awayStats.def_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>Pace Index</span><span>${awayStats.pace_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>SOS Index</span><span>${awayStats.sos_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>Form Index</span><span>${awayStats.form_index.toFixed(3)}</span></div>
-          <div class="stat-row"><span>PPG</span><span>${awayStats.ppg.toFixed(1)}</span></div>
-          <div class="stat-row"><span>Opp PPG</span><span>${awayStats.opp_ppg.toFixed(1)}</span></div>
-        `;
+        document.getElementById('homeStats').innerHTML =
+          '<div class="stat-row"><span>Off Index</span><span>' + homeStats.off_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>Def Index</span><span>' + homeStats.def_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>Pace Index</span><span>' + homeStats.pace_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>SOS Index</span><span>' + homeStats.sos_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>Form Index</span><span>' + homeStats.form_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>PPG</span><span>' + homeStats.ppg.toFixed(1) + '</span></div>' +
+          '<div class="stat-row"><span>Opp PPG</span><span>' + homeStats.opp_ppg.toFixed(1) + '</span></div>';
 
-        const d = result.debug;
-        const reasoning = `
-          Base total (from PPG) is ${d.baseTotal.toFixed(1)} points. After adjusting for pace
-          (${d.avgPaceIdx.toFixed(2)}×) and strength of schedule (${d.avgSosIdx.toFixed(2)}×),
-          the game environment total is ${d.envTotal.toFixed(1)}.
-          Offense-vs-defense matchups give ${homeStats.team} a factor of ${d.offVsDefHome.toFixed(2)}
-          and ${awayStats.team} ${d.offVsDefAway.toFixed(2)}. Combined with form and scoring profile,
-          the model allocates ${(d.shareHome * 100).toFixed(1)}% of points to ${homeStats.team}
-          and ${(d.shareAway * 100).toFixed(1)}% to ${awayStats.team}, producing the projected spread of
-          ${result.spread.toFixed(1)}.
-        `;
-        document.getElementById('reasoningText').textContent = reasoning.replace(/\s+/g, " ").trim();
-        document.getElementById('results').classList.add('show');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('awayStatsTitle').textContent = awayStats.team + ' Profile';
+        document.getElementById('awayStats').innerHTML =
+          '<div class="stat-row"><span>Off Index</span><span>' + awayStats.off_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>Def Index</span><span>' + awayStats.def_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>Pace Index</span><span>' + awayStats.pace_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>SOS Index</span><span>' + awayStats.sos_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>Form Index</span><span>' + awayStats.form_index.toFixed(3) + '</span></div>' +
+          '<div class="stat-row"><span>PPG</span><span>' + awayStats.ppg.toFixed(1) + '</span></div>' +
+          '<div class="stat-row"><span>Opp PPG</span><span>' + awayStats.opp_ppg.toFixed(1) + '</span></div>';
+
+        var d = result.debug;
+        var reasoning =
+          "Base total from scoring is " + d.baseTotal.toFixed(1) + " points. " +
+          "After adjusting for pace (" + d.avgPaceIdx.toFixed(2) + "×) and strength of schedule (" +
+          d.avgSosIdx.toFixed(2) + "×), the environment total is " + d.envTotal.toFixed(1) + ". " +
+          "Offense-vs-defense matchups give " + homeStats.team + " a factor of " +
+          d.offVsDefHome.toFixed(2) + " and " + awayStats.team + " " + d.offVsDefAway.toFixed(2) + ". " +
+          "Combined with recent form and scoring profile, the model allocates " +
+          (d.shareHome * 100).toFixed(1) + "% of expected points to " + homeStats.team +
+          " and " + (d.shareAway * 100).toFixed(1) + "% to " + awayStats.team +
+          ", producing the projected spread of " + result.spread.toFixed(1) + ".";
+        document.getElementById('reasoningText').textContent = reasoning;
+
+        resultsDiv.classList.add('show');
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
         console.error(err);
         alert('Could not load stats or compute prediction. Check league/team and try again.');
@@ -885,14 +900,14 @@
     }
 
     /************* INIT *************/
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", function () {
       renderAuthUI();
       checkAccessAndRender();
       loadAllTeams();
 
-      const leagueSel = document.getElementById('league');
+      var leagueSel = document.getElementById('league');
       if (leagueSel) {
-        leagueSel.addEventListener('change', () => {
+        leagueSel.addEventListener('change', function () {
           if (teamsLoaded) populateTeamDropdowns();
         });
       }
