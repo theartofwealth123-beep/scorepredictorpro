@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sports Score Predictor Pro</title>
-
+  <title>Sports Score Predictor</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #4338ca 100%);
@@ -15,11 +13,10 @@
       padding: 20px;
       color: white;
     }
-
     .container { max-width: 1200px; margin: 0 auto; }
     .header { text-align: center; margin-bottom: 20px; }
-    h1 { font-size: 2.4rem; margin-bottom: 8px; }
-    .subtitle { color: #93c5fd; font-size: 1.05rem; }
+    h1 { font-size: 2.2rem; margin-bottom: 8px; }
+    .subtitle { color: #93c5fd; font-size: 1rem; }
 
     /* Top bar */
     .top-bar {
@@ -28,22 +25,19 @@
       align-items: center;
       margin-bottom: 15px;
     }
-
     .brand {
-      font-size: 1.1rem;
       font-weight: 700;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.05em;
+      font-size: 0.95rem;
       text-transform: uppercase;
-      opacity: 0.95;
+      opacity: 0.9;
     }
-
     .auth-buttons {
       display: flex;
       gap: 10px;
       align-items: center;
       font-size: 0.9rem;
     }
-
     .btn {
       padding: 8px 14px;
       border-radius: 999px;
@@ -51,39 +45,35 @@
       cursor: pointer;
       font-size: 0.9rem;
       font-weight: 600;
-      transition: 0.15s ease;
     }
-
     .btn-outline {
       background: transparent;
       border: 1px solid rgba(255,255,255,0.5);
       color: white;
     }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-
     .btn-primary {
       background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
       color: white;
     }
-    .btn-primary:hover { transform: scale(1.05); }
-
     .btn-danger {
-      background: rgba(239, 68, 68, 0.95);
+      background: rgba(248, 113, 113, 0.9);
       color: white;
     }
-    .btn-danger:hover { opacity: 0.8; }
-
+    .user-label {
+      opacity: 0.8;
+      font-size: 0.8rem;
+    }
     .badge {
       display: inline-block;
-      padding: 3px 8px;
+      padding: 2px 8px;
       border-radius: 999px;
-      font-size: 0.75rem;
-      background: rgba(16, 185, 129, 0.2);
-      border: 1px solid rgba(16, 185, 129, 0.5);
+      font-size: 0.7rem;
       margin-left: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.6);
     }
 
-    /* Modal */
+    /* Auth modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -94,77 +84,130 @@
       z-index: 50;
     }
     .modal-backdrop.show { display: flex; }
-
     .modal {
       background: #020617;
       border-radius: 16px;
       padding: 24px;
       width: 100%;
       max-width: 380px;
-      border: 1px solid rgba(148,163,184,0.4);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      border: 1px solid rgba(148, 163, 184, 0.4);
     }
-
-    input[type="email"], input[type="password"] {
+    .modal h2 { font-size: 1.3rem; margin-bottom: 4px; }
+    .modal-desc {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 16px;
+    }
+    .modal .form-group { margin-bottom: 12px; }
+    input[type="email"],
+    input[type="password"] {
       width: 100%;
       padding: 10px 12px;
       border-radius: 10px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.8);
       color: white;
       font-size: 0.9rem;
     }
-
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .modal-footer-text {
+      font-size: 0.8rem;
+      text-align: center;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+    .link {
+      color: #93c5fd;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      cursor: pointer;
+    }
     .error-text {
       color: #fecaca;
-      margin-top: 4px;
       font-size: 0.8rem;
+      margin-top: 4px;
       min-height: 1em;
     }
 
-    /* Paywall */
+    /* Paywall card */
     .paywall-card {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.8);
       border-radius: 20px;
       padding: 24px;
       margin-bottom: 24px;
-      border: 1px solid rgba(251,191,36,0.85);
+      border: 1px solid rgba(251, 191, 36, 0.8);
+    }
+    .paywall-title { font-size: 1.2rem; margin-bottom: 6px; }
+    .paywall-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 14px;
+    }
+    .paywall-list {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 14px;
+      padding-left: 18px;
+    }
+    .paywall-list li { margin-bottom: 4px; }
+    .paywall-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(52, 211, 153, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.7);
+      margin-bottom: 8px;
+    }
+    .trial-status {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 4px;
     }
 
+    /* App inputs */
     .input-section {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 20px;
       margin-bottom: 24px;
-      backdrop-filter: blur(10px);
     }
-
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; }
     label { font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
-
     select {
       padding: 10px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.2);
       color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 0.9rem;
     }
-
-    select option { background: #1e3a8a; }
-
+    select option { background: #1e3a8a; color: white; }
     .predict-btn {
       width: 100%;
       padding: 14px;
-      border-radius: 10px;
-      border: none;
-      color: white;
-      font-size: 1.1rem;
       background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: 0.15s ease;
     }
-    .predict-btn:hover { transform: scale(1.03); }
-
-    /* Results */
+    .predict-btn:hover { transform: scale(1.02); }
     .results { display: none; }
     .results.show { display: block; }
 
@@ -175,96 +218,117 @@
       margin-bottom: 24px;
       text-align: center;
     }
-
+    .confidence {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+    .scores {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-top: 20px;
+    }
     .team-score {
-      background: rgba(255,255,255,0.2);
-      padding: 22px;
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 15px;
+      padding: 22px;
     }
-
-    .score {
-      font-size: 3.2rem;
-      font-weight: 700;
+    .team-name { font-size: 1.1rem; margin-bottom: 6px; }
+    .label-pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(15, 23, 42, 0.3);
+      margin-bottom: 6px;
     }
+    .score { font-size: 3rem; font-weight: bold; }
+    .winner-info { text-align: center; }
+    .winner-name { font-size: 1.6rem; font-weight: bold; margin: 6px 0; }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
+      margin-bottom: 24px;
     }
-
     .stat-card {
-      background: rgba(255,255,255,0.1);
-      padding: 22px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
+      padding: 22px;
     }
-
+    .stat-card h3 { font-size: 1.2rem; margin-bottom: 14px; }
     .stat-row {
       display: flex;
       justify-content: space-between;
       padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+    }
+
+    .methodology {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 22px;
       font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
-      h1 { font-size: 1.9rem; }
-      .score { font-size: 2.5rem; }
+      h1 { font-size: 1.7rem; }
+      .scores { grid-template-columns: 1fr; }
+      .score { font-size: 2.4rem; }
+      .top-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-
-    <!-- Top Bar -->
+    <!-- Top bar -->
     <div class="top-bar">
       <div class="brand">ScorePredictor Pro</div>
       <div class="auth-buttons" id="authControls"></div>
     </div>
 
-    <!-- Header -->
     <div class="header">
       <h1>⚡ Sports Score Predictor</h1>
-      <p class="subtitle">Advanced Statistical Analysis & Member-Only Predictions</p>
+      <p class="subtitle">Advanced Statistical Analysis & Predictions (Members Only)</p>
     </div>
 
-    <!-- PAYWALL -->
+    <!-- PAYWALL SCREEN -->
     <div id="paywall">
       <div class="paywall-card">
         <div class="paywall-badge">3-Day Free Trial</div>
-
-        <h2 style="margin-bottom:8px;">Unlock ScorePredictor Pro</h2>
+        <h2 class="paywall-title">Unlock ScorePredictor Pro</h2>
         <p class="paywall-subtitle">
-          Start your free trial — no credit card required.  
-          Admin login always has unlimited access.
+          Start your free 3-day trial — no payment required. Log in any time with your account
+          or use your admin login for unlimited access.
         </p>
-
         <ul class="paywall-list">
-          <li>Predict NFL, NBA, MLB, NCAAF, and NCAAB games.</li>
-          <li>Real statistical models using efficiency indexes.</li>
-          <li>Daily auto-updated stats (serverless scraping).</li>
-          <li>Private admin mode for unrestricted usage.</li>
+          <li>Unlimited score predictions for NFL, NBA, MLB, NCAAF, and NCAAB.</li>
+          <li>League-aware model using efficiency, pace, and strength of schedule.</li>
+          <li>Admin-controlled access – keep your edge private.</li>
         </ul>
-
         <button class="btn btn-primary" onclick="openAuthModal('signup')">Start Free Trial</button>
-        <button class="btn btn-outline" onclick="openAuthModal('login')" style="margin-top:8px;">
+        <button class="btn btn-outline" onclick="openAuthModal('login')" style="margin-left:8px;margin-top:8px;">
           Log In
         </button>
-
-        <p id="trialStatusText" class="trial-status"></p>
+        <p class="trial-status" id="trialStatusText"></p>
       </div>
     </div>
 
-    <!-- MAIN APP (Requires Login) -->
+    <!-- MAIN APP (GATED) -->
     <div id="appContent" style="display:none;">
-
-      <!-- Input Panel -->
       <div class="input-section">
         <div class="form-grid">
-
           <div class="form-group">
             <label>League</label>
             <select id="league">
+              <!-- value must match keys in all-teams.json and TeamRankings scraper -->
               <option value="NFL">NFL</option>
               <option value="NBA">NBA</option>
               <option value="MLB">MLB</option>
@@ -287,502 +351,616 @@
             </select>
           </div>
         </div>
-
         <button class="predict-btn" onclick="predictScore()">🎯 Generate Prediction</button>
       </div>
 
-      <!-- RESULTS -->
       <div id="results" class="results">
-
-        <!-- Score Card -->
         <div class="score-card">
           <h2>Predicted Final Score</h2>
-
           <div class="confidence" id="confidence"></div>
-
-          <div class="scores" style="display:grid;grid-template-columns:1fr auto 1fr;gap:20px;margin-top:20px;">
-
+          <div class="scores">
             <div class="team-score">
+              <div class="label-pill">Home</div>
               <div class="team-name" id="homeTeamName"></div>
               <div class="score" id="homeScore"></div>
-              <div style="opacity:0.8;margin-top:5px;">Home</div>
             </div>
-
-            <div class="winner-info" style="text-align:center;">
-              <div style="opacity:0.7;">Winner</div>
+            <div class="winner-info">
+              <div style="opacity: 0.8;">Projected Winner</div>
               <div class="winner-name" id="winner"></div>
-              <div id="spread" style="opacity:0.75;margin-top:4px;"></div>
+              <div style="opacity: 0.8;" id="spread"></div>
             </div>
-
             <div class="team-score">
+              <div class="label-pill">Away</div>
               <div class="team-name" id="awayTeamName"></div>
               <div class="score" id="awayScore"></div>
-              <div style="opacity:0.8;margin-top:5px;">Away</div>
             </div>
-
           </div>
         </div>
 
-        <!-- Team Stats Comparison -->
         <div class="stats-grid">
-
           <div class="stat-card">
             <h3 id="homeStatsTitle"></h3>
             <div id="homeStats"></div>
           </div>
-
           <div class="stat-card">
             <h3 id="awayStatsTitle"></h3>
             <div id="awayStats"></div>
           </div>
-
         </div>
 
-        <!-- Methodology -->
         <div class="methodology">
-          <h3>Model Explanation</h3>
+          <h3>Prediction Methodology</h3>
           <p>
-            Our model blends offensive/defensive efficiency, pace, form index,
-            strength of schedule, and home-field advantage into a unified prediction.
+            The model uses offensive/defensive efficiency indices, pace, strength of schedule,
+            recent form, and home-field advantage on top of raw scoring (PPG / Opp PPG) to create
+            league-aware projections.
           </p>
-          <p id="reasoningText" style="opacity:0.9;margin-top:10px;"></p>
+          <p id="reasoningText" style="margin-top:10px; opacity:0.9;"></p>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- AUTH MODAL -->
+  <!-- Auth modal -->
   <div id="authModalBackdrop" class="modal-backdrop">
     <div class="modal">
       <h2 id="authModalTitle">Sign in</h2>
       <p class="modal-desc" id="authModalDesc"></p>
-
       <div class="form-group">
-        <label>Email</label>
+        <label for="authEmail">Email</label>
         <input type="email" id="authEmail" placeholder="you@example.com" />
       </div>
-
       <div class="form-group">
-        <label>Password</label>
+        <label for="authPassword">Password</label>
         <input type="password" id="authPassword" placeholder="••••••••" />
       </div>
-
-      <div id="authError" class="error-text"></div>
-
+      <div class="error-text" id="authError"></div>
       <div class="modal-actions">
-        <button id="authPrimaryBtn" class="btn btn-primary"></button>
+        <button class="btn btn-primary" id="authPrimaryBtn"></button>
         <button class="btn btn-outline" onclick="closeAuthModal()">Cancel</button>
       </div>
-
       <div class="modal-footer-text">
         <span id="authToggleText"></span>
         <span class="link" id="authToggleLink" onclick="toggleAuthMode()"></span>
       </div>
     </div>
   </div>
-<script>
-/*************************************************
- *                 AUTH SYSTEM
- *************************************************/
-const ADMIN_EMAIL = "ben_sovilla@yahoo.com";
-const TRIAL_DAYS = 3;
-let authMode = "login";
 
-function getUsers() {
-  return JSON.parse(localStorage.getItem("sp_users") || "{}");
-}
-function saveUsers(users) {
-  localStorage.setItem("sp_users", JSON.stringify(users));
-}
+  <script>
+    /************* AUTH + TRIAL LAYER *************/
+    const ADMIN_EMAIL = "ben_sovilla@yahoo.com";
+    const TRIAL_DAYS = 3;
+    let authMode = "login";
 
-function getCurrentUser() {
-  return JSON.parse(localStorage.getItem("sp_currentUser") || "null");
-}
-function setCurrentUser(user) {
-  if (user) localStorage.setItem("sp_currentUser", JSON.stringify(user));
-  else localStorage.removeItem("sp_currentUser");
+    function getUsers() {
+      try { return JSON.parse(localStorage.getItem("sp_users") || "{}"); }
+      catch { return {}; }
+    }
+    function saveUsers(users) {
+      localStorage.setItem("sp_users", JSON.stringify(users));
+    }
+    function getCurrentUser() {
+      try { return JSON.parse(localStorage.getItem("sp_currentUser") || "null"); }
+      catch { return null; }
+    }
+    function setCurrentUser(user) {
+      if (user) localStorage.setItem("sp_currentUser", JSON.stringify(user));
+      else localStorage.removeItem("sp_currentUser");
+      renderAuthUI();
+      checkAccessAndRender();
+    }
+    function isTrialActive(user) {
+      if (!user || !user.trialStart) return false;
+      const start = new Date(user.trialStart).getTime();
+      const now = Date.now();
+      const diffDays = (now - start) / (1000 * 60 * 60 * 24);
+      return diffDays < TRIAL_DAYS;
+    }
+    function remainingTrialText(user) {
+      if (!user || !user.trialStart) return "No trial started yet.";
+      const start = new Date(user.trialStart).getTime();
+      const now = Date.now();
+      const diffMs = start + TRIAL_DAYS * 24 * 60 * 60 * 1000 - now;
+      if (diffMs <= 0) return "Your free trial has expired.";
+      const remainingDays = diffMs / (1000 * 60 * 60 * 24);
+      const days = Math.floor(remainingDays);
+      const hours = Math.floor((remainingDays - days) * 24);
+      if (days <= 0) return `Trial active: about ${hours}h left`;
+      return `Trial active: about ${days}d ${hours}h left`;
+    }
+    function userHasAccess(user) {
+      if (!user) return false;
+      if (user.isAdmin) return true;
+      if (user.isSubscribed) return true;
+      if (isTrialActive(user)) return true;
+      return false;
+    }
+    function renderAuthUI() {
+      const user = getCurrentUser();
+      const authControls = document.getElementById("authControls");
+      const paywallTrialText = document.getElementById("trialStatusText");
+      if (!authControls) return;
 
-  renderAuthUI();
-  checkAccessAndRender();
-}
+      if (!user) {
+        authControls.innerHTML = `
+          <button class="btn btn-outline" onclick="openAuthModal('login')">Log in</button>
+          <button class="btn btn-primary" onclick="openAuthModal('signup')">Start Free Trial</button>
+        `;
+        if (paywallTrialText) {
+          paywallTrialText.textContent = "Not signed in. Create an account to start your free 3-day trial.";
+        }
+      } else {
+        const accessText = userHasAccess(user)
+          ? (isTrialActive(user) && !user.isSubscribed && !user.isAdmin
+              ? remainingTrialText(user)
+              : (user.isSubscribed ? "Subscription active." : "Admin access."))
+          : "No active trial or subscription.";
 
-function isTrialActive(user) {
-  if (!user || !user.trialStart) return false;
-  const start = new Date(user.trialStart).getTime();
-  const now = Date.now();
-  return (now - start) / 86400000 < TRIAL_DAYS;
-}
+        const roleBadge = user.isAdmin
+          ? '<span class="badge">Admin</span>'
+          : user.isSubscribed
+          ? '<span class="badge">Subscriber</span>'
+          : isTrialActive(user)
+          ? '<span class="badge">Trial</span>'
+          : "";
 
-function userHasAccess(user) {
-  if (!user) return false;
-  if (user.isAdmin || user.isSubscribed || isTrialActive(user)) return true;
-  return false;
-}
+        authControls.innerHTML = `
+          <div class="user-label">
+            Signed in as ${user.email}${roleBadge}
+          </div>
+          ${!user.isSubscribed && !user.isAdmin ? `
+            <button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe now</button>
+          ` : ""}
+          <button class="btn btn-danger" onclick="logout()">Log out</button>
+        `;
 
-function remainingTrialText(user) {
-  const start = new Date(user.trialStart).getTime();
-  const now = Date.now();
-  const expires = start + TRIAL_DAYS * 86400000;
-  const diff = expires - now;
-
-  if (diff <= 0) return "Your free trial has expired.";
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  return `Trial active: ${days}d ${hours}h left`;
-}
-
-function renderAuthUI() {
-  const user = getCurrentUser();
-  const ctrl = document.getElementById("authControls");
-  const trialText = document.getElementById("trialStatusText");
-
-  if (!user) {
-    ctrl.innerHTML = `
-      <button class="btn btn-outline" onclick="openAuthModal('login')">Log In</button>
-      <button class="btn btn-primary" onclick="openAuthModal('signup')">Start Free Trial</button>
-    `;
-    trialText.textContent = "Not signed in.";
-    return;
-  }
-
-  const badge = user.isAdmin
-    ? `<span class="badge">Admin</span>`
-    : user.isSubscribed
-    ? `<span class="badge">Subscriber</span>`
-    : `<span class="badge">Trial</span>`;
-
-  ctrl.innerHTML = `
-      <div class="user-label">Signed in as ${user.email}${badge}</div>
-      ${
-        !user.isAdmin && !user.isSubscribed
-          ? `<button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe now</button>`
-          : ""
+        if (paywallTrialText) {
+          paywallTrialText.textContent = accessText;
+        }
       }
-      <button class="btn btn-danger" onclick="logout()">Log out</button>
-  `;
+    }
+    function checkAccessAndRender() {
+      const user = getCurrentUser();
+      const appContent = document.getElementById("appContent");
+      const paywall = document.getElementById("paywall");
+      if (!appContent || !paywall) return;
+      if (userHasAccess(user)) {
+        appContent.style.display = "block";
+        paywall.style.display = "none";
+      } else {
+        appContent.style.display = "none";
+        paywall.style.display = "block";
+      }
+    }
+    function openAuthModal(mode) {
+      authMode = mode || "login";
+      const backdrop = document.getElementById("authModalBackdrop");
+      const title = document.getElementById("authModalTitle");
+      const desc = document.getElementById("authModalDesc");
+      const primaryBtn = document.getElementById("authPrimaryBtn");
+      const toggleText = document.getElementById("authToggleText");
+      const toggleLink = document.getElementById("authToggleLink");
+      const error = document.getElementById("authError");
 
-  trialText.textContent = user.isAdmin
-    ? "Admin access."
-    : user.isSubscribed
-    ? "Subscription active."
-    : remainingTrialText(user);
-}
+      document.getElementById("authEmail").value = "";
+      document.getElementById("authPassword").value = "";
+      error.textContent = "";
 
-function checkAccessAndRender() {
-  const user = getCurrentUser();
-  const app = document.getElementById("appContent");
-  const paywall = document.getElementById("paywall");
+      if (authMode === "login") {
+        title.textContent = "Sign in to your account";
+        desc.textContent = "Access your subscription or continue your free trial.";
+        primaryBtn.textContent = "Sign in";
+        toggleText.textContent = "Don't have an account?";
+        toggleLink.textContent = "Create one";
+      } else {
+        title.textContent = "Create your account";
+        desc.textContent = "Start your 3-day free trial. No payment required to begin.";
+        primaryBtn.textContent = "Create account";
+        toggleText.textContent = "Already have an account?";
+        toggleLink.textContent = "Sign in";
+      }
 
-  if (userHasAccess(user)) {
-    app.style.display = "block";
-    paywall.style.display = "none";
-  } else {
-    paywall.style.display = "block";
-    app.style.display = "none";
-  }
-}
-
-function openAuthModal(mode) {
-  authMode = mode;
-  const backdrop = document.getElementById("authModalBackdrop");
-  const title = document.getElementById("authModalTitle");
-  const desc = document.getElementById("authModalDesc");
-  const btn = document.getElementById("authPrimaryBtn");
-  const toggleText = document.getElementById("authToggleText");
-  const toggleLink = document.getElementById("authToggleLink");
-
-  document.getElementById("authEmail").value = "";
-  document.getElementById("authPassword").value = "";
-  document.getElementById("authError").textContent = "";
-
-  if (mode === "login") {
-    title.textContent = "Log In";
-    desc.textContent = "Access ScorePredictor Pro";
-    btn.textContent = "Log in";
-    toggleText.textContent = "Don't have an account?";
-    toggleLink.textContent = "Create one";
-  } else {
-    title.textContent = "Create Account";
-    desc.textContent = "Start your 3-day free trial.";
-    btn.textContent = "Create Account";
-    toggleText.textContent = "Already have an account?";
-    toggleLink.textContent = "Log in";
-  }
-
-  btn.onclick = handleAuthSubmit;
-  backdrop.classList.add("show");
-}
-
-function closeAuthModal() {
-  document.getElementById("authModalBackdrop").classList.remove("show");
-}
-
-function toggleAuthMode() {
-  openAuthModal(authMode === "login" ? "signup" : "login");
-}
-
-function handleAuthSubmit() {
-  const email = document.getElementById("authEmail").value.trim().toLowerCase();
-  const password = document.getElementById("authPassword").value;
-  const error = document.getElementById("authError");
-
-  if (!email || !password) {
-    error.textContent = "Enter email and password.";
-    return;
-  }
-
-  const users = getUsers();
-
-  if (authMode === "signup") {
-    if (users[email]) {
-      error.textContent = "Account already exists.";
-      return;
+      primaryBtn.onclick = handleAuthSubmit;
+      backdrop.classList.add("show");
+    }
+    function closeAuthModal() {
+      document.getElementById("authModalBackdrop").classList.remove("show");
+    }
+    function toggleAuthMode() {
+      authMode = authMode === "login" ? "signup" : "login";
+      openAuthModal(authMode);
+    }
+    function handleAuthSubmit() {
+      const email = document.getElementById("authEmail").value.trim().toLowerCase();
+      const password = document.getElementById("authPassword").value;
+      const error = document.getElementById("authError");
+      error.textContent = "";
+      if (!email || !password) {
+        error.textContent = "Please enter email and password.";
+        return;
+      }
+      const users = getUsers();
+      if (authMode === "signup") {
+        if (users[email]) {
+          error.textContent = "An account with this email already exists. Try signing in.";
+          return;
+        }
+        const newUser = {
+          email,
+          password,
+          isAdmin: email === ADMIN_EMAIL,
+          isSubscribed: false,
+          trialStart: new Date().toISOString()
+        };
+        users[email] = newUser;
+        saveUsers(users);
+        setCurrentUser(newUser);
+        closeAuthModal();
+      } else {
+        const existing = users[email];
+        if (!existing || existing.password !== password) {
+          error.textContent = "Invalid email or password.";
+          return;
+        }
+        existing.isAdmin = email === ADMIN_EMAIL;
+        users[email] = existing;
+        saveUsers(users);
+        setCurrentUser(existing);
+        closeAuthModal();
+      }
+    }
+    function logout() {
+      setCurrentUser(null);
+    }
+    function fakeSubscribe() {
+      const user = getCurrentUser();
+      if (!user) return openAuthModal("signup");
+      const users = getUsers();
+      user.isSubscribed = true;
+      users[user.email] = user;
+      saveUsers(users);
+      setCurrentUser(user);
+      alert("Subscription activated (demo). In production this would happen after payment.");
     }
 
-    users[email] = {
-      email,
-      password,
-      isAdmin: email === ADMIN_EMAIL,
-      isSubscribed: false,
-      trialStart: new Date().toISOString()
+    /************* LEAGUE SCORING CONFIG + HELPERS *************/
+    const leagueConfig = {
+      NFL:  { avgPointsPerTeam: 22,  totalPointsStd: 10, homeAdvDefault: 2.5 },
+      NBA:  { avgPointsPerTeam: 114, totalPointsStd: 15, homeAdvDefault: 3.0 },
+      MLB:  { avgPointsPerTeam: 4.5, totalPointsStd: 3,  homeAdvDefault: 0.3 },
+      NCAAF:{ avgPointsPerTeam: 29,  totalPointsStd: 12, homeAdvDefault: 3.5 },
+      NCAAB:{ avgPointsPerTeam: 71,  totalPointsStd: 12, homeAdvDefault: 3.8 }
     };
 
-    saveUsers(users);
-    setCurrentUser(users[email]);
-    closeAuthModal();
-    return;
-  }
+    function clamp(x, min, max) {
+      return Math.max(min, Math.min(max, x));
+    }
+    function safeNum(x, fallback = 1) {
+      const n = Number(x);
+      return Number.isFinite(n) && n > 0 ? n : fallback;
+    }
+    function basePoints(attPPG, defOppPPG, leagueAvg) {
+      attPPG   = safeNum(attPPG, leagueAvg);
+      defOppPPG = safeNum(defOppPPG, leagueAvg);
+      return 0.5 * attPPG + 0.3 * defOppPPG + 0.2 * leagueAvg;
+    }
+    function roundOne(x) { return Math.round(x * 10) / 10; }
 
-  if (!users[email] || users[email].password !== password) {
-    error.textContent = "Invalid email or password.";
-    return;
-  }
+    /************* ADVANCED PREDICTION MODEL *************/
+    function predictFromRealStats(homeStats, awayStats, league) {
+      const cfg = leagueConfig[league];
+      if (!cfg) throw new Error("Unknown league: " + league);
 
-  setCurrentUser(users[email]);
-  closeAuthModal();
-}
+      const leagueAvg = cfg.avgPointsPerTeam;
+      const home = homeStats;
+      const away = awayStats;
 
-function logout() {
-  setCurrentUser(null);
-}
+      // 1) Base expectation from PPG & Opp PPG
+      const baseHome = basePoints(home.ppg, away.opp_ppg, leagueAvg);
+      const baseAway = basePoints(away.ppg, home.opp_ppg, leagueAvg);
 
-function fakeSubscribe() {
-  const user = getCurrentUser();
-  const users = getUsers();
-  users[user.email].isSubscribed = true;
-  saveUsers(users);
-  setCurrentUser(users[user.email]);
-  alert("Subscription activated (demo mode)");
-}
+      // 2) Scoring & defensive strength vs league
+      const homeScoreStrength = clamp(safeNum(home.ppg, leagueAvg) / leagueAvg, 0.7, 1.4);
+      const awayScoreStrength = clamp(safeNum(away.ppg, leagueAvg) / leagueAvg, 0.7, 1.4);
 
-/*************************************************
- *                 TEAM LOADING
- *************************************************/
+      const homeDefWeakness = clamp(safeNum(away.opp_ppg, leagueAvg) / leagueAvg, 0.7, 1.4);
+      const awayDefWeakness = clamp(safeNum(home.opp_ppg, leagueAvg) / leagueAvg, 0.7, 1.4);
 
-let ALL_TEAMS = {};
-let ALL_STATS = {};
-let teamsReady = false;
+      // 3) Pace, SOS, form
+      const paceHome = safeNum(home.pace_index, 1);
+      const paceAway = safeNum(away.pace_index, 1);
+      const avgPace  = (paceHome + paceAway) / 2;
+      const paceMultiplier = clamp(avgPace, 0.9, 1.1);
 
-async function loadAllTeams() {
-  try {
-    const res = await fetch("/data/all-teams.json");
-    if (!res.ok) throw new Error("all-teams.json missing");
-    ALL_TEAMS = await res.json();
-    teamsReady = true;
-    populateTeamDropdowns();
-  } catch (err) {
-    alert("Error loading team list: " + err.message);
-  }
-}
+      const sosHome = safeNum(home.sos_index, 1);
+      const sosAway = safeNum(away.sos_index, 1);
+      const avgSos  = (sosHome + sosAway) / 2;
+      const sosMultiplier = clamp(avgSos, 0.9, 1.1);
 
-function populateTeamDropdowns() {
-  const league = document.getElementById("league").value;
-  const homeSel = document.getElementById("homeTeam");
-  const awaySel = document.getElementById("awayTeam");
+      const formHome = safeNum(home.form_index, 1);
+      const formAway = safeNum(away.form_index, 1);
+      const avgForm  = (formHome + formAway) / 2;
+      const formMultiplier = clamp(avgForm, 0.9, 1.1);
 
-  const teams = ALL_TEAMS[league] || [];
+      // 4) Off/Def efficiency ratios
+      const offIndexHome = safeNum(home.off_index, leagueAvg);
+      const offIndexAway = safeNum(away.off_index, leagueAvg);
+      const defIndexHome = safeNum(home.def_index, leagueAvg);
+      const defIndexAway = safeNum(away.def_index, leagueAvg);
 
-  homeSel.innerHTML = `<option value="">Select Home Team</option>`;
-  awaySel.innerHTML = `<option value="">Select Away Team</option>`;
+      const effRatioHome = clamp(offIndexHome / defIndexAway, 0.85, 1.15);
+      const effRatioAway = clamp(offIndexAway / defIndexHome, 0.85, 1.15);
 
-  teams.forEach(t => {
-    const h = document.createElement("option");
-    h.value = t;
-    h.textContent = t;
+      // 5) Combine all into multipliers
+      const multHome =
+        homeScoreStrength *
+        homeDefWeakness *
+        paceMultiplier *
+        sosMultiplier *
+        formMultiplier *
+        effRatioHome;
 
-    const a = h.cloneNode(true);
+      const multAway =
+        awayScoreStrength *
+        awayDefWeakness *
+        paceMultiplier *
+        sosMultiplier *
+        formMultiplier *
+        effRatioAway;
 
-    homeSel.appendChild(h);
-    awaySel.appendChild(a);
-  });
-}
+      let rawHome = baseHome * multHome;
+      let rawAway = baseAway * multAway;
 
-/*************************************************
- *          FETCH LIVE STATS (Netlify Function)
- *************************************************/
-async function fetchTeamStats(league, team) {
-  const url = `/.netlify/functions/team-stats?league=${encodeURIComponent(
-    league
-  )}&team=${encodeURIComponent(team)}`;
+      // 6) Home-field edge
+      const homeEdgePoints = cfg.homeAdvDefault || 0;
+      rawHome += homeEdgePoints / 2;
+      rawAway -= homeEdgePoints / 2;
+      if (rawAway < 0) {
+        const diff = -rawAway;
+        rawAway = 0;
+        rawHome = Math.max(0, rawHome - diff);
+      }
 
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`(${res.status}) Failed for ${team}`);
+      // 7) Clamp totals to realistic band
+      let preScaleTotal = rawHome + rawAway;
+      if (preScaleTotal <= 0) {
+        preScaleTotal = 2 * leagueAvg;
+        rawHome = leagueAvg;
+        rawAway = leagueAvg;
+      }
 
-  const data = await res.json();
-  if (data.error) throw new Error(data.error);
+      const desiredMin = leagueAvg * 1.6;
+      const desiredMax = leagueAvg * 2.6;
+      const desiredTotal = clamp(preScaleTotal, desiredMin, desiredMax);
+      const scale = desiredTotal / preScaleTotal;
 
-  return data;
-}
+      rawHome *= scale;
+      rawAway *= scale;
 
-/*************************************************
- *                 PREDICTION ENGINE
- *************************************************/
-const leagueConfig = {
-  NFL: { avgPoints: 22, std: 10, homeAdv: 2.5 },
-  NBA: { avgPoints: 114, std: 15, homeAdv: 3.0 },
-  MLB: { avgPoints: 4.5, std: 3, homeAdv: 0.3 },
-  NCAAF: { avgPoints: 29, std: 12, homeAdv: 3.5 },
-  NCAAB: { avgPoints: 71, std: 12, homeAdv: 3.8 },
-};
+      const homeScore = roundOne(rawHome);
+      const awayScore = roundOne(rawAway);
+      const spread = Math.abs(rawHome - rawAway);
 
-function round1(x) {
-  return Math.round(x * 10) / 10;
-}
+      let confidence;
+      if (spread >= cfg.totalPointsStd * 0.6) confidence = "High";
+      else if (spread >= cfg.totalPointsStd * 0.3) confidence = "Medium";
+      else confidence = "Low";
 
-function simulateScore(home, away, league) {
-  const cfg = leagueConfig[league];
-  const base = cfg.avgPoints * 2;
+      const finalTotal = rawHome + rawAway;
 
-  const env =
-    ((home.pace_index + away.pace_index) / 2) *
-    ((home.sos_index + away.sos_index) / 2);
+      return {
+        homeScore,
+        awayScore,
+        confidence,
+        winner: rawHome >= rawAway ? home.team : away.team,
+        spread: roundOne(spread),
+        debug: {
+          leagueAvg,
+          baseHome,
+          baseAway,
+          paceMultiplier,
+          sosMultiplier,
+          formMultiplier,
+          effMultiplierHome: effRatioHome,
+          effMultiplierAway: effRatioAway,
+          homeScoreStrength,
+          awayScoreStrength,
+          homeDefWeakness,
+          awayDefWeakness,
+          homeEdgePoints,
+          preScaleTotal,
+          finalTotal
+        }
+      };
+    }
 
-  const match =
-    (home.off_index / away.def_index +
-      away.off_index / home.def_index) /
-    2;
+    /************* TEAM LISTS (from data/all-teams.json) *************/
+    let ALL_TEAMS = {};
+    let teamsLoaded = false;
 
-  const rawTotal = base * env * match;
-  const homeAdv = home.home_adv_points ?? cfg.homeAdv;
+    async function loadAllTeams() {
+      const leagueSel = document.getElementById('league');
+      const homeSel = document.getElementById('homeTeam');
+      const awaySel = document.getElementById('awayTeam');
+      if (!leagueSel || !homeSel || !awaySel) return;
 
-  const homeW =
-    (home.off_index / away.def_index) *
-    home.form_index *
-    (1 + homeAdv / rawTotal);
+      homeSel.innerHTML = '<option value="">Loading teams…</option>';
+      awaySel.innerHTML = '<option value="">Loading teams…</option>';
+      homeSel.disabled = true;
+      awaySel.disabled = true;
 
-  const awayW = (away.off_index / home.def_index) * away.form_index;
+      try {
+        const res = await fetch('/data/all-teams.json');  // generated by your scraper
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        ALL_TEAMS = data || {};
+        teamsLoaded = true;
 
-  const weightSum = homeW + awayW;
+        if (!ALL_TEAMS[leagueSel.value]) {
+          const leagues = Object.keys(ALL_TEAMS);
+          if (leagues.length) leagueSel.value = leagues[0];
+        }
 
-  const homeScore = round1(rawTotal * (homeW / weightSum));
-  const awayScore = round1(rawTotal * (awayW / weightSum));
+        populateTeamDropdowns();
+      } catch (err) {
+        console.error(err);
+        homeSel.innerHTML = '<option value="">Error loading teams</option>';
+        awaySel.innerHTML = '<option value="">Error loading teams</option>';
+        alert('Error loading team list: ' + err.message);
+      }
+    }
 
-  return {
-    homeScore,
-    awayScore,
-    winner: homeScore >= awayScore ? home.team : away.team,
-    spread: round1(Math.abs(homeScore - awayScore)),
-    confidence:
-      Math.abs(homeScore - awayScore) >= cfg.std * 0.6
-        ? "High"
-        : Math.abs(homeScore - awayScore) >= cfg.std * 0.3
-        ? "Medium"
-        : "Low",
-  };
-}
+    function populateTeamDropdowns() {
+      const leagueSel = document.getElementById('league');
+      const homeSel = document.getElementById('homeTeam');
+      const awaySel = document.getElementById('awayTeam');
+      if (!leagueSel || !homeSel || !awaySel) return;
 
-/*************************************************
- *           BUTTON HANDLER: PREDICT
- *************************************************/
-async function predictScore() {
-  const league = document.getElementById("league").value;
-  const home = document.getElementById("homeTeam").value;
-  const away = document.getElementById("awayTeam").value;
+      const league = leagueSel.value;
+      const teams = ALL_TEAMS[league] || [];
 
-  if (!home || !away) {
-    alert("Choose Home and Away teams.");
-    return;
-  }
-  if (home === away) {
-    alert("Teams must be different.");
-    return;
-  }
+      homeSel.innerHTML = '<option value="">Select Home Team</option>';
+      awaySel.innerHTML = '<option value="">Select Away Team</option>';
 
-  try {
-    document.getElementById("confidence").textContent = "Loading stats…";
+      teams.forEach(name => {
+        const optH = document.createElement('option');
+        optH.value = name;
+        optH.textContent = name;
+        homeSel.appendChild(optH);
 
-    const [homeStats, awayStats] = await Promise.all([
-      fetchTeamStats(league, home),
-      fetchTeamStats(league, away),
-    ]);
+        const optA = document.createElement('option');
+        optA.value = name;
+        optA.textContent = name;
+        awaySel.appendChild(optA);
+      });
 
-    const result = simulateScore(homeStats, awayStats, league);
+      homeSel.disabled = false;
+      awaySel.disabled = false;
+    }
 
-    // Update UI
-    document.getElementById("homeTeamName").textContent = home;
-    document.getElementById("awayTeamName").textContent = away;
+    /************* FETCH TEAM STATS FROM NETLIFY FUNCTION *************/
+    async function fetchTeamStats(league, teamName) {
+      const url = `/.netlify/functions/team-stats?league=${encodeURIComponent(league)}&team=${encodeURIComponent(teamName)}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Stats API error for ${teamName}: ${res.status} ${res.statusText}`);
+      }
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
 
-    document.getElementById("homeScore").textContent = result.homeScore;
-    document.getElementById("awayScore").textContent = result.awayScore;
+      const required = ["off_index", "def_index", "pace_index", "sos_index", "form_index", "ppg", "opp_ppg"];
+      for (const key of required) {
+        if (typeof data[key] !== "number") {
+          throw new Error(`Missing or invalid "${key}" in stats response for ${teamName}`);
+        }
+      }
 
-    document.getElementById("winner").textContent = result.winner;
-    document.getElementById("spread").textContent =
-      "Spread: " + result.spread;
+      return {
+        league: data.league || league,
+        team: data.team || teamName,
+        off_index: data.off_index,
+        def_index: data.def_index,
+        pace_index: data.pace_index,
+        sos_index: data.sos_index,
+        form_index: data.form_index,
+        ppg: data.ppg,
+        opp_ppg: data.opp_ppg,
+        home_adv_points: typeof data.home_adv_points === "number" ? data.home_adv_points : cfg?.homeAdvDefault || 0
+      };
+    }
 
-    document.getElementById("confidence").textContent =
-      result.confidence + " confidence";
+    /************* PREDICT BUTTON HANDLER *************/
+    async function predictScore() {
+      const league = document.getElementById('league').value;
+      const homeTeam = document.getElementById('homeTeam').value;
+      const awayTeam = document.getElementById('awayTeam').value;
 
-    document.getElementById("homeStatsTitle").textContent =
-      home + " Profile";
-    document.getElementById("awayStatsTitle").textContent =
-      away + " Profile";
+      if (!homeTeam || !awayTeam) {
+        alert('Select both teams from the dropdowns.');
+        return;
+      }
+      if (homeTeam === awayTeam) {
+        alert('Home and away teams must be different.');
+        return;
+      }
 
-    document.getElementById("homeStats").innerHTML = `
-      <div class="stat-row"><span>Off Index</span><span>${homeStats.off_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>Def Index</span><span>${homeStats.def_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>Pace Index</span><span>${homeStats.pace_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>SOS Index</span><span>${homeStats.sos_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>Form Index</span><span>${homeStats.form_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>PPG</span><span>${homeStats.ppg.toFixed(1)}</span></div>
-      <div class="stat-row"><span>Opp PPG</span><span>${homeStats.opp_ppg.toFixed(1)}</span></div>
-    `;
+      try {
+        document.getElementById('confidence').textContent = 'Loading advanced stats...';
 
-    document.getElementById("awayStats").innerHTML = `
-      <div class="stat-row"><span>Off Index</span><span>${awayStats.off_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>Def Index</span><span>${awayStats.def_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>Pace Index</span><span>${awayStats.pace_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>SOS Index</span><span>${awayStats.sos_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>Form Index</span><span>${awayStats.form_index.toFixed(3)}</span></div>
-      <div class="stat-row"><span>PPG</span><span>${awayStats.ppg.toFixed(1)}</span></div>
-      <div class="stat-row"><span>Opp PPG</span><span>${awayStats.opp_ppg.toFixed(1)}</span></div>
-    `;
+        const [homeStats, awayStats] = await Promise.all([
+          fetchTeamStats(league, homeTeam),
+          fetchTeamStats(league, awayTeam)
+        ]);
 
-    document.getElementById("reasoningText").textContent = `
-      The model adjusts for offensive efficiency, defensive resistance, pace,
-      strength of schedule, form trends, and home-field advantage to calculate
-      projected scoring distribution.
-    `;
+        const result = predictFromRealStats(homeStats, awayStats, league);
 
-    document.getElementById("results").classList.add("show");
-    document.getElementById("results").scrollIntoView({ behavior: "smooth" });
+        document.getElementById('confidence').textContent = result.confidence + ' confidence';
+        document.getElementById('homeTeamName').textContent = homeStats.team;
+        document.getElementById('awayTeamName').textContent = awayStats.team;
+        document.getElementById('homeScore').textContent = result.homeScore;
+        document.getElementById('awayScore').textContent = result.awayScore;
+        document.getElementById('winner').textContent = result.winner;
+        document.getElementById('spread').textContent = 'Spread: ' + result.spread.toFixed(1);
 
-  } catch (err) {
-    console.error(err);
-    alert("Could not load stats: " + err.message);
-  }
-}
+        document.getElementById('homeStatsTitle').textContent = homeStats.team + ' Profile';
+        document.getElementById('homeStats').innerHTML = `
+          <div class="stat-row"><span>Off Index</span><span>${homeStats.off_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>Def Index</span><span>${homeStats.def_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>Pace Index</span><span>${homeStats.pace_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>SOS Index</span><span>${homeStats.sos_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>Form Index</span><span>${homeStats.form_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>PPG</span><span>${homeStats.ppg.toFixed(1)}</span></div>
+          <div class="stat-row"><span>Opp PPG</span><span>${homeStats.opp_ppg.toFixed(1)}</span></div>
+        `;
+        document.getElementById('awayStatsTitle').textContent = awayStats.team + ' Profile';
+        document.getElementById('awayStats').innerHTML = `
+          <div class="stat-row"><span>Off Index</span><span>${awayStats.off_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>Def Index</span><span>${awayStats.def_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>Pace Index</span><span>${awayStats.pace_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>SOS Index</span><span>${awayStats.sos_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>Form Index</span><span>${awayStats.form_index.toFixed(3)}</span></div>
+          <div class="stat-row"><span>PPG</span><span>${awayStats.ppg.toFixed(1)}</span></div>
+          <div class="stat-row"><span>Opp PPG</span><span>${awayStats.opp_ppg.toFixed(1)}</span></div>
+        `;
 
-/*************************************************
- *                   INIT
- *************************************************/
-document.addEventListener("DOMContentLoaded", () => {
-  renderAuthUI();
-  checkAccessAndRender();
-  loadAllTeams();
+        const d = result.debug;
+        const reasoning = `
+          League average scoring is about ${d.leagueAvg.toFixed(1)} points per team.
+          Starting from each team's scoring profile (base ${d.baseHome.toFixed(1)} for ${homeStats.team}
+          and ${d.baseAway.toFixed(1)} for ${awayStats.team}), the model adjusts for pace
+          (${d.paceMultiplier.toFixed(2)}x), strength of schedule (${d.sosMultiplier.toFixed(2)}x),
+          recent form (${d.formMultiplier.toFixed(2)}x), and efficiency matchups
+          (${d.effMultiplierHome.toFixed(2)}x for ${homeStats.team},
+          ${d.effMultiplierAway.toFixed(2)}x for ${awayStats.team}).
+          A home-field edge of ${d.homeEdgePoints.toFixed(1)} points is added to ${homeStats.team}.
+          After rescaling to keep the total realistic for ${league}, the model lands on
+          about ${d.finalTotal.toFixed(1)} total points and a spread of ${result.spread.toFixed(1)}
+          in favor of ${result.winner}.
+        `;
+        document.getElementById('reasoningText').textContent =
+          reasoning.replace(/\s+/g, ' ').trim();
 
-  document.getElementById("league").addEventListener("change", () => {
-    if (teamsReady) populateTeamDropdowns();
-  });
-});
-</script>
+        document.getElementById('results').classList.add('show');
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        console.error(err);
+        alert('Could not load stats or compute prediction. Check league/team or try again.\n' + err.message);
+      }
+    }
+
+    /************* INIT *************/
+    document.addEventListener("DOMContentLoaded", () => {
+      renderAuthUI();
+      checkAccessAndRender();
+      loadAllTeams();
+
+      const leagueSel = document.getElementById('league');
+      if (leagueSel) {
+        leagueSel.addEventListener('change', () => {
+          if (teamsLoaded) populateTeamDropdowns();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
