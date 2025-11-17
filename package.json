@@ -1,0 +1,14 @@
+{
+  "name": "scorepredictorpro",
+  "version": "1.0.0",
+  "description": "Sports predictor scraper + frontend",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build-stats": "node scripts/build-all-stats.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2"
+  }
+}

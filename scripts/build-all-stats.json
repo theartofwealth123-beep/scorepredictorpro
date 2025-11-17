@@ -1,0 +1,257 @@
+/**
+ * scripts/build-all-stats.js
+ *
+ * Scrapes public stat tables (TeamRankings-style pages) and builds:
+ *   data/all-teams.json  – { league: [ "Team A", "Team B", ... ] }
+ *   data/all-stats.json  – { league: { "Team A": { off_index, def_index, ... } } }
+ *
+ * Run:
+ *   npm install cheerio node-fetch
+ *   node scripts/build-all-stats.js
+ */
+
+const fs = require("fs");
+const path = require("path");
+const cheerio = require("cheerio");
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
+// ---------- CONFIG YOU MAY NEED TO TWEAK ----------
+
+const STAT_SOURCES = {
+  NFL: {
+    ppg: "https://www.teamrankings.com/nfl/stat/points-per-game",
+    opp_ppg: "https://www.teamrankings.com/nfl/stat/opponent-points-per-game",
+    pace: "https://www.teamrankings.com/nfl/stat/plays-per-game",
+    sos: "https://www.teamrankings.com/nfl/stat/schedule-strength",
+    form: "https://www.teamrankings.com/nfl/stat/average-margin-of-victory"
+  },
+  NBA: {
+    ppg: "https://www.teamrankings.com/nba/stat/points-per-game",
+    opp_ppg: "https://www.teamrankings.com/nba/stat/opponent-points-per-game",
+    pace: "https://www.teamrankings.com/nba/stat/possessions-per-game",
+    sos: "https://www.teamrankings.com/nba/stat/schedule-strength",
+    form: "https://www.teamrankings.com/nba/stat/average-scoring-margin"
+  },
+  MLB: {
+    ppg: "https://www.teamrankings.com/mlb/stat/runs-per-game",
+    opp_ppg: "https://www.teamrankings.com/mlb/stat/opponent-runs-per-game",
+    pace: "https://www.teamrankings.com/mlb/stat/plate-appearances-per-game",
+    sos: "https://www.teamrankings.com/mlb/stat/schedule-strength",
+    form: "https://www.teamrankings.com/mlb/stat/average-run-margin"
+  },
+  NCAAF: {
+    ppg: "https://www.teamrankings.com/college-football/stat/points-per-game",
+    opp_ppg:
+      "https://www.teamrankings.com/college-football/stat/opponent-points-per-game",
+    pace:
+      "https://www.teamrankings.com/college-football/stat/plays-per-game",
+    sos: "https://www.teamrankings.com/college-football/stat/schedule-strength",
+    form:
+      "https://www.teamrankings.com/college-football/stat/average-scoring-margin"
+  },
+  NCAAB: {
+    ppg:
+      "https://www.teamrankings.com/ncaa-basketball/stat/points-per-game",
+    opp_ppg:
+      "https://www.teamrankings.com/ncaa-basketball/stat/opponent-points-per-game",
+    pace:
+      "https://www.teamrankings.com/ncaa-basketball/stat/possessions-per-game",
+    sos:
+      "https://www.teamrankings.com/ncaa-basketball/stat/schedule-strength",
+    form:
+      "https://www.teamrankings.com/ncaa-basketball/stat/average-scoring-margin"
+  }
+};
+
+const REQUEST_DELAY_MS = 800;
+
+// ---------- PATHS ----------
+
+const ROOT_DIR = path.join(__dirname, "..");
+const DATA_DIR = path.join(ROOT_DIR, "data");
+const ALL_TEAMS_PATH = path.join(DATA_DIR, "all-teams.json");
+const ALL_STATS_PATH = path.join(DATA_DIR, "all-stats.json");
+
+// ---------- HELPERS ----------
+
+function ensureDir(p) {
+  if (!fs.existsSync(p)) {
+    fs.mkdirSync(p, { recursive: true });
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function scrapeStatTable(url, numericColIndex = 1) {
+  console.log(`  Fetching ${url}`);
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status} ${res.statusText}`);
+  }
+  const html = await res.text();
+  const $ = cheerio.load(html);
+
+  const rows = $("table.datatable tbody tr");
+  if (!rows.length) {
+    console.warn(
+      `    WARNING: No rows found with "table.datatable tbody tr". Check selectors.`
+    );
+  }
+
+  const result = {};
+
+  rows.each((_, tr) => {
+    const tds = $(tr).find("td");
+    if (tds.length < numericColIndex + 1) return;
+
+    const team = $(tds[0]).text().trim();
+    let raw = $(tds[numericColIndex]).text().trim();
+
+    raw = raw.replace(/,/g, "");
+    const value = parseFloat(raw);
+    if (!team || Number.isNaN(value)) return;
+
+    result[team] = value;
+  });
+
+  console.log(`    Parsed ${Object.keys(result).length} rows`);
+  return result;
+}
+
+function buildIndexFromMap(rawMap, invert = false) {
+  const entries = Object.entries(rawMap);
+  if (!entries.length) return { indexMap: {}, avg: 0 };
+
+  const values = entries.map(([, v]) => v);
+  const avg = values.reduce((a, b) => a + b, 0) / values.length;
+
+  const indexMap = {};
+  for (const [team, v] of entries) {
+    if (invert) {
+      indexMap[team] = avg / v;
+    } else {
+      indexMap[team] = v / avg;
+    }
+  }
+
+  return { indexMap, avg };
+}
+
+function clamp(x, min, max) {
+  return Math.max(min, Math.min(max, x));
+}
+
+async function buildLeagueStats(league, urls) {
+  console.log(`\n=== Building stats for ${league} ===`);
+
+  const ppg = await scrapeStatTable(urls.ppg);
+  await sleep(REQUEST_DELAY_MS);
+
+  const oppPpg = await scrapeStatTable(urls.opp_ppg);
+  await sleep(REQUEST_DELAY_MS);
+
+  const pace = await scrapeStatTable(urls.pace);
+  await sleep(REQUEST_DELAY_MS);
+
+  const sosRaw = await scrapeStatTable(urls.sos);
+  await sleep(REQUEST_DELAY_MS);
+
+  const formRaw = await scrapeStatTable(urls.form);
+  await sleep(REQUEST_DELAY_MS);
+
+  const { indexMap: offIndex } = buildIndexFromMap(ppg, false);
+  const { indexMap: defIndex } = buildIndexFromMap(oppPpg, true);
+  const { indexMap: paceIndex } = buildIndexFromMap(pace, false);
+  const { indexMap: sosIndex } = buildIndexFromMap(sosRaw, false);
+
+  const formIndex = {};
+  const formValues = Object.values(formRaw);
+  const formAvg =
+    formValues.length === 0
+      ? 0
+      : formValues.reduce((a, b) => a + b, 0) / formValues.length;
+  for (const [team, margin] of Object.entries(formRaw)) {
+    const delta = (margin - formAvg) / 20;
+    formIndex[team] = clamp(1 + delta, 0.7, 1.3);
+  }
+
+  const allTeamNames = new Set([
+    ...Object.keys(ppg),
+    ...Object.keys(oppPpg),
+    ...Object.keys(pace),
+    ...Object.keys(sosRaw),
+    ...Object.keys(formRaw)
+  ]);
+
+  const leagueStats = {};
+  const leagueTeams = [];
+
+  for (const team of Array.from(allTeamNames).sort()) {
+    leagueTeams.push(team);
+
+    leagueStats[team] = {
+      league,
+      team,
+      ppg: ppg[team] ?? null,
+      opp_ppg: oppPpg[team] ?? null,
+      off_index: offIndex[team] ?? 1.0,
+      def_index: defIndex[team] ?? 1.0,
+      pace_index: paceIndex[team] ?? 1.0,
+      sos_index: sosIndex[team] ?? 1.0,
+      form_index: formIndex[team] ?? 1.0,
+      home_adv_points:
+        league === "NBA"
+          ? 3
+          : league === "NFL"
+          ? 2.5
+          : league === "MLB"
+          ? 0.3
+          : league === "NCAAF"
+          ? 3.5
+          : league === "NCAAB"
+          ? 3.8
+          : 2
+    };
+  }
+
+  console.log(
+    `  Finished ${league}: ${leagueTeams.length} teams with derived indices.`
+  );
+
+  return { leagueStats, leagueTeams };
+}
+
+async function main() {
+  ensureDir(DATA_DIR);
+
+  const allStats = {};
+  const allTeams = {};
+
+  for (const [league, urls] of Object.entries(STAT_SOURCES)) {
+    try {
+      const { leagueStats, leagueTeams } = await buildLeagueStats(
+        league,
+        urls
+      );
+      allStats[league] = leagueStats;
+      allTeams[league] = leagueTeams;
+    } catch (err) {
+      console.error(`ERROR building stats for ${league}:`, err.message);
+    }
+  }
+
+  fs.writeFileSync(ALL_STATS_PATH, JSON.stringify(allStats, null, 2), "utf8");
+  fs.writeFileSync(ALL_TEAMS_PATH, JSON.stringify(allTeams, null, 2), "utf8");
+
+  console.log("\nWrote:");
+  console.log("  " + ALL_STATS_PATH);
+  console.log("  " + ALL_TEAMS_PATH);
+}
+
+main().catch((err) => {
+  console.error("Fatal error in build-all-stats:", err);
+  process.exit(1);
+});
