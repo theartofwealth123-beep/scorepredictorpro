@@ -778,125 +778,72 @@
       };
     }
 
-    /************* TEAM LISTS (all-teams.json) *************/
-    let ALL_TEAMS = {};
-    let teamsLoaded = false;
+/************* TEAM LISTS (from data/all-teams.json) *************/
+let ALL_TEAMS = {};
+let teamsLoaded = false;
 
-    async function loadAllTeams() {
-      const leagueSel = document.getElementById('league');
-      const homeSel = document.getElementById('homeTeam');
-      const awaySel = document.getElementById('awayTeam');
-      if (!leagueSel || !homeSel || !awaySel) return;
+async function loadAllTeams() {
+  const leagueSel = document.getElementById('league');
+  const homeSel = document.getElementById('homeTeam');
+  const awaySel = document.getElementById('awayTeam');
+  if (!leagueSel || !homeSel || !awaySel) return;
 
-      homeSel.innerHTML = '<option value="">Loading teams…</option>';
-      awaySel.innerHTML = '<option value="">Loading teams…</option>';
-      homeSel.disabled = true;
-      awaySel.disabled = true;
+  homeSel.innerHTML = '<option value="">Loading teams…</option>';
+  awaySel.innerHTML = '<option value="">Loading teams…</option>';
+  homeSel.disabled = true;
+  awaySel.disabled = true;
 
-      try {
-        // all-teams.json is in the same folder as index.html
-        const res = await fetch('all-teams.json');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        ALL_TEAMS = data || {};
-        teamsLoaded = true;
+  try {
+    // ✅ JSON served from /data/all-teams.json (Netlify static)
+    const res = await fetch('/data/all-teams.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
 
-        if (!ALL_TEAMS[leagueSel.value]) {
-          const leagues = Object.keys(ALL_TEAMS);
-          if (leagues.length) leagueSel.value = leagues[0];
-        }
+    ALL_TEAMS = data || {};
+    teamsLoaded = true;
 
-        populateTeamDropdowns();
-      } catch (err) {
-        console.error(err);
-        homeSel.innerHTML = '<option value="">Error loading teams</option>';
-        awaySel.innerHTML = '<option value="">Error loading teams</option>';
-        alert('Error loading team list: ' + err.message);
-      }
+    // Make sure the selected league exists
+    if (!ALL_TEAMS[leagueSel.value]) {
+      const leagues = Object.keys(ALL_TEAMS);
+      if (leagues.length) leagueSel.value = leagues[0];
     }
 
-    function populateTeamDropdowns() {
-      const leagueSel = document.getElementById('league');
-      const homeSel = document.getElementById('homeTeam');
-      const awaySel = document.getElementById('awayTeam');
-      if (!leagueSel || !homeSel || !awaySel) return;
+    populateTeamDropdowns();
+  } catch (err) {
+    console.error(err);
+    homeSel.innerHTML = '<option value="">Error loading teams</option>';
+    awaySel.innerHTML = '<option value="">Error loading teams</option>';
+    alert("Error loading team list: " + err.message);
+  }
+}
 
-      const league = leagueSel.value;
-      const teams = ALL_TEAMS[league] || [];
+function populateTeamDropdowns() {
+  const leagueSel = document.getElementById('league');
+  const homeSel = document.getElementById('homeTeam');
+  const awaySel = document.getElementById('awayTeam');
+  if (!leagueSel || !homeSel || !awaySel) return;
 
-      homeSel.innerHTML = '<option value="">Select Home Team</option>';
-      awaySel.innerHTML = '<option value="">Select Away Team</option>';
+  const league = leagueSel.value;
+  const teams = ALL_TEAMS[league] || [];
 
-      teams.forEach(name => {
-        const optH = document.createElement('option');
-        optH.value = name;
-        optH.textContent = name;
-        homeSel.appendChild(optH);
+  homeSel.innerHTML = '<option value="">Select Home Team</option>';
+  awaySel.innerHTML = '<option value="">Select Away Team</option>';
 
-        const optA = document.createElement('option');
-        optA.value = name;
-        optA.textContent = name;
-        awaySel.appendChild(optA);
-      });
+  teams.forEach(name => {
+    const optH = document.createElement('option');
+    optH.value = name;
+    optH.textContent = name;
+    homeSel.appendChild(optH);
 
-      homeSel.disabled = false;
-      awaySel.disabled = false;
-    }
+    const optA = document.createElement('option');
+    optA.value = name;
+    optA.textContent = name;
+    awaySel.appendChild(optA);
+  });
 
-    /************* STATS FETCH (Netlify function) *************/
-    async function fetchTeamStats(league, teamName) {
-      const url = `/.netlify/functions/team-stats?league=${encodeURIComponent(league)}&team=${encodeURIComponent(teamName)}`;
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`Stats API error for ${teamName}: ${res.status} ${res.statusText}`);
-      }
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-
-      const required = ["off_index", "def_index", "pace_index", "sos_index", "form_index", "ppg", "opp_ppg"];
-      for (const key of required) {
-        if (typeof data[key] !== "number") {
-          throw new Error(`Missing or invalid "${key}" in stats response for ${teamName}`);
-        }
-      }
-
-      return {
-        league: data.league || league,
-        team: data.team || teamName,
-        off_index: data.off_index,
-        def_index: data.def_index,
-        pace_index: data.pace_index,
-        sos_index: data.sos_index,
-        form_index: data.form_index,
-        ppg: data.ppg,
-        opp_ppg: data.opp_ppg,
-        home_adv_points: typeof data.home_adv_points === "number" ? data.home_adv_points : 0
-      };
-    }
-
-    /************* PREDICT BUTTON *************/
-    async function predictScore() {
-      const league = document.getElementById('league').value;
-      const homeTeam = document.getElementById('homeTeam').value.trim();
-      const awayTeam = document.getElementById('awayTeam').value.trim();
-
-      if (!homeTeam || !awayTeam) {
-        alert('Select both Home and Away teams.');
-        return;
-      }
-      if (homeTeam.toLowerCase() === awayTeam.toLowerCase()) {
-        alert('Teams must be different.');
-        return;
-      }
-
-      try {
-        document.getElementById('confidence').textContent = 'Loading stats…';
-        document.getElementById('leagueTag').textContent = league;
-
-        const [homeStats, awayStats] = await Promise.all([
-          fetchTeamStats(league, homeTeam),
-          fetchTeamStats(league, awayTeam)
-        ]);
+  homeSel.disabled = false;
+  awaySel.disabled = false;
+}
 
         const result = predictFromRealStats(homeStats, awayStats, league);
 

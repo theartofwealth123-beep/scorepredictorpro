@@ -81,15 +81,6 @@
       "ppg": 23.1,
       "opp_ppg": 22
     },
-    "Tampa Bay": {
-      "off_index": 29,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 29,
-      "opp_ppg": 22
-    },
     "Baltimore": {
       "off_index": 30.1,
       "def_index": 1,
@@ -97,6 +88,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 30.1,
+      "opp_ppg": 22
+    },
+    "Tampa Bay": {
+      "off_index": 29,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 29,
       "opp_ppg": 22
     },
     "Pittsburgh": {
@@ -108,15 +108,6 @@
       "ppg": 21.9,
       "opp_ppg": 22
     },
-    "Jacksonville": {
-      "off_index": 18.8,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 18.8,
-      "opp_ppg": 22
-    },
     "Green Bay": {
       "off_index": 26.1,
       "def_index": 1,
@@ -124,6 +115,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 26.1,
+      "opp_ppg": 22
+    },
+    "Jacksonville": {
+      "off_index": 18.8,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 18.8,
       "opp_ppg": 22
     },
     "San Francisco": {
