@@ -27,15 +27,6 @@
       "ppg": 20.6,
       "opp_ppg": 22
     },
-    "Buffalo": {
-      "off_index": 30.6,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 30.6,
-      "opp_ppg": 22
-    },
     "Detroit": {
       "off_index": 33.1,
       "def_index": 1,
@@ -43,6 +34,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 33.1,
+      "opp_ppg": 22
+    },
+    "Buffalo": {
+      "off_index": 30.6,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 30.6,
       "opp_ppg": 22
     },
     "LA Rams": {
@@ -108,15 +108,6 @@
       "ppg": 21.9,
       "opp_ppg": 22
     },
-    "Green Bay": {
-      "off_index": 26.1,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 26.1,
-      "opp_ppg": 22
-    },
     "Jacksonville": {
       "off_index": 18.8,
       "def_index": 1,
@@ -124,6 +115,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 18.8,
+      "opp_ppg": 22
+    },
+    "Green Bay": {
+      "off_index": 26.1,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 26.1,
       "opp_ppg": 22
     },
     "San Francisco": {
@@ -607,15 +607,6 @@
       "ppg": 4.78,
       "opp_ppg": 4.5
     },
-    "Chi Cubs": {
-      "off_index": 4.54,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 4.54,
-      "opp_ppg": 4.5
-    },
     "Boston": {
       "off_index": 4.64,
       "def_index": 1,
@@ -623,6 +614,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 4.64,
+      "opp_ppg": 4.5
+    },
+    "Chi Cubs": {
+      "off_index": 4.54,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 4.54,
       "opp_ppg": 4.5
     },
     "Philadelphia": {
@@ -1059,15 +1059,6 @@
       "ppg": 27.7,
       "opp_ppg": 29
     },
-    "Marshall": {
-      "off_index": 30.8,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 30.8,
-      "opp_ppg": 29
-    },
     "Missouri": {
       "off_index": 27.1,
       "def_index": 1,
@@ -1075,6 +1066,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 27.1,
+      "opp_ppg": 29
+    },
+    "Marshall": {
+      "off_index": 30.8,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 30.8,
       "opp_ppg": 29
     },
     "Florida St": {
@@ -1086,15 +1086,6 @@
       "ppg": 13.1,
       "opp_ppg": 29
     },
-    "Alabama": {
-      "off_index": 32.3,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 32.3,
-      "opp_ppg": 29
-    },
     "Virginia": {
       "off_index": 21.6,
       "def_index": 1,
@@ -1102,6 +1093,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 21.6,
+      "opp_ppg": 29
+    },
+    "Alabama": {
+      "off_index": 32.3,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 32.3,
       "opp_ppg": 29
     },
     "Hawai'i": {
@@ -1122,15 +1122,6 @@
       "ppg": 31.5,
       "opp_ppg": 29
     },
-    "SMU": {
-      "off_index": 34.8,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 34.8,
-      "opp_ppg": 29
-    },
     "E Carolina": {
       "off_index": 31.2,
       "def_index": 1,
@@ -1138,6 +1129,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 31.2,
+      "opp_ppg": 29
+    },
+    "SMU": {
+      "off_index": 34.8,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 34.8,
       "opp_ppg": 29
     },
     "Arizona": {
@@ -1221,15 +1221,6 @@
       "ppg": 13.5,
       "opp_ppg": 29
     },
-    "Nebraska": {
-      "off_index": 22.7,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 22.7,
-      "opp_ppg": 29
-    },
     "Old Dominion": {
       "off_index": 28,
       "def_index": 1,
@@ -1237,6 +1228,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 28,
+      "opp_ppg": 29
+    },
+    "Nebraska": {
+      "off_index": 22.7,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 22.7,
       "opp_ppg": 29
     },
     "TCU": {
@@ -1248,15 +1248,6 @@
       "ppg": 32.5,
       "opp_ppg": 29
     },
-    "Air Force": {
-      "off_index": 18.7,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 18.7,
-      "opp_ppg": 29
-    },
     "Louisville": {
       "off_index": 34.3,
       "def_index": 1,
@@ -1264,6 +1255,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 34.3,
+      "opp_ppg": 29
+    },
+    "Air Force": {
+      "off_index": 18.7,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 18.7,
       "opp_ppg": 29
     },
     "New Mexico": {
@@ -1401,15 +1401,6 @@
       "ppg": 35.8,
       "opp_ppg": 29
     },
-    "Kansas St": {
-      "off_index": 30,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 30,
-      "opp_ppg": 29
-    },
     "Coastal Car": {
       "off_index": 27.8,
       "def_index": 1,
@@ -1417,6 +1408,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 27.8,
+      "opp_ppg": 29
+    },
+    "Kansas St": {
+      "off_index": 30,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 30,
       "opp_ppg": 29
     },
     "Clemson": {
@@ -1581,6 +1581,15 @@
       "ppg": 30,
       "opp_ppg": 29
     },
+    "Liberty": {
+      "off_index": 27.6,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 27.6,
+      "opp_ppg": 29
+    },
     "Arizona St": {
       "off_index": 32.9,
       "def_index": 1,
@@ -1597,15 +1606,6 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 27.3,
-      "opp_ppg": 29
-    },
-    "Liberty": {
-      "off_index": 27.6,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 27.6,
       "opp_ppg": 29
     },
     "C Michigan": {
@@ -1635,15 +1635,6 @@
       "ppg": 24.4,
       "opp_ppg": 29
     },
-    "Missouri St": {
-      "off_index": 34,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 34,
-      "opp_ppg": 29
-    },
     "Michigan St": {
       "off_index": 17.5,
       "def_index": 1,
@@ -1651,6 +1642,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 17.5,
+      "opp_ppg": 29
+    },
+    "Missouri St": {
+      "off_index": 34,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 34,
       "opp_ppg": 29
     },
     "Colorado": {
@@ -1896,15 +1896,6 @@
       "ppg": 23.8,
       "opp_ppg": 29
     },
-    "Minnesota": {
-      "off_index": 24.3,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 24.3,
-      "opp_ppg": 29
-    },
     "Nevada": {
       "off_index": 20.9,
       "def_index": 1,
@@ -1914,13 +1905,13 @@
       "ppg": 20.9,
       "opp_ppg": 29
     },
-    "Colorado St": {
-      "off_index": 23.3,
+    "Minnesota": {
+      "off_index": 24.3,
       "def_index": 1,
       "pace_index": 1,
       "sos_index": 1,
       "form_index": 1,
-      "ppg": 23.3,
+      "ppg": 24.3,
       "opp_ppg": 29
     },
     "Bowling Green": {
@@ -1930,6 +1921,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 25.9,
+      "opp_ppg": 29
+    },
+    "Colorado St": {
+      "off_index": 23.3,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 23.3,
       "opp_ppg": 29
     },
     "Stanford": {
@@ -4283,6 +4283,15 @@
       "ppg": 0.7149699999999999,
       "opp_ppg": 71
     },
+    "Fordham": {
+      "off_index": 1.01,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 0.7171,
+      "opp_ppg": 71
+    },
     "North Dakota": {
       "off_index": 1.064,
       "def_index": 1,
@@ -4317,15 +4326,6 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 0.70148,
-      "opp_ppg": 71
-    },
-    "Fordham": {
-      "off_index": 1.01,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 0.7171,
       "opp_ppg": 71
     },
     "Texas St": {
@@ -4490,15 +4490,6 @@
       "ppg": 0.7952000000000001,
       "opp_ppg": 71
     },
-    "Holy Cross": {
-      "off_index": 1.014,
-      "def_index": 1,
-      "pace_index": 1,
-      "sos_index": 1,
-      "form_index": 1,
-      "ppg": 0.71994,
-      "opp_ppg": 71
-    },
     "Wagner": {
       "off_index": 0.917,
       "def_index": 1,
@@ -4506,6 +4497,15 @@
       "sos_index": 1,
       "form_index": 1,
       "ppg": 0.65107,
+      "opp_ppg": 71
+    },
+    "Holy Cross": {
+      "off_index": 1.014,
+      "def_index": 1,
+      "pace_index": 1,
+      "sos_index": 1,
+      "form_index": 1,
+      "ppg": 0.71994,
       "opp_ppg": 71
     },
     "Brown": {
