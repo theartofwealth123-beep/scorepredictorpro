@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"
+
+[[scheduled]]
+  name = "update-stats"
+  description = "Scrape stats every 12 hours"
+  cron = "0 */12 * * *"
+  path = "/.netlify/functions/scheduler"
