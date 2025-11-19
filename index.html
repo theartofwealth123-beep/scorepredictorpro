@@ -739,7 +739,7 @@
 
   /************* FETCH TEAM STATS FROM NETLIFY FUNCTION *************/
   async function fetchTeamStats(league, teamName) {
-    const url = `/.netlify/functions/team-stats?league=${encodeURIComponent(league)}&team=${encodeURIComponent(teamName)}`;
+const url = `/.netlify/functions/teams-stats?league=${encodeURIComponent(league)}&team=${encodeURIComponent(teamName)}`;
     const res = await fetch(url);
     if (!res.ok) {
       throw new Error(`Stats API error for ${teamName}: ${res.status} ${res.statusText}`);
