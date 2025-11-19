@@ -617,14 +617,59 @@
     alert("Subscription activated (demo). In production this would happen after payment.");
   }
 
-  /************* LEAGUE PARAMS (SCORING + VOLATILITY) *************/
-  // These are realistic average totals & volatility per league
+  /************* LEAGUE CONFIG (USED BY MONTE CARLO) *************/
+  // Tuned to keep totals + spreads in realistic ranges per league
   const LEAGUE_PARAMS = {
-    NFL:   { baseTotal: 44,  homeAdv: 2.3, spreadVol: 9.5,  teamSd: 8.0 },
-    NBA:   { baseTotal: 230, homeAdv: 2.8, spreadVol: 13,   teamSd: 11 },
-    MLB:   { baseTotal: 9,   homeAdv: 0.4, spreadVol: 3,    teamSd: 2.2 },
-    NCAAF: { baseTotal: 55,  homeAdv: 3.5, spreadVol: 17,   teamSd: 14 },
-    NCAAB: { baseTotal: 142, homeAdv: 3.8, spreadVol: 12,   teamSd: 10 }
+    NFL: {
+      avgTotal: 44,
+      minTotal: 30,
+      maxTotal: 62,
+      homeAdv: 2.5,
+      totalSigma: 7,
+      spreadSigma: 10,
+      marginScale: 7,
+      maxMargin: 21
+    },
+    NBA: {
+      avgTotal: 228,
+      minTotal: 205,
+      maxTotal: 260,
+      homeAdv: 2.5,
+      totalSigma: 10,
+      spreadSigma: 11,
+      marginScale: 6.5,
+      maxMargin: 22
+    },
+    MLB: {
+      avgTotal: 9,
+      minTotal: 5,
+      maxTotal: 15,
+      homeAdv: 0.4,
+      totalSigma: 2.2,
+      spreadSigma: 1.8,
+      marginScale: 2.2,
+      maxMargin: 5
+    },
+    NCAAF: {
+      avgTotal: 55,
+      minTotal: 35,
+      maxTotal: 82,
+      homeAdv: 3.5,
+      totalSigma: 10,
+      spreadSigma: 14,
+      marginScale: 9,
+      maxMargin: 32
+    },
+    NCAAB: {
+      avgTotal: 143,
+      minTotal: 120,
+      maxTotal: 190,
+      homeAdv: 3.8,
+      totalSigma: 11,
+      spreadSigma: 13,
+      marginScale: 7.5,
+      maxMargin: 28
+    }
   };
 
   /************* TEAM LISTS (data/all-teams.json) *************/
@@ -643,13 +688,9 @@
     awaySel.disabled = true;
 
     try {
-      // Try root first (Netlify publish dir), then /data as fallback
-      let res = await fetch('all-teams.json');
-      if (!res.ok) {
-        res = await fetch('/data/all-teams.json');
-      }
+      // all-teams.json should sit next to index.html in Netlify
+      const res = await fetch('all-teams.json');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
       const data = await res.json();
       ALL_TEAMS = data || {};
       teamsLoaded = true;
@@ -706,148 +747,147 @@
     const data = await res.json();
     if (data.error) throw new Error(data.error);
 
-    // Required numeric fields; if some scraper fields are missing, default to 1
-    const num = (v, fallback) =>
-      typeof v === "number" && isFinite(v) ? v : fallback;
+    const required = ["off_index", "def_index", "pace_index", "sos_index", "form_index", "ppg", "opp_ppg"];
+    for (const key of required) {
+      if (typeof data[key] !== "number") {
+        throw new Error(`Missing or invalid "${key}" in stats response for ${teamName}`);
+      }
+    }
 
     return {
       league: data.league || league,
       team: data.team || teamName,
-      off_index: num(data.off_index, 1.0),
-      def_index: num(data.def_index, 1.0),
-      pace_index: num(data.pace_index, 1.0),
-      sos_index: num(data.sos_index, 1.0),
-      form_index: num(data.form_index, 1.0),
-      ppg: num(data.ppg, 0),          // used mostly for display now
-      opp_ppg: num(data.opp_ppg, 0),  // used mostly for display now
-      home_adv_points: num(data.home_adv_points, 0)
+      off_index: data.off_index,
+      def_index: data.def_index,
+      pace_index: data.pace_index,
+      sos_index: data.sos_index,
+      form_index: data.form_index,
+      ppg: data.ppg,
+      opp_ppg: data.opp_ppg,
+      home_adv_points: typeof data.home_adv_points === "number" ? data.home_adv_points : 0
     };
   }
 
-  /************* RANDOM + MONTE CARLO ENGINE *************/
-  // Standard normal using Box-Muller
-  function randn() {
+  /************* RANDOM NORMAL HELPER (Box–Muller) *************/
+  function randomNormal() {
     let u = 0, v = 0;
     while (u === 0) u = Math.random();
     while (v === 0) v = Math.random();
-    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
   }
 
-  function computeDeterministic(home, away, league) {
-    const cfg = LEAGUE_PARAMS[league] || { baseTotal: 40, homeAdv: 0, spreadVol: 10, teamSd: 8 };
-
-    // Use league baseline instead of raw PPG so bad scrape values (like 0.7) don't kill us
-    const baseTotal = cfg.baseTotal;
-
-    // Pace & SOS environment factors (if your scraper fills them)
-    const paceIdx = (home.pace_index + away.pace_index) / 2 || 1.0;
-    const sosIdx  = (home.sos_index + away.sos_index) / 2 || 1.0;
-
-    const paceFactor = 1 + (paceIdx - 1) * 0.7;
-    const sosFactor  = 1 + (sosIdx - 1) * 0.4;
-
-    let envTotal = baseTotal * paceFactor * sosFactor;
-
-    // Clamp totals to sane ranges per league
-    if (league === "NFL" || league === "NCAAF") {
-      if (envTotal < 20) envTotal = 20;
-      if (envTotal > 80) envTotal = 80;
-    } else if (league === "NBA" || league === "NCAAB") {
-      if (envTotal < 120) envTotal = 120;
-      if (envTotal > 190) envTotal = 190;
-    } else if (league === "MLB") {
-      if (envTotal < 4) envTotal = 4;
-      if (envTotal > 16) envTotal = 16;
-    }
-
-    // Advanced matchup: Off vs Def with form baked in
-    const offHome = home.off_index || 1;
-    const offAway = away.off_index || 1;
-    const defHome = home.def_index || 1;
-    const defAway = away.def_index || 1;
-
-    let rawHome = (offHome / (defAway || 1)) * (home.form_index || 1);
-    let rawAway = (offAway / (defHome || 1)) * (away.form_index || 1);
-
-    if (!isFinite(rawHome) || rawHome <= 0) rawHome = 1;
-    if (!isFinite(rawAway) || rawAway <= 0) rawAway = 1;
-
-    // College gets heavier mismatch exponent to allow real blowouts
-    let exponent = 1.5; // pro
-    if (league === "NCAAF" || league === "NCAAB") exponent = 2.3;
-
-    const wHome = Math.pow(rawHome, exponent);
-    const wAway = Math.pow(rawAway, exponent);
-    const sumW = wHome + wAway || 1;
-
-    const shareHome = wHome / sumW;
-    const shareAway = wAway / sumW;
-
-    let muHome = envTotal * shareHome + cfg.homeAdv / 2;
-    let muAway = envTotal * shareAway - cfg.homeAdv / 2;
-
-    if (muHome < 0) muHome = 0;
-    if (muAway < 0) muAway = 0;
-
-    return {
-      muHome,
-      muAway,
-      envTotal,
-      paceIdx,
-      sosIdx,
-      rawHome,
-      rawAway,
-      shareHome,
-      shareAway
+  /************* PREDICTION MODEL (ADVANCED MONTE CARLO) *************/
+  function predictFromStats(home, away, league) {
+    const cfg = LEAGUE_PARAMS[league] || {
+      avgTotal: 40,
+      minTotal: 20,
+      maxTotal: 80,
+      homeAdv: 0,
+      totalSigma: 8,
+      spreadSigma: 10,
+      marginScale: 6,
+      maxMargin: 25
     };
-  }
 
-  function runMonteCarlo(home, away, league, sims = 50000) {
-    const cfg = LEAGUE_PARAMS[league] || { teamSd: 8, spreadVol: 10 };
-    const det = computeDeterministic(home, away, league);
+    // 1) BASE TOTAL: blend league baseline with actual PPG of these teams
+    const teamTotal = (home.ppg || cfg.avgTotal / 2) + (away.ppg || cfg.avgTotal / 2);
+    let baseTotal = 0.5 * cfg.avgTotal + 0.5 * teamTotal;
 
-    const sd = cfg.teamSd || 8;
-    let sumH = 0;
-    let sumA = 0;
-    let winH = 0;
-    let winA = 0;
-    let tie = 0;
+    if (baseTotal < cfg.minTotal) baseTotal = cfg.minTotal;
+    if (baseTotal > cfg.maxTotal) baseTotal = cfg.maxTotal;
 
-    for (let i = 0; i < sims; i++) {
-      const h = Math.max(0, det.muHome + sd * randn());
-      const a = Math.max(0, det.muAway + sd * randn());
-      sumH += h;
-      sumA += a;
-      if (h > a) winH++;
-      else if (a > h) winA++;
-      else tie++;
+    // 2) RATING FOR EACH TEAM (offense vs opponent defense, plus schedule)
+    const safeOppPpgHome = home.opp_ppg || (cfg.avgTotal / 2);
+    const safeOppPpgAway = away.opp_ppg || (cfg.avgTotal / 2);
+
+    const offRatingHome = (home.off_index || 1) * (home.ppg || cfg.avgTotal / 2) / safeOppPpgHome;
+    const offRatingAway = (away.off_index || 1) * (away.ppg || cfg.avgTotal / 2) / safeOppPpgAway;
+
+    const sosAdjHome = home.sos_index ? (0.7 + 0.6 * home.sos_index) : 1.0;
+    const sosAdjAway = away.sos_index ? (0.7 + 0.6 * away.sos_index) : 1.0;
+
+    const ratingHome = offRatingHome * sosAdjHome;
+    const ratingAway = offRatingAway * sosAdjAway;
+
+    const safeRatingHome = Number.isFinite(ratingHome) && ratingHome > 0 ? ratingHome : 1;
+    const safeRatingAway = Number.isFinite(ratingAway) && ratingAway > 0 ? ratingAway : 1;
+
+    // 3) EXPECTED MARGIN via log ratio
+    const ratio = safeRatingHome / safeRatingAway;
+    let marginMean = cfg.marginScale * Math.log(ratio);
+
+    // home-field
+    marginMean += cfg.homeAdv;
+
+    if (marginMean > cfg.maxMargin) marginMean = cfg.maxMargin;
+    if (marginMean < -cfg.maxMargin) marginMean = -cfg.maxMargin;
+
+    // 4) MONTE CARLO SIMULATION
+    const iterations = 20000;
+
+    let sumHome = 0;
+    let sumAway = 0;
+    let homeWins = 0;
+
+    for (let i = 0; i < iterations; i++) {
+      let total = baseTotal + randomNormal() * cfg.totalSigma;
+      if (total < cfg.minTotal) total = cfg.minTotal;
+      if (total > cfg.maxTotal) total = cfg.maxTotal;
+
+      let margin = marginMean + randomNormal() * cfg.spreadSigma;
+
+      let homeScore = (total + margin) / 2;
+      let awayScore = total - homeScore;
+
+      if (homeScore < 0) homeScore = 0;
+      if (awayScore < 0) awayScore = 0;
+
+      sumHome += homeScore;
+      sumAway += awayScore;
+      if (homeScore > awayScore) homeWins++;
     }
 
-    const meanH = sumH / sims;
-    const meanA = sumA / sims;
-    const homeWinProb = winH / sims;
-    const awayWinProb = winA / sims;
-    const tieProb = tie / sims;
-    const spread = Math.abs(meanH - meanA);
+    let homeScoreAvg = sumHome / iterations;
+    let awayScoreAvg = sumAway / iterations;
+
+    homeScoreAvg = Math.round(homeScoreAvg * 10) / 10;
+    awayScoreAvg = Math.round(awayScoreAvg * 10) / 10;
+
+    const spread = Math.abs(homeScoreAvg - awayScoreAvg);
+    const winner = homeScoreAvg >= awayScoreAvg ? home.team : away.team;
+    const homeWinProb = homeWins / iterations;
 
     let confidence;
-    const vol = cfg.spreadVol || 10;
+    const vol = cfg.spreadSigma || 10;
     if (spread >= vol * 0.8) confidence = "High";
     else if (spread >= vol * 0.4) confidence = "Medium";
     else confidence = "Low";
 
-    const winner = meanH >= meanA ? home.team : away.team;
+    const envTotal = (sumHome + sumAway) / iterations;
+    const avgPaceIdx = (home.pace_index + away.pace_index) / 2 || 1.0;
+    const avgSosIdx = (home.sos_index + away.sos_index) / 2 || 1.0;
+    const offVsDefHome = safeRatingHome;
+    const offVsDefAway = safeRatingAway;
+    const shareHome = homeScoreAvg / (homeScoreAvg + awayScoreAvg || 1);
+    const shareAway = 1 - shareHome;
 
     return {
-      homeScore: Math.round(meanH * 10) / 10,
-      awayScore: Math.round(meanA * 10) / 10,
+      homeScore: homeScoreAvg,
+      awayScore: awayScoreAvg,
       winner,
-      spread: Math.round(spread * 10) / 10,
+      spread,
       confidence,
-      homeWinProb,
-      awayWinProb,
-      tieProb,
-      det
+      debug: {
+        baseTotal,
+        envTotal,
+        avgPaceIdx,
+        avgSosIdx,
+        offVsDefHome,
+        offVsDefAway,
+        shareHome,
+        shareAway,
+        homeWinProb
+      }
     };
   }
 
@@ -865,18 +905,15 @@
       return;
     }
     try {
-      document.getElementById('confidence').textContent = 'Running advanced simulation...';
+      document.getElementById('confidence').textContent = 'Loading stats...';
       const [homeStats, awayStats] = await Promise.all([
         fetchTeamStats(league, homeTeam),
         fetchTeamStats(league, awayTeam)
       ]);
 
-      const result = runMonteCarlo(homeStats, awayStats, league, 50000); // you can bump to 100000
+      const result = predictFromStats(homeStats, awayStats, league);
 
-      // Fill UI
-      document.getElementById('confidence').textContent =
-        `${result.confidence} confidence · Home win ${ (result.homeWinProb*100).toFixed(1) }%`;
-
+      document.getElementById('confidence').textContent = result.confidence + ' confidence';
       document.getElementById('homeTeamName').textContent = homeStats.team + " (Home)";
       document.getElementById('awayTeamName').textContent = awayStats.team + " (Away)";
       document.getElementById('homeScore').textContent = result.homeScore;
@@ -905,17 +942,17 @@
         <div class="stat-row"><span>Opp PPG</span><span>${awayStats.opp_ppg.toFixed(1)}</span></div>
       `;
 
-      const d = result.det;
+      const d = result.debug;
+      const winPct = (d.homeWinProb * 100).toFixed(1);
       const reasoning = `
-        Baseline total for ${league} is ${LEAGUE_PARAMS[league]?.baseTotal ?? 40} points.
-        Pace (${d.paceIdx.toFixed(2)}×) and strength of schedule (${d.sosIdx.toFixed(2)}×) adjust the environment
-        to about ${d.envTotal.toFixed(1)} total points. Offense vs defense matchups give
-        ${homeStats.team} a raw factor of ${d.rawHome.toFixed(2)} and
-        ${awayStats.team} ${d.rawAway.toFixed(2)}. After amplifying mismatches, the model allocates
-        ${(d.shareHome * 100).toFixed(1)}% of scoring to ${homeStats.team} and
-        ${(d.shareAway * 100).toFixed(1)}% to ${awayStats.team}.
-        A Monte Carlo simulation over tens of thousands of games then estimates win probabilities and
-        final scores, producing this projected spread of ${result.spread.toFixed(1)}.
+        Base total (from league + team PPG) is ${d.baseTotal.toFixed(1)} points. After adjusting for pace
+        (${d.avgPaceIdx.toFixed(2)}×) and strength of schedule (${d.avgSosIdx.toFixed(2)}×), the simulated game
+        environment averages ${d.envTotal.toFixed(1)} total points across 20,000 Monte Carlo runs.
+        Matchup ratings give ${homeStats.team} an effective strength of ${d.offVsDefHome.toFixed(2)} versus
+        ${d.offVsDefAway.toFixed(2)} for ${awayStats.team}. The model allocates roughly
+        ${(d.shareHome * 100).toFixed(1)}% of points to ${homeStats.team} and
+        ${(d.shareAway * 100).toFixed(1)}% to ${awayStats.team}, with a home win probability of
+        ${winPct}% and an implied spread of ${result.spread.toFixed(1)}.
       `;
       document.getElementById('reasoningText').textContent = reasoning.replace(/\s+/g, " ").trim();
       document.getElementById('results').classList.add('show');
