@@ -689,7 +689,7 @@
 
     try {
       // all-teams.json should sit next to index.html in Netlify
-      const res = await fetch('all-teams.json');
+          const res = await fetch('/data/all-teams.json');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       ALL_TEAMS = data || {};
