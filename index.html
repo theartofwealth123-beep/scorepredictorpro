@@ -421,497 +421,524 @@
   </div>
 
   <script>
-    /************* AUTH + TRIAL LAYER *************/
-    const ADMIN_EMAIL = "ben_sovilla@yahoo.com";
-    const TRIAL_DAYS = 3;
-    let authMode = "login";
+  /************* AUTH + TRIAL LAYER *************/
+  const ADMIN_EMAIL = "ben_sovilla@yahoo.com";
+  const TRIAL_DAYS = 3;
+  let authMode = "login";
 
-    function getUsers() {
-      try { return JSON.parse(localStorage.getItem("sp_users") || "{}"); }
-      catch (e) { return {}; }
-    }
-    function saveUsers(users) {
-      localStorage.setItem("sp_users", JSON.stringify(users));
-    }
-    function getCurrentUser() {
-      try { return JSON.parse(localStorage.getItem("sp_currentUser") || "null"); }
-      catch (e) { return null; }
-    }
-    function setCurrentUser(user) {
-      if (user) localStorage.setItem("sp_currentUser", JSON.stringify(user));
-      else localStorage.removeItem("sp_currentUser");
-      renderAuthUI();
-      checkAccessAndRender();
-    }
-    function isTrialActive(user) {
-      if (!user || !user.trialStart) return false;
-      var start = new Date(user.trialStart).getTime();
-      var now = Date.now();
-      var diffDays = (now - start) / (1000 * 60 * 60 * 24);
-      return diffDays < TRIAL_DAYS;
-    }
-    function remainingTrialText(user) {
-      if (!user || !user.trialStart) return "No trial started yet.";
-      var start = new Date(user.trialStart).getTime();
-      var now = Date.now();
-      var expiry = start + TRIAL_DAYS * 24 * 60 * 60 * 1000;
-      var diffMs = expiry - now;
-      if (diffMs <= 0) return "Your free trial has expired.";
-      var remainingDays = diffMs / (1000 * 60 * 60 * 24);
-      var days = Math.floor(remainingDays);
-      var hours = Math.floor((remainingDays - days) * 24);
-      if (days <= 0) return "Trial active: about " + hours + "h left";
-      return "Trial active: about " + days + "d " + hours + "h left";
-    }
-    function userHasAccess(user) {
-      if (!user) return false;
-      if (user.isAdmin) return true;
-      if (user.isSubscribed) return true;
-      if (isTrialActive(user)) return true;
-      return false;
-    }
-    function renderAuthUI() {
-      var user = getCurrentUser();
-      var authControls = document.getElementById("authControls");
-      var paywallTrialText = document.getElementById("trialStatusText");
-      if (!authControls) return;
+  function getUsers() {
+    try { return JSON.parse(localStorage.getItem("sp_users") || "{}"); }
+    catch { return {}; }
+  }
+  function saveUsers(users) {
+    localStorage.setItem("sp_users", JSON.stringify(users));
+  }
+  function getCurrentUser() {
+    try { return JSON.parse(localStorage.getItem("sp_currentUser") || "null"); }
+    catch { return null; }
+  }
+  function setCurrentUser(user) {
+    if (user) localStorage.setItem("sp_currentUser", JSON.stringify(user));
+    else localStorage.removeItem("sp_currentUser");
+    renderAuthUI();
+    checkAccessAndRender();
+  }
+  function isTrialActive(user) {
+    if (!user || !user.trialStart) return false;
+    const start = new Date(user.trialStart).getTime();
+    const now = Date.now();
+    const diffDays = (now - start) / (1000 * 60 * 60 * 24);
+    return diffDays < TRIAL_DAYS;
+  }
+  function remainingTrialText(user) {
+    if (!user || !user.trialStart) return "No trial started yet.";
+    const start = new Date(user.trialStart).getTime();
+    const now = Date.now();
+    const diffMs = start + TRIAL_DAYS * 24 * 60 * 60 * 1000 - now;
+    if (diffMs <= 0) return "Your free trial has expired.";
+    const remainingDays = diffMs / (1000 * 60 * 60 * 24);
+    const days = Math.floor(remainingDays);
+    const hours = Math.floor((remainingDays - days) * 24);
+    if (days <= 0) return `Trial active: about ${hours}h left`;
+    return `Trial active: about ${days}d ${hours}h left`;
+  }
+  function userHasAccess(user) {
+    if (!user) return false;
+    if (user.isAdmin) return true;
+    if (user.isSubscribed) return true;
+    if (isTrialActive(user)) return true;
+    return false;
+  }
+  function renderAuthUI() {
+    const user = getCurrentUser();
+    const authControls = document.getElementById("authControls");
+    const paywallTrialText = document.getElementById("trialStatusText");
+    if (!authControls) return;
 
-      if (!user) {
-        var html = "";
-        html += '<button class="btn btn-outline" onclick="openAuthModal(\'login\')">Log in</button>';
-        html += '<button class="btn btn-primary" onclick="openAuthModal(\'signup\')">Start Free Trial</button>';
-        authControls.innerHTML = html;
-        if (paywallTrialText) {
-          paywallTrialText.textContent = "Not signed in. Create an account to start your free 3-day trial.";
-        }
-      } else {
-        var accessText;
-        if (userHasAccess(user)) {
-          if (isTrialActive(user) && !user.isSubscribed && !user.isAdmin) {
-            accessText = remainingTrialText(user);
-          } else {
-            accessText = user.isSubscribed ? "Subscription active." : "Admin access.";
-          }
-        } else {
-          accessText = "No active trial or subscription.";
-        }
+    if (!user) {
+      authControls.innerHTML = `
+        <button class="btn btn-outline" onclick="openAuthModal('login')">Log in</button>
+        <button class="btn btn-primary" onclick="openAuthModal('signup')">Start Free Trial</button>
+      `;
+      if (paywallTrialText) {
+        paywallTrialText.textContent = "Not signed in. Create an account to start your free 3-day trial.";
+      }
+    } else {
+      const accessText = userHasAccess(user)
+        ? (isTrialActive(user) && !user.isSubscribed && !user.isAdmin
+            ? remainingTrialText(user)
+            : (user.isSubscribed ? "Subscription active." : "Admin access."))
+        : "No active trial or subscription.";
 
-        var roleBadge = "";
-        if (user.isAdmin) {
-          roleBadge = '<span class="badge">Admin</span>';
-        } else if (user.isSubscribed) {
-          roleBadge = '<span class="badge">Subscriber</span>';
-        } else if (isTrialActive(user)) {
-          roleBadge = '<span class="badge">Trial</span>';
-        }
+      const roleBadge = user.isAdmin
+        ? '<span class="badge">Admin</span>'
+        : user.isSubscribed
+        ? '<span class="badge">Subscriber</span>'
+        : isTrialActive(user)
+        ? '<span class="badge">Trial</span>'
+        : "";
 
-        var html2 = '';
-        html2 += '<div class="user-label">Signed in as ' + user.email + roleBadge + '</div>';
-        if (!user.isSubscribed && !user.isAdmin) {
-          html2 += '<button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe now</button>';
-        }
-        html2 += '<button class="btn btn-danger" onclick="logout()">Log out</button>';
-        authControls.innerHTML = html2;
+      authControls.innerHTML = `
+        <div class="user-label">
+          Signed in as ${user.email}${roleBadge}
+        </div>
+        ${!user.isSubscribed && !user.isAdmin ? `
+          <button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe now</button>
+        ` : ""}
+        <button class="btn btn-danger" onclick="logout()">Log out</button>
+      `;
 
-        if (paywallTrialText) {
-          paywallTrialText.textContent = accessText;
-        }
+      if (paywallTrialText) {
+        paywallTrialText.textContent = accessText;
       }
     }
-    function checkAccessAndRender() {
-      var user = getCurrentUser();
-      var appContent = document.getElementById("appContent");
-      var paywall = document.getElementById("paywall");
-      if (!appContent || !paywall) return;
-      if (userHasAccess(user)) {
-        appContent.style.display = "block";
-        paywall.style.display = "none";
-      } else {
-        appContent.style.display = "none";
-        paywall.style.display = "block";
-      }
+  }
+  function checkAccessAndRender() {
+    const user = getCurrentUser();
+    const appContent = document.getElementById("appContent");
+    const paywall = document.getElementById("paywall");
+    if (!appContent || !paywall) return;
+    if (userHasAccess(user)) {
+      appContent.style.display = "block";
+      paywall.style.display = "none";
+    } else {
+      appContent.style.display = "none";
+      paywall.style.display = "block";
     }
-    function openAuthModal(mode) {
-      authMode = mode || "login";
-      var backdrop = document.getElementById("authModalBackdrop");
-      var title = document.getElementById("authModalTitle");
-      var desc = document.getElementById("authModalDesc");
-      var primaryBtn = document.getElementById("authPrimaryBtn");
-      var toggleText = document.getElementById("authToggleText");
-      var toggleLink = document.getElementById("authToggleLink");
-      var error = document.getElementById("authError");
+  }
+  function openAuthModal(mode) {
+    authMode = mode || "login";
+    const backdrop = document.getElementById("authModalBackdrop");
+    const title = document.getElementById("authModalTitle");
+    const desc = document.getElementById("authModalDesc");
+    const primaryBtn = document.getElementById("authPrimaryBtn");
+    const toggleText = document.getElementById("authToggleText");
+    const toggleLink = document.getElementById("authToggleLink");
+    const error = document.getElementById("authError");
 
-      document.getElementById("authEmail").value = "";
-      document.getElementById("authPassword").value = "";
-      error.textContent = "";
+    document.getElementById("authEmail").value = "";
+    document.getElementById("authPassword").value = "";
+    error.textContent = "";
 
-      if (authMode === "login") {
-        title.textContent = "Sign in to your account";
-        desc.textContent = "Access your subscription or continue your free trial.";
-        primaryBtn.textContent = "Sign in";
-        toggleText.textContent = "Don't have an account?";
-        toggleLink.textContent = "Create one";
-      } else {
-        title.textContent = "Create your account";
-        desc.textContent = "Start your 3-day free trial. No payment required to begin.";
-        primaryBtn.textContent = "Create account";
-        toggleText.textContent = "Already have an account?";
-        toggleLink.textContent = "Sign in";
-      }
+    if (authMode === "login") {
+      title.textContent = "Sign in to your account";
+      desc.textContent = "Access your subscription or continue your free trial.";
+      primaryBtn.textContent = "Sign in";
+      toggleText.textContent = "Don't have an account?";
+      toggleLink.textContent = "Create one";
+    } else {
+      title.textContent = "Create your account";
+      desc.textContent = "Start your 3-day free trial. No payment required to begin.";
+      primaryBtn.textContent = "Create account";
+      toggleText.textContent = "Already have an account?";
+      toggleLink.textContent = "Sign in";
+    }
 
-      primaryBtn.onclick = handleAuthSubmit;
-      backdrop.classList.add("show");
+    primaryBtn.onclick = handleAuthSubmit;
+    backdrop.classList.add("show");
+  }
+  function closeAuthModal() {
+    document.getElementById("authModalBackdrop").classList.remove("show");
+  }
+  function toggleAuthMode() {
+    authMode = authMode === "login" ? "signup" : "login";
+    openAuthModal(authMode);
+  }
+  function handleAuthSubmit() {
+    const email = document.getElementById("authEmail").value.trim().toLowerCase();
+    const password = document.getElementById("authPassword").value;
+    const error = document.getElementById("authError");
+    error.textContent = "";
+    if (!email || !password) {
+      error.textContent = "Please enter email and password.";
+      return;
     }
-    function closeAuthModal() {
-      document.getElementById("authModalBackdrop").classList.remove("show");
-    }
-    function toggleAuthMode() {
-      if (authMode === "login") authMode = "signup";
-      else authMode = "login";
-      openAuthModal(authMode);
-    }
-    function handleAuthSubmit() {
-      var email = document.getElementById("authEmail").value.trim().toLowerCase();
-      var password = document.getElementById("authPassword").value;
-      var error = document.getElementById("authError");
-      error.textContent = "";
-      if (!email || !password) {
-        error.textContent = "Please enter email and password.";
+    const users = getUsers();
+    if (authMode === "signup") {
+      if (users[email]) {
+        error.textContent = "An account with this email already exists. Try signing in.";
         return;
       }
-      var users = getUsers();
-      if (authMode === "signup") {
-        if (users[email]) {
-          error.textContent = "An account with this email already exists. Try signing in.";
-          return;
-        }
-        var newUser = {
-          email: email,
-          password: password,
-          isAdmin: email === ADMIN_EMAIL,
-          isSubscribed: false,
-          trialStart: new Date().toISOString()
-        };
-        users[email] = newUser;
-        saveUsers(users);
-        setCurrentUser(newUser);
-        closeAuthModal();
-      } else {
-        var existing = users[email];
-        if (!existing || existing.password !== password) {
-          error.textContent = "Invalid email or password.";
-          return;
-        }
-        existing.isAdmin = email === ADMIN_EMAIL;
-        users[email] = existing;
-        saveUsers(users);
-        setCurrentUser(existing);
-        closeAuthModal();
-      }
-    }
-    function logout() {
-      setCurrentUser(null);
-    }
-    function fakeSubscribe() {
-      var user = getCurrentUser();
-      if (!user) { openAuthModal("signup"); return; }
-      var users = getUsers();
-      user.isSubscribed = true;
-      users[user.email] = user;
+      const newUser = {
+        email,
+        password,
+        isAdmin: email === ADMIN_EMAIL,
+        isSubscribed: false,
+        trialStart: new Date().toISOString()
+      };
+      users[email] = newUser;
       saveUsers(users);
-      setCurrentUser(user);
-      alert("Subscription activated (demo). In production this would happen after payment.");
-    }
-
-    /************* LEAGUE PARAMS *************/
-    var LEAGUE_PARAMS = {
-      NFL:  { homeAdv: 2.3, spreadVol: 9.5 },
-      NBA:  { homeAdv: 2.8, spreadVol: 13 },
-      MLB:  { homeAdv: 0.4, spreadVol: 3 },
-      NCAAF:{ homeAdv: 3.5, spreadVol: 17 },
-      NCAAB:{ homeAdv: 3.8, spreadVol: 13 }
-    };
-
-    /************* TEAM LISTS (data/all-teams.json) *************/
-    var ALL_TEAMS = {};
-    var teamsLoaded = false;
-
-    async function loadAllTeams() {
-      var leagueSel = document.getElementById('league');
-      var homeSel = document.getElementById('homeTeam');
-      var awaySel = document.getElementById('awayTeam');
-      if (!leagueSel || !homeSel || !awaySel) return;
-
-      homeSel.innerHTML = '<option value="">Loading teams…</option>';
-      awaySel.innerHTML = '<option value="">Loading teams…</option>';
-      homeSel.disabled = true;
-      awaySel.disabled = true;
-
-      try {
-        // IMPORTANT: matches /data/all-teams.json in repo root
-        var res = await fetch('/data/all-teams.json');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        var data = await res.json();
-        ALL_TEAMS = data || {};
-        teamsLoaded = true;
-
-        if (!ALL_TEAMS[leagueSel.value]) {
-          var leagues = Object.keys(ALL_TEAMS);
-          if (leagues.length) leagueSel.value = leagues[0];
-        }
-
-        populateTeamDropdowns();
-      } catch (err) {
-        console.error(err);
-        homeSel.innerHTML = '<option value="">Error loading teams</option>';
-        awaySel.innerHTML = '<option value="">Error loading teams</option>';
-        alert('Error loading team list: ' + err.message);
+      setCurrentUser(newUser);
+      closeAuthModal();
+    } else {
+      const existing = users[email];
+      if (!existing || existing.password !== password) {
+        error.textContent = "Invalid email or password.";
+        return;
       }
+      existing.isAdmin = email === ADMIN_EMAIL;
+      users[email] = existing;
+      saveUsers(users);
+      setCurrentUser(existing);
+      closeAuthModal();
     }
+  }
+  function logout() {
+    setCurrentUser(null);
+  }
+  function fakeSubscribe() {
+    const user = getCurrentUser();
+    if (!user) return openAuthModal("signup");
+    const users = getUsers();
+    user.isSubscribed = true;
+    users[user.email] = user;
+    saveUsers(users);
+    setCurrentUser(user);
+    alert("Subscription activated (demo). In production this would happen after payment.");
+  }
 
-    function populateTeamDropdowns() {
-      var leagueSel = document.getElementById('league');
-      var homeSel = document.getElementById('homeTeam');
-      var awaySel = document.getElementById('awayTeam');
-      if (!leagueSel || !homeSel || !awaySel) return;
+  /************* LEAGUE PARAMS (SCORING + VOLATILITY) *************/
+  // These are realistic average totals & volatility per league
+  const LEAGUE_PARAMS = {
+    NFL:   { baseTotal: 44,  homeAdv: 2.3, spreadVol: 9.5,  teamSd: 8.0 },
+    NBA:   { baseTotal: 230, homeAdv: 2.8, spreadVol: 13,   teamSd: 11 },
+    MLB:   { baseTotal: 9,   homeAdv: 0.4, spreadVol: 3,    teamSd: 2.2 },
+    NCAAF: { baseTotal: 55,  homeAdv: 3.5, spreadVol: 17,   teamSd: 14 },
+    NCAAB: { baseTotal: 142, homeAdv: 3.8, spreadVol: 12,   teamSd: 10 }
+  };
 
-      var league = leagueSel.value;
-      var teams = ALL_TEAMS[league] || [];
+  /************* TEAM LISTS (data/all-teams.json) *************/
+  let ALL_TEAMS = {};
+  let teamsLoaded = false;
 
-      homeSel.innerHTML = '<option value="">Select Home Team</option>';
-      awaySel.innerHTML = '<option value="">Select Away Team</option>';
+  async function loadAllTeams() {
+    const leagueSel = document.getElementById('league');
+    const homeSel = document.getElementById('homeTeam');
+    const awaySel = document.getElementById('awayTeam');
+    if (!leagueSel || !homeSel || !awaySel) return;
 
-      for (var i = 0; i < teams.length; i++) {
-        var name = teams[i];
+    homeSel.innerHTML = '<option value="">Loading teams…</option>';
+    awaySel.innerHTML = '<option value="">Loading teams…</option>';
+    homeSel.disabled = true;
+    awaySel.disabled = true;
 
-        var optH = document.createElement('option');
-        optH.value = name;
-        optH.textContent = name;
-        homeSel.appendChild(optH);
-
-        var optA = document.createElement('option');
-        optA.value = name;
-        optA.textContent = name;
-        awaySel.appendChild(optA);
-      }
-
-      homeSel.disabled = false;
-      awaySel.disabled = false;
-    }
-
-    /************* FETCH TEAM STATS (Netlify function) *************/
-    async function fetchTeamStats(league, teamName) {
-      var url = "/.netlify/functions/team-stats?league=" +
-        encodeURIComponent(league) +
-        "&team=" + encodeURIComponent(teamName);
-      var res = await fetch(url);
+    try {
+      // Try root first (Netlify publish dir), then /data as fallback
+      let res = await fetch('all-teams.json');
       if (!res.ok) {
-        throw new Error("Stats API error for " + teamName + ": " + res.status + " " + res.statusText);
+        res = await fetch('/data/all-teams.json');
       }
-      var data = await res.json();
-      if (data.error) throw new Error(data.error);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      var required = ["off_index", "def_index", "pace_index", "sos_index", "form_index", "ppg", "opp_ppg"];
-      for (var i = 0; i < required.length; i++) {
-        var key = required[i];
-        if (typeof data[key] !== "number") {
-          throw new Error('Missing or invalid "' + key + '" in stats response for ' + teamName);
-        }
+      const data = await res.json();
+      ALL_TEAMS = data || {};
+      teamsLoaded = true;
+
+      if (!ALL_TEAMS[leagueSel.value]) {
+        const leagues = Object.keys(ALL_TEAMS);
+        if (leagues.length) leagueSel.value = leagues[0];
       }
 
-      return {
-        league: data.league || league,
-        team: data.team || teamName,
-        off_index: data.off_index,
-        def_index: data.def_index,
-        pace_index: data.pace_index,
-        sos_index: data.sos_index,
-        form_index: data.form_index,
-        ppg: data.ppg,
-        opp_ppg: data.opp_ppg,
-        home_adv_points: typeof data.home_adv_points === "number" ? data.home_adv_points : 0
-      };
+      populateTeamDropdowns();
+    } catch (err) {
+      console.error(err);
+      homeSel.innerHTML = '<option value="">Error loading teams</option>';
+      awaySel.innerHTML = '<option value="">Error loading teams</option>';
+      alert('Error loading team list: ' + err.message);
     }
+  }
 
-    /************* PREDICTION MODEL *************/
-    function predictFromStats(home, away, league) {
-      var params = LEAGUE_PARAMS[league] || { homeAdv: 0, spreadVol: 10 };
+  function populateTeamDropdowns() {
+    const leagueSel = document.getElementById('league');
+    const homeSel = document.getElementById('homeTeam');
+    const awaySel = document.getElementById('awayTeam');
+    if (!leagueSel || !homeSel || !awaySel) return;
 
-      // Base total = avg actual PPG
-      var totalPpg = (home.ppg + away.ppg) || 0;
-      var baseTotal = totalPpg || 40; // fallback
+    const league = leagueSel.value;
+    const teams = ALL_TEAMS[league] || [];
 
-      var avgPaceIdx = (home.pace_index + away.pace_index) / 2 || 1.0;
-      var avgSosIdx  = (home.sos_index + away.sos_index) / 2 || 1.0;
+    homeSel.innerHTML = '<option value="">Select Home Team</option>';
+    awaySel.innerHTML = '<option value="">Select Away Team</option>';
 
-      var paceFactor = 1 + (avgPaceIdx - 1) * 0.7;
-      var sosFactor  = 1 + (avgSosIdx - 1) * 0.4;
+    teams.forEach(name => {
+      const optH = document.createElement('option');
+      optH.value = name;
+      optH.textContent = name;
+      homeSel.appendChild(optH);
 
-      var envTotal = baseTotal * paceFactor * sosFactor;
-
-      // Guardrails
-      if (league === "NFL" || league === "NCAAF") {
-        if (envTotal < 20) envTotal = 20;
-        if (envTotal > 80) envTotal = 80;
-      } else if (league === "NBA" || league === "NCAAB") {
-        if (envTotal < 120) envTotal = 120;
-        if (envTotal > 190) envTotal = 190;
-      } else if (league === "MLB") {
-        if (envTotal < 4) envTotal = 4;
-        if (envTotal > 16) envTotal = 16;
-      }
-
-      var offVsDefHome = home.off_index / (away.def_index || 1);
-      var offVsDefAway = away.off_index / (home.def_index || 1);
-
-      var ppgHome = home.ppg || 1;
-      var ppgAway = away.ppg || 1;
-      var ppgSum = ppgHome + ppgAway;
-
-      var rawHome = offVsDefHome * home.form_index * (ppgHome / ppgSum);
-      var rawAway = offVsDefAway * away.form_index * (ppgAway / ppgSum);
-
-      if (!isFinite(rawHome) || rawHome <= 0) rawHome = 1;
-      if (!isFinite(rawAway) || rawAway <= 0) rawAway = 1;
-
-      var exponent = 1.25;
-      if (league === "NCAAF" || league === "NCAAB") exponent = 1.7;
-
-      var weightHome = Math.pow(rawHome, exponent);
-      var weightAway = Math.pow(rawAway, exponent);
-      var weightSum = weightHome + weightAway || 1;
-
-      var shareHome = weightHome / weightSum;
-      var shareAway = weightAway / weightSum;
-
-      var homeScore = envTotal * shareHome + params.homeAdv / 2;
-      var awayScore = envTotal * shareAway - params.homeAdv / 2;
-
-      if (homeScore < 0) homeScore = 0;
-      if (awayScore < 0) awayScore = 0;
-
-      homeScore = Math.round(homeScore * 10) / 10;
-      awayScore = Math.round(awayScore * 10) / 10;
-
-      var spread = Math.abs(homeScore - awayScore);
-      var winner = homeScore >= awayScore ? home.team : away.team;
-
-      var confidence;
-      var vol = params.spreadVol || 10;
-      if (spread >= vol * 0.8) confidence = "High";
-      else if (spread >= vol * 0.4) confidence = "Medium";
-      else confidence = "Low";
-
-      return {
-        homeScore: homeScore,
-        awayScore: awayScore,
-        winner: winner,
-        spread: spread,
-        confidence: confidence,
-        debug: {
-          baseTotal: baseTotal,
-          envTotal: envTotal,
-          avgPaceIdx: avgPaceIdx,
-          avgSosIdx: avgSosIdx,
-          offVsDefHome: offVsDefHome,
-          offVsDefAway: offVsDefAway,
-          rawHome: rawHome,
-          rawAway: rawAway,
-          shareHome: shareHome,
-          shareAway: shareAway
-        }
-      };
-    }
-
-    /************* PREDICT BUTTON HANDLER *************/
-    async function predictScore() {
-      var league = document.getElementById('league').value;
-      var homeTeam = document.getElementById('homeTeam').value.trim();
-      var awayTeam = document.getElementById('awayTeam').value.trim();
-      if (!homeTeam || !awayTeam) {
-        alert('Select both teams from the dropdowns.');
-        return;
-      }
-      if (homeTeam.toLowerCase() === awayTeam.toLowerCase()) {
-        alert('Teams must be different.');
-        return;
-      }
-      try {
-        document.getElementById('confidence').textContent = 'Loading stats...';
-        var resultsDiv = document.getElementById('results');
-
-        var statsPromises = [
-          fetchTeamStats(league, homeTeam),
-          fetchTeamStats(league, awayTeam)
-        ];
-        var stats = await Promise.all(statsPromises);
-        var homeStats = stats[0];
-        var awayStats = stats[1];
-
-        var result = predictFromStats(homeStats, awayStats, league);
-
-        document.getElementById('confidence').textContent = result.confidence + ' confidence';
-        document.getElementById('homeTeamName').textContent = homeStats.team + " (Home)";
-        document.getElementById('awayTeamName').textContent = awayStats.team + " (Away)";
-        document.getElementById('homeScore').textContent = result.homeScore;
-        document.getElementById('awayScore').textContent = result.awayScore;
-        document.getElementById('winner').textContent = result.winner;
-        document.getElementById('spread').textContent = 'Spread: ' + result.spread.toFixed(1);
-
-        document.getElementById('homeStatsTitle').textContent = homeStats.team + ' Profile';
-        document.getElementById('homeStats').innerHTML =
-          '<div class="stat-row"><span>Off Index</span><span>' + homeStats.off_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>Def Index</span><span>' + homeStats.def_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>Pace Index</span><span>' + homeStats.pace_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>SOS Index</span><span>' + homeStats.sos_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>Form Index</span><span>' + homeStats.form_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>PPG</span><span>' + homeStats.ppg.toFixed(1) + '</span></div>' +
-          '<div class="stat-row"><span>Opp PPG</span><span>' + homeStats.opp_ppg.toFixed(1) + '</span></div>';
-
-        document.getElementById('awayStatsTitle').textContent = awayStats.team + ' Profile';
-        document.getElementById('awayStats').innerHTML =
-          '<div class="stat-row"><span>Off Index</span><span>' + awayStats.off_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>Def Index</span><span>' + awayStats.def_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>Pace Index</span><span>' + awayStats.pace_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>SOS Index</span><span>' + awayStats.sos_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>Form Index</span><span>' + awayStats.form_index.toFixed(3) + '</span></div>' +
-          '<div class="stat-row"><span>PPG</span><span>' + awayStats.ppg.toFixed(1) + '</span></div>' +
-          '<div class="stat-row"><span>Opp PPG</span><span>' + awayStats.opp_ppg.toFixed(1) + '</span></div>';
-
-        var d = result.debug;
-        var reasoning =
-          "Base total from scoring is " + d.baseTotal.toFixed(1) + " points. " +
-          "After adjusting for pace (" + d.avgPaceIdx.toFixed(2) + "×) and strength of schedule (" +
-          d.avgSosIdx.toFixed(2) + "×), the environment total is " + d.envTotal.toFixed(1) + ". " +
-          "Offense-vs-defense matchups give " + homeStats.team + " a factor of " +
-          d.offVsDefHome.toFixed(2) + " and " + awayStats.team + " " + d.offVsDefAway.toFixed(2) + ". " +
-          "Combined with recent form and scoring profile, the model allocates " +
-          (d.shareHome * 100).toFixed(1) + "% of expected points to " + homeStats.team +
-          " and " + (d.shareAway * 100).toFixed(1) + "% to " + awayStats.team +
-          ", producing the projected spread of " + result.spread.toFixed(1) + ".";
-        document.getElementById('reasoningText').textContent = reasoning;
-
-        resultsDiv.classList.add('show');
-        resultsDiv.scrollIntoView({ behavior: 'smooth' });
-      } catch (err) {
-        console.error(err);
-        alert('Could not load stats or compute prediction. Check league/team and try again.');
-      }
-    }
-
-    /************* INIT *************/
-    document.addEventListener("DOMContentLoaded", function () {
-      renderAuthUI();
-      checkAccessAndRender();
-      loadAllTeams();
-
-      var leagueSel = document.getElementById('league');
-      if (leagueSel) {
-        leagueSel.addEventListener('change', function () {
-          if (teamsLoaded) populateTeamDropdowns();
-        });
-      }
+      const optA = document.createElement('option');
+      optA.value = name;
+      optA.textContent = name;
+      awaySel.appendChild(optA);
     });
-  </script>
+
+    homeSel.disabled = false;
+    awaySel.disabled = false;
+  }
+
+  /************* FETCH TEAM STATS FROM NETLIFY FUNCTION *************/
+  async function fetchTeamStats(league, teamName) {
+    const url = `/.netlify/functions/team-stats?league=${encodeURIComponent(league)}&team=${encodeURIComponent(teamName)}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Stats API error for ${teamName}: ${res.status} ${res.statusText}`);
+    }
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    // Required numeric fields; if some scraper fields are missing, default to 1
+    const num = (v, fallback) =>
+      typeof v === "number" && isFinite(v) ? v : fallback;
+
+    return {
+      league: data.league || league,
+      team: data.team || teamName,
+      off_index: num(data.off_index, 1.0),
+      def_index: num(data.def_index, 1.0),
+      pace_index: num(data.pace_index, 1.0),
+      sos_index: num(data.sos_index, 1.0),
+      form_index: num(data.form_index, 1.0),
+      ppg: num(data.ppg, 0),          // used mostly for display now
+      opp_ppg: num(data.opp_ppg, 0),  // used mostly for display now
+      home_adv_points: num(data.home_adv_points, 0)
+    };
+  }
+
+  /************* RANDOM + MONTE CARLO ENGINE *************/
+  // Standard normal using Box-Muller
+  function randn() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+
+  function computeDeterministic(home, away, league) {
+    const cfg = LEAGUE_PARAMS[league] || { baseTotal: 40, homeAdv: 0, spreadVol: 10, teamSd: 8 };
+
+    // Use league baseline instead of raw PPG so bad scrape values (like 0.7) don't kill us
+    const baseTotal = cfg.baseTotal;
+
+    // Pace & SOS environment factors (if your scraper fills them)
+    const paceIdx = (home.pace_index + away.pace_index) / 2 || 1.0;
+    const sosIdx  = (home.sos_index + away.sos_index) / 2 || 1.0;
+
+    const paceFactor = 1 + (paceIdx - 1) * 0.7;
+    const sosFactor  = 1 + (sosIdx - 1) * 0.4;
+
+    let envTotal = baseTotal * paceFactor * sosFactor;
+
+    // Clamp totals to sane ranges per league
+    if (league === "NFL" || league === "NCAAF") {
+      if (envTotal < 20) envTotal = 20;
+      if (envTotal > 80) envTotal = 80;
+    } else if (league === "NBA" || league === "NCAAB") {
+      if (envTotal < 120) envTotal = 120;
+      if (envTotal > 190) envTotal = 190;
+    } else if (league === "MLB") {
+      if (envTotal < 4) envTotal = 4;
+      if (envTotal > 16) envTotal = 16;
+    }
+
+    // Advanced matchup: Off vs Def with form baked in
+    const offHome = home.off_index || 1;
+    const offAway = away.off_index || 1;
+    const defHome = home.def_index || 1;
+    const defAway = away.def_index || 1;
+
+    let rawHome = (offHome / (defAway || 1)) * (home.form_index || 1);
+    let rawAway = (offAway / (defHome || 1)) * (away.form_index || 1);
+
+    if (!isFinite(rawHome) || rawHome <= 0) rawHome = 1;
+    if (!isFinite(rawAway) || rawAway <= 0) rawAway = 1;
+
+    // College gets heavier mismatch exponent to allow real blowouts
+    let exponent = 1.5; // pro
+    if (league === "NCAAF" || league === "NCAAB") exponent = 2.3;
+
+    const wHome = Math.pow(rawHome, exponent);
+    const wAway = Math.pow(rawAway, exponent);
+    const sumW = wHome + wAway || 1;
+
+    const shareHome = wHome / sumW;
+    const shareAway = wAway / sumW;
+
+    let muHome = envTotal * shareHome + cfg.homeAdv / 2;
+    let muAway = envTotal * shareAway - cfg.homeAdv / 2;
+
+    if (muHome < 0) muHome = 0;
+    if (muAway < 0) muAway = 0;
+
+    return {
+      muHome,
+      muAway,
+      envTotal,
+      paceIdx,
+      sosIdx,
+      rawHome,
+      rawAway,
+      shareHome,
+      shareAway
+    };
+  }
+
+  function runMonteCarlo(home, away, league, sims = 50000) {
+    const cfg = LEAGUE_PARAMS[league] || { teamSd: 8, spreadVol: 10 };
+    const det = computeDeterministic(home, away, league);
+
+    const sd = cfg.teamSd || 8;
+    let sumH = 0;
+    let sumA = 0;
+    let winH = 0;
+    let winA = 0;
+    let tie = 0;
+
+    for (let i = 0; i < sims; i++) {
+      const h = Math.max(0, det.muHome + sd * randn());
+      const a = Math.max(0, det.muAway + sd * randn());
+      sumH += h;
+      sumA += a;
+      if (h > a) winH++;
+      else if (a > h) winA++;
+      else tie++;
+    }
+
+    const meanH = sumH / sims;
+    const meanA = sumA / sims;
+    const homeWinProb = winH / sims;
+    const awayWinProb = winA / sims;
+    const tieProb = tie / sims;
+    const spread = Math.abs(meanH - meanA);
+
+    let confidence;
+    const vol = cfg.spreadVol || 10;
+    if (spread >= vol * 0.8) confidence = "High";
+    else if (spread >= vol * 0.4) confidence = "Medium";
+    else confidence = "Low";
+
+    const winner = meanH >= meanA ? home.team : away.team;
+
+    return {
+      homeScore: Math.round(meanH * 10) / 10,
+      awayScore: Math.round(meanA * 10) / 10,
+      winner,
+      spread: Math.round(spread * 10) / 10,
+      confidence,
+      homeWinProb,
+      awayWinProb,
+      tieProb,
+      det
+    };
+  }
+
+  /************* PREDICT BUTTON HANDLER *************/
+  async function predictScore() {
+    const league = document.getElementById('league').value;
+    const homeTeam = document.getElementById('homeTeam').value.trim();
+    const awayTeam = document.getElementById('awayTeam').value.trim();
+    if (!homeTeam || !awayTeam) {
+      alert('Select both teams from the dropdowns.');
+      return;
+    }
+    if (homeTeam.toLowerCase() === awayTeam.toLowerCase()) {
+      alert('Teams must be different.');
+      return;
+    }
+    try {
+      document.getElementById('confidence').textContent = 'Running advanced simulation...';
+      const [homeStats, awayStats] = await Promise.all([
+        fetchTeamStats(league, homeTeam),
+        fetchTeamStats(league, awayTeam)
+      ]);
+
+      const result = runMonteCarlo(homeStats, awayStats, league, 50000); // you can bump to 100000
+
+      // Fill UI
+      document.getElementById('confidence').textContent =
+        `${result.confidence} confidence · Home win ${ (result.homeWinProb*100).toFixed(1) }%`;
+
+      document.getElementById('homeTeamName').textContent = homeStats.team + " (Home)";
+      document.getElementById('awayTeamName').textContent = awayStats.team + " (Away)";
+      document.getElementById('homeScore').textContent = result.homeScore;
+      document.getElementById('awayScore').textContent = result.awayScore;
+      document.getElementById('winner').textContent = result.winner;
+      document.getElementById('spread').textContent = 'Spread: ' + result.spread.toFixed(1);
+
+      document.getElementById('homeStatsTitle').textContent = homeStats.team + ' Profile';
+      document.getElementById('homeStats').innerHTML = `
+        <div class="stat-row"><span>Off Index</span><span>${homeStats.off_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>Def Index</span><span>${homeStats.def_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>Pace Index</span><span>${homeStats.pace_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>SOS Index</span><span>${homeStats.sos_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>Form Index</span><span>${homeStats.form_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>PPG</span><span>${homeStats.ppg.toFixed(1)}</span></div>
+        <div class="stat-row"><span>Opp PPG</span><span>${homeStats.opp_ppg.toFixed(1)}</span></div>
+      `;
+      document.getElementById('awayStatsTitle').textContent = awayStats.team + ' Profile';
+      document.getElementById('awayStats').innerHTML = `
+        <div class="stat-row"><span>Off Index</span><span>${awayStats.off_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>Def Index</span><span>${awayStats.def_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>Pace Index</span><span>${awayStats.pace_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>SOS Index</span><span>${awayStats.sos_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>Form Index</span><span>${awayStats.form_index.toFixed(3)}</span></div>
+        <div class="stat-row"><span>PPG</span><span>${awayStats.ppg.toFixed(1)}</span></div>
+        <div class="stat-row"><span>Opp PPG</span><span>${awayStats.opp_ppg.toFixed(1)}</span></div>
+      `;
+
+      const d = result.det;
+      const reasoning = `
+        Baseline total for ${league} is ${LEAGUE_PARAMS[league]?.baseTotal ?? 40} points.
+        Pace (${d.paceIdx.toFixed(2)}×) and strength of schedule (${d.sosIdx.toFixed(2)}×) adjust the environment
+        to about ${d.envTotal.toFixed(1)} total points. Offense vs defense matchups give
+        ${homeStats.team} a raw factor of ${d.rawHome.toFixed(2)} and
+        ${awayStats.team} ${d.rawAway.toFixed(2)}. After amplifying mismatches, the model allocates
+        ${(d.shareHome * 100).toFixed(1)}% of scoring to ${homeStats.team} and
+        ${(d.shareAway * 100).toFixed(1)}% to ${awayStats.team}.
+        A Monte Carlo simulation over tens of thousands of games then estimates win probabilities and
+        final scores, producing this projected spread of ${result.spread.toFixed(1)}.
+      `;
+      document.getElementById('reasoningText').textContent = reasoning.replace(/\s+/g, " ").trim();
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    } catch (err) {
+      console.error(err);
+      alert('Could not load stats or compute prediction. Check league/team and try again.');
+    }
+  }
+
+  /************* INIT *************/
+  document.addEventListener("DOMContentLoaded", () => {
+    renderAuthUI();
+    checkAccessAndRender();
+    loadAllTeams();
+
+    const leagueSel = document.getElementById('league');
+    if (leagueSel) {
+      leagueSel.addEventListener('change', () => {
+        if (teamsLoaded) populateTeamDropdowns();
+      });
+    }
+  });
+</script>
 </body>
 </html>
