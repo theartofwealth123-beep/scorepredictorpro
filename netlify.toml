@@ -1,17 +1,12 @@
-# netlify.toml ← CORRECT 2025 SYNTAX FOR SCHEDULED FUNCTIONS
+# netlify.toml ← CLEAN 2025 SYNTAX, NO REDIRECTS NEEDED
 [build]
   publish = "."
   functions = "netlify/functions"
-
-[[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
 
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["jstat", "twitter-api-v2"]
 
-# CORRECT scheduled function syntax (2025+): functions.schedules as object with function key
+# Scheduled scraper every 12 hours
 [functions.schedules]
   scheduler = "0 */12 * * *"
