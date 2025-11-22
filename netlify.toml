@@ -1,4 +1,4 @@
-# netlify.toml ← NEW 2025+ CORRECT SYNTAX
+# netlify.toml ← CORRECT 2025 SYNTAX FOR SCHEDULED FUNCTIONS
 [build]
   publish = "."
   functions = "netlify/functions"
@@ -12,7 +12,6 @@
   node_bundler = "esbuild"
   external_node_modules = ["jstat", "twitter-api-v2"]
 
-# Correct scheduled function syntax (2025+)
-[[functions.schedules]]
-  function = "scheduler"
-  cron = "0 */12 * * *"
+# CORRECT scheduled function syntax (2025+): functions.schedules as object with function key
+[functions.schedules]
+  scheduler = "0 */12 * * *"
