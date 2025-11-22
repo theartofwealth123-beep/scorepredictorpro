@@ -1,3 +1,4 @@
+# netlify.toml ← NEW 2025+ CORRECT SYNTAX
 [build]
   publish = "."
   functions = "netlify/functions"
@@ -11,7 +12,7 @@
   node_bundler = "esbuild"
   external_node_modules = ["jstat", "twitter-api-v2"]
 
-# Scheduled scraper — every 12 hours
-[[functions.schedule]]
+# Correct scheduled function syntax (2025+)
+[[functions.schedules]]
   function = "scheduler"
-  schedule = "0 */12 * * *"
+  cron = "0 */12 * * *"
