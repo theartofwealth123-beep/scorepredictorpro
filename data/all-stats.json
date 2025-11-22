@@ -231,17 +231,6 @@
       "ppg": 26.1,
       "opp_ppg": 20
     },
-    "Seattle": {
-      "league": "NFL",
-      "team": "Seattle",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9789473684210527,
-      "sos_index": 1,
-      "form_index": 1.003056768558952,
-      "ppg": 22.1,
-      "opp_ppg": 21.6
-    },
     "NY Jets": {
       "league": "NFL",
       "team": "NY Jets",
@@ -252,6 +241,17 @@
       "form_index": 0.9646288209606987,
       "ppg": 19.9,
       "opp_ppg": 23.8
+    },
+    "Seattle": {
+      "league": "NFL",
+      "team": "Seattle",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9789473684210527,
+      "sos_index": 1,
+      "form_index": 1.003056768558952,
+      "ppg": 22.1,
+      "opp_ppg": 21.6
     },
     "Cincinnati": {
       "league": "NFL",
@@ -387,17 +387,6 @@
       "ppg": 114.7,
       "opp_ppg": 111.3
     },
-    "Minnesota": {
-      "league": "NBA",
-      "team": "Minnesota",
-      "off_index": 1.0246575342465756,
-      "def_index": 1.0354330708661417,
-      "pace_index": 0.9723684210526315,
-      "sos_index": 1,
-      "form_index": 1.0425,
-      "ppg": 113.5,
-      "opp_ppg": 108.8
-    },
     "Okla City": {
       "league": "NBA",
       "team": "Okla City",
@@ -409,16 +398,16 @@
       "ppg": 118.9,
       "opp_ppg": 107.3
     },
-    "Toronto": {
+    "Minnesota": {
       "league": "NBA",
-      "team": "Toronto",
-      "off_index": 0.9479452054794523,
-      "def_index": 0.9866141732283464,
-      "pace_index": 1.0092105263157893,
+      "team": "Minnesota",
+      "off_index": 1.0246575342465756,
+      "def_index": 1.0354330708661417,
+      "pace_index": 0.9723684210526315,
       "sos_index": 1,
-      "form_index": 0.9675,
-      "ppg": 110.9,
-      "opp_ppg": 115.2
+      "form_index": 1.0425,
+      "ppg": 113.5,
+      "opp_ppg": 108.8
     },
     "Phoenix": {
       "league": "NBA",
@@ -431,6 +420,17 @@
       "ppg": 113.6,
       "opp_ppg": 116.6
     },
+    "Toronto": {
+      "league": "NBA",
+      "team": "Toronto",
+      "off_index": 0.9479452054794523,
+      "def_index": 0.9866141732283464,
+      "pace_index": 1.0092105263157893,
+      "sos_index": 1,
+      "form_index": 0.9675,
+      "ppg": 110.9,
+      "opp_ppg": 115.2
+    },
     "San Antonio": {
       "league": "NBA",
       "team": "San Antonio",
@@ -441,61 +441,6 @@
       "form_index": 0.9800000000000001,
       "ppg": 113.9,
       "opp_ppg": 116.7
-    },
-    "Milwaukee": {
-      "league": "NBA",
-      "team": "Milwaukee",
-      "off_index": 1.0219178082191782,
-      "def_index": 0.9976377952755904,
-      "pace_index": 0.9921052631578947,
-      "sos_index": 1,
-      "form_index": 1.0208333333333333,
-      "ppg": 115,
-      "opp_ppg": 112.9
-    },
-    "Miami": {
-      "league": "NBA",
-      "team": "Miami",
-      "off_index": 0.9904109589041097,
-      "def_index": 0.9944881889763777,
-      "pace_index": 0.9605263157894736,
-      "sos_index": 1,
-      "form_index": 0.9983333333333334,
-      "ppg": 110,
-      "opp_ppg": 110.6
-    },
-    "Philadelphia": {
-      "league": "NBA",
-      "team": "Philadelphia",
-      "off_index": 0.9671232876712331,
-      "def_index": 0.9330708661417322,
-      "pace_index": 0.9763157894736841,
-      "sos_index": 1,
-      "form_index": 0.9516666666666667,
-      "ppg": 109.6,
-      "opp_ppg": 115.8
-    },
-    "Boston": {
-      "league": "NBA",
-      "team": "Boston",
-      "off_index": 1.0712328767123287,
-      "def_index": 1.0464566929133858,
-      "pace_index": 0.95,
-      "sos_index": 1,
-      "form_index": 1.0758333333333334,
-      "ppg": 115,
-      "opp_ppg": 106.3
-    },
-    "Cleveland": {
-      "league": "NBA",
-      "team": "Cleveland",
-      "off_index": 1.1,
-      "def_index": 1.0244094488188977,
-      "pace_index": 1.0013157894736842,
-      "sos_index": 1,
-      "form_index": 1.085,
-      "ppg": 121.7,
-      "opp_ppg": 111.9
     },
     "LA Lakers": {
       "league": "NBA",
@@ -519,27 +464,38 @@
       "ppg": 117.5,
       "opp_ppg": 119.2
     },
-    "Portland": {
+    "Boston": {
       "league": "NBA",
-      "team": "Portland",
-      "off_index": 0.9602739726027397,
-      "def_index": 0.9913385826771651,
-      "pace_index": 0.9973684210526317,
+      "team": "Boston",
+      "off_index": 1.0712328767123287,
+      "def_index": 1.0464566929133858,
+      "pace_index": 0.95,
       "sos_index": 1,
-      "form_index": 0.9783333333333334,
-      "ppg": 110.9,
-      "opp_ppg": 113.9
+      "form_index": 1.0758333333333334,
+      "ppg": 115,
+      "opp_ppg": 106.3
     },
-    "Charlotte": {
+    "Philadelphia": {
       "league": "NBA",
-      "team": "Charlotte",
-      "off_index": 0.9041095890410961,
-      "def_index": 0.9598425196850394,
-      "pace_index": 0.9776315789473685,
+      "team": "Philadelphia",
+      "off_index": 0.9671232876712331,
+      "def_index": 0.9330708661417322,
+      "pace_index": 0.9763157894736841,
       "sos_index": 1,
-      "form_index": 0.9275,
-      "ppg": 105.1,
-      "opp_ppg": 114.2
+      "form_index": 0.9516666666666667,
+      "ppg": 109.6,
+      "opp_ppg": 115.8
+    },
+    "Cleveland": {
+      "league": "NBA",
+      "team": "Cleveland",
+      "off_index": 1.1,
+      "def_index": 1.0244094488188977,
+      "pace_index": 1.0013157894736842,
+      "sos_index": 1,
+      "form_index": 1.085,
+      "ppg": 121.7,
+      "opp_ppg": 111.9
     },
     "Detroit": {
       "league": "NBA",
@@ -552,6 +508,50 @@
       "ppg": 114.9,
       "opp_ppg": 113.2
     },
+    "Miami": {
+      "league": "NBA",
+      "team": "Miami",
+      "off_index": 0.9904109589041097,
+      "def_index": 0.9944881889763777,
+      "pace_index": 0.9605263157894736,
+      "sos_index": 1,
+      "form_index": 0.9983333333333334,
+      "ppg": 110,
+      "opp_ppg": 110.6
+    },
+    "Milwaukee": {
+      "league": "NBA",
+      "team": "Milwaukee",
+      "off_index": 1.0219178082191782,
+      "def_index": 0.9976377952755904,
+      "pace_index": 0.9921052631578947,
+      "sos_index": 1,
+      "form_index": 1.0208333333333333,
+      "ppg": 115,
+      "opp_ppg": 112.9
+    },
+    "Charlotte": {
+      "league": "NBA",
+      "team": "Charlotte",
+      "off_index": 0.9041095890410961,
+      "def_index": 0.9598425196850394,
+      "pace_index": 0.9776315789473685,
+      "sos_index": 1,
+      "form_index": 0.9275,
+      "ppg": 105.1,
+      "opp_ppg": 114.2
+    },
+    "Portland": {
+      "league": "NBA",
+      "team": "Portland",
+      "off_index": 0.9602739726027397,
+      "def_index": 0.9913385826771651,
+      "pace_index": 0.9973684210526317,
+      "sos_index": 1,
+      "form_index": 0.9783333333333334,
+      "ppg": 110.9,
+      "opp_ppg": 113.9
+    },
     "Atlanta": {
       "league": "NBA",
       "team": "Atlanta",
@@ -562,28 +562,6 @@
       "form_index": 0.9908333333333333,
       "ppg": 117.9,
       "opp_ppg": 119.4
-    },
-    "Golden State": {
-      "league": "NBA",
-      "team": "Golden State",
-      "off_index": 1.0013698630136987,
-      "def_index": 1.0291338582677163,
-      "pace_index": 0.9815789473684211,
-      "sos_index": 1,
-      "form_index": 1.0241666666666667,
-      "ppg": 112.5,
-      "opp_ppg": 110
-    },
-    "LA Clippers": {
-      "league": "NBA",
-      "team": "LA Clippers",
-      "off_index": 1.015068493150685,
-      "def_index": 1.0417322834645668,
-      "pace_index": 0.9697368421052631,
-      "sos_index": 1,
-      "form_index": 1.0391666666666666,
-      "ppg": 112.5,
-      "opp_ppg": 108.2
     },
     "Orlando": {
       "league": "NBA",
@@ -606,6 +584,28 @@
       "form_index": 0.9258333333333334,
       "ppg": 111.9,
       "opp_ppg": 121.2
+    },
+    "Golden State": {
+      "league": "NBA",
+      "team": "Golden State",
+      "off_index": 1.0013698630136987,
+      "def_index": 1.0291338582677163,
+      "pace_index": 0.9815789473684211,
+      "sos_index": 1,
+      "form_index": 1.0241666666666667,
+      "ppg": 112.5,
+      "opp_ppg": 110
+    },
+    "LA Clippers": {
+      "league": "NBA",
+      "team": "LA Clippers",
+      "off_index": 1.015068493150685,
+      "def_index": 1.0417322834645668,
+      "pace_index": 0.9697368421052631,
+      "sos_index": 1,
+      "form_index": 1.0391666666666666,
+      "ppg": 112.5,
+      "opp_ppg": 108.2
     },
     "Brooklyn": {
       "league": "NBA",
@@ -741,17 +741,6 @@
       "ppg": 4.78,
       "opp_ppg": 3.98
     },
-    "Boston": {
-      "league": "MLB",
-      "team": "Boston",
-      "off_index": 1.0290598290598292,
-      "def_index": 1.013131313131313,
-      "pace_index": 1.05,
-      "sos_index": 1,
-      "form_index": 1.0324137931034483,
-      "ppg": 4.64,
-      "opp_ppg": 4.61
-    },
     "Chi Cubs": {
       "league": "MLB",
       "team": "Chi Cubs",
@@ -762,6 +751,17 @@
       "form_index": 1.0586206896551724,
       "ppg": 4.54,
       "opp_ppg": 4.13
+    },
+    "Boston": {
+      "league": "MLB",
+      "team": "Boston",
+      "off_index": 1.0290598290598292,
+      "def_index": 1.013131313131313,
+      "pace_index": 1.05,
+      "sos_index": 1,
+      "form_index": 1.0324137931034483,
+      "ppg": 4.64,
+      "opp_ppg": 4.61
     },
     "Philadelphia": {
       "league": "MLB",
@@ -1249,17 +1249,6 @@
       "ppg": 13.1,
       "opp_ppg": 29.9
     },
-    "Akron": {
-      "league": "NCAAF",
-      "team": "Akron",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9908888888888889,
-      "sos_index": 1,
-      "form_index": 0.9681159420289855,
-      "ppg": 19.5,
-      "opp_ppg": 33.1
-    },
     "Pittsburgh": {
       "league": "NCAAF",
       "team": "Pittsburgh",
@@ -1293,6 +1282,17 @@
       "ppg": 36.8,
       "opp_ppg": 24.3
     },
+    "Akron": {
+      "league": "NCAAF",
+      "team": "Akron",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9908888888888889,
+      "sos_index": 1,
+      "form_index": 0.9681159420289855,
+      "ppg": 19.5,
+      "opp_ppg": 33.1
+    },
     "Marshall": {
       "league": "NCAAF",
       "team": "Marshall",
@@ -1304,17 +1304,6 @@
       "ppg": 30.8,
       "opp_ppg": 24.8
     },
-    "Boise St": {
-      "league": "NCAAF",
-      "team": "Boise St",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.014888888888889,
-      "sos_index": 1,
-      "form_index": 1.0630434782608695,
-      "ppg": 35.8,
-      "opp_ppg": 23.2
-    },
     "S Alabama": {
       "league": "NCAAF",
       "team": "S Alabama",
@@ -1325,6 +1314,17 @@
       "form_index": 1.0304347826086957,
       "ppg": 30,
       "opp_ppg": 26.4
+    },
+    "Boise St": {
+      "league": "NCAAF",
+      "team": "Boise St",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.014888888888889,
+      "sos_index": 1,
+      "form_index": 1.0630434782608695,
+      "ppg": 35.8,
+      "opp_ppg": 23.2
     },
     "Auburn": {
       "league": "NCAAF",
@@ -1458,6 +1458,17 @@
       "ppg": 21.5,
       "opp_ppg": 38.1
     },
+    "Houston": {
+      "league": "NCAAF",
+      "team": "Houston",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9757777777777777,
+      "sos_index": 1,
+      "form_index": 0.985144927536232,
+      "ppg": 14,
+      "opp_ppg": 22.9
+    },
     "Arizona": {
       "league": "NCAAF",
       "team": "Arizona",
@@ -1469,16 +1480,16 @@
       "ppg": 21.7,
       "opp_ppg": 33.7
     },
-    "Houston": {
+    "Jacksonville St": {
       "league": "NCAAF",
-      "team": "Houston",
+      "team": "Jacksonville St",
       "off_index": 1,
       "def_index": 1,
-      "pace_index": 0.9757777777777777,
+      "pace_index": 1.0117777777777779,
       "sos_index": 1,
-      "form_index": 0.985144927536232,
-      "ppg": 14,
-      "opp_ppg": 22.9
+      "form_index": 1.0532608695652175,
+      "ppg": 36,
+      "opp_ppg": 26.1
     },
     "Air Force": {
       "league": "NCAAF",
@@ -1502,17 +1513,6 @@
       "ppg": 32.5,
       "opp_ppg": 26.7
     },
-    "Jacksonville St": {
-      "league": "NCAAF",
-      "team": "Jacksonville St",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.0117777777777779,
-      "sos_index": 1,
-      "form_index": 1.0532608695652175,
-      "ppg": 36,
-      "opp_ppg": 26.1
-    },
     "Iowa St": {
       "league": "NCAAF",
       "team": "Iowa St",
@@ -1535,17 +1535,6 @@
       "ppg": 34,
       "opp_ppg": 42
     },
-    "Middle Tenn": {
-      "league": "NCAAF",
-      "team": "Middle Tenn",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9935555555555555,
-      "sos_index": 1,
-      "form_index": 0.9510869565217391,
-      "ppg": 16.8,
-      "opp_ppg": 35.1
-    },
     "Kentucky": {
       "league": "NCAAF",
       "team": "Kentucky",
@@ -1556,6 +1545,17 @@
       "form_index": 0.9978260869565218,
       "ppg": 18.1,
       "opp_ppg": 23.5
+    },
+    "Middle Tenn": {
+      "league": "NCAAF",
+      "team": "Middle Tenn",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9935555555555555,
+      "sos_index": 1,
+      "form_index": 0.9510869565217391,
+      "ppg": 16.8,
+      "opp_ppg": 35.1
     },
     "Indiana": {
       "league": "NCAAF",
@@ -1601,6 +1601,17 @@
       "ppg": 32.3,
       "opp_ppg": 18.3
     },
+    "San Jose St": {
+      "league": "NCAAF",
+      "team": "San Jose St",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.002888888888889,
+      "sos_index": 1,
+      "form_index": 1.0155797101449275,
+      "ppg": 27.3,
+      "opp_ppg": 27.8
+    },
     "UCF": {
       "league": "NCAAF",
       "team": "UCF",
@@ -1633,17 +1644,6 @@
       "form_index": 1.0181159420289856,
       "ppg": 32.2,
       "opp_ppg": 32
-    },
-    "San Jose St": {
-      "league": "NCAAF",
-      "team": "San Jose St",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.002888888888889,
-      "sos_index": 1,
-      "form_index": 1.0155797101449275,
-      "ppg": 27.3,
-      "opp_ppg": 27.8
     },
     "Stanford": {
       "league": "NCAAF",
@@ -1744,17 +1744,6 @@
       "ppg": 32.5,
       "opp_ppg": 21.8
     },
-    "Georgia Tech": {
-      "league": "NCAAF",
-      "team": "Georgia Tech",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.0015555555555555,
-      "sos_index": 1,
-      "form_index": 1.0144927536231885,
-      "ppg": 26.4,
-      "opp_ppg": 27.2
-    },
     "Oklahoma": {
       "league": "NCAAF",
       "team": "Oklahoma",
@@ -1766,16 +1755,16 @@
       "ppg": 21.1,
       "opp_ppg": 22.2
     },
-    "Duke": {
+    "Georgia Tech": {
       "league": "NCAAF",
-      "team": "Duke",
+      "team": "Georgia Tech",
       "off_index": 1,
       "def_index": 1,
-      "pace_index": 0.9948888888888888,
+      "pace_index": 1.0015555555555555,
       "sos_index": 1,
-      "form_index": 1.0173913043478262,
-      "ppg": 26.3,
-      "opp_ppg": 26.3
+      "form_index": 1.0144927536231885,
+      "ppg": 26.4,
+      "opp_ppg": 27.2
     },
     "Wake Forest": {
       "league": "NCAAF",
@@ -1799,6 +1788,17 @@
       "ppg": 30.3,
       "opp_ppg": 20.2
     },
+    "Duke": {
+      "league": "NCAAF",
+      "team": "Duke",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9948888888888888,
+      "sos_index": 1,
+      "form_index": 1.0173913043478262,
+      "ppg": 26.3,
+      "opp_ppg": 26.3
+    },
     "Buffalo": {
       "league": "NCAAF",
       "team": "Buffalo",
@@ -1821,28 +1821,6 @@
       "ppg": 31.5,
       "opp_ppg": 39.9
     },
-    "Colorado": {
-      "league": "NCAAF",
-      "team": "Colorado",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.0002222222222221,
-      "sos_index": 1,
-      "form_index": 1.0547101449275362,
-      "ppg": 33.1,
-      "opp_ppg": 22.8
-    },
-    "Coastal Car": {
-      "league": "NCAAF",
-      "team": "Coastal Car",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9913333333333333,
-      "sos_index": 1,
-      "form_index": 1.0003623188405797,
-      "ppg": 27.8,
-      "opp_ppg": 32.5
-    },
     "Louisiana Tech": {
       "league": "NCAAF",
       "team": "Louisiana Tech",
@@ -1854,16 +1832,16 @@
       "ppg": 20.6,
       "opp_ppg": 21.3
     },
-    "Toledo": {
+    "Colorado": {
       "league": "NCAAF",
-      "team": "Toledo",
+      "team": "Colorado",
       "off_index": 1,
       "def_index": 1,
-      "pace_index": 1.0104444444444445,
+      "pace_index": 1.0002222222222221,
       "sos_index": 1,
-      "form_index": 1.0257246376811595,
-      "ppg": 26.6,
-      "opp_ppg": 24.3
+      "form_index": 1.0547101449275362,
+      "ppg": 33.1,
+      "opp_ppg": 22.8
     },
     "UTEP": {
       "league": "NCAAF",
@@ -1886,6 +1864,28 @@
       "form_index": 1.0471014492753623,
       "ppg": 34.3,
       "opp_ppg": 26.1
+    },
+    "Coastal Car": {
+      "league": "NCAAF",
+      "team": "Coastal Car",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9913333333333333,
+      "sos_index": 1,
+      "form_index": 1.0003623188405797,
+      "ppg": 27.8,
+      "opp_ppg": 32.5
+    },
+    "Toledo": {
+      "league": "NCAAF",
+      "team": "Toledo",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.0104444444444445,
+      "sos_index": 1,
+      "form_index": 1.0257246376811595,
+      "ppg": 26.6,
+      "opp_ppg": 24.3
     },
     "Ohio": {
       "league": "NCAAF",
@@ -1953,17 +1953,6 @@
       "ppg": 26.9,
       "opp_ppg": 23.5
     },
-    "W Michigan": {
-      "league": "NCAAF",
-      "team": "W Michigan",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9757777777777777,
-      "sos_index": 1,
-      "form_index": 0.9996376811594203,
-      "ppg": 26.4,
-      "opp_ppg": 31.3
-    },
     "Colorado St": {
       "league": "NCAAF",
       "team": "Colorado St",
@@ -1997,6 +1986,17 @@
       "ppg": 29.3,
       "opp_ppg": 23.6
     },
+    "W Michigan": {
+      "league": "NCAAF",
+      "team": "W Michigan",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9757777777777777,
+      "sos_index": 1,
+      "form_index": 0.9996376811594203,
+      "ppg": 26.4,
+      "opp_ppg": 31.3
+    },
     "Michigan St": {
       "league": "NCAAF",
       "team": "Michigan St",
@@ -2018,17 +2018,6 @@
       "form_index": 1.0394927536231884,
       "ppg": 30.2,
       "opp_ppg": 24.1
-    },
-    "Old Dominion": {
-      "league": "NCAAF",
-      "team": "Old Dominion",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.0157777777777777,
-      "sos_index": 1,
-      "form_index": 1.0173913043478262,
-      "ppg": 28,
-      "opp_ppg": 28
     },
     "Charlotte": {
       "league": "NCAAF",
@@ -2052,6 +2041,28 @@
       "ppg": 25.6,
       "opp_ppg": 37
     },
+    "Old Dominion": {
+      "league": "NCAAF",
+      "team": "Old Dominion",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.0157777777777777,
+      "sos_index": 1,
+      "form_index": 1.0173913043478262,
+      "ppg": 28,
+      "opp_ppg": 28
+    },
+    "UMass": {
+      "league": "NCAAF",
+      "team": "UMass",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.019777777777778,
+      "sos_index": 1,
+      "form_index": 0.9492753623188406,
+      "ppg": 20,
+      "opp_ppg": 38.8
+    },
     "Arkansas": {
       "league": "NCAAF",
       "team": "Arkansas",
@@ -2063,16 +2074,16 @@
       "ppg": 27.7,
       "opp_ppg": 27.1
     },
-    "Wyoming": {
+    "Bowling Green": {
       "league": "NCAAF",
-      "team": "Wyoming",
+      "team": "Bowling Green",
       "off_index": 1,
       "def_index": 1,
-      "pace_index": 1.006888888888889,
+      "pace_index": 0.9846666666666667,
       "sos_index": 1,
-      "form_index": 0.9829710144927537,
-      "ppg": 19.9,
-      "opp_ppg": 29.4
+      "form_index": 1.0315217391304348,
+      "ppg": 25.9,
+      "opp_ppg": 22
     },
     "Nebraska": {
       "league": "NCAAF",
@@ -2107,6 +2118,28 @@
       "ppg": 27.8,
       "opp_ppg": 30.9
     },
+    "Wyoming": {
+      "league": "NCAAF",
+      "team": "Wyoming",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.006888888888889,
+      "sos_index": 1,
+      "form_index": 0.9829710144927537,
+      "ppg": 19.9,
+      "opp_ppg": 29.4
+    },
+    "Washington St": {
+      "league": "NCAAF",
+      "team": "Washington St",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 0.9997777777777778,
+      "sos_index": 1,
+      "form_index": 1.0315217391304348,
+      "ppg": 33.8,
+      "opp_ppg": 29.9
+    },
     "Oregon": {
       "league": "NCAAF",
       "team": "Oregon",
@@ -2140,28 +2173,6 @@
       "ppg": 33.8,
       "opp_ppg": 22.2
     },
-    "Washington St": {
-      "league": "NCAAF",
-      "team": "Washington St",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9997777777777778,
-      "sos_index": 1,
-      "form_index": 1.0315217391304348,
-      "ppg": 33.8,
-      "opp_ppg": 29.9
-    },
-    "UMass": {
-      "league": "NCAAF",
-      "team": "UMass",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.019777777777778,
-      "sos_index": 1,
-      "form_index": 0.9492753623188406,
-      "ppg": 20,
-      "opp_ppg": 38.8
-    },
     "Michigan": {
       "league": "NCAAF",
       "team": "Michigan",
@@ -2184,16 +2195,16 @@
       "ppg": 30.2,
       "opp_ppg": 25.2
     },
-    "Bowling Green": {
+    "Sam Houston": {
       "league": "NCAAF",
-      "team": "Bowling Green",
+      "team": "Sam Houston",
       "off_index": 1,
       "def_index": 1,
-      "pace_index": 0.9846666666666667,
+      "pace_index": 1.010888888888889,
       "sos_index": 1,
-      "form_index": 1.0315217391304348,
-      "ppg": 25.9,
-      "opp_ppg": 22
+      "form_index": 1.0293478260869566,
+      "ppg": 23.8,
+      "opp_ppg": 20.5
     },
     "Washington": {
       "league": "NCAAF",
@@ -2205,17 +2216,6 @@
       "form_index": 1.0061594202898552,
       "ppg": 22.4,
       "opp_ppg": 25.5
-    },
-    "Sam Houston": {
-      "league": "NCAAF",
-      "team": "Sam Houston",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.010888888888889,
-      "sos_index": 1,
-      "form_index": 1.0293478260869566,
-      "ppg": 23.8,
-      "opp_ppg": 20.5
     },
     "Kansas": {
       "league": "NCAAF",
@@ -2239,17 +2239,6 @@
       "ppg": 12.7,
       "opp_ppg": 43.5
     },
-    "Maryland": {
-      "league": "NCAAF",
-      "team": "Maryland",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.0344444444444445,
-      "sos_index": 1,
-      "form_index": 0.9847826086956522,
-      "ppg": 22.4,
-      "opp_ppg": 31.4
-    },
     "Florida": {
       "league": "NCAAF",
       "team": "Florida",
@@ -2260,6 +2249,17 @@
       "form_index": 1.026449275362319,
       "ppg": 26.9,
       "opp_ppg": 24.4
+    },
+    "Maryland": {
+      "league": "NCAAF",
+      "team": "Maryland",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.0344444444444445,
+      "sos_index": 1,
+      "form_index": 0.9847826086956522,
+      "ppg": 22.4,
+      "opp_ppg": 31.4
     },
     "Notre Dame": {
       "league": "NCAAF",
@@ -2283,17 +2283,6 @@
       "ppg": 33.1,
       "opp_ppg": 16.5
     },
-    "LSU": {
-      "league": "NCAAF",
-      "team": "LSU",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 1.0206666666666666,
-      "sos_index": 1,
-      "form_index": 1.0344202898550725,
-      "ppg": 29.3,
-      "opp_ppg": 24.6
-    },
     "Ball St": {
       "league": "NCAAF",
       "team": "Ball St",
@@ -2304,6 +2293,17 @@
       "form_index": 0.9565217391304348,
       "ppg": 23.8,
       "opp_ppg": 40.6
+    },
+    "LSU": {
+      "league": "NCAAF",
+      "team": "LSU",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.0206666666666666,
+      "sos_index": 1,
+      "form_index": 1.0344202898550725,
+      "ppg": 29.3,
+      "opp_ppg": 24.6
     },
     "Northwestern": {
       "league": "NCAAF",
@@ -2360,16 +2360,16 @@
       "ppg": 24.3,
       "opp_ppg": 18.3
     },
-    "N Illinois": {
+    "Vanderbilt": {
       "league": "NCAAF",
-      "team": "N Illinois",
+      "team": "Vanderbilt",
       "off_index": 1,
       "def_index": 1,
-      "pace_index": 1.026888888888889,
+      "pace_index": 0.9668888888888888,
       "sos_index": 1,
-      "form_index": 1.0293478260869566,
-      "ppg": 22.1,
-      "opp_ppg": 18.8
+      "form_index": 1.016304347826087,
+      "ppg": 25,
+      "opp_ppg": 25.3
     },
     "Navy": {
       "league": "NCAAF",
@@ -2382,17 +2382,6 @@
       "ppg": 29.8,
       "opp_ppg": 22.3
     },
-    "Vanderbilt": {
-      "league": "NCAAF",
-      "team": "Vanderbilt",
-      "off_index": 1,
-      "def_index": 1,
-      "pace_index": 0.9668888888888888,
-      "sos_index": 1,
-      "form_index": 1.016304347826087,
-      "ppg": 25,
-      "opp_ppg": 25.3
-    },
     "Miami OH": {
       "league": "NCAAF",
       "team": "Miami OH",
@@ -2402,6 +2391,17 @@
       "sos_index": 1,
       "form_index": 1.0365942028985509,
       "ppg": 24.1,
+      "opp_ppg": 18.8
+    },
+    "N Illinois": {
+      "league": "NCAAF",
+      "team": "N Illinois",
+      "off_index": 1,
+      "def_index": 1,
+      "pace_index": 1.026888888888889,
+      "sos_index": 1,
+      "form_index": 1.0293478260869566,
+      "ppg": 22.1,
       "opp_ppg": 18.8
     },
     "Kansas St": {
@@ -2516,17 +2516,6 @@
     }
   },
   "NCAAB": {
-    "NC State": {
-      "league": "NCAAB",
-      "team": "NC State",
-      "off_index": 1.0164044943820225,
-      "def_index": 1.0062893081761006,
-      "pace_index": 0.9827272727272728,
-      "sos_index": 1,
-      "form_index": 1.0157057654075548,
-      "ppg": 69.6,
-      "opp_ppg": 70.4
-    },
     "Colorado St": {
       "league": "NCAAB",
       "team": "Colorado St",
@@ -2548,6 +2537,17 @@
       "form_index": 1.0371769383697813,
       "ppg": 78.9,
       "opp_ppg": 74.3
+    },
+    "NC State": {
+      "league": "NCAAB",
+      "team": "NC State",
+      "off_index": 1.0164044943820225,
+      "def_index": 1.0062893081761006,
+      "pace_index": 0.9827272727272728,
+      "sos_index": 1,
+      "form_index": 1.0157057654075548,
+      "ppg": 69.6,
+      "opp_ppg": 70.4
     },
     "Illinois": {
       "league": "NCAAB",
@@ -2571,39 +2571,6 @@
       "ppg": 73.7,
       "opp_ppg": 65.3
     },
-    "Yale": {
-      "league": "NCAAB",
-      "team": "Yale",
-      "off_index": 1.0658426966292136,
-      "def_index": 1.0314465408805034,
-      "pace_index": 1.0021212121212122,
-      "sos_index": 1,
-      "form_index": 1.0578528827037774,
-      "ppg": 80.7,
-      "opp_ppg": 70.9
-    },
-    "Louisville": {
-      "league": "NCAAB",
-      "team": "Louisville",
-      "off_index": 1.0510112359550563,
-      "def_index": 1.0452830188679245,
-      "pace_index": 1.0027272727272727,
-      "sos_index": 1,
-      "form_index": 1.054671968190855,
-      "ppg": 78.5,
-      "opp_ppg": 69.5
-    },
-    "Virginia": {
-      "league": "NCAAB",
-      "team": "Virginia",
-      "off_index": 1.0146067415730338,
-      "def_index": 0.9962264150943397,
-      "pace_index": 0.9554545454545454,
-      "sos_index": 1,
-      "form_index": 1.010934393638171,
-      "ppg": 64.8,
-      "opp_ppg": 66.8
-    },
     "LSU": {
       "league": "NCAAB",
       "team": "LSU",
@@ -2614,50 +2581,6 @@
       "form_index": 1.0196819085487079,
       "ppg": 73.8,
       "opp_ppg": 73.6
-    },
-    "Wisconsin": {
-      "league": "NCAAB",
-      "team": "Wisconsin",
-      "off_index": 1.0622471910112359,
-      "def_index": 1.0320754716981133,
-      "pace_index": 1.0021212121212122,
-      "sos_index": 1,
-      "form_index": 1.0554671968190854,
-      "ppg": 80.1,
-      "opp_ppg": 70.9
-    },
-    "Indiana": {
-      "league": "NCAAB",
-      "team": "Indiana",
-      "off_index": 1.0235955056179775,
-      "def_index": 1.0270440251572328,
-      "pace_index": 1.0057575757575759,
-      "sos_index": 1,
-      "form_index": 1.0296222664015906,
-      "ppg": 74.7,
-      "opp_ppg": 72
-    },
-    "UCSB": {
-      "league": "NCAAB",
-      "team": "UCSB",
-      "off_index": 1.0334831460674156,
-      "def_index": 1.0251572327044027,
-      "pace_index": 0.9887878787878788,
-      "sos_index": 1,
-      "form_index": 1.0339960238568588,
-      "ppg": 73.2,
-      "opp_ppg": 69.4
-    },
-    "Georgia": {
-      "league": "NCAAB",
-      "team": "Georgia",
-      "off_index": 1.0321348314606742,
-      "def_index": 1.040251572327044,
-      "pace_index": 1.0015151515151515,
-      "sos_index": 1,
-      "form_index": 1.0403578528827038,
-      "ppg": 75.3,
-      "opp_ppg": 69.9
     },
     "Iowa": {
       "league": "NCAAB",
@@ -2670,16 +2593,38 @@
       "ppg": 82.5,
       "opp_ppg": 79.7
     },
-    "Duke": {
+    "Louisville": {
       "league": "NCAAB",
-      "team": "Duke",
-      "off_index": 1.1,
-      "def_index": 1.0855345911949685,
-      "pace_index": 0.9881818181818182,
+      "team": "Louisville",
+      "off_index": 1.0510112359550563,
+      "def_index": 1.0452830188679245,
+      "pace_index": 1.0027272727272727,
       "sos_index": 1,
-      "form_index": 1.1,
-      "ppg": 83.2,
-      "opp_ppg": 62.8
+      "form_index": 1.054671968190855,
+      "ppg": 78.5,
+      "opp_ppg": 69.5
+    },
+    "Wisconsin": {
+      "league": "NCAAB",
+      "team": "Wisconsin",
+      "off_index": 1.0622471910112359,
+      "def_index": 1.0320754716981133,
+      "pace_index": 1.0021212121212122,
+      "sos_index": 1,
+      "form_index": 1.0554671968190854,
+      "ppg": 80.1,
+      "opp_ppg": 70.9
+    },
+    "Virginia": {
+      "league": "NCAAB",
+      "team": "Virginia",
+      "off_index": 1.0146067415730338,
+      "def_index": 0.9962264150943397,
+      "pace_index": 0.9554545454545454,
+      "sos_index": 1,
+      "form_index": 1.010934393638171,
+      "ppg": 64.8,
+      "opp_ppg": 66.8
     },
     "Iowa St": {
       "league": "NCAAB",
@@ -2692,16 +2637,27 @@
       "ppg": 80.3,
       "opp_ppg": 68.3
     },
-    "Wichita St": {
+    "Indiana": {
       "league": "NCAAB",
-      "team": "Wichita St",
-      "off_index": 1.012808988764045,
-      "def_index": 1.0226415094339625,
-      "pace_index": 1.0093939393939393,
+      "team": "Indiana",
+      "off_index": 1.0235955056179775,
+      "def_index": 1.0270440251572328,
+      "pace_index": 1.0057575757575759,
       "sos_index": 1,
-      "form_index": 1.0208747514910537,
-      "ppg": 73.6,
-      "opp_ppg": 73.1
+      "form_index": 1.0296222664015906,
+      "ppg": 74.7,
+      "opp_ppg": 72
+    },
+    "Yale": {
+      "league": "NCAAB",
+      "team": "Yale",
+      "off_index": 1.0658426966292136,
+      "def_index": 1.0314465408805034,
+      "pace_index": 1.0021212121212122,
+      "sos_index": 1,
+      "form_index": 1.0578528827037774,
+      "ppg": 80.7,
+      "opp_ppg": 70.9
     },
     "UConn": {
       "league": "NCAAB",
@@ -2736,17 +2692,6 @@
       "ppg": 76.1,
       "opp_ppg": 65.8
     },
-    "Kentucky": {
-      "league": "NCAAB",
-      "team": "Kentucky",
-      "off_index": 1.0649438202247192,
-      "def_index": 1.0069182389937108,
-      "pace_index": 1.0227272727272727,
-      "sos_index": 1,
-      "form_index": 1.0475149105367794,
-      "ppg": 84.4,
-      "opp_ppg": 77.2
-    },
     "Saint Mary's": {
       "league": "NCAAB",
       "team": "Saint Mary's",
@@ -2758,49 +2703,16 @@
       "ppg": 72.7,
       "opp_ppg": 61.8
     },
-    "Missouri": {
+    "Duke": {
       "league": "NCAAB",
-      "team": "Missouri",
-      "off_index": 1.0779775280898876,
-      "def_index": 1.0157232704402517,
-      "pace_index": 1.0075757575757576,
+      "team": "Duke",
+      "off_index": 1.1,
+      "def_index": 1.0855345911949685,
+      "pace_index": 0.9881818181818182,
       "sos_index": 1,
-      "form_index": 1.058648111332008,
-      "ppg": 83.6,
-      "opp_ppg": 73.6
-    },
-    "USC": {
-      "league": "NCAAB",
-      "team": "USC",
-      "off_index": 1.0388764044943821,
-      "def_index": 1.0012578616352201,
-      "pace_index": 1.0033333333333334,
-      "sos_index": 1,
-      "form_index": 1.0272365805168988,
-      "ppg": 76.7,
-      "opp_ppg": 74.6
-    },
-    "S Florida": {
-      "league": "NCAAB",
-      "team": "S Florida",
-      "off_index": 1.0074157303370785,
-      "def_index": 1.009433962264151,
-      "pace_index": 1.0130303030303032,
-      "sos_index": 1,
-      "form_index": 1.010934393638171,
-      "ppg": 73.4,
-      "opp_ppg": 75.4
-    },
-    "Kansas St": {
-      "league": "NCAAB",
-      "team": "Kansas St",
-      "off_index": 1.010112359550562,
-      "def_index": 1.0339622641509436,
-      "pace_index": 0.9954545454545455,
-      "sos_index": 1,
-      "form_index": 1.023658051689861,
-      "ppg": 70.8,
-      "opp_ppg": 69.6
+      "form_index": 1.1,
+      "ppg": 83.2,
+      "opp_ppg": 62.8
     },
     "Colorado": {
       "league": "NCAAB",
@@ -2813,16 +2725,27 @@
       "ppg": 69.7,
       "opp_ppg": 71.9
     },
-    "Nebraska": {
+    "Georgia": {
       "league": "NCAAB",
-      "team": "Nebraska",
-      "off_index": 1.029438202247191,
-      "def_index": 1.0251572327044027,
-      "pace_index": 1.0075757575757576,
+      "team": "Georgia",
+      "off_index": 1.0321348314606742,
+      "def_index": 1.040251572327044,
+      "pace_index": 1.0015151515151515,
       "sos_index": 1,
-      "form_index": 1.0324055666003977,
-      "ppg": 76,
-      "opp_ppg": 72.6
+      "form_index": 1.0403578528827038,
+      "ppg": 75.3,
+      "opp_ppg": 69.9
+    },
+    "USC": {
+      "league": "NCAAB",
+      "team": "USC",
+      "off_index": 1.0388764044943821,
+      "def_index": 1.0012578616352201,
+      "pace_index": 1.0033333333333334,
+      "sos_index": 1,
+      "form_index": 1.0272365805168988,
+      "ppg": 76.7,
+      "opp_ppg": 74.6
     },
     "Tennessee": {
       "league": "NCAAB",
@@ -2835,16 +2758,49 @@
       "ppg": 74,
       "opp_ppg": 63.1
     },
-    "Santa Clara": {
+    "S Florida": {
       "league": "NCAAB",
-      "team": "Santa Clara",
-      "off_index": 1.0617977528089888,
-      "def_index": 1.028301886792453,
-      "pace_index": 1.0124242424242424,
+      "team": "S Florida",
+      "off_index": 1.0074157303370785,
+      "def_index": 1.009433962264151,
+      "pace_index": 1.0130303030303032,
       "sos_index": 1,
-      "form_index": 1.0542743538767396,
-      "ppg": 81.9,
-      "opp_ppg": 73
+      "form_index": 1.010934393638171,
+      "ppg": 73.4,
+      "opp_ppg": 75.4
+    },
+    "Missouri": {
+      "league": "NCAAB",
+      "team": "Missouri",
+      "off_index": 1.0779775280898876,
+      "def_index": 1.0157232704402517,
+      "pace_index": 1.0075757575757576,
+      "sos_index": 1,
+      "form_index": 1.058648111332008,
+      "ppg": 83.6,
+      "opp_ppg": 73.6
+    },
+    "Gonzaga": {
+      "league": "NCAAB",
+      "team": "Gonzaga",
+      "off_index": 1.083370786516854,
+      "def_index": 1.0622641509433963,
+      "pace_index": 1.0172727272727273,
+      "sos_index": 1,
+      "form_index": 1.0844930417495031,
+      "ppg": 86.4,
+      "opp_ppg": 69.9
+    },
+    "Nebraska": {
+      "league": "NCAAB",
+      "team": "Nebraska",
+      "off_index": 1.029438202247191,
+      "def_index": 1.0251572327044027,
+      "pace_index": 1.0075757575757576,
+      "sos_index": 1,
+      "form_index": 1.0324055666003977,
+      "ppg": 76,
+      "opp_ppg": 72.6
     },
     "Penn St": {
       "league": "NCAAB",
@@ -2878,6 +2834,17 @@
       "form_index": 1.031610337972167,
       "ppg": 72.4,
       "opp_ppg": 69.2
+    },
+    "Murray St": {
+      "league": "NCAAB",
+      "team": "Murray St",
+      "off_index": 1.0150561797752808,
+      "def_index": 1.019496855345912,
+      "pace_index": 0.9893939393939394,
+      "sos_index": 1,
+      "form_index": 1.0204771371769383,
+      "ppg": 70.6,
+      "opp_ppg": 70.2
     },
     "Texas Tech": {
       "league": "NCAAB",
@@ -2923,6 +2890,17 @@
       "ppg": 69.2,
       "opp_ppg": 73.2
     },
+    "Kansas St": {
+      "league": "NCAAB",
+      "team": "Kansas St",
+      "off_index": 1.010112359550562,
+      "def_index": 1.0339622641509436,
+      "pace_index": 0.9954545454545455,
+      "sos_index": 1,
+      "form_index": 1.023658051689861,
+      "ppg": 70.8,
+      "opp_ppg": 69.6
+    },
     "G Washington": {
       "league": "NCAAB",
       "team": "G Washington",
@@ -2934,27 +2912,16 @@
       "ppg": 72.3,
       "opp_ppg": 68.6
     },
-    "Florida St": {
+    "Buffalo": {
       "league": "NCAAB",
-      "team": "Florida St",
-      "off_index": 1.0146067415730338,
-      "def_index": 1.0333333333333334,
-      "pace_index": 1.0124242424242424,
+      "team": "Buffalo",
+      "off_index": 0.9808988764044944,
+      "def_index": 0.9679245283018868,
+      "pace_index": 1.020909090909091,
       "sos_index": 1,
-      "form_index": 1.0268389662027833,
-      "ppg": 74.5,
-      "opp_ppg": 72.5
-    },
-    "Tulsa": {
-      "league": "NCAAB",
-      "team": "Tulsa",
-      "off_index": 0.9997752808988765,
-      "def_index": 1.0012578616352201,
-      "pace_index": 1.000909090909091,
-      "sos_index": 1,
-      "form_index": 1.0025844930417496,
-      "ppg": 70.1,
-      "opp_ppg": 74.2
+      "form_index": 0.9739562624254474,
+      "ppg": 70.3,
+      "opp_ppg": 81.6
     },
     "Auburn": {
       "league": "NCAAB",
@@ -2967,17 +2934,6 @@
       "ppg": 83,
       "opp_ppg": 69.4
     },
-    "Mississippi": {
-      "league": "NCAAB",
-      "team": "Mississippi",
-      "off_index": 1.0375280898876404,
-      "def_index": 1.0320754716981133,
-      "pace_index": 1.0075757575757576,
-      "sos_index": 1,
-      "form_index": 1.040755467196819,
-      "ppg": 77.2,
-      "opp_ppg": 71.7
-    },
     "Saint Louis": {
       "league": "NCAAB",
       "team": "Saint Louis",
@@ -2989,27 +2945,16 @@
       "ppg": 73.6,
       "opp_ppg": 72.6
     },
-    "Kent St": {
+    "Providence": {
       "league": "NCAAB",
-      "team": "Kent St",
-      "off_index": 1.0204494382022473,
-      "def_index": 1.0446540880503146,
-      "pace_index": 0.9954545454545455,
+      "team": "Providence",
+      "off_index": 1.0177528089887642,
+      "def_index": 1.0012578616352201,
+      "pace_index": 0.9918181818181818,
       "sos_index": 1,
-      "form_index": 1.0351888667992049,
-      "ppg": 72.5,
-      "opp_ppg": 68.4
-    },
-    "Murray St": {
-      "league": "NCAAB",
-      "team": "Murray St",
-      "off_index": 1.0150561797752808,
-      "def_index": 1.019496855345912,
-      "pace_index": 0.9893939393939394,
-      "sos_index": 1,
-      "form_index": 1.0204771371769383,
-      "ppg": 70.6,
-      "opp_ppg": 70.2
+      "form_index": 1.0141153081510934,
+      "ppg": 71.3,
+      "opp_ppg": 72.5
     },
     "BYU": {
       "league": "NCAAB",
@@ -3044,6 +2989,17 @@
       "ppg": 75.2,
       "opp_ppg": 70.3
     },
+    "SMU": {
+      "league": "NCAAB",
+      "team": "SMU",
+      "off_index": 1.0546067415730338,
+      "def_index": 1.0364779874213836,
+      "pace_index": 1.0075757575757576,
+      "sos_index": 1,
+      "form_index": 1.0530815109343936,
+      "ppg": 79.9,
+      "opp_ppg": 71.3
+    },
     "Elon": {
       "league": "NCAAB",
       "team": "Elon",
@@ -3055,27 +3011,38 @@
       "ppg": 71.5,
       "opp_ppg": 70.9
     },
-    "Syracuse": {
+    "High Point": {
       "league": "NCAAB",
-      "team": "Syracuse",
-      "off_index": 1.019550561797753,
-      "def_index": 0.9823899371069184,
-      "pace_index": 1.0093939393939393,
+      "team": "High Point",
+      "off_index": 1.0820224719101124,
+      "def_index": 1.0176100628930818,
+      "pace_index": 0.9912121212121212,
       "sos_index": 1,
-      "form_index": 1.0065606361829027,
-      "ppg": 74.7,
-      "opp_ppg": 77.8
+      "form_index": 1.0606361829025845,
+      "ppg": 81.2,
+      "opp_ppg": 70.7
     },
-    "North Carolina": {
+    "Florida St": {
       "league": "NCAAB",
-      "team": "North Carolina",
-      "off_index": 1.0496629213483146,
-      "def_index": 1.019496855345912,
-      "pace_index": 1.0166666666666666,
+      "team": "Florida St",
+      "off_index": 1.0146067415730338,
+      "def_index": 1.0333333333333334,
+      "pace_index": 1.0124242424242424,
       "sos_index": 1,
-      "form_index": 1.0427435387673958,
-      "ppg": 80.7,
-      "opp_ppg": 74.7
+      "form_index": 1.0268389662027833,
+      "ppg": 74.5,
+      "opp_ppg": 72.5
+    },
+    "Kentucky": {
+      "league": "NCAAB",
+      "team": "Kentucky",
+      "off_index": 1.0649438202247192,
+      "def_index": 1.0069182389937108,
+      "pace_index": 1.0227272727272727,
+      "sos_index": 1,
+      "form_index": 1.0475149105367794,
+      "ppg": 84.4,
+      "opp_ppg": 77.2
     },
     "St Bonaventure": {
       "league": "NCAAB",
@@ -3099,6 +3066,17 @@
       "ppg": 83.4,
       "opp_ppg": 76.4
     },
+    "Wichita St": {
+      "league": "NCAAB",
+      "team": "Wichita St",
+      "off_index": 1.012808988764045,
+      "def_index": 1.0226415094339625,
+      "pace_index": 1.0093939393939393,
+      "sos_index": 1,
+      "form_index": 1.0208747514910537,
+      "ppg": 73.6,
+      "opp_ppg": 73.1
+    },
     "UCF": {
       "league": "NCAAB",
       "team": "UCF",
@@ -3110,27 +3088,38 @@
       "ppg": 79.8,
       "opp_ppg": 80.4
     },
-    "Charleston": {
+    "Texas": {
       "league": "NCAAB",
-      "team": "Charleston",
-      "off_index": 1.0262921348314606,
-      "def_index": 1.0238993710691826,
-      "pace_index": 1.0148484848484849,
+      "team": "Texas",
+      "off_index": 1.050561797752809,
+      "def_index": 1.018238993710692,
+      "pace_index": 1.0033333333333334,
       "sos_index": 1,
-      "form_index": 1.0300198807157057,
-      "ppg": 76.7,
-      "opp_ppg": 73.9
+      "form_index": 1.0423459244532804,
+      "ppg": 78.5,
+      "opp_ppg": 72.6
     },
-    "Gonzaga": {
+    "Kent St": {
       "league": "NCAAB",
-      "team": "Gonzaga",
-      "off_index": 1.083370786516854,
-      "def_index": 1.0622641509433963,
-      "pace_index": 1.0172727272727273,
+      "team": "Kent St",
+      "off_index": 1.0204494382022473,
+      "def_index": 1.0446540880503146,
+      "pace_index": 0.9954545454545455,
       "sos_index": 1,
-      "form_index": 1.0844930417495031,
-      "ppg": 86.4,
-      "opp_ppg": 69.9
+      "form_index": 1.0351888667992049,
+      "ppg": 72.5,
+      "opp_ppg": 68.4
+    },
+    "UCSB": {
+      "league": "NCAAB",
+      "team": "UCSB",
+      "off_index": 1.0334831460674156,
+      "def_index": 1.0251572327044027,
+      "pace_index": 0.9887878787878788,
+      "sos_index": 1,
+      "form_index": 1.0339960238568588,
+      "ppg": 73.2,
+      "opp_ppg": 69.4
     },
     "Alabama": {
       "league": "NCAAB",
@@ -3154,16 +3143,16 @@
       "ppg": 72.6,
       "opp_ppg": 72.5
     },
-    "Buffalo": {
+    "South Carolina": {
       "league": "NCAAB",
-      "team": "Buffalo",
-      "off_index": 0.9808988764044944,
-      "def_index": 0.9679245283018868,
-      "pace_index": 1.020909090909091,
+      "team": "South Carolina",
+      "off_index": 1.0065168539325842,
+      "def_index": 1.0125786163522013,
+      "pace_index": 0.9924242424242424,
       "sos_index": 1,
-      "form_index": 0.9739562624254474,
-      "ppg": 70.3,
-      "opp_ppg": 81.6
+      "form_index": 1.0125248508946323,
+      "ppg": 69.8,
+      "opp_ppg": 71.4
     },
     "Richmond": {
       "league": "NCAAB",
@@ -3176,16 +3165,27 @@
       "ppg": 65.6,
       "opp_ppg": 72.6
     },
-    "South Carolina": {
+    "Santa Clara": {
       "league": "NCAAB",
-      "team": "South Carolina",
-      "off_index": 1.0065168539325842,
-      "def_index": 1.0125786163522013,
-      "pace_index": 0.9924242424242424,
+      "team": "Santa Clara",
+      "off_index": 1.0617977528089888,
+      "def_index": 1.028301886792453,
+      "pace_index": 1.0124242424242424,
       "sos_index": 1,
-      "form_index": 1.0125248508946323,
-      "ppg": 69.8,
-      "opp_ppg": 71.4
+      "form_index": 1.0542743538767396,
+      "ppg": 81.9,
+      "opp_ppg": 73
+    },
+    "Tulsa": {
+      "league": "NCAAB",
+      "team": "Tulsa",
+      "off_index": 0.9997752808988765,
+      "def_index": 1.0012578616352201,
+      "pace_index": 1.000909090909091,
+      "sos_index": 1,
+      "form_index": 1.0025844930417496,
+      "ppg": 70.1,
+      "opp_ppg": 74.2
     },
     "St John's": {
       "league": "NCAAB",
@@ -3198,16 +3198,16 @@
       "ppg": 78.5,
       "opp_ppg": 65.8
     },
-    "SMU": {
+    "Mississippi": {
       "league": "NCAAB",
-      "team": "SMU",
-      "off_index": 1.0546067415730338,
-      "def_index": 1.0364779874213836,
+      "team": "Mississippi",
+      "off_index": 1.0375280898876404,
+      "def_index": 1.0320754716981133,
       "pace_index": 1.0075757575757576,
       "sos_index": 1,
-      "form_index": 1.0530815109343936,
-      "ppg": 79.9,
-      "opp_ppg": 71.3
+      "form_index": 1.040755467196819,
+      "ppg": 77.2,
+      "opp_ppg": 71.7
     },
     "UNLV": {
       "league": "NCAAB",
@@ -3220,6 +3220,17 @@
       "ppg": 69.2,
       "opp_ppg": 68.1
     },
+    "Syracuse": {
+      "league": "NCAAB",
+      "team": "Syracuse",
+      "off_index": 1.019550561797753,
+      "def_index": 0.9823899371069184,
+      "pace_index": 1.0093939393939393,
+      "sos_index": 1,
+      "form_index": 1.0065606361829027,
+      "ppg": 74.7,
+      "opp_ppg": 77.8
+    },
     "Arkansas": {
       "league": "NCAAB",
       "team": "Arkansas",
@@ -3231,27 +3242,38 @@
       "ppg": 76.8,
       "opp_ppg": 71.4
     },
-    "Washington": {
+    "Utah": {
       "league": "NCAAB",
-      "team": "Washington",
-      "off_index": 1.008314606741573,
-      "def_index": 0.9849056603773586,
-      "pace_index": 1.0003030303030302,
+      "team": "Utah",
+      "off_index": 1.0280898876404494,
+      "def_index": 1.0232704402515724,
+      "pace_index": 1.0063636363636363,
       "sos_index": 1,
-      "form_index": 1.0009940357852882,
-      "ppg": 71.4,
-      "opp_ppg": 75.9
+      "form_index": 1.030417495029821,
+      "ppg": 75.5,
+      "opp_ppg": 72.6
     },
-    "California": {
+    "Vermont": {
       "league": "NCAAB",
-      "team": "California",
-      "off_index": 1.0253932584269663,
-      "def_index": 0.9911949685534592,
-      "pace_index": 1.0093939393939393,
+      "team": "Vermont",
+      "off_index": 0.9957303370786517,
+      "def_index": 1.038364779874214,
+      "pace_index": 0.9706060606060606,
       "sos_index": 1,
-      "form_index": 1.0141153081510934,
-      "ppg": 75.6,
-      "opp_ppg": 76.8
+      "form_index": 1.0168986083499005,
+      "ppg": 64.5,
+      "opp_ppg": 65
+    },
+    "Miami": {
+      "league": "NCAAB",
+      "team": "Miami",
+      "off_index": 1.0298876404494381,
+      "def_index": 0.9345911949685535,
+      "pace_index": 0.996060606060606,
+      "sos_index": 1,
+      "form_index": 0.9926441351888668,
+      "ppg": 74,
+      "opp_ppg": 80.6
     },
     "Temple": {
       "league": "NCAAB",
@@ -3264,38 +3286,16 @@
       "ppg": 77.7,
       "opp_ppg": 77.6
     },
-    "Providence": {
+    "Stanford": {
       "league": "NCAAB",
-      "team": "Providence",
-      "off_index": 1.0177528089887642,
-      "def_index": 1.0012578616352201,
-      "pace_index": 0.9918181818181818,
+      "team": "Stanford",
+      "off_index": 1.0330337078651686,
+      "def_index": 1.0157232704402517,
+      "pace_index": 0.9906060606060606,
       "sos_index": 1,
-      "form_index": 1.0141153081510934,
-      "ppg": 71.3,
-      "opp_ppg": 72.5
-    },
-    "S Illinois": {
-      "league": "NCAAB",
-      "team": "S Illinois",
-      "off_index": 1.0141573033707867,
-      "def_index": 0.9874213836477989,
-      "pace_index": 0.9996969696969698,
-      "sos_index": 1,
-      "form_index": 1.005765407554672,
-      "ppg": 72.2,
-      "opp_ppg": 75.5
-    },
-    "Miami": {
-      "league": "NCAAB",
-      "team": "Miami",
-      "off_index": 1.0298876404494381,
-      "def_index": 0.9345911949685535,
-      "pace_index": 0.996060606060606,
-      "sos_index": 1,
-      "form_index": 0.9926441351888668,
-      "ppg": 74,
-      "opp_ppg": 80.6
+      "form_index": 1.0300198807157057,
+      "ppg": 73.5,
+      "opp_ppg": 70.7
     },
     "New Mexico St": {
       "league": "NCAAB",
@@ -3319,27 +3319,38 @@
       "ppg": 82.5,
       "opp_ppg": 73.3
     },
-    "Georgia So": {
+    "North Carolina": {
       "league": "NCAAB",
-      "team": "Georgia So",
-      "off_index": 1.006067415730337,
-      "def_index": 1.010062893081761,
-      "pace_index": 1.0184848484848485,
+      "team": "North Carolina",
+      "off_index": 1.0496629213483146,
+      "def_index": 1.019496855345912,
+      "pace_index": 1.0166666666666666,
       "sos_index": 1,
-      "form_index": 1.010934393638171,
-      "ppg": 74.1,
-      "opp_ppg": 76.1
+      "form_index": 1.0427435387673958,
+      "ppg": 80.7,
+      "opp_ppg": 74.7
     },
-    "Boise St": {
+    "Rhode Island": {
       "league": "NCAAB",
-      "team": "Boise St",
-      "off_index": 1.0510112359550563,
-      "def_index": 1.0408805031446542,
-      "pace_index": 0.9845454545454545,
+      "team": "Rhode Island",
+      "off_index": 1.0258426966292136,
+      "def_index": 1.0176100628930818,
+      "pace_index": 1.0178787878787878,
       "sos_index": 1,
-      "form_index": 1.0510934393638172,
-      "ppg": 75.1,
-      "opp_ppg": 67
+      "form_index": 1.026441351888668,
+      "ppg": 77.1,
+      "opp_ppg": 75.2
+    },
+    "California": {
+      "league": "NCAAB",
+      "team": "California",
+      "off_index": 1.0253932584269663,
+      "def_index": 0.9911949685534592,
+      "pace_index": 1.0093939393939393,
+      "sos_index": 1,
+      "form_index": 1.0141153081510934,
+      "ppg": 75.6,
+      "opp_ppg": 76.8
     },
     "Michigan": {
       "league": "NCAAB",
@@ -3351,39 +3362,6 @@
       "form_index": 1.0447316103379722,
       "ppg": 78,
       "opp_ppg": 71.5
-    },
-    "SF Austin": {
-      "league": "NCAAB",
-      "team": "SF Austin",
-      "off_index": 0.9660674157303372,
-      "def_index": 1.0421383647798743,
-      "pace_index": 0.9996969696969698,
-      "sos_index": 1,
-      "form_index": 1.0001988071570578,
-      "ppg": 64.7,
-      "opp_ppg": 69.4
-    },
-    "Rutgers": {
-      "league": "NCAAB",
-      "team": "Rutgers",
-      "off_index": 1.0285393258426967,
-      "def_index": 0.9924528301886794,
-      "pace_index": 1.0148484848484849,
-      "sos_index": 1,
-      "form_index": 1.0165009940357854,
-      "ppg": 77,
-      "opp_ppg": 77.6
-    },
-    "High Point": {
-      "league": "NCAAB",
-      "team": "High Point",
-      "off_index": 1.0820224719101124,
-      "def_index": 1.0176100628930818,
-      "pace_index": 0.9912121212121212,
-      "sos_index": 1,
-      "form_index": 1.0606361829025845,
-      "ppg": 81.2,
-      "opp_ppg": 70.7
     },
     "Bowling Green": {
       "league": "NCAAB",
@@ -3407,17 +3385,6 @@
       "ppg": 72,
       "opp_ppg": 69.9
     },
-    "Texas": {
-      "league": "NCAAB",
-      "team": "Texas",
-      "off_index": 1.050561797752809,
-      "def_index": 1.018238993710692,
-      "pace_index": 1.0033333333333334,
-      "sos_index": 1,
-      "form_index": 1.0423459244532804,
-      "ppg": 78.5,
-      "opp_ppg": 72.6
-    },
     "Miami OH": {
       "league": "NCAAB",
       "team": "Miami OH",
@@ -3429,60 +3396,27 @@
       "ppg": 77.7,
       "opp_ppg": 73.3
     },
-    "Utah": {
+    "NC Wilmington": {
       "league": "NCAAB",
-      "team": "Utah",
-      "off_index": 1.0280898876404494,
-      "def_index": 1.0232704402515724,
-      "pace_index": 1.0063636363636363,
-      "sos_index": 1,
-      "form_index": 1.030417495029821,
-      "ppg": 75.5,
-      "opp_ppg": 72.6
-    },
-    "Nevada": {
-      "league": "NCAAB",
-      "team": "Nevada",
-      "off_index": 1.0384269662921348,
-      "def_index": 1.0220125786163523,
-      "pace_index": 0.979090909090909,
-      "sos_index": 1,
-      "form_index": 1.0355864811133202,
-      "ppg": 72.3,
-      "opp_ppg": 68.1
-    },
-    "Cornell": {
-      "league": "NCAAB",
-      "team": "Cornell",
-      "off_index": 1.0613483146067417,
-      "def_index": 0.9911949685534592,
-      "pace_index": 1.0203030303030303,
-      "sos_index": 1,
-      "form_index": 1.0375745526838966,
-      "ppg": 83.4,
-      "opp_ppg": 78.7
-    },
-    "VCU": {
-      "league": "NCAAB",
-      "team": "VCU",
+      "team": "NC Wilmington",
       "off_index": 1.0532584269662921,
-      "def_index": 1.0830188679245283,
-      "pace_index": 0.9881818181818182,
+      "def_index": 1.019496855345912,
+      "pace_index": 0.9906060606060606,
       "sos_index": 1,
-      "form_index": 1.071371769383698,
-      "ppg": 76.2,
-      "opp_ppg": 63
+      "form_index": 1.0439363817097416,
+      "ppg": 76.6,
+      "opp_ppg": 70.3
     },
-    "Seton Hall": {
+    "SF Austin": {
       "league": "NCAAB",
-      "team": "Seton Hall",
-      "off_index": 0.9647191011235956,
-      "def_index": 1.0050314465408805,
-      "pace_index": 0.9803030303030302,
+      "team": "SF Austin",
+      "off_index": 0.9660674157303372,
+      "def_index": 1.0421383647798743,
+      "pace_index": 0.9996969696969698,
       "sos_index": 1,
-      "form_index": 0.9846918489065607,
-      "ppg": 61.6,
-      "opp_ppg": 70.2
+      "form_index": 1.0001988071570578,
+      "ppg": 64.7,
+      "opp_ppg": 69.4
     },
     "Davidson": {
       "league": "NCAAB",
@@ -3506,27 +3440,49 @@
       "ppg": 73.3,
       "opp_ppg": 74.8
     },
-    "Vermont": {
+    "S Illinois": {
       "league": "NCAAB",
-      "team": "Vermont",
-      "off_index": 0.9957303370786517,
-      "def_index": 1.038364779874214,
-      "pace_index": 0.9706060606060606,
+      "team": "S Illinois",
+      "off_index": 1.0141573033707867,
+      "def_index": 0.9874213836477989,
+      "pace_index": 0.9996969696969698,
       "sos_index": 1,
-      "form_index": 1.0168986083499005,
-      "ppg": 64.5,
-      "opp_ppg": 65
+      "form_index": 1.005765407554672,
+      "ppg": 72.2,
+      "opp_ppg": 75.5
     },
-    "Kansas": {
+    "Texas A&M": {
       "league": "NCAAB",
-      "team": "Kansas",
-      "off_index": 1.0289887640449438,
-      "def_index": 1.0534591194968554,
-      "pace_index": 1.0087878787878788,
+      "team": "Texas A&M",
+      "off_index": 1.0280898876404494,
+      "def_index": 1.050314465408805,
+      "pace_index": 1.000909090909091,
       "sos_index": 1,
-      "form_index": 1.0447316103379722,
-      "ppg": 76.1,
-      "opp_ppg": 69.6
+      "form_index": 1.0423459244532802,
+      "ppg": 74.6,
+      "opp_ppg": 68.7
+    },
+    "Cornell": {
+      "league": "NCAAB",
+      "team": "Cornell",
+      "off_index": 1.0613483146067417,
+      "def_index": 0.9911949685534592,
+      "pace_index": 1.0203030303030303,
+      "sos_index": 1,
+      "form_index": 1.0375745526838966,
+      "ppg": 83.4,
+      "opp_ppg": 78.7
+    },
+    "Washington": {
+      "league": "NCAAB",
+      "team": "Washington",
+      "off_index": 1.008314606741573,
+      "def_index": 0.9849056603773586,
+      "pace_index": 1.0003030303030302,
+      "sos_index": 1,
+      "form_index": 1.0009940357852882,
+      "ppg": 71.4,
+      "opp_ppg": 75.9
     },
     "McNeese": {
       "league": "NCAAB",
@@ -3550,6 +3506,28 @@
       "ppg": 68.8,
       "opp_ppg": 67.6
     },
+    "Seton Hall": {
+      "league": "NCAAB",
+      "team": "Seton Hall",
+      "off_index": 0.9647191011235956,
+      "def_index": 1.0050314465408805,
+      "pace_index": 0.9803030303030302,
+      "sos_index": 1,
+      "form_index": 0.9846918489065607,
+      "ppg": 61.6,
+      "opp_ppg": 70.2
+    },
+    "Rutgers": {
+      "league": "NCAAB",
+      "team": "Rutgers",
+      "off_index": 1.0285393258426967,
+      "def_index": 0.9924528301886794,
+      "pace_index": 1.0148484848484849,
+      "sos_index": 1,
+      "form_index": 1.0165009940357854,
+      "ppg": 77,
+      "opp_ppg": 77.6
+    },
     "Marquette": {
       "league": "NCAAB",
       "team": "Marquette",
@@ -3560,6 +3538,28 @@
       "form_index": 1.0502982107355865,
       "ppg": 76.6,
       "opp_ppg": 68.7
+    },
+    "Iona": {
+      "league": "NCAAB",
+      "team": "Iona",
+      "off_index": 0.9925842696629213,
+      "def_index": 1.040251572327044,
+      "pace_index": 1.0051515151515151,
+      "sos_index": 1,
+      "form_index": 1.0157057654075548,
+      "ppg": 69.7,
+      "opp_ppg": 70.5
+    },
+    "San Diego St": {
+      "league": "NCAAB",
+      "team": "San Diego St",
+      "off_index": 1.0087640449438202,
+      "def_index": 1.0666666666666669,
+      "pace_index": 0.9906060606060606,
+      "sos_index": 1,
+      "form_index": 1.0371769383697813,
+      "ppg": 69.8,
+      "opp_ppg": 65.2
     },
     "Toledo": {
       "league": "NCAAB",
@@ -3583,16 +3583,16 @@
       "ppg": 75.4,
       "opp_ppg": 71.3
     },
-    "Rhode Island": {
+    "Wyoming": {
       "league": "NCAAB",
-      "team": "Rhode Island",
-      "off_index": 1.0258426966292136,
-      "def_index": 1.0176100628930818,
-      "pace_index": 1.0178787878787878,
+      "team": "Wyoming",
+      "off_index": 0.9925842696629213,
+      "def_index": 1.0012578616352201,
+      "pace_index": 0.9815151515151516,
       "sos_index": 1,
-      "form_index": 1.026441351888668,
-      "ppg": 77.1,
-      "opp_ppg": 75.2
+      "form_index": 0.9994035785288271,
+      "ppg": 65.8,
+      "opp_ppg": 70.7
     },
     "Oklahoma St": {
       "league": "NCAAB",
@@ -3605,28 +3605,6 @@
       "ppg": 73,
       "opp_ppg": 76.3
     },
-    "Iona": {
-      "league": "NCAAB",
-      "team": "Iona",
-      "off_index": 0.9925842696629213,
-      "def_index": 1.040251572327044,
-      "pace_index": 1.0051515151515151,
-      "sos_index": 1,
-      "form_index": 1.0157057654075548,
-      "ppg": 69.7,
-      "opp_ppg": 70.5
-    },
-    "Wyoming": {
-      "league": "NCAAB",
-      "team": "Wyoming",
-      "off_index": 0.9925842696629213,
-      "def_index": 1.0012578616352201,
-      "pace_index": 0.9815151515151516,
-      "sos_index": 1,
-      "form_index": 0.9994035785288271,
-      "ppg": 65.8,
-      "opp_ppg": 70.7
-    },
     "Wake Forest": {
       "league": "NCAAB",
       "team": "Wake Forest",
@@ -3637,72 +3615,6 @@
       "form_index": 1.027634194831014,
       "ppg": 70.2,
       "opp_ppg": 68
-    },
-    "Georgetown": {
-      "league": "NCAAB",
-      "team": "Georgetown",
-      "off_index": 1.0141573033707867,
-      "def_index": 1.038993710691824,
-      "pace_index": 0.9984848484848485,
-      "sos_index": 1,
-      "form_index": 1.0284294234592446,
-      "ppg": 72,
-      "opp_ppg": 69.6
-    },
-    "Loyola Mymt": {
-      "league": "NCAAB",
-      "team": "Loyola Mymt",
-      "off_index": 1.0051685393258427,
-      "def_index": 1.0138364779874216,
-      "pace_index": 0.9966666666666667,
-      "sos_index": 1,
-      "form_index": 1.0117296222664016,
-      "ppg": 70.3,
-      "opp_ppg": 72.1
-    },
-    "Stanford": {
-      "league": "NCAAB",
-      "team": "Stanford",
-      "off_index": 1.0330337078651686,
-      "def_index": 1.0157232704402517,
-      "pace_index": 0.9906060606060606,
-      "sos_index": 1,
-      "form_index": 1.0300198807157057,
-      "ppg": 73.5,
-      "opp_ppg": 70.7
-    },
-    "Minnesota": {
-      "league": "NCAAB",
-      "team": "Minnesota",
-      "off_index": 1.0078651685393258,
-      "def_index": 1.0106918238993712,
-      "pace_index": 0.9809090909090908,
-      "sos_index": 1,
-      "form_index": 1.0125248508946323,
-      "ppg": 68.1,
-      "opp_ppg": 69.7
-    },
-    "Creighton": {
-      "league": "NCAAB",
-      "team": "Creighton",
-      "off_index": 1.0402247191011236,
-      "def_index": 1.0301886792452832,
-      "pace_index": 0.9954545454545455,
-      "sos_index": 1,
-      "form_index": 1.040755467196819,
-      "ppg": 75.5,
-      "opp_ppg": 70
-    },
-    "Texas A&M": {
-      "league": "NCAAB",
-      "team": "Texas A&M",
-      "off_index": 1.0280898876404494,
-      "def_index": 1.050314465408805,
-      "pace_index": 1.000909090909091,
-      "sos_index": 1,
-      "form_index": 1.0423459244532802,
-      "ppg": 74.6,
-      "opp_ppg": 68.7
     },
     "Michigan St": {
       "league": "NCAAB",
@@ -3715,6 +3627,17 @@
       "ppg": 77.7,
       "opp_ppg": 67.1
     },
+    "Georgetown": {
+      "league": "NCAAB",
+      "team": "Georgetown",
+      "off_index": 1.0141573033707867,
+      "def_index": 1.038993710691824,
+      "pace_index": 0.9984848484848485,
+      "sos_index": 1,
+      "form_index": 1.0284294234592446,
+      "ppg": 72,
+      "opp_ppg": 69.6
+    },
     "Winthrop": {
       "league": "NCAAB",
       "team": "Winthrop",
@@ -3725,6 +3648,28 @@
       "form_index": 1.02882703777336,
       "ppg": 82.3,
       "opp_ppg": 79.8
+    },
+    "VCU": {
+      "league": "NCAAB",
+      "team": "VCU",
+      "off_index": 1.0532584269662921,
+      "def_index": 1.0830188679245283,
+      "pace_index": 0.9881818181818182,
+      "sos_index": 1,
+      "form_index": 1.071371769383698,
+      "ppg": 76.2,
+      "opp_ppg": 63
+    },
+    "Creighton": {
+      "league": "NCAAB",
+      "team": "Creighton",
+      "off_index": 1.0402247191011236,
+      "def_index": 1.0301886792452832,
+      "pace_index": 0.9954545454545455,
+      "sos_index": 1,
+      "form_index": 1.040755467196819,
+      "ppg": 75.5,
+      "opp_ppg": 70
     },
     "Florida Atlantic": {
       "league": "NCAAB",
@@ -3748,6 +3693,17 @@
       "ppg": 68.4,
       "opp_ppg": 68.1
     },
+    "Charleston": {
+      "league": "NCAAB",
+      "team": "Charleston",
+      "off_index": 1.0262921348314606,
+      "def_index": 1.0238993710691826,
+      "pace_index": 1.0148484848484849,
+      "sos_index": 1,
+      "form_index": 1.0300198807157057,
+      "ppg": 76.7,
+      "opp_ppg": 73.9
+    },
     "Belmont": {
       "league": "NCAAB",
       "team": "Belmont",
@@ -3770,16 +3726,38 @@
       "ppg": 81.5,
       "opp_ppg": 76.8
     },
-    "Boston U": {
+    "Montana": {
       "league": "NCAAB",
-      "team": "Boston U",
-      "off_index": 0.9975280898876405,
-      "def_index": 1.0157232704402517,
-      "pace_index": 0.9760606060606061,
+      "team": "Montana",
+      "off_index": 1.0397752808988765,
+      "def_index": 0.9823899371069184,
+      "pace_index": 0.9942424242424243,
       "sos_index": 1,
-      "form_index": 1.0081510934393638,
-      "ppg": 65.6,
-      "opp_ppg": 68.3
+      "form_index": 1.0196819085487079,
+      "ppg": 75.2,
+      "opp_ppg": 75
+    },
+    "Kansas": {
+      "league": "NCAAB",
+      "team": "Kansas",
+      "off_index": 1.0289887640449438,
+      "def_index": 1.0534591194968554,
+      "pace_index": 1.0087878787878788,
+      "sos_index": 1,
+      "form_index": 1.0447316103379722,
+      "ppg": 76.1,
+      "opp_ppg": 69.6
+    },
+    "Loyola Mymt": {
+      "league": "NCAAB",
+      "team": "Loyola Mymt",
+      "off_index": 1.0051685393258427,
+      "def_index": 1.0138364779874216,
+      "pace_index": 0.9966666666666667,
+      "sos_index": 1,
+      "form_index": 1.0117296222664016,
+      "ppg": 70.3,
+      "opp_ppg": 72.1
     },
     "UCLA": {
       "league": "NCAAB",
@@ -3791,6 +3769,17 @@
       "form_index": 1.054671968190855,
       "ppg": 74.2,
       "opp_ppg": 65.2
+    },
+    "Boise St": {
+      "league": "NCAAB",
+      "team": "Boise St",
+      "off_index": 1.0510112359550563,
+      "def_index": 1.0408805031446542,
+      "pace_index": 0.9845454545454545,
+      "sos_index": 1,
+      "form_index": 1.0510934393638172,
+      "ppg": 75.1,
+      "opp_ppg": 67
     },
     "Youngstown St": {
       "league": "NCAAB",
@@ -3825,6 +3814,17 @@
       "ppg": 77.6,
       "opp_ppg": 70
     },
+    "Nevada": {
+      "league": "NCAAB",
+      "team": "Nevada",
+      "off_index": 1.0384269662921348,
+      "def_index": 1.0220125786163523,
+      "pace_index": 0.979090909090909,
+      "sos_index": 1,
+      "form_index": 1.0355864811133202,
+      "ppg": 72.3,
+      "opp_ppg": 68.1
+    },
     "Tulane": {
       "league": "NCAAB",
       "team": "Tulane",
@@ -3847,16 +3847,38 @@
       "ppg": 65.6,
       "opp_ppg": 75.1
     },
-    "NC Wilmington": {
+    "George Mason": {
       "league": "NCAAB",
-      "team": "NC Wilmington",
-      "off_index": 1.0532584269662921,
-      "def_index": 1.019496855345912,
-      "pace_index": 0.9906060606060606,
+      "team": "George Mason",
+      "off_index": 1.0164044943820225,
+      "def_index": 1.0723270440251573,
+      "pace_index": 0.9869696969696969,
       "sos_index": 1,
-      "form_index": 1.0439363817097416,
-      "ppg": 76.6,
-      "opp_ppg": 70.3
+      "form_index": 1.044333996023857,
+      "ppg": 70.4,
+      "opp_ppg": 64
+    },
+    "Minnesota": {
+      "league": "NCAAB",
+      "team": "Minnesota",
+      "off_index": 1.0078651685393258,
+      "def_index": 1.0106918238993712,
+      "pace_index": 0.9809090909090908,
+      "sos_index": 1,
+      "form_index": 1.0125248508946323,
+      "ppg": 68.1,
+      "opp_ppg": 69.7
+    },
+    "San Francisco": {
+      "league": "NCAAB",
+      "team": "San Francisco",
+      "off_index": 1.03438202247191,
+      "def_index": 1.0465408805031446,
+      "pace_index": 1.0045454545454546,
+      "sos_index": 1,
+      "form_index": 1.0451292246520876,
+      "ppg": 76.2,
+      "opp_ppg": 69.6
     },
     "TCU": {
       "league": "NCAAB",
@@ -3868,17 +3890,6 @@
       "form_index": 1.0145129224652087,
       "ppg": 67.6,
       "opp_ppg": 68.7
-    },
-    "San Diego St": {
-      "league": "NCAAB",
-      "team": "San Diego St",
-      "off_index": 1.0087640449438202,
-      "def_index": 1.0666666666666669,
-      "pace_index": 0.9906060606060606,
-      "sos_index": 1,
-      "form_index": 1.0371769383697813,
-      "ppg": 69.8,
-      "opp_ppg": 65.2
     },
     "Hawai'i": {
       "league": "NCAAB",
@@ -3902,16 +3913,16 @@
       "ppg": 73.7,
       "opp_ppg": 74
     },
-    "Montana": {
+    "J Madison": {
       "league": "NCAAB",
-      "team": "Montana",
-      "off_index": 1.0397752808988765,
-      "def_index": 0.9823899371069184,
-      "pace_index": 0.9942424242424243,
+      "team": "J Madison",
+      "off_index": 1.0330337078651686,
+      "def_index": 1,
+      "pace_index": 0.9839393939393939,
       "sos_index": 1,
-      "form_index": 1.0196819085487079,
-      "ppg": 75.2,
-      "opp_ppg": 75
+      "form_index": 1.0228628230616303,
+      "ppg": 72.3,
+      "opp_ppg": 71.3
     },
     "Washington St": {
       "league": "NCAAB",
@@ -3924,16 +3935,38 @@
       "ppg": 78.9,
       "opp_ppg": 78.6
     },
-    "Cal Baptist": {
+    "West Virginia": {
       "league": "NCAAB",
-      "team": "Cal Baptist",
-      "off_index": 1.0110112359550563,
-      "def_index": 1.0327044025157235,
-      "pace_index": 0.9972727272727273,
+      "team": "West Virginia",
+      "off_index": 1.0047191011235954,
+      "def_index": 1.0616352201257864,
+      "pace_index": 0.9845454545454545,
       "sos_index": 1,
-      "form_index": 1.0240556660039761,
-      "ppg": 71.3,
-      "opp_ppg": 70
+      "form_index": 1.0324055666003977,
+      "ppg": 68.2,
+      "opp_ppg": 64.8
+    },
+    "Delaware": {
+      "league": "NCAAB",
+      "team": "Delaware",
+      "off_index": 1.0330337078651686,
+      "def_index": 0.9729559748427673,
+      "pace_index": 1.0087878787878788,
+      "sos_index": 1,
+      "form_index": 1.0113320079522863,
+      "ppg": 76.8,
+      "opp_ppg": 78.7
+    },
+    "Florida": {
+      "league": "NCAAB",
+      "team": "Florida",
+      "off_index": 1.0802247191011236,
+      "def_index": 1.0566037735849059,
+      "pace_index": 1.0112121212121212,
+      "sos_index": 1,
+      "form_index": 1.079324055666004,
+      "ppg": 84.8,
+      "opp_ppg": 69.6
     },
     "N Iowa": {
       "league": "NCAAB",
@@ -3957,6 +3990,17 @@
       "ppg": 77.5,
       "opp_ppg": 63
     },
+    "Troy": {
+      "league": "NCAAB",
+      "team": "Troy",
+      "off_index": 1.0231460674157304,
+      "def_index": 1.0566037735849059,
+      "pace_index": 0.9906060606060606,
+      "sos_index": 1,
+      "form_index": 1.0415506958250498,
+      "ppg": 72,
+      "opp_ppg": 66.3
+    },
     "Marshall": {
       "league": "NCAAB",
       "team": "Marshall",
@@ -3979,16 +4023,16 @@
       "ppg": 70.9,
       "opp_ppg": 69.3
     },
-    "Florida": {
+    "Georgia So": {
       "league": "NCAAB",
-      "team": "Florida",
-      "off_index": 1.0802247191011236,
-      "def_index": 1.0566037735849059,
-      "pace_index": 1.0112121212121212,
+      "team": "Georgia So",
+      "off_index": 1.006067415730337,
+      "def_index": 1.010062893081761,
+      "pace_index": 1.0184848484848485,
       "sos_index": 1,
-      "form_index": 1.079324055666004,
-      "ppg": 84.8,
-      "opp_ppg": 69.6
+      "form_index": 1.010934393638171,
+      "ppg": 74.1,
+      "opp_ppg": 76.1
     },
     "Maryland": {
       "league": "NCAAB",
@@ -4056,17 +4100,6 @@
       "ppg": 79.5,
       "opp_ppg": 74.2
     },
-    "George Mason": {
-      "league": "NCAAB",
-      "team": "George Mason",
-      "off_index": 1.0164044943820225,
-      "def_index": 1.0723270440251573,
-      "pace_index": 0.9869696969696969,
-      "sos_index": 1,
-      "form_index": 1.044333996023857,
-      "ppg": 70.4,
-      "opp_ppg": 64
-    },
     "Illinois Chicago": {
       "league": "NCAAB",
       "team": "Illinois Chicago",
@@ -4111,16 +4144,16 @@
       "ppg": 78.8,
       "opp_ppg": 70.5
     },
-    "San Diego": {
+    "Cal Baptist": {
       "league": "NCAAB",
-      "team": "San Diego",
-      "off_index": 0.9808988764044944,
-      "def_index": 0.9786163522012579,
-      "pace_index": 1.0203030303030303,
+      "team": "Cal Baptist",
+      "off_index": 1.0110112359550563,
+      "def_index": 1.0327044025157235,
+      "pace_index": 0.9972727272727273,
       "sos_index": 1,
-      "form_index": 0.9791252485089463,
-      "ppg": 70.2,
-      "opp_ppg": 80.2
+      "form_index": 1.0240556660039761,
+      "ppg": 71.3,
+      "opp_ppg": 70
     },
     "St Thomas": {
       "league": "NCAAB",
@@ -4132,6 +4165,28 @@
       "form_index": 1.040755467196819,
       "ppg": 81.6,
       "opp_ppg": 76.1
+    },
+    "Pittsburgh": {
+      "league": "NCAAB",
+      "team": "Pittsburgh",
+      "off_index": 1.04561797752809,
+      "def_index": 1.018867924528302,
+      "pace_index": 0.993030303030303,
+      "sos_index": 1,
+      "form_index": 1.039165009940358,
+      "ppg": 75.9,
+      "opp_ppg": 70.8
+    },
+    "Portland St": {
+      "league": "NCAAB",
+      "team": "Portland St",
+      "off_index": 1.0096629213483146,
+      "def_index": 1.0308176100628932,
+      "pace_index": 1.0015151515151515,
+      "sos_index": 1,
+      "form_index": 1.022465208747515,
+      "ppg": 71.8,
+      "opp_ppg": 70.9
     },
     "Denver": {
       "league": "NCAAB",
@@ -4154,6 +4209,28 @@
       "form_index": 1.0009940357852882,
       "ppg": 72.1,
       "opp_ppg": 76.6
+    },
+    "Oregon St": {
+      "league": "NCAAB",
+      "team": "Oregon St",
+      "off_index": 1.06,
+      "def_index": 1.0125786163522013,
+      "pace_index": 0.9803030303030302,
+      "sos_index": 1,
+      "form_index": 1.044333996023857,
+      "ppg": 75.7,
+      "opp_ppg": 69.3
+    },
+    "Colgate": {
+      "league": "NCAAB",
+      "team": "Colgate",
+      "off_index": 1.0213483146067417,
+      "def_index": 0.9949685534591196,
+      "pace_index": 0.9887878787878788,
+      "sos_index": 1,
+      "form_index": 1.0137176938369783,
+      "ppg": 71.4,
+      "opp_ppg": 72.7
     },
     "Milwaukee": {
       "league": "NCAAB",
@@ -4199,38 +4276,16 @@
       "ppg": 65.8,
       "opp_ppg": 64.6
     },
-    "E Carolina": {
+    "San Diego": {
       "league": "NCAAB",
-      "team": "E Carolina",
-      "off_index": 1.0262921348314606,
-      "def_index": 1.0006289308176102,
-      "pace_index": 0.999090909090909,
+      "team": "San Diego",
+      "off_index": 0.9808988764044944,
+      "def_index": 0.9786163522012579,
+      "pace_index": 1.0203030303030303,
       "sos_index": 1,
-      "form_index": 1.0192842942345925,
-      "ppg": 74,
-      "opp_ppg": 73.9
-    },
-    "Colgate": {
-      "league": "NCAAB",
-      "team": "Colgate",
-      "off_index": 1.0213483146067417,
-      "def_index": 0.9949685534591196,
-      "pace_index": 0.9887878787878788,
-      "sos_index": 1,
-      "form_index": 1.0137176938369783,
-      "ppg": 71.4,
-      "opp_ppg": 72.7
-    },
-    "UT Martin": {
-      "league": "NCAAB",
-      "team": "UT Martin",
-      "off_index": 1.001123595505618,
-      "def_index": 1.008176100628931,
-      "pace_index": 0.9996969696969698,
-      "sos_index": 1,
-      "form_index": 1.006958250497018,
+      "form_index": 0.9791252485089463,
       "ppg": 70.2,
-      "opp_ppg": 73.2
+      "opp_ppg": 80.2
     },
     "UMass": {
       "league": "NCAAB",
@@ -4243,38 +4298,16 @@
       "ppg": 72.5,
       "opp_ppg": 75.7
     },
-    "West Virginia": {
+    "DePaul": {
       "league": "NCAAB",
-      "team": "West Virginia",
-      "off_index": 1.0047191011235954,
-      "def_index": 1.0616352201257864,
-      "pace_index": 0.9845454545454545,
+      "team": "DePaul",
+      "off_index": 1.0137078651685394,
+      "def_index": 0.9993710691823899,
+      "pace_index": 1.0015151515151515,
       "sos_index": 1,
-      "form_index": 1.0324055666003977,
-      "ppg": 68.2,
-      "opp_ppg": 64.8
-    },
-    "Oregon St": {
-      "league": "NCAAB",
-      "team": "Oregon St",
-      "off_index": 1.06,
-      "def_index": 1.0125786163522013,
-      "pace_index": 0.9803030303030302,
-      "sos_index": 1,
-      "form_index": 1.044333996023857,
-      "ppg": 75.7,
-      "opp_ppg": 69.3
-    },
-    "Troy": {
-      "league": "NCAAB",
-      "team": "Troy",
-      "off_index": 1.0231460674157304,
-      "def_index": 1.0566037735849059,
-      "pace_index": 0.9906060606060606,
-      "sos_index": 1,
-      "form_index": 1.0415506958250498,
-      "ppg": 72,
-      "opp_ppg": 66.3
+      "form_index": 1.0105367793240558,
+      "ppg": 72.4,
+      "opp_ppg": 74.5
     },
     "LIU": {
       "league": "NCAAB",
@@ -4287,16 +4320,16 @@
       "ppg": 65.5,
       "opp_ppg": 66.5
     },
-    "N Illinois": {
+    "IU Indy": {
       "league": "NCAAB",
-      "team": "N Illinois",
-      "off_index": 0.9683146067415731,
-      "def_index": 0.9767295597484277,
-      "pace_index": 1.0154545454545454,
+      "team": "IU Indy",
+      "off_index": 1.0334831460674156,
+      "def_index": 0.9226415094339623,
+      "pace_index": 0.9839393939393939,
       "sos_index": 1,
-      "form_index": 0.970775347912525,
-      "ppg": 67.4,
-      "opp_ppg": 79.5
+      "form_index": 0.9898608349900597,
+      "ppg": 72.4,
+      "opp_ppg": 79.7
     },
     "UT Rio Grande": {
       "league": "NCAAB",
@@ -4309,6 +4342,28 @@
       "ppg": 74.1,
       "opp_ppg": 76.8
     },
+    "Boston U": {
+      "league": "NCAAB",
+      "team": "Boston U",
+      "off_index": 0.9975280898876405,
+      "def_index": 1.0157232704402517,
+      "pace_index": 0.9760606060606061,
+      "sos_index": 1,
+      "form_index": 1.0081510934393638,
+      "ppg": 65.6,
+      "opp_ppg": 68.3
+    },
+    "Fresno St": {
+      "league": "NCAAB",
+      "team": "Fresno St",
+      "off_index": 0.9795505617977528,
+      "def_index": 0.980503144654088,
+      "pace_index": 1.0245454545454546,
+      "sos_index": 1,
+      "form_index": 0.9791252485089463,
+      "ppg": 70.7,
+      "opp_ppg": 80.7
+    },
     "Pacific": {
       "league": "NCAAB",
       "team": "Pacific",
@@ -4319,17 +4374,6 @@
       "form_index": 0.9823061630218688,
       "ppg": 68,
       "opp_ppg": 77.2
-    },
-    "Columbia": {
-      "league": "NCAAB",
-      "team": "Columbia",
-      "off_index": 1.0280898876404494,
-      "def_index": 0.9672955974842767,
-      "pace_index": 1.0154545454545454,
-      "sos_index": 1,
-      "form_index": 1.0049701789264414,
-      "ppg": 77.1,
-      "opp_ppg": 80.6
     },
     "La Salle": {
       "league": "NCAAB",
@@ -4342,16 +4386,16 @@
       "ppg": 70.9,
       "opp_ppg": 75.5
     },
-    "IU Indy": {
+    "N Dakota St": {
       "league": "NCAAB",
-      "team": "IU Indy",
-      "off_index": 1.0334831460674156,
-      "def_index": 0.9226415094339623,
-      "pace_index": 0.9839393939393939,
+      "team": "N Dakota St",
+      "off_index": 1.0788764044943822,
+      "def_index": 0.9691823899371069,
+      "pace_index": 0.9918181818181818,
       "sos_index": 1,
-      "form_index": 0.9898608349900597,
-      "ppg": 72.4,
-      "opp_ppg": 79.7
+      "form_index": 1.0375745526838966,
+      "ppg": 80.7,
+      "opp_ppg": 76
     },
     "Sam Houston": {
       "league": "NCAAB",
@@ -4386,27 +4430,16 @@
       "ppg": 72.7,
       "opp_ppg": 69.4
     },
-    "Longwood": {
+    "Arizona St": {
       "league": "NCAAB",
-      "team": "Longwood",
-      "off_index": 1.0321348314606742,
-      "def_index": 0.9955974842767296,
-      "pace_index": 1.0087878787878788,
+      "team": "Arizona St",
+      "off_index": 1.0092134831460675,
+      "def_index": 1.0006289308176102,
+      "pace_index": 1.0154545454545454,
       "sos_index": 1,
-      "form_index": 1.0208747514910537,
-      "ppg": 76.6,
-      "opp_ppg": 76.1
-    },
-    "Sacramento St": {
-      "league": "NCAAB",
-      "team": "Sacramento St",
-      "off_index": 0.9773033707865169,
-      "def_index": 0.9742138364779874,
-      "pace_index": 0.9803030303030302,
-      "sos_index": 1,
-      "form_index": 0.978727634194831,
-      "ppg": 63.3,
-      "opp_ppg": 73.4
+      "form_index": 1.0081510934393638,
+      "ppg": 74.1,
+      "opp_ppg": 76.8
     },
     "Northeastern": {
       "league": "NCAAB",
@@ -4430,27 +4463,49 @@
       "ppg": 79.4,
       "opp_ppg": 74.5
     },
-    "J Madison": {
+    "Charleston So": {
       "league": "NCAAB",
-      "team": "J Madison",
-      "off_index": 1.0330337078651686,
-      "def_index": 1,
-      "pace_index": 0.9839393939393939,
+      "team": "Charleston So",
+      "off_index": 0.9907865168539326,
+      "def_index": 0.9742138364779874,
+      "pace_index": 1.01,
       "sos_index": 1,
-      "form_index": 1.0228628230616303,
-      "ppg": 72.3,
-      "opp_ppg": 71.3
+      "form_index": 0.9842942345924454,
+      "ppg": 70.1,
+      "opp_ppg": 78.8
     },
-    "Arizona St": {
+    "Oregon": {
       "league": "NCAAB",
-      "team": "Arizona St",
-      "off_index": 1.0092134831460675,
-      "def_index": 1.0006289308176102,
-      "pace_index": 1.0154545454545454,
+      "team": "Oregon",
+      "off_index": 1.0361797752808988,
+      "def_index": 1.0364779874213836,
+      "pace_index": 1.0051515151515151,
       "sos_index": 1,
-      "form_index": 1.0081510934393638,
-      "ppg": 74.1,
-      "opp_ppg": 76.8
+      "form_index": 1.0411530815109344,
+      "ppg": 76.5,
+      "opp_ppg": 70.9
+    },
+    "Pepperdine": {
+      "league": "NCAAB",
+      "team": "Pepperdine",
+      "off_index": 1.0069662921348315,
+      "def_index": 0.979874213836478,
+      "pace_index": 1.0045454545454546,
+      "sos_index": 1,
+      "form_index": 0.9974155069582505,
+      "ppg": 71.8,
+      "opp_ppg": 77.2
+    },
+    "Siena": {
+      "league": "NCAAB",
+      "team": "Siena",
+      "off_index": 1.0164044943820225,
+      "def_index": 1.0150943396226415,
+      "pace_index": 0.9978787878787879,
+      "sos_index": 1,
+      "form_index": 1.0192842942345925,
+      "ppg": 72.2,
+      "opp_ppg": 72.1
     },
     "Tarleton St": {
       "league": "NCAAB",
@@ -4507,27 +4562,16 @@
       "ppg": 76.9,
       "opp_ppg": 71.6
     },
-    "Siena": {
+    "Penn": {
       "league": "NCAAB",
-      "team": "Siena",
-      "off_index": 1.0164044943820225,
-      "def_index": 1.0150943396226415,
-      "pace_index": 0.9978787878787879,
+      "team": "Penn",
+      "off_index": 1.0002247191011235,
+      "def_index": 0.9660377358490566,
+      "pace_index": 0.9966666666666667,
       "sos_index": 1,
-      "form_index": 1.0192842942345925,
-      "ppg": 72.2,
-      "opp_ppg": 72.1
-    },
-    "Idaho St": {
-      "league": "NCAAB",
-      "team": "Idaho St",
-      "off_index": 1.026741573033708,
-      "def_index": 1,
-      "pace_index": 0.9887878787878788,
-      "sos_index": 1,
-      "form_index": 1.0192842942345925,
-      "ppg": 72.2,
-      "opp_ppg": 72.1
+      "form_index": 0.987872763419483,
+      "ppg": 69.6,
+      "opp_ppg": 77.4
     },
     "W Michigan": {
       "league": "NCAAB",
@@ -4551,6 +4595,17 @@
       "ppg": 78.7,
       "opp_ppg": 70.5
     },
+    "NC A&T": {
+      "league": "NCAAB",
+      "team": "NC A&T",
+      "off_index": 0.9831460674157304,
+      "def_index": 0.9811320754716981,
+      "pace_index": 1.003939393939394,
+      "sos_index": 1,
+      "form_index": 0.9831013916500995,
+      "ppg": 67.9,
+      "opp_ppg": 76.9
+    },
     "C Michigan": {
       "league": "NCAAB",
       "team": "C Michigan",
@@ -4562,17 +4617,6 @@
       "ppg": 72.7,
       "opp_ppg": 74.4
     },
-    "Bucknell": {
-      "league": "NCAAB",
-      "team": "Bucknell",
-      "off_index": 1.0146067415730338,
-      "def_index": 1.0245283018867926,
-      "pace_index": 1.0106060606060607,
-      "sos_index": 1,
-      "form_index": 1.0220675944333997,
-      "ppg": 74,
-      "opp_ppg": 73.2
-    },
     "Hofstra": {
       "league": "NCAAB",
       "team": "Hofstra",
@@ -4583,17 +4627,6 @@
       "form_index": 1.0145129224652087,
       "ppg": 64.5,
       "opp_ppg": 65.6
-    },
-    "Drake": {
-      "league": "NCAAB",
-      "team": "Drake",
-      "off_index": 1.0492134831460675,
-      "def_index": 1.0528301886792453,
-      "pace_index": 0.95,
-      "sos_index": 1,
-      "form_index": 1.0518886679920478,
-      "ppg": 68.5,
-      "opp_ppg": 60.2
     },
     "The Citadel": {
       "league": "NCAAB",
@@ -4617,16 +4650,16 @@
       "ppg": 71.6,
       "opp_ppg": 67.4
     },
-    "Delaware": {
+    "Lamar": {
       "league": "NCAAB",
-      "team": "Delaware",
-      "off_index": 1.0330337078651686,
-      "def_index": 0.9729559748427673,
-      "pace_index": 1.0087878787878788,
+      "team": "Lamar",
+      "off_index": 0.996179775280899,
+      "def_index": 1.0465408805031446,
+      "pace_index": 0.9881818181818182,
       "sos_index": 1,
-      "form_index": 1.0113320079522863,
-      "ppg": 76.8,
-      "opp_ppg": 78.7
+      "form_index": 1.0204771371769383,
+      "ppg": 67.4,
+      "opp_ppg": 67
     },
     "San Jose St": {
       "league": "NCAAB",
@@ -4650,27 +4683,27 @@
       "ppg": 68.6,
       "opp_ppg": 72.2
     },
-    "Navy": {
+    "Drake": {
       "league": "NCAAB",
-      "team": "Navy",
-      "off_index": 1.0123595505617977,
-      "def_index": 1.0088050314465409,
-      "pace_index": 0.9887878787878788,
+      "team": "Drake",
+      "off_index": 1.0492134831460675,
+      "def_index": 1.0528301886792453,
+      "pace_index": 0.95,
       "sos_index": 1,
-      "form_index": 1.0145129224652087,
-      "ppg": 70.1,
-      "opp_ppg": 71.2
+      "form_index": 1.0518886679920478,
+      "ppg": 68.5,
+      "opp_ppg": 60.2
     },
-    "Fresno St": {
+    "Longwood": {
       "league": "NCAAB",
-      "team": "Fresno St",
-      "off_index": 0.9795505617977528,
-      "def_index": 0.980503144654088,
-      "pace_index": 1.0245454545454546,
+      "team": "Longwood",
+      "off_index": 1.0321348314606742,
+      "def_index": 0.9955974842767296,
+      "pace_index": 1.0087878787878788,
       "sos_index": 1,
-      "form_index": 0.9791252485089463,
-      "ppg": 70.7,
-      "opp_ppg": 80.7
+      "form_index": 1.0208747514910537,
+      "ppg": 76.6,
+      "opp_ppg": 76.1
     },
     "UMBC": {
       "league": "NCAAB",
@@ -4694,28 +4727,6 @@
       "ppg": 74.9,
       "opp_ppg": 72.4
     },
-    "San Francisco": {
-      "league": "NCAAB",
-      "team": "San Francisco",
-      "off_index": 1.03438202247191,
-      "def_index": 1.0465408805031446,
-      "pace_index": 1.0045454545454546,
-      "sos_index": 1,
-      "form_index": 1.0451292246520876,
-      "ppg": 76.2,
-      "opp_ppg": 69.6
-    },
-    "DePaul": {
-      "league": "NCAAB",
-      "team": "DePaul",
-      "off_index": 1.0137078651685394,
-      "def_index": 0.9993710691823899,
-      "pace_index": 1.0015151515151515,
-      "sos_index": 1,
-      "form_index": 1.0105367793240558,
-      "ppg": 72.4,
-      "opp_ppg": 74.5
-    },
     "Utah Valley": {
       "league": "NCAAB",
       "team": "Utah Valley",
@@ -4726,39 +4737,6 @@
       "form_index": 1.0399602385685884,
       "ppg": 74.2,
       "opp_ppg": 68.9
-    },
-    "N Alabama": {
-      "league": "NCAAB",
-      "team": "N Alabama",
-      "off_index": 1.0550561797752809,
-      "def_index": 1.018867924528302,
-      "pace_index": 0.9942424242424243,
-      "sos_index": 1,
-      "form_index": 1.0447316103379722,
-      "ppg": 77.5,
-      "opp_ppg": 71
-    },
-    "Pittsburgh": {
-      "league": "NCAAB",
-      "team": "Pittsburgh",
-      "off_index": 1.04561797752809,
-      "def_index": 1.018867924528302,
-      "pace_index": 0.993030303030303,
-      "sos_index": 1,
-      "form_index": 1.039165009940358,
-      "ppg": 75.9,
-      "opp_ppg": 70.8
-    },
-    "Queens": {
-      "league": "NCAAB",
-      "team": "Queens",
-      "off_index": 1.0276404494382023,
-      "def_index": 0.9937106918238995,
-      "pace_index": 1.0087878787878788,
-      "sos_index": 1,
-      "form_index": 1.017296222664016,
-      "ppg": 75.9,
-      "opp_ppg": 76.3
     },
     "New Orleans": {
       "league": "NCAAB",
@@ -4771,6 +4749,39 @@
       "ppg": 67.9,
       "opp_ppg": 82.5
     },
+    "UT Martin": {
+      "league": "NCAAB",
+      "team": "UT Martin",
+      "off_index": 1.001123595505618,
+      "def_index": 1.008176100628931,
+      "pace_index": 0.9996969696969698,
+      "sos_index": 1,
+      "form_index": 1.006958250497018,
+      "ppg": 70.2,
+      "opp_ppg": 73.2
+    },
+    "Xavier": {
+      "league": "NCAAB",
+      "team": "Xavier",
+      "off_index": 1.043370786516854,
+      "def_index": 1.0333333333333334,
+      "pace_index": 1.006969696969697,
+      "sos_index": 1,
+      "form_index": 1.0447316103379722,
+      "ppg": 78.1,
+      "opp_ppg": 71.6
+    },
+    "Queens": {
+      "league": "NCAAB",
+      "team": "Queens",
+      "off_index": 1.0276404494382023,
+      "def_index": 0.9937106918238995,
+      "pace_index": 1.0087878787878788,
+      "sos_index": 1,
+      "form_index": 1.017296222664016,
+      "ppg": 75.9,
+      "opp_ppg": 76.3
+    },
     "E Washington": {
       "league": "NCAAB",
       "team": "E Washington",
@@ -4781,83 +4792,6 @@
       "form_index": 0.9922465208747515,
       "ppg": 69.6,
       "opp_ppg": 76.3
-    },
-    "Ohio": {
-      "league": "NCAAB",
-      "team": "Ohio",
-      "off_index": 1.0325842696629213,
-      "def_index": 1.0056603773584907,
-      "pace_index": 1.0227272727272727,
-      "sos_index": 1,
-      "form_index": 1.0260437375745528,
-      "ppg": 79.1,
-      "opp_ppg": 77.3
-    },
-    "UC Riverside": {
-      "league": "NCAAB",
-      "team": "UC Riverside",
-      "off_index": 1.0217977528089888,
-      "def_index": 0.9899371069182391,
-      "pace_index": 1.0063636363636363,
-      "sos_index": 1,
-      "form_index": 1.0113320079522863,
-      "ppg": 74.5,
-      "opp_ppg": 76.4
-    },
-    "Penn": {
-      "league": "NCAAB",
-      "team": "Penn",
-      "off_index": 1.0002247191011235,
-      "def_index": 0.9660377358490566,
-      "pace_index": 0.9966666666666667,
-      "sos_index": 1,
-      "form_index": 0.987872763419483,
-      "ppg": 69.6,
-      "opp_ppg": 77.4
-    },
-    "Howard": {
-      "league": "NCAAB",
-      "team": "Howard",
-      "off_index": 1.0186516853932586,
-      "def_index": 0.9660377358490566,
-      "pace_index": 1.0154545454545454,
-      "sos_index": 1,
-      "form_index": 0.9986083499005964,
-      "ppg": 75.6,
-      "opp_ppg": 80.7
-    },
-    "Montana St": {
-      "league": "NCAAB",
-      "team": "Montana St",
-      "off_index": 1.0177528089887642,
-      "def_index": 1.0113207547169811,
-      "pace_index": 0.9875757575757576,
-      "sos_index": 1,
-      "form_index": 1.0188866799204772,
-      "ppg": 70.7,
-      "opp_ppg": 70.7
-    },
-    "UC Davis": {
-      "league": "NCAAB",
-      "team": "UC Davis",
-      "off_index": 0.9764044943820225,
-      "def_index": 1.0257861635220127,
-      "pace_index": 0.999090909090909,
-      "sos_index": 1,
-      "form_index": 0.9994035785288271,
-      "ppg": 66.2,
-      "opp_ppg": 71.1
-    },
-    "CS Northridge": {
-      "league": "NCAAB",
-      "team": "CS Northridge",
-      "off_index": 1.0298876404494381,
-      "def_index": 1.038364779874214,
-      "pace_index": 1.0275757575757576,
-      "sos_index": 1,
-      "form_index": 1.039562624254473,
-      "ppg": 79.5,
-      "opp_ppg": 74.3
     },
     "Morgan St": {
       "league": "NCAAB",
@@ -4870,6 +4804,83 @@
       "ppg": 76.2,
       "opp_ppg": 82.8
     },
+    "Ohio": {
+      "league": "NCAAB",
+      "team": "Ohio",
+      "off_index": 1.0325842696629213,
+      "def_index": 1.0056603773584907,
+      "pace_index": 1.0227272727272727,
+      "sos_index": 1,
+      "form_index": 1.0260437375745528,
+      "ppg": 79.1,
+      "opp_ppg": 77.3
+    },
+    "Howard": {
+      "league": "NCAAB",
+      "team": "Howard",
+      "off_index": 1.0186516853932586,
+      "def_index": 0.9660377358490566,
+      "pace_index": 1.0154545454545454,
+      "sos_index": 1,
+      "form_index": 0.9986083499005964,
+      "ppg": 75.6,
+      "opp_ppg": 80.7
+    },
+    "N Illinois": {
+      "league": "NCAAB",
+      "team": "N Illinois",
+      "off_index": 0.9683146067415731,
+      "def_index": 0.9767295597484277,
+      "pace_index": 1.0154545454545454,
+      "sos_index": 1,
+      "form_index": 0.970775347912525,
+      "ppg": 67.4,
+      "opp_ppg": 79.5
+    },
+    "Columbia": {
+      "league": "NCAAB",
+      "team": "Columbia",
+      "off_index": 1.0280898876404494,
+      "def_index": 0.9672955974842767,
+      "pace_index": 1.0154545454545454,
+      "sos_index": 1,
+      "form_index": 1.0049701789264414,
+      "ppg": 77.1,
+      "opp_ppg": 80.6
+    },
+    "Montana St": {
+      "league": "NCAAB",
+      "team": "Montana St",
+      "off_index": 1.0177528089887642,
+      "def_index": 1.0113207547169811,
+      "pace_index": 0.9875757575757576,
+      "sos_index": 1,
+      "form_index": 1.0188866799204772,
+      "ppg": 70.7,
+      "opp_ppg": 70.7
+    },
+    "CS Northridge": {
+      "league": "NCAAB",
+      "team": "CS Northridge",
+      "off_index": 1.0298876404494381,
+      "def_index": 1.038364779874214,
+      "pace_index": 1.0275757575757576,
+      "sos_index": 1,
+      "form_index": 1.039562624254473,
+      "ppg": 79.5,
+      "opp_ppg": 74.3
+    },
+    "N Alabama": {
+      "league": "NCAAB",
+      "team": "N Alabama",
+      "off_index": 1.0550561797752809,
+      "def_index": 1.018867924528302,
+      "pace_index": 0.9942424242424243,
+      "sos_index": 1,
+      "form_index": 1.0447316103379722,
+      "ppg": 77.5,
+      "opp_ppg": 71
+    },
     "Memphis": {
       "league": "NCAAB",
       "team": "Memphis",
@@ -4880,6 +4891,17 @@
       "form_index": 1.0447316103379722,
       "ppg": 79.9,
       "opp_ppg": 73.4
+    },
+    "UC Davis": {
+      "league": "NCAAB",
+      "team": "UC Davis",
+      "off_index": 0.9764044943820225,
+      "def_index": 1.0257861635220127,
+      "pace_index": 0.999090909090909,
+      "sos_index": 1,
+      "form_index": 0.9994035785288271,
+      "ppg": 66.2,
+      "opp_ppg": 71.1
     },
     "Cincinnati": {
       "league": "NCAAB",
@@ -4892,28 +4914,6 @@
       "ppg": 71.2,
       "opp_ppg": 66.2
     },
-    "Boston College": {
-      "league": "NCAAB",
-      "team": "Boston College",
-      "off_index": 1.0020224719101123,
-      "def_index": 0.9855345911949686,
-      "pace_index": 1.0003030303030302,
-      "sos_index": 1,
-      "form_index": 0.9974155069582505,
-      "ppg": 70.4,
-      "opp_ppg": 75.8
-    },
-    "N Dakota St": {
-      "league": "NCAAB",
-      "team": "N Dakota St",
-      "off_index": 1.0788764044943822,
-      "def_index": 0.9691823899371069,
-      "pace_index": 0.9918181818181818,
-      "sos_index": 1,
-      "form_index": 1.0375745526838966,
-      "ppg": 80.7,
-      "opp_ppg": 76
-    },
     "Wofford": {
       "league": "NCAAB",
       "team": "Wofford",
@@ -4925,6 +4925,17 @@
       "ppg": 73.1,
       "opp_ppg": 70.8
     },
+    "Saint Peter's": {
+      "league": "NCAAB",
+      "team": "Saint Peter's",
+      "off_index": 0.9831460674157304,
+      "def_index": 1.040251572327044,
+      "pace_index": 0.9796969696969697,
+      "sos_index": 1,
+      "form_index": 1.0101391650099403,
+      "ppg": 64.1,
+      "opp_ppg": 66.3
+    },
     "E Michigan": {
       "league": "NCAAB",
       "team": "E Michigan",
@@ -4935,6 +4946,28 @@
       "form_index": 1.0037773359840956,
       "ppg": 73.3,
       "opp_ppg": 77.1
+    },
+    "Niagara": {
+      "league": "NCAAB",
+      "team": "Niagara",
+      "off_index": 1.0047191011235954,
+      "def_index": 0.9905660377358491,
+      "pace_index": 0.9796969696969697,
+      "sos_index": 1,
+      "form_index": 1.0021868787276342,
+      "ppg": 67.4,
+      "opp_ppg": 71.6
+    },
+    "E Carolina": {
+      "league": "NCAAB",
+      "team": "E Carolina",
+      "off_index": 1.0262921348314606,
+      "def_index": 1.0006289308176102,
+      "pace_index": 0.999090909090909,
+      "sos_index": 1,
+      "form_index": 1.0192842942345925,
+      "ppg": 74,
+      "opp_ppg": 73.9
     },
     "Loyola MD": {
       "league": "NCAAB",
@@ -4969,17 +5002,6 @@
       "ppg": 74.4,
       "opp_ppg": 77.5
     },
-    "Southern": {
-      "league": "NCAAB",
-      "team": "Southern",
-      "off_index": 0.9925842696629213,
-      "def_index": 1.0566037735849059,
-      "pace_index": 1.0106060606060607,
-      "sos_index": 1,
-      "form_index": 1.0232604373757455,
-      "ppg": 70.6,
-      "opp_ppg": 69.5
-    },
     "Chattanooga": {
       "league": "NCAAB",
       "team": "Chattanooga",
@@ -4990,17 +5012,6 @@
       "form_index": 1.0399602385685887,
       "ppg": 79.4,
       "opp_ppg": 74.1
-    },
-    "Saint Joseph's": {
-      "league": "NCAAB",
-      "team": "Saint Joseph's",
-      "off_index": 1.029438202247191,
-      "def_index": 1.0528301886792453,
-      "pace_index": 1.0027272727272727,
-      "sos_index": 1,
-      "form_index": 1.0447316103379722,
-      "ppg": 75.1,
-      "opp_ppg": 68.6
     },
     "Bradley": {
       "league": "NCAAB",
@@ -5013,17 +5024,6 @@
       "ppg": 75.4,
       "opp_ppg": 69.3
     },
-    "Niagara": {
-      "league": "NCAAB",
-      "team": "Niagara",
-      "off_index": 1.0047191011235954,
-      "def_index": 0.9905660377358491,
-      "pace_index": 0.9796969696969697,
-      "sos_index": 1,
-      "form_index": 1.0021868787276342,
-      "ppg": 67.4,
-      "opp_ppg": 71.6
-    },
     "Mercer": {
       "league": "NCAAB",
       "team": "Mercer",
@@ -5035,27 +5035,16 @@
       "ppg": 73.7,
       "opp_ppg": 77
     },
-    "Charleston So": {
+    "Boston College": {
       "league": "NCAAB",
-      "team": "Charleston So",
-      "off_index": 0.9907865168539326,
-      "def_index": 0.9742138364779874,
-      "pace_index": 1.01,
+      "team": "Boston College",
+      "off_index": 1.0020224719101123,
+      "def_index": 0.9855345911949686,
+      "pace_index": 1.0003030303030302,
       "sos_index": 1,
-      "form_index": 0.9842942345924454,
-      "ppg": 70.1,
-      "opp_ppg": 78.8
-    },
-    "NC A&T": {
-      "league": "NCAAB",
-      "team": "NC A&T",
-      "off_index": 0.9831460674157304,
-      "def_index": 0.9811320754716981,
-      "pace_index": 1.003939393939394,
-      "sos_index": 1,
-      "form_index": 0.9831013916500995,
-      "ppg": 67.9,
-      "opp_ppg": 76.9
+      "form_index": 0.9974155069582505,
+      "ppg": 70.4,
+      "opp_ppg": 75.8
     },
     "Tennessee St": {
       "league": "NCAAB",
@@ -5068,39 +5057,6 @@
       "ppg": 76.1,
       "opp_ppg": 75.4
     },
-    "Abl Christian": {
-      "league": "NCAAB",
-      "team": "Abl Christian",
-      "off_index": 0.9732584269662922,
-      "def_index": 1.0440251572327044,
-      "pace_index": 1.0112121212121212,
-      "sos_index": 1,
-      "form_index": 1.0053677932405567,
-      "ppg": 67.6,
-      "opp_ppg": 71
-    },
-    "Portland St": {
-      "league": "NCAAB",
-      "team": "Portland St",
-      "off_index": 1.0096629213483146,
-      "def_index": 1.0308176100628932,
-      "pace_index": 1.0015151515151515,
-      "sos_index": 1,
-      "form_index": 1.022465208747515,
-      "ppg": 71.8,
-      "opp_ppg": 70.9
-    },
-    "Saint Peter's": {
-      "league": "NCAAB",
-      "team": "Saint Peter's",
-      "off_index": 0.9831460674157304,
-      "def_index": 1.040251572327044,
-      "pace_index": 0.9796969696969697,
-      "sos_index": 1,
-      "form_index": 1.0101391650099403,
-      "ppg": 64.1,
-      "opp_ppg": 66.3
-    },
     "Utah Tech": {
       "league": "NCAAB",
       "team": "Utah Tech",
@@ -5111,6 +5067,17 @@
       "form_index": 0.9842942345924454,
       "ppg": 68.2,
       "opp_ppg": 76.9
+    },
+    "Idaho St": {
+      "league": "NCAAB",
+      "team": "Idaho St",
+      "off_index": 1.026741573033708,
+      "def_index": 1,
+      "pace_index": 0.9887878787878788,
+      "sos_index": 1,
+      "form_index": 1.0192842942345925,
+      "ppg": 72.2,
+      "opp_ppg": 72.1
     },
     "Campbell": {
       "league": "NCAAB",
@@ -5134,6 +5101,28 @@
       "ppg": 70.9,
       "opp_ppg": 81.3
     },
+    "Southern": {
+      "league": "NCAAB",
+      "team": "Southern",
+      "off_index": 0.9925842696629213,
+      "def_index": 1.0566037735849059,
+      "pace_index": 1.0106060606060607,
+      "sos_index": 1,
+      "form_index": 1.0232604373757455,
+      "ppg": 70.6,
+      "opp_ppg": 69.5
+    },
+    "Le Moyne": {
+      "league": "NCAAB",
+      "team": "Le Moyne",
+      "off_index": 1.0042696629213483,
+      "def_index": 0.9471698113207547,
+      "pace_index": 1.0075757575757576,
+      "sos_index": 1,
+      "form_index": 0.9811133200795229,
+      "ppg": 71.9,
+      "opp_ppg": 81.4
+    },
     "N Texas": {
       "league": "NCAAB",
       "team": "N Texas",
@@ -5145,60 +5134,27 @@
       "ppg": 67.5,
       "opp_ppg": 60.6
     },
-    "Grambling": {
+    "Saint Joseph's": {
       "league": "NCAAB",
-      "team": "Grambling",
-      "off_index": 0.9786516853932584,
-      "def_index": 1.0213836477987424,
-      "pace_index": 0.9857575757575758,
+      "team": "Saint Joseph's",
+      "off_index": 1.029438202247191,
+      "def_index": 1.0528301886792453,
+      "pace_index": 1.0027272727272727,
       "sos_index": 1,
-      "form_index": 0.9994035785288271,
-      "ppg": 64.4,
-      "opp_ppg": 69.3
+      "form_index": 1.0447316103379722,
+      "ppg": 75.1,
+      "opp_ppg": 68.6
     },
-    "Hampton": {
+    "Oakland": {
       "league": "NCAAB",
-      "team": "Hampton",
-      "off_index": 1.012808988764045,
-      "def_index": 1.0075471698113208,
-      "pace_index": 0.9857575757575758,
+      "team": "Oakland",
+      "off_index": 1.0204494382022473,
+      "def_index": 0.9924528301886794,
+      "pace_index": 0.9845454545454545,
       "sos_index": 1,
-      "form_index": 1.0141153081510934,
-      "ppg": 69.6,
-      "opp_ppg": 70.8
-    },
-    "American": {
-      "league": "NCAAB",
-      "team": "American",
-      "off_index": 1.0159550561797754,
-      "def_index": 1.0069182389937108,
-      "pace_index": 0.9718181818181818,
-      "sos_index": 1,
-      "form_index": 1.01610337972167,
-      "ppg": 67.8,
-      "opp_ppg": 68.5
-    },
-    "Rice": {
-      "league": "NCAAB",
-      "team": "Rice",
-      "off_index": 1.0141573033707867,
-      "def_index": 1.0169811320754718,
-      "pace_index": 0.9887878787878788,
-      "sos_index": 1,
-      "form_index": 1.0192842942345925,
-      "ppg": 70.4,
-      "opp_ppg": 70.3
-    },
-    "Lafayette": {
-      "league": "NCAAB",
-      "team": "Lafayette",
-      "off_index": 1.0006741573033708,
-      "def_index": 1.018867924528302,
-      "pace_index": 0.9857575757575758,
-      "sos_index": 1,
-      "form_index": 1.0113320079522863,
-      "ppg": 67.8,
-      "opp_ppg": 69.7
+      "form_index": 1.012127236580517,
+      "ppg": 70.5,
+      "opp_ppg": 72.2
     },
     "Fairfield": {
       "league": "NCAAB",
@@ -5211,27 +5167,38 @@
       "ppg": 66.7,
       "opp_ppg": 73.5
     },
-    "S Utah": {
+    "Navy": {
       "league": "NCAAB",
-      "team": "S Utah",
-      "off_index": 0.9696629213483147,
-      "def_index": 1.0044025157232706,
-      "pace_index": 1.01,
+      "team": "Navy",
+      "off_index": 1.0123595505617977,
+      "def_index": 1.0088050314465409,
+      "pace_index": 0.9887878787878788,
       "sos_index": 1,
-      "form_index": 0.9850894632206759,
-      "ppg": 66.8,
-      "opp_ppg": 75.3
+      "form_index": 1.0145129224652087,
+      "ppg": 70.1,
+      "opp_ppg": 71.2
     },
-    "W Georgia": {
+    "Brown": {
       "league": "NCAAB",
-      "team": "W Georgia",
-      "off_index": 0.9844943820224719,
-      "def_index": 0.959748427672956,
-      "pace_index": 1.0015151515151515,
+      "team": "Brown",
+      "off_index": 1.0078651685393258,
+      "def_index": 1.0176100628930818,
+      "pace_index": 0.9996969696969698,
       "sos_index": 1,
-      "form_index": 0.9751491053677933,
-      "ppg": 67.8,
-      "opp_ppg": 78.8
+      "form_index": 1.014910536779324,
+      "ppg": 71.2,
+      "opp_ppg": 72.2
+    },
+    "Bucknell": {
+      "league": "NCAAB",
+      "team": "Bucknell",
+      "off_index": 1.0146067415730338,
+      "def_index": 1.0245283018867926,
+      "pace_index": 1.0106060606060607,
+      "sos_index": 1,
+      "form_index": 1.0220675944333997,
+      "ppg": 74,
+      "opp_ppg": 73.2
     },
     "Kansas City": {
       "league": "NCAAB",
@@ -5266,16 +5233,16 @@
       "ppg": 76.3,
       "opp_ppg": 82.2
     },
-    "NJIT": {
+    "Purdue FW": {
       "league": "NCAAB",
-      "team": "NJIT",
-      "off_index": 0.9692134831460675,
-      "def_index": 0.9880503144654088,
-      "pace_index": 0.9912121212121212,
+      "team": "Purdue FW",
+      "off_index": 1.0447191011235957,
+      "def_index": 1.0012578616352201,
+      "pace_index": 1.0130303030303032,
       "sos_index": 1,
-      "form_index": 0.9791252485089463,
-      "ppg": 63.9,
-      "opp_ppg": 73.9
+      "form_index": 1.0312127236580517,
+      "ppg": 79.4,
+      "opp_ppg": 76.3
     },
     "Merrimack": {
       "league": "NCAAB",
@@ -5288,16 +5255,71 @@
       "ppg": 65.6,
       "opp_ppg": 64.2
     },
-    "Lamar": {
+    "American": {
       "league": "NCAAB",
-      "team": "Lamar",
-      "off_index": 0.996179775280899,
-      "def_index": 1.0465408805031446,
-      "pace_index": 0.9881818181818182,
+      "team": "American",
+      "off_index": 1.0159550561797754,
+      "def_index": 1.0069182389937108,
+      "pace_index": 0.9718181818181818,
       "sos_index": 1,
-      "form_index": 1.0204771371769383,
-      "ppg": 67.4,
-      "opp_ppg": 67
+      "form_index": 1.01610337972167,
+      "ppg": 67.8,
+      "opp_ppg": 68.5
+    },
+    "Drexel": {
+      "league": "NCAAB",
+      "team": "Drexel",
+      "off_index": 1.0204494382022473,
+      "def_index": 1.0264150943396229,
+      "pace_index": 0.979090909090909,
+      "sos_index": 1,
+      "form_index": 1.0268389662027833,
+      "ppg": 69.6,
+      "opp_ppg": 67.6
+    },
+    "SE Missouri St": {
+      "league": "NCAAB",
+      "team": "SE Missouri St",
+      "off_index": 1.012808988764045,
+      "def_index": 1.0452830188679245,
+      "pace_index": 1.0015151515151515,
+      "sos_index": 1,
+      "form_index": 1.0308151093439364,
+      "ppg": 72.3,
+      "opp_ppg": 69.3
+    },
+    "Evansville": {
+      "league": "NCAAB",
+      "team": "Evansville",
+      "off_index": 0.9791011235955056,
+      "def_index": 1.0075471698113208,
+      "pace_index": 0.9893939393939394,
+      "sos_index": 1,
+      "form_index": 0.9938369781312127,
+      "ppg": 65.1,
+      "opp_ppg": 71.4
+    },
+    "Rice": {
+      "league": "NCAAB",
+      "team": "Rice",
+      "off_index": 1.0141573033707867,
+      "def_index": 1.0169811320754718,
+      "pace_index": 0.9887878787878788,
+      "sos_index": 1,
+      "form_index": 1.0192842942345925,
+      "ppg": 70.4,
+      "opp_ppg": 70.3
+    },
+    "SC Upstate": {
+      "league": "NCAAB",
+      "team": "SC Upstate",
+      "off_index": 0.9867415730337079,
+      "def_index": 0.9465408805031448,
+      "pace_index": 1.0287878787878788,
+      "sos_index": 1,
+      "form_index": 0.9675944333996024,
+      "ppg": 72.6,
+      "opp_ppg": 85.5
     },
     "Texas St": {
       "league": "NCAAB",
@@ -5310,16 +5332,16 @@
       "ppg": 74.7,
       "opp_ppg": 74.5
     },
-    "SC Upstate": {
+    "NW State": {
       "league": "NCAAB",
-      "team": "SC Upstate",
-      "off_index": 0.9867415730337079,
-      "def_index": 0.9465408805031448,
-      "pace_index": 1.0287878787878788,
+      "team": "NW State",
+      "off_index": 0.9934831460674157,
+      "def_index": 1.0113207547169811,
+      "pace_index": 0.9778787878787878,
       "sos_index": 1,
-      "form_index": 0.9675944333996024,
-      "ppg": 72.6,
-      "opp_ppg": 85.5
+      "form_index": 1.004572564612326,
+      "ppg": 65.4,
+      "opp_ppg": 69
     },
     "S Dakota St": {
       "league": "NCAAB",
@@ -5354,49 +5376,16 @@
       "ppg": 66,
       "opp_ppg": 72.2
     },
-    "Oregon": {
+    "Grambling": {
       "league": "NCAAB",
-      "team": "Oregon",
-      "off_index": 1.0361797752808988,
-      "def_index": 1.0364779874213836,
-      "pace_index": 1.0051515151515151,
-      "sos_index": 1,
-      "form_index": 1.0411530815109344,
-      "ppg": 76.5,
-      "opp_ppg": 70.9
-    },
-    "Pepperdine": {
-      "league": "NCAAB",
-      "team": "Pepperdine",
-      "off_index": 1.0069662921348315,
-      "def_index": 0.979874213836478,
-      "pace_index": 1.0045454545454546,
-      "sos_index": 1,
-      "form_index": 0.9974155069582505,
-      "ppg": 71.8,
-      "opp_ppg": 77.2
-    },
-    "Jacksonville": {
-      "league": "NCAAB",
-      "team": "Jacksonville",
-      "off_index": 1.0078651685393258,
+      "team": "Grambling",
+      "off_index": 0.9786516853932584,
       "def_index": 1.0213836477987424,
-      "pace_index": 1.000909090909091,
+      "pace_index": 0.9857575757575758,
       "sos_index": 1,
-      "form_index": 1.0168986083499005,
-      "ppg": 71.4,
-      "opp_ppg": 71.9
-    },
-    "Old Dominion": {
-      "league": "NCAAB",
-      "team": "Old Dominion",
-      "off_index": 0.9925842696629213,
-      "def_index": 0.9968553459119497,
-      "pace_index": 0.9906060606060606,
-      "sos_index": 1,
-      "form_index": 0.9974155069582505,
-      "ppg": 67.4,
-      "opp_ppg": 72.8
+      "form_index": 0.9994035785288271,
+      "ppg": 64.4,
+      "opp_ppg": 69.3
     },
     "William & Mary": {
       "league": "NCAAB",
@@ -5408,6 +5397,17 @@
       "form_index": 1.010934393638171,
       "ppg": 76.5,
       "opp_ppg": 78.5
+    },
+    "UT Arlington": {
+      "league": "NCAAB",
+      "team": "UT Arlington",
+      "off_index": 1.0137078651685394,
+      "def_index": 0.9937106918238995,
+      "pace_index": 1.0051515151515151,
+      "sos_index": 1,
+      "form_index": 1.0081510934393638,
+      "ppg": 73,
+      "opp_ppg": 75.7
     },
     "Mercyhurst": {
       "league": "NCAAB",
@@ -5442,6 +5442,17 @@
       "ppg": 66.6,
       "opp_ppg": 73.3
     },
+    "Lafayette": {
+      "league": "NCAAB",
+      "team": "Lafayette",
+      "off_index": 1.0006741573033708,
+      "def_index": 1.018867924528302,
+      "pace_index": 0.9857575757575758,
+      "sos_index": 1,
+      "form_index": 1.0113320079522863,
+      "ppg": 67.8,
+      "opp_ppg": 69.7
+    },
     "VMI": {
       "league": "NCAAB",
       "team": "VMI",
@@ -5453,38 +5464,16 @@
       "ppg": 69.1,
       "opp_ppg": 75.5
     },
-    "Radford": {
+    "W Georgia": {
       "league": "NCAAB",
-      "team": "Radford",
-      "off_index": 1.0393258426966292,
-      "def_index": 0.988679245283019,
-      "pace_index": 0.9754545454545455,
-      "sos_index": 1,
-      "form_index": 1.0216699801192843,
-      "ppg": 71.7,
-      "opp_ppg": 71
-    },
-    "SE Missouri St": {
-      "league": "NCAAB",
-      "team": "SE Missouri St",
-      "off_index": 1.012808988764045,
-      "def_index": 1.0452830188679245,
+      "team": "W Georgia",
+      "off_index": 0.9844943820224719,
+      "def_index": 0.959748427672956,
       "pace_index": 1.0015151515151515,
       "sos_index": 1,
-      "form_index": 1.0308151093439364,
-      "ppg": 72.3,
-      "opp_ppg": 69.3
-    },
-    "NW State": {
-      "league": "NCAAB",
-      "team": "NW State",
-      "off_index": 0.9934831460674157,
-      "def_index": 1.0113207547169811,
-      "pace_index": 0.9778787878787878,
-      "sos_index": 1,
-      "form_index": 1.004572564612326,
-      "ppg": 65.4,
-      "opp_ppg": 69
+      "form_index": 0.9751491053677933,
+      "ppg": 67.8,
+      "opp_ppg": 78.8
     },
     "Lipscomb": {
       "league": "NCAAB",
@@ -5508,38 +5497,16 @@
       "ppg": 57.5,
       "opp_ppg": 63
     },
-    "Holy Cross": {
+    "CS Bakersfield": {
       "league": "NCAAB",
-      "team": "Holy Cross",
-      "off_index": 1.0078651685393258,
-      "def_index": 0.9779874213836478,
-      "pace_index": 0.9839393939393939,
+      "team": "CS Bakersfield",
+      "off_index": 1.0146067415730338,
+      "def_index": 0.9830188679245283,
+      "pace_index": 0.9954545454545455,
       "sos_index": 1,
-      "form_index": 0.9986083499005964,
-      "ppg": 68.6,
-      "opp_ppg": 73.7
-    },
-    "Brown": {
-      "league": "NCAAB",
-      "team": "Brown",
-      "off_index": 1.0078651685393258,
-      "def_index": 1.0176100628930818,
-      "pace_index": 0.9996969696969698,
-      "sos_index": 1,
-      "form_index": 1.014910536779324,
-      "ppg": 71.2,
-      "opp_ppg": 72.2
-    },
-    "Le Moyne": {
-      "league": "NCAAB",
-      "team": "Le Moyne",
-      "off_index": 1.0042696629213483,
-      "def_index": 0.9471698113207547,
-      "pace_index": 1.0075757575757576,
-      "sos_index": 1,
-      "form_index": 0.9811133200795229,
-      "ppg": 71.9,
-      "opp_ppg": 81.4
+      "form_index": 1.0041749502982107,
+      "ppg": 71.5,
+      "opp_ppg": 75.2
     },
     "Sacred Heart": {
       "league": "NCAAB",
@@ -5552,27 +5519,16 @@
       "ppg": 75.1,
       "opp_ppg": 75.7
     },
-    "Detroit Mercy": {
+    "Sacramento St": {
       "league": "NCAAB",
-      "team": "Detroit Mercy",
-      "off_index": 0.9746067415730337,
-      "def_index": 0.979874213836478,
-      "pace_index": 1.0015151515151515,
+      "team": "Sacramento St",
+      "off_index": 0.9773033707865169,
+      "def_index": 0.9742138364779874,
+      "pace_index": 0.9803030303030302,
       "sos_index": 1,
-      "form_index": 0.9779324055666004,
-      "ppg": 66.3,
-      "opp_ppg": 76.6
-    },
-    "Xavier": {
-      "league": "NCAAB",
-      "team": "Xavier",
-      "off_index": 1.043370786516854,
-      "def_index": 1.0333333333333334,
-      "pace_index": 1.006969696969697,
-      "sos_index": 1,
-      "form_index": 1.0447316103379722,
-      "ppg": 78.1,
-      "opp_ppg": 71.6
+      "form_index": 0.978727634194831,
+      "ppg": 63.3,
+      "opp_ppg": 73.4
     },
     "Presbyterian": {
       "league": "NCAAB",
@@ -5585,27 +5541,16 @@
       "ppg": 70.5,
       "opp_ppg": 72.9
     },
-    "Drexel": {
+    "Old Dominion": {
       "league": "NCAAB",
-      "team": "Drexel",
-      "off_index": 1.0204494382022473,
-      "def_index": 1.0264150943396229,
-      "pace_index": 0.979090909090909,
+      "team": "Old Dominion",
+      "off_index": 0.9925842696629213,
+      "def_index": 0.9968553459119497,
+      "pace_index": 0.9906060606060606,
       "sos_index": 1,
-      "form_index": 1.0268389662027833,
-      "ppg": 69.6,
-      "opp_ppg": 67.6
-    },
-    "Louisiana": {
-      "league": "NCAAB",
-      "team": "Louisiana",
-      "off_index": 0.9773033707865169,
-      "def_index": 0.9918238993710692,
-      "pace_index": 0.99,
-      "sos_index": 1,
-      "form_index": 0.9854870775347914,
-      "ppg": 64.9,
-      "opp_ppg": 73.3
+      "form_index": 0.9974155069582505,
+      "ppg": 67.4,
+      "opp_ppg": 72.8
     },
     "Florida Intl": {
       "league": "NCAAB",
@@ -5618,6 +5563,17 @@
       "ppg": 67.9,
       "opp_ppg": 73
     },
+    "Hampton": {
+      "league": "NCAAB",
+      "team": "Hampton",
+      "off_index": 1.012808988764045,
+      "def_index": 1.0075471698113208,
+      "pace_index": 0.9857575757575758,
+      "sos_index": 1,
+      "form_index": 1.0141153081510934,
+      "ppg": 69.6,
+      "opp_ppg": 70.8
+    },
     "Hou Christian": {
       "league": "NCAAB",
       "team": "Hou Christian",
@@ -5628,6 +5584,39 @@
       "form_index": 0.9982107355864811,
       "ppg": 64.7,
       "opp_ppg": 69.9
+    },
+    "Little Rock": {
+      "league": "NCAAB",
+      "team": "Little Rock",
+      "off_index": 0.9912359550561798,
+      "def_index": 1.0559748427672957,
+      "pace_index": 0.999090909090909,
+      "sos_index": 1,
+      "form_index": 1.0220675944333997,
+      "ppg": 68.5,
+      "opp_ppg": 67.7
+    },
+    "UC Riverside": {
+      "league": "NCAAB",
+      "team": "UC Riverside",
+      "off_index": 1.0217977528089888,
+      "def_index": 0.9899371069182391,
+      "pace_index": 1.0063636363636363,
+      "sos_index": 1,
+      "form_index": 1.0113320079522863,
+      "ppg": 74.5,
+      "opp_ppg": 76.4
+    },
+    "Louisiana": {
+      "league": "NCAAB",
+      "team": "Louisiana",
+      "off_index": 0.9773033707865169,
+      "def_index": 0.9918238993710692,
+      "pace_index": 0.99,
+      "sos_index": 1,
+      "form_index": 0.9854870775347914,
+      "ppg": 64.9,
+      "opp_ppg": 73.3
     },
     "Valparaiso": {
       "league": "NCAAB",
@@ -5662,16 +5651,71 @@
       "ppg": 73.8,
       "opp_ppg": 75.3
     },
-    "UL Monroe": {
+    "SIU Edward": {
       "league": "NCAAB",
-      "team": "UL Monroe",
-      "off_index": 0.9768539325842697,
-      "def_index": 0.9723270440251572,
-      "pace_index": 0.9984848484848485,
+      "team": "SIU Edward",
+      "off_index": 1.0015730337078652,
+      "def_index": 1.0465408805031446,
+      "pace_index": 0.996060606060606,
       "sos_index": 1,
-      "form_index": 0.9759443339960239,
-      "ppg": 66.1,
-      "opp_ppg": 76.9
+      "form_index": 1.0240556660039761,
+      "ppg": 69.6,
+      "opp_ppg": 68.3
+    },
+    "Jacksonville": {
+      "league": "NCAAB",
+      "team": "Jacksonville",
+      "off_index": 1.0078651685393258,
+      "def_index": 1.0213836477987424,
+      "pace_index": 1.000909090909091,
+      "sos_index": 1,
+      "form_index": 1.0168986083499005,
+      "ppg": 71.4,
+      "opp_ppg": 71.9
+    },
+    "Towson": {
+      "league": "NCAAB",
+      "team": "Towson",
+      "off_index": 1.0217977528089888,
+      "def_index": 1.0220125786163523,
+      "pace_index": 0.9766666666666667,
+      "sos_index": 1,
+      "form_index": 1.0256461232604375,
+      "ppg": 69.4,
+      "opp_ppg": 67.7
+    },
+    "Detroit Mercy": {
+      "league": "NCAAB",
+      "team": "Detroit Mercy",
+      "off_index": 0.9746067415730337,
+      "def_index": 0.979874213836478,
+      "pace_index": 1.0015151515151515,
+      "sos_index": 1,
+      "form_index": 0.9779324055666004,
+      "ppg": 66.3,
+      "opp_ppg": 76.6
+    },
+    "Alcorn St": {
+      "league": "NCAAB",
+      "team": "Alcorn St",
+      "off_index": 0.9840449438202248,
+      "def_index": 0.9937106918238995,
+      "pace_index": 0.9863636363636363,
+      "sos_index": 1,
+      "form_index": 0.9906560636182903,
+      "ppg": 65.3,
+      "opp_ppg": 72.4
+    },
+    "Radford": {
+      "league": "NCAAB",
+      "team": "Radford",
+      "off_index": 1.0393258426966292,
+      "def_index": 0.988679245283019,
+      "pace_index": 0.9754545454545455,
+      "sos_index": 1,
+      "form_index": 1.0216699801192843,
+      "ppg": 71.7,
+      "opp_ppg": 71
     },
     "E Kentucky": {
       "league": "NCAAB",
@@ -5683,39 +5727,6 @@
       "form_index": 1.021272365805169,
       "ppg": 76.5,
       "opp_ppg": 75.9
-    },
-    "Purdue FW": {
-      "league": "NCAAB",
-      "team": "Purdue FW",
-      "off_index": 1.0447191011235957,
-      "def_index": 1.0012578616352201,
-      "pace_index": 1.0130303030303032,
-      "sos_index": 1,
-      "form_index": 1.0312127236580517,
-      "ppg": 79.4,
-      "opp_ppg": 76.3
-    },
-    "Tenn Tech": {
-      "league": "NCAAB",
-      "team": "Tenn Tech",
-      "off_index": 1.001123595505618,
-      "def_index": 1.0062893081761006,
-      "pace_index": 1.003939393939394,
-      "sos_index": 1,
-      "form_index": 1.005765407554672,
-      "ppg": 70.8,
-      "opp_ppg": 74.1
-    },
-    "Oakland": {
-      "league": "NCAAB",
-      "team": "Oakland",
-      "off_index": 1.0204494382022473,
-      "def_index": 0.9924528301886794,
-      "pace_index": 0.9845454545454545,
-      "sos_index": 1,
-      "form_index": 1.012127236580517,
-      "ppg": 70.5,
-      "opp_ppg": 72.2
     },
     "Marist": {
       "league": "NCAAB",
@@ -5750,6 +5761,17 @@
       "ppg": 75.8,
       "opp_ppg": 67.4
     },
+    "UL Monroe": {
+      "league": "NCAAB",
+      "team": "UL Monroe",
+      "off_index": 0.9768539325842697,
+      "def_index": 0.9723270440251572,
+      "pace_index": 0.9984848484848485,
+      "sos_index": 1,
+      "form_index": 0.9759443339960239,
+      "ppg": 66.1,
+      "opp_ppg": 76.9
+    },
     "Cal Poly": {
       "league": "NCAAB",
       "team": "Cal Poly",
@@ -5761,27 +5783,27 @@
       "ppg": 81.6,
       "opp_ppg": 83.4
     },
-    "Georgia Tech": {
+    "Holy Cross": {
       "league": "NCAAB",
-      "team": "Georgia Tech",
-      "off_index": 1.010112359550562,
-      "def_index": 1.0264150943396229,
-      "pace_index": 1.0087878787878788,
+      "team": "Holy Cross",
+      "off_index": 1.0078651685393258,
+      "def_index": 0.9779874213836478,
+      "pace_index": 0.9839393939393939,
       "sos_index": 1,
-      "form_index": 1.0204771371769383,
-      "ppg": 73.1,
-      "opp_ppg": 72.7
+      "form_index": 0.9986083499005964,
+      "ppg": 68.6,
+      "opp_ppg": 73.7
     },
-    "CS Bakersfield": {
+    "Austin Peay": {
       "league": "NCAAB",
-      "team": "CS Bakersfield",
-      "off_index": 1.0146067415730338,
-      "def_index": 0.9830188679245283,
+      "team": "Austin Peay",
+      "off_index": 1.0051685393258427,
+      "def_index": 0.9773584905660377,
       "pace_index": 0.9954545454545455,
       "sos_index": 1,
-      "form_index": 1.0041749502982107,
-      "ppg": 71.5,
-      "opp_ppg": 75.2
+      "form_index": 0.9962226640159046,
+      "ppg": 70.1,
+      "opp_ppg": 75.8
     },
     "Quinnipiac": {
       "league": "NCAAB",
@@ -5805,49 +5827,16 @@
       "ppg": 69.9,
       "opp_ppg": 80.6
     },
-    "Austin Peay": {
+    "Georgia Tech": {
       "league": "NCAAB",
-      "team": "Austin Peay",
-      "off_index": 1.0051685393258427,
-      "def_index": 0.9773584905660377,
-      "pace_index": 0.9954545454545455,
+      "team": "Georgia Tech",
+      "off_index": 1.010112359550562,
+      "def_index": 1.0264150943396229,
+      "pace_index": 1.0087878787878788,
       "sos_index": 1,
-      "form_index": 0.9962226640159046,
-      "ppg": 70.1,
-      "opp_ppg": 75.8
-    },
-    "Canisius": {
-      "league": "NCAAB",
-      "team": "Canisius",
-      "off_index": 0.9831460674157304,
-      "def_index": 0.9320754716981132,
-      "pace_index": 0.9839393939393939,
-      "sos_index": 1,
-      "form_index": 0.9640159045725647,
-      "ppg": 64.8,
-      "opp_ppg": 78.6
-    },
-    "Gardner-Webb": {
-      "league": "NCAAB",
-      "team": "Gardner-Webb",
-      "off_index": 1.013258426966292,
-      "def_index": 0.979874213836478,
-      "pace_index": 1.01,
-      "sos_index": 1,
-      "form_index": 1.001789264413519,
-      "ppg": 73.8,
-      "opp_ppg": 78.1
-    },
-    "Little Rock": {
-      "league": "NCAAB",
-      "team": "Little Rock",
-      "off_index": 0.9912359550561798,
-      "def_index": 1.0559748427672957,
-      "pace_index": 0.999090909090909,
-      "sos_index": 1,
-      "form_index": 1.0220675944333997,
-      "ppg": 68.5,
-      "opp_ppg": 67.7
+      "form_index": 1.0204771371769383,
+      "ppg": 73.1,
+      "opp_ppg": 72.7
     },
     "Alabama A&M": {
       "league": "NCAAB",
@@ -5871,27 +5860,16 @@
       "ppg": 70.4,
       "opp_ppg": 67.3
     },
-    "SIU Edward": {
+    "Alabama St": {
       "league": "NCAAB",
-      "team": "SIU Edward",
-      "off_index": 1.0015730337078652,
-      "def_index": 1.0465408805031446,
-      "pace_index": 0.996060606060606,
-      "sos_index": 1,
-      "form_index": 1.0240556660039761,
-      "ppg": 69.6,
-      "opp_ppg": 68.3
-    },
-    "Chicago St": {
-      "league": "NCAAB",
-      "team": "Chicago St",
-      "off_index": 0.9467415730337079,
-      "def_index": 0.9685534591194969,
+      "team": "Alabama St",
+      "off_index": 1.0056179775280898,
+      "def_index": 1.0220125786163523,
       "pace_index": 1.0057575757575759,
       "sos_index": 1,
-      "form_index": 0.9544731610337972,
-      "ppg": 62.5,
-      "opp_ppg": 78.7
+      "form_index": 1.0157057654075548,
+      "ppg": 71.9,
+      "opp_ppg": 72.7
     },
     "Binghamton": {
       "league": "NCAAB",
@@ -5904,27 +5882,27 @@
       "ppg": 68.6,
       "opp_ppg": 73
     },
-    "Alabama St": {
+    "Abl Christian": {
       "league": "NCAAB",
-      "team": "Alabama St",
-      "off_index": 1.0056179775280898,
-      "def_index": 1.0220125786163523,
-      "pace_index": 1.0057575757575759,
+      "team": "Abl Christian",
+      "off_index": 0.9732584269662922,
+      "def_index": 1.0440251572327044,
+      "pace_index": 1.0112121212121212,
       "sos_index": 1,
-      "form_index": 1.0157057654075548,
-      "ppg": 71.9,
-      "opp_ppg": 72.7
+      "form_index": 1.0053677932405567,
+      "ppg": 67.6,
+      "opp_ppg": 71
     },
-    "Evansville": {
+    "Monmouth": {
       "league": "NCAAB",
-      "team": "Evansville",
-      "off_index": 0.9791011235955056,
-      "def_index": 1.0075471698113208,
-      "pace_index": 0.9893939393939394,
+      "team": "Monmouth",
+      "off_index": 1.0056179775280898,
+      "def_index": 0.9836477987421385,
+      "pace_index": 0.9966666666666667,
       "sos_index": 1,
-      "form_index": 0.9938369781312127,
-      "ppg": 65.1,
-      "opp_ppg": 71.4
+      "form_index": 0.9986083499005964,
+      "ppg": 70.3,
+      "opp_ppg": 75.4
     },
     "Portland": {
       "league": "NCAAB",
@@ -5948,27 +5926,27 @@
       "ppg": 79,
       "opp_ppg": 81.5
     },
-    "Princeton": {
+    "Tenn Tech": {
       "league": "NCAAB",
-      "team": "Princeton",
-      "off_index": 1.019550561797753,
+      "team": "Tenn Tech",
+      "off_index": 1.001123595505618,
       "def_index": 1.0062893081761006,
-      "pace_index": 0.9942424242424243,
+      "pace_index": 1.003939393939394,
       "sos_index": 1,
-      "form_index": 1.0176938369781312,
-      "ppg": 72.1,
-      "opp_ppg": 72.4
+      "form_index": 1.005765407554672,
+      "ppg": 70.8,
+      "opp_ppg": 74.1
     },
-    "AR-Pine Bluff": {
+    "Lehigh": {
       "league": "NCAAB",
-      "team": "AR-Pine Bluff",
-      "off_index": 0.9755056179775281,
-      "def_index": 0.9358490566037736,
-      "pace_index": 1.0227272727272727,
+      "team": "Lehigh",
+      "off_index": 1.0006741573033708,
+      "def_index": 1.0031446540880504,
+      "pace_index": 0.9912121212121212,
       "sos_index": 1,
-      "form_index": 0.9556660039761431,
-      "ppg": 69.8,
-      "opp_ppg": 85.7
+      "form_index": 1.004572564612326,
+      "ppg": 68.7,
+      "opp_ppg": 72.3
     },
     "F Dickinson": {
       "league": "NCAAB",
@@ -5980,6 +5958,17 @@
       "form_index": 1.0033797216699802,
       "ppg": 70.5,
       "opp_ppg": 74.4
+    },
+    "NJIT": {
+      "league": "NCAAB",
+      "team": "NJIT",
+      "off_index": 0.9692134831460675,
+      "def_index": 0.9880503144654088,
+      "pace_index": 0.9912121212121212,
+      "sos_index": 1,
+      "form_index": 0.9791252485089463,
+      "ppg": 63.9,
+      "opp_ppg": 73.9
     },
     "CS Fullerton": {
       "league": "NCAAB",
@@ -6003,16 +5992,27 @@
       "ppg": 63.7,
       "opp_ppg": 69.8
     },
-    "Alcorn St": {
+    "Princeton": {
       "league": "NCAAB",
-      "team": "Alcorn St",
-      "off_index": 0.9840449438202248,
-      "def_index": 0.9937106918238995,
-      "pace_index": 0.9863636363636363,
+      "team": "Princeton",
+      "off_index": 1.019550561797753,
+      "def_index": 1.0062893081761006,
+      "pace_index": 0.9942424242424243,
       "sos_index": 1,
-      "form_index": 0.9906560636182903,
-      "ppg": 65.3,
+      "form_index": 1.0176938369781312,
+      "ppg": 72.1,
       "opp_ppg": 72.4
+    },
+    "Chicago St": {
+      "league": "NCAAB",
+      "team": "Chicago St",
+      "off_index": 0.9467415730337079,
+      "def_index": 0.9685534591194969,
+      "pace_index": 1.0057575757575759,
+      "sos_index": 1,
+      "form_index": 0.9544731610337972,
+      "ppg": 62.5,
+      "opp_ppg": 78.7
     },
     "Texas So": {
       "league": "NCAAB",
@@ -6046,6 +6046,17 @@
       "form_index": 0.9719681908548707,
       "ppg": 61.9,
       "opp_ppg": 73.7
+    },
+    "Army": {
+      "league": "NCAAB",
+      "team": "Army",
+      "off_index": 1.008314606741573,
+      "def_index": 0.9823899371069184,
+      "pace_index": 1.0027272727272727,
+      "sos_index": 1,
+      "form_index": 0.9998011928429424,
+      "ppg": 71.7,
+      "opp_ppg": 76.5
     },
     "Lindenwood": {
       "league": "NCAAB",
@@ -6091,6 +6102,17 @@
       "ppg": 69.3,
       "opp_ppg": 70.7
     },
+    "Gardner-Webb": {
+      "league": "NCAAB",
+      "team": "Gardner-Webb",
+      "off_index": 1.013258426966292,
+      "def_index": 0.979874213836478,
+      "pace_index": 1.01,
+      "sos_index": 1,
+      "form_index": 1.001789264413519,
+      "ppg": 73.8,
+      "opp_ppg": 78.1
+    },
     "UMass Lowell": {
       "league": "NCAAB",
       "team": "UMass Lowell",
@@ -6101,17 +6123,6 @@
       "form_index": 1.0188866799204772,
       "ppg": 76.1,
       "opp_ppg": 76.1
-    },
-    "Army": {
-      "league": "NCAAB",
-      "team": "Army",
-      "off_index": 1.008314606741573,
-      "def_index": 0.9823899371069184,
-      "pace_index": 1.0027272727272727,
-      "sos_index": 1,
-      "form_index": 0.9998011928429424,
-      "ppg": 71.7,
-      "opp_ppg": 76.5
     },
     "Nicholls": {
       "league": "NCAAB",
@@ -6124,27 +6135,38 @@
       "ppg": 72,
       "opp_ppg": 71.7
     },
-    "New Haven": {
+    "AR-Pine Bluff": {
       "league": "NCAAB",
-      "team": "New Haven",
-      "off_index": 0.9719101123595506,
-      "def_index": 0.9937106918238995,
-      "pace_index": 0.9893939393939394,
+      "team": "AR-Pine Bluff",
+      "off_index": 0.9755056179775281,
+      "def_index": 0.9358490566037736,
+      "pace_index": 1.0227272727272727,
       "sos_index": 1,
-      "form_index": 0.9831013916500995,
-      "ppg": 64,
-      "opp_ppg": 73
+      "form_index": 0.9556660039761431,
+      "ppg": 69.8,
+      "opp_ppg": 85.7
     },
-    "Stonehill": {
+    "S Utah": {
       "league": "NCAAB",
-      "team": "Stonehill",
-      "off_index": 1.003820224719101,
-      "def_index": 0.9974842767295599,
-      "pace_index": 0.9803030303030302,
+      "team": "S Utah",
+      "off_index": 0.9696629213483147,
+      "def_index": 1.0044025157232706,
+      "pace_index": 1.01,
       "sos_index": 1,
-      "form_index": 1.004572564612326,
-      "ppg": 67.3,
-      "opp_ppg": 70.9
+      "form_index": 0.9850894632206759,
+      "ppg": 66.8,
+      "opp_ppg": 75.3
+    },
+    "Canisius": {
+      "league": "NCAAB",
+      "team": "Canisius",
+      "off_index": 0.9831460674157304,
+      "def_index": 0.9320754716981132,
+      "pace_index": 0.9839393939393939,
+      "sos_index": 1,
+      "form_index": 0.9640159045725647,
+      "ppg": 64.8,
+      "opp_ppg": 78.6
     },
     "Louisiana Tech": {
       "league": "NCAAB",
@@ -6190,17 +6212,6 @@
       "ppg": 74.7,
       "opp_ppg": 71.8
     },
-    "St Francis PA": {
-      "league": "NCAAB",
-      "team": "St Francis PA",
-      "off_index": 0.9943820224719101,
-      "def_index": 0.9962264150943397,
-      "pace_index": 0.993030303030303,
-      "sos_index": 1,
-      "form_index": 0.9974155069582505,
-      "ppg": 68,
-      "opp_ppg": 73.4
-    },
     "E Illinois": {
       "league": "NCAAB",
       "team": "E Illinois",
@@ -6211,6 +6222,17 @@
       "form_index": 0.9918489065606362,
       "ppg": 63.5,
       "opp_ppg": 70.3
+    },
+    "Stonehill": {
+      "league": "NCAAB",
+      "team": "Stonehill",
+      "off_index": 1.003820224719101,
+      "def_index": 0.9974842767295599,
+      "pace_index": 0.9803030303030302,
+      "sos_index": 1,
+      "form_index": 1.004572564612326,
+      "ppg": 67.3,
+      "opp_ppg": 70.9
     },
     "NC Central": {
       "league": "NCAAB",
@@ -6223,17 +6245,6 @@
       "ppg": 74,
       "opp_ppg": 78.8
     },
-    "Monmouth": {
-      "league": "NCAAB",
-      "team": "Monmouth",
-      "off_index": 1.0056179775280898,
-      "def_index": 0.9836477987421385,
-      "pace_index": 0.9966666666666667,
-      "sos_index": 1,
-      "form_index": 0.9986083499005964,
-      "ppg": 70.3,
-      "opp_ppg": 75.4
-    },
     "N Arizona": {
       "league": "NCAAB",
       "team": "N Arizona",
@@ -6245,16 +6256,16 @@
       "ppg": 72.5,
       "opp_ppg": 73.3
     },
-    "Lehigh": {
+    "St Francis PA": {
       "league": "NCAAB",
-      "team": "Lehigh",
-      "off_index": 1.0006741573033708,
-      "def_index": 1.0031446540880504,
-      "pace_index": 0.9912121212121212,
+      "team": "St Francis PA",
+      "off_index": 0.9943820224719101,
+      "def_index": 0.9962264150943397,
+      "pace_index": 0.993030303030303,
       "sos_index": 1,
-      "form_index": 1.004572564612326,
-      "ppg": 68.7,
-      "opp_ppg": 72.3
+      "form_index": 0.9974155069582505,
+      "ppg": 68,
+      "opp_ppg": 73.4
     },
     "S Indiana": {
       "league": "NCAAB",
@@ -6311,16 +6322,27 @@
       "ppg": 71.2,
       "opp_ppg": 70.6
     },
-    "UT Arlington": {
+    "New Haven": {
       "league": "NCAAB",
-      "team": "UT Arlington",
-      "off_index": 1.0137078651685394,
-      "def_index": 0.9937106918238995,
-      "pace_index": 1.0051515151515151,
+      "team": "New Haven",
+      "off_index": 0.9413483146067416,
+      "def_index": 0.9899371069182391,
+      "pace_index": 0.9778787878787878,
       "sos_index": 1,
-      "form_index": 1.0081510934393638,
-      "ppg": 73,
-      "opp_ppg": 75.7
+      "form_index": 0.9648111332007953,
+      "ppg": 57.7,
+      "opp_ppg": 71.3
+    },
+    "Prairie View": {
+      "league": "NCAAB",
+      "team": "Prairie View",
+      "off_index": 0.9853932584269663,
+      "def_index": 0.9534591194968554,
+      "pace_index": 1.0154545454545454,
+      "sos_index": 1,
+      "form_index": 0.9711729622266402,
+      "ppg": 70.2,
+      "opp_ppg": 82.2
     },
     "Coppin St": {
       "league": "NCAAB",
@@ -6333,16 +6355,16 @@
       "ppg": 61.3,
       "opp_ppg": 76.9
     },
-    "Towson": {
+    "Georgia St": {
       "league": "NCAAB",
-      "team": "Towson",
-      "off_index": 1.0217977528089888,
-      "def_index": 1.0220125786163523,
-      "pace_index": 0.9766666666666667,
+      "team": "Georgia St",
+      "off_index": 1.017303370786517,
+      "def_index": 0.9729559748427673,
+      "pace_index": 1.008181818181818,
       "sos_index": 1,
-      "form_index": 1.0256461232604375,
-      "ppg": 69.4,
-      "opp_ppg": 67.7
+      "form_index": 1.0009940357852882,
+      "ppg": 74.2,
+      "opp_ppg": 78.7
     },
     "Maine": {
       "league": "NCAAB",
@@ -6365,28 +6387,6 @@
       "form_index": 0.9652087475149106,
       "ppg": 67.1,
       "opp_ppg": 80.6
-    },
-    "Florida A&M": {
-      "league": "NCAAB",
-      "team": "Florida A&M",
-      "off_index": 0.9930337078651685,
-      "def_index": 0.980503144654088,
-      "pace_index": 0.999090909090909,
-      "sos_index": 1,
-      "form_index": 0.9898608349900597,
-      "ppg": 68.8,
-      "opp_ppg": 76.1
-    },
-    "Georgia St": {
-      "league": "NCAAB",
-      "team": "Georgia St",
-      "off_index": 1.017303370786517,
-      "def_index": 0.9729559748427673,
-      "pace_index": 1.008181818181818,
-      "sos_index": 1,
-      "form_index": 1.0009940357852882,
-      "ppg": 74.2,
-      "opp_ppg": 78.7
     },
     "N Kentucky": {
       "league": "NCAAB",
@@ -6432,6 +6432,17 @@
       "ppg": 68.5,
       "opp_ppg": 79.4
     },
+    "Rider": {
+      "league": "NCAAB",
+      "team": "Rider",
+      "off_index": 1.0029213483146067,
+      "def_index": 0.9874213836477989,
+      "pace_index": 0.979090909090909,
+      "sos_index": 1,
+      "form_index": 0.9998011928429424,
+      "ppg": 67,
+      "opp_ppg": 71.8
+    },
     "Delaware St": {
       "league": "NCAAB",
       "team": "Delaware St",
@@ -6454,16 +6465,27 @@
       "ppg": 71.1,
       "opp_ppg": 72.1
     },
-    "Prairie View": {
+    "Florida A&M": {
       "league": "NCAAB",
-      "team": "Prairie View",
-      "off_index": 0.9853932584269663,
-      "def_index": 0.9534591194968554,
-      "pace_index": 1.0154545454545454,
+      "team": "Florida A&M",
+      "off_index": 0.9930337078651685,
+      "def_index": 0.980503144654088,
+      "pace_index": 0.999090909090909,
       "sos_index": 1,
-      "form_index": 0.9711729622266402,
-      "ppg": 70.2,
-      "opp_ppg": 82.2
+      "form_index": 0.9898608349900597,
+      "ppg": 68.8,
+      "opp_ppg": 76.1
+    },
+    "New Hampshire": {
+      "league": "NCAAB",
+      "team": "New Hampshire",
+      "off_index": 0.9665168539325844,
+      "def_index": 0.9735849056603774,
+      "pace_index": 1.000909090909091,
+      "sos_index": 1,
+      "form_index": 0.9699801192842943,
+      "ppg": 64.9,
+      "opp_ppg": 77.2
     },
     "Albany": {
       "league": "NCAAB",
@@ -6497,28 +6519,6 @@
       "form_index": 1.036779324055666,
       "ppg": 76,
       "opp_ppg": 71.5
-    },
-    "Rider": {
-      "league": "NCAAB",
-      "team": "Rider",
-      "off_index": 1.0029213483146067,
-      "def_index": 0.9874213836477989,
-      "pace_index": 0.979090909090909,
-      "sos_index": 1,
-      "form_index": 0.9998011928429424,
-      "ppg": 67,
-      "opp_ppg": 71.8
-    },
-    "New Hampshire": {
-      "league": "NCAAB",
-      "team": "New Hampshire",
-      "off_index": 0.9665168539325844,
-      "def_index": 0.9735849056603774,
-      "pace_index": 1.000909090909091,
-      "sos_index": 1,
-      "form_index": 0.9699801192842943,
-      "ppg": 64.9,
-      "opp_ppg": 77.2
     },
     "Maryland ES": {
       "league": "NCAAB",

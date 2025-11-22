@@ -1,20 +1,16 @@
 // netlify/functions/scheduler.js
-const { exec } = require("child_process");
+const { execSync } = require('child_process');
 
 exports.handler = async () => {
-  return new Promise((resolve) => {
-    exec("node scripts/scraper.js", (err, stdout, stderr) => {
-      if (err) {
-        resolve({
-          statusCode: 500,
-          body: "Scraper failed: " + err
-        });
-      }
-
-      resolve({
-        statusCode: 200,
-        body: "Scraper executed successfully.\n" + stdout
-      });
-    });
-  });
+  try {
+    console.log('Running scraper at', new Date().toISOString());
+    execSync('node scraper.js', { stdio: 'inherit' });
+    return {
+      statusCode: 200,
+      body: 'Data updated successfully'
+    };
+  } catch (err) {
+    console.error(err);
+    return { statusCode: 500, body: 'Scrape failed' };
+  }
 };

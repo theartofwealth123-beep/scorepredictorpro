@@ -1,8 +1,17 @@
 [build]
+  publish = "."
   functions = "netlify/functions"
 
-[[scheduled]]
-  name = "update-stats"
-  description = "Scrape stats every 12 hours"
-  cron = "0 */12 * * *"
-  path = "/.netlify/functions/scheduler"
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["jstat", "twitter-api-v2"]
+
+# Scheduled scraper — every 12 hours
+[[functions.schedule]]
+  function = "scheduler"
+  schedule = "0 */12 * * *"
