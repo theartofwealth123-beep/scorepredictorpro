@@ -23,13 +23,13 @@
 <body>
 <body>
   <div class="container">
-    <header>
-      <h1>Elite Sports Predictor</h1>
-      <p>50,000-sim Monte Carlo + Vegas edge detection • All 5 leagues</p>
-      <div id="auth-buttons">
-        <button id="login-btn" class="btn-primary">Login / Sign Up</button>
-      </div>
-    </header>
+  <header>
+  <h1>ScorePredictor Pro</h1>
+  <p>Advanced sports prediction engine</p>
+  <div id="auth-buttons">
+    <button id="login-btn" class="btn-primary">Login / Sign Up</button>
+  </div>
+</header>
 
     <!-- Logged In Profile -->
     <div id="profile-section" class="card">
@@ -66,144 +66,45 @@
     <div id="login-section" class="loading">Checking login status...</div>
   </div>
 
-  <script>
-    const stripe = Stripe(import.meta.env?.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_xxx');
+   <script>
+  // ← REPLACE YOUR ENTIRE <script> TAG WITH THIS ONE
+  const config = {
+    domain: typeof import !== 'undefined' && import.meta?.env?.VITE_AUTH0_DOMAIN || 
+            process.env.AUTH0_DOMAIN || 'dev-YOURDOMAIN.us.auth0.com',
+    clientId: typeof import !== 'undefined' && import.meta?.env?.VITE_AUTH0_CLIENT_ID || 
+              process.env.AUTH0_CLIENT_ID || 'YOUR_CLIENT_ID_HERE',
+    authorizationParams: {
+      redirect_uri: window.location.origin,
+      audience: typeof import !== 'undefined' && import.meta?.env?.VITE_AUTH0_AUDIENCE || 
+                process.env.AUTH0_AUDIENCE || window.location.origin,
+    },
+    useRefreshTokens: true,
+    cacheLocation: 'localstorage'
+  };
 
-    let auth0 = null;
-    let userProfile = null;
+  let auth0 = null;
 
-    async function initAuth() {
-      auth0 = await auth0.Auth0Client.create({
-        domain: import.meta.env.VITE_AUTH0_DOMAIN || 'YOUR_DOMAIN.auth0.com',
-        clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || 'YOUR_CLIENT_ID',
-        authorizationParams: {
-          redirect_uri: window.location.origin,
-          audience: import.meta.env.VITE_AUTH0_AUDIENCE || window.location.origin,
-          scope: 'openid profile email'
-        },
-        useRefreshTokens: true,
-        cacheLocation: 'localstorage'
-      });
-
-      // Handle redirect callback
-      if (location.search.includes('code=')) {
-        await auth0.handleRedirectCallback();
-        history.replaceState({}, '', '/');
-      }
-
-      const isAuthenticated = await auth0.isAuthenticated();
-      if (isAuthenticated) {
-        userProfile = await auth0.getUser();
-        showLoggedIn();
-        checkSubscriptionStatus();
-      } else {
-        document.getElementById('login-section').style.display = 'block';
-      }
+  async function initAuth() {
+    auth0 = await createAuth0Client(config);
+    if (location.search.includes('code=')) {
+      await auth0.handleRedirectCallback();
+      window.history.replaceState({}, document.title, '/');
     }
-
-    function showLoggedIn() {
+    if (await auth0.isAuthenticated()) {
+      const user = await auth0.getUser();
       document.getElementById('login-section').style.display = 'none';
       document.getElementById('profile-section').style.display = 'block';
       document.getElementById('predictor').style.display = 'block';
       document.getElementById('auth-buttons').style.display = 'none';
-      document.getElementById('user-name').textContent = userProfile.name;
-      document.getElementById('user-email').textContent = userProfile.email;
+      document.getElementById('user-name').textContent = user.name || user.nickname;
     }
+  }
 
-    async function checkSubscriptionStatus() {
-      const token = await auth0.getTokenSilently();
-      const res = await fetch('/.netlify/functions/get-sub-status', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
-      document.getElementById('sub-status').textContent = data.status || 'Free';
-      document.getElementById('subscribe-btn').style.display = data.status === 'active' ? 'none' : 'inline-block';
-    }
+  document.getElementById('login-btn').onclick = () => auth0.loginWithRedirect();
+  document.getElementById('logout-btn').onclick = () => auth0.logout({ returnTo: window.location.origin });
 
-    // Buttons
-    document.getElementById('login-btn').onclick = () => auth0.loginWithRedirect();
-    document.getElementById('logout-btn').onclick = () => auth0.logout({ returnTo: window.location.origin });
-    document.getElementById('subscribe-btn').onclick = startCheckout;
-    document.getElementById('portal-btn').onclick = openPortal;
-
-    async function startCheckout() {
-      const token = await auth0.getTokenSilently();
-      const res = await fetch('/.netlify/functions/create-checkout', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const { sessionId } = await res.json();
-      stripe.redirectToCheckout({ sessionId });
-    }
-
-    async function openPortal() {
-      const token = await auth0.getTokenSilently();
-      const res = await fetch('/.netlify/functions/create-portal', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const { url } = await res.json();
-      window.location.href = url;
-    }
-
-    document.getElementById('predict-btn').onclick = async () => {
-      const league = document.getElementById('league').value;
-      const home = document.getElementById('home-team').value.trim();
-      const away = document.getElementById('away-team').value.trim();
-      if (!home || !away) return alert('Enter both teams');
-
-      const token = await auth0.getTokenSilently();
-      const res = await fetch('/.netlify/functions/predict-matchup', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ league, homeTeam: home, awayTeam: away })
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        document.getElementById('matchup').textContent = data.matchup;
-        document.getElementById('score').textContent = data.projectedScore;
-        document.getElementById('prob').textContent = `${data.winProbability[home]} (home)`;
-        document.getElementById('edge').textContent = data.edgeVsMarket || 'No edge';
-        document.getElementById('result').style.display = 'block';
-      } else {
-        alert(data.error || 'Prediction failed — upgrade for access');
-      }
-    };
-
-    initAuth();
+  initAuth().catch(console.error);
   </script>
-      <!-- All your existing HTML ends here -->
-
-    <!-- TEAM AUTOCOMPLETE — PUT THIS RIGHT BEFORE </body> -->
-    <datalist id="teams-datalist"></datalist>
-
-    <script>
-    // Auto-load team lists for dropdowns
-    fetch('/data/all-teams.json')
-      .then(r => r.json())
-      .then(data => {
-        const homeInput = document.getElementById('home-team');
-        const awayInput = document.getElementById('away-team');
-        const leagueSelect = document.getElementById('league');
-
-        function updateTeams() {
-          const league = leagueSelect.value;
-          const teamList = data[league] || [];
-          const datalist = document.getElementById('teams-datalist') || document.createElement('datalist');
-          datalist.id = 'teams-datalist';
-          datalist.innerHTML = teamList.map(t => `<option value="${t}">`).join('');
-          document.body.appendChild(datalist);
-
-          homeInput.setAttribute('list', 'teams-datalist');
-          awayInput.setAttribute('list', 'teams-datalist');
-        }
-
-        leagueSelect.addEventListener('change', updateTeams);
-        updateTeams(); // run on page load
-      })
-      .catch(err => console.log("Team list failed to load — will still work without it"));
-    </script>
   </body>
 </html>
 </body>
