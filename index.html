@@ -23,7 +23,14 @@
         ScorePredictor Pro
       </h1>
       <p class="text-xl md:text-2xl text-gray-300 mt-4">AI-powered edge on every game</p>
-      <div id="auth-section" class="mt-10 flex flex-col items-center gap-4"></div>
+      <div id="auth-section" class="mt-10 flex flex-col items-center gap-4">
+        <button id="login-btn" class="bg-white text-black hover:bg-gray-100 font-bold text-xl px-10 py-5 rounded-2xl shadow-xl transform hover:scale-105 transition">
+          Login / Sign Up
+        </button>
+        <div class="text-gray-400">
+          <label><input type="checkbox" id="remember-me" checked class="mr-2">Stay logged in</label>
+        </div>
+      </div>
     </header>
 
     <section id="featured" class="my-16">
@@ -86,40 +93,37 @@
       });
     };
 
-    // Login / Remember me
-    document.getElementById("auth-section").innerHTML = `
-      <button id="login-btn" class="bg-white text-black hover:bg-gray-100 font-bold text-xl px-10 py-5 rounded-2xl shadow-xl transform hover:scale-105 transition">
-        Login / Sign Up
-      </button>
-      <div class="mt-4 text-gray-400">
-        <label><input type="checkbox" id="remember-me" checked class="mr-2">Stay logged in</label>
-      </div>
-    `;
-
-    document.getElementById("login-btn").onclick = async () => {
-      const remember = document.getElementById("remember-me").checked;
-      await auth0Client.loginWithRedirect({
-        redirect_uri: window.location.origin,
-        prompt: remember ? "login" : "none"
-      });
+    const setupLoginButton = () => {
+      const btn = document.getElementById("login-btn");
+      if (btn) {
+        btn.onclick = async () => {
+          const remember = document.getElementById("remember-me")?.checked ?? true;
+          await auth0Client.loginWithRedirect({
+            redirect_uri: window.location.origin,
+            prompt: remember ? undefined : "login"
+          });
+        };
+      }
     };
 
-    document.getElementById("logout-btn")?.addEventListener("click", async () => {
-      localStorage.clear();
-      await auth0Client.logout({ returnTo: window.location.origin });
-    });
+    const setupLogoutButton = () => {
+      const btn = document.getElementById("logout-btn");
+      if (btn) {
+        btn.onclick = async () => {
+          localStorage.clear();
+          await auth0Client.logout({ returnTo: window.location.origin });
+        };
+      }
+    };
 
-    // === LOAD REAL GAMES EVERY DAY AUTOMATICALLY
     async function loadRealFeaturedGames() {
       try {
         const res = await fetch("/.netlify/functions/today-games");
         const games = await res.json();
-
         if (games.length === 0) {
-          document.getElementById("featured-games").innerHTML = "<p class='text-center text-gray-500 col-span-full'>No games scheduled today</p>";
+          document.getElementById("featured-games").innerHTML = "<p class='text-center text-gray-500 col-span-full'>No games today</p>";
           return;
         }
-
         document.getElementById("featured-games").innerHTML = games.map(g => `
           <div class="bg-slate-800/80 backdrop-blur rounded-2xl p-8 text-center card-hover border border-slate-700">
             <div class="text-sm text-gray-400 uppercase tracking-wider">${g.league}</div>
@@ -144,34 +148,6 @@
       document.getElementById("predict-btn").click();
       document.querySelector("#quick-predictor").scrollIntoView({ behavior: "smooth" });
     }
-
-    // Auth + page load
-    window.addEventListener("load", async () => {
-      await initAuth0();
-      if (location.search.includes("code=")) {
-        await auth0Client.handleRedirectCallback();
-        history.replaceState({}, "", "/");
-      }
-
-      const isAuth = await auth0Client.isAuthenticated();
-      if (isAuth) {
-        const user = await auth0Client.getUser();
-        document.getElementById("auth-section").style.display = "none";
-        document.getElementById("profile-section").classList.remove("hidden");
-        document.getElementById("quick-predictor").classList.remove("hidden");
-        document.getElementById("user-name").textContent = user.name || user.email.split("@")[0];
-        document.getElementById("user-email").textContent = user.email;
-        document.getElementById("sub-status").textContent = ADMIN_EMAILS.includes(user.email) ? "ADMIN – Unlimited Forever" : "Premium Active";
-
-        loadRealFeaturedGames();   // ← this now pulls fresh games every day
-        loadTeamList();
-      } else {
-        loadRealFeaturedGames();   // even guests see real games
-      }
-    });
-
-    // === YOUR EXISTING PREDICTION CODE (unchanged) ===
-    async function checkSubscription() { /* keep your old code or leave blank for now */ }
 
     function loadTeamList() {
       fetch('/data/all-teams.json')
@@ -209,6 +185,35 @@
         alert(data.error || "Prediction failed — upgrade required");
       }
     };
+
+    window.addEventListener("load", async () => {
+      await initAuth0();
+
+      if (location.search.includes("code=") || location.search.includes("error=")) {
+        await auth0Client.handleRedirectCallback();
+        history.replaceState({}, "", "/");
+      }
+
+      setupLoginButton();
+      setupLogoutButton();
+
+      const isAuth = await auth0Client.isAuthenticated();
+      if (isAuth) {
+        const user = await auth0Client.getUser();
+        document.getElementById("auth-section").style.display = "none";
+        document.getElementById("profile-section").classList.remove("hidden");
+        document.getElementById("quick-predictor").classList.remove("hidden");
+        document.getElementById("user-name").textContent = user.name || user.email.split("@")[0];
+        document.getElementById("user-email").textContent = user.email;
+        document.getElementById("sub-status").textContent = 
+          ADMIN_EMAILS.includes(user.email) ? "ADMIN – Unlimited Forever" : "Premium Active";
+
+        loadRealFeaturedGames();
+        loadTeamList();
+      } else {
+        loadRealFeaturedGames();
+      }
+    });
   </script>
 </body>
 </html>
