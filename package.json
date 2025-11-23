@@ -1,20 +1,16 @@
 {
-  "name": "sports-predictor",
+  "name": "scorepredictor-pro",
   "version": "1.0.0",
+  "description": "AI Sports Prediction Engine",
+  "main": "index.html",
   "scripts": {
-    "scrape": "node scraper.js",
-    "dev": "netlify dev"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.7",
-    "cheerio": "^1.0.0-rc.12",
-    "csv-parser": "^3.0.0",
-    "jstat": "^1.9.6",
-    "node-fetch": "^2.7.0",
-    "stripe": "^16.12.0",
-    "twitter-api-v2": "^1.16.2"
-  },
-  "devDependencies": {
-    "netlify-cli": "^17.0.0"
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "node-fetch": "^2.7.0"
   }
 }
