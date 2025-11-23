@@ -76,13 +76,13 @@
 
   <script>
     // === AUTH0 CLASSIC LOGIN (GUARANTEED TO WORK) ===
-    const webAuth = new auth0.WebAuth({
-      domain:       'dev-3cwuyjrqj751y7nr.us.auth0.com',  // ← REPLACE WITH YOUR AUTH0 DOMAIN
-      clientID:     'Kn1t6VdQRe609XsqVx5vezfy8aqR12NU', // ← REPLACE WITH YOUR CLIENT ID
-      redirectUri:  window.location.origin,
-      responseType: 'token id_token',
-      scope:        'openid profile email'
-    });
+const webAuth = new auth0.WebAuth({
+  domain:       'dev-3cwuyjrqj751y7nr.us.auth0.com',     // ← correct tenant
+  clientID:     'R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w',     // ← correct client ID
+  redirectUri:  window.location.origin,                  // this is fine now
+  responseType: 'token id_token',
+  scope:        'openid profile email'
+});
 
     const loginBtn = document.getElementById('login-btn');
     const logoutBtn = document.getElementById('logout-btn');
