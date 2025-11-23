@@ -1,8 +1,4 @@
-# netlify.toml — MINIMAL 2025, SCHEDULE MOVED TO FUNCTION CODE
+# netlify.toml — BARE BONES 2025, LET NETLIFY AUTO-HANDLE FUNCTIONS
 [build]
   publish = "."
   functions = "netlify/functions"
-
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = ["jstat", "twitter-api-v2", "stripe", "jsonwebtoken"]
