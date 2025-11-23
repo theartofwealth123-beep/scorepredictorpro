@@ -1,4 +1,0 @@
-# netlify.toml — BARE BONES 2025, LET NETLIFY AUTO-HANDLE FUNCTIONS
-[build]
-  publish = "."
-  functions = "netlify/functions"
