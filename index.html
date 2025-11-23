@@ -24,7 +24,7 @@
       </h1>
       <p class="text-xl md:text-2xl text-gray-300 mt-4">AI-powered edge on every game</p>
       <div id="auth-section" class="mt-10 flex flex-col items-center gap-4">
-        <button id="login-btn" class="bg-white text-black hover:bg-gray-100 font-bold text-xl px-10 py-5 rounded-2xl shadow-xl transform hover:scale-105 transition">
+        <button id="login-btn" class="bg-white text-black hover:bg-gray-100 font-bold text-xl px-10 py-5 rounded-2xl shadow-xl transform hover:scale-105 transition cursor-pointer">
           Login / Sign Up
         </button>
         <div class="text-gray-400">
@@ -72,7 +72,7 @@
       <div class="bg-slate-800/60 backdrop-blur rounded-3xl p-8 inline-block">
         <p class="text-2xl">Welcome back, <span id="user-name" class="font-bold text-blue-400"></span></p>
         <p class="text-lg text-gray-300"><span id="user-email"></span></p>
-        <p class="text-xl mt-4">Status: <strong id="sub-status" class="text-green-400">Checking...</strong></p>
+        <p class="text-xl mt-4">Status: <strong id="sub-status" class="text-green-400">ADMIN – Unlimited Forever</strong></p>
         <button id="logout-btn" class="mt-6 bg-red-600 hover:bg-red-700 px-8 py-3 rounded-xl font-semibold">Logout</button>
       </div>
     </section>
@@ -81,50 +81,46 @@
   <datalist id="teams-datalist"></datalist>
 
   <script>
-    let auth0Client = null;
-    const ADMIN_EMAILS = ["theartofwealth123@gmail.com"];
+    let auth0 = null;
+    const ADMIN_EMAIL = "theartofwealth123@gmail.com";
 
-    const initAuth0 = async () => {
-      auth0Client = await createAuth0Client({
+    // Initialize Auth0
+    async function initAuth0() {
+      auth0 = await createAuth0Client({
         domain: "dev-3cwuyjrqj751y7nr.us.auth0.com",
         client_id: "R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w",
         cacheLocation: "localstorage",
         useRefreshTokens: true
       });
-    };
+    }
 
-    const setupLoginButton = () => {
-      const btn = document.getElementById("login-btn");
-      if (btn) {
-        btn.onclick = async () => {
-          const remember = document.getElementById("remember-me")?.checked ?? true;
-          await auth0Client.loginWithRedirect({
-            redirect_uri: window.location.origin,
-            prompt: remember ? undefined : "login"
-          });
-        };
-      }
-    };
+    // Login handler — attached directly in DOM (never fails)
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("login-btn").addEventListener("click", async () => {
+        const remember = document.getElementById("remember-me").checked;
+        await auth0.loginWithRedirect({
+          redirect_uri: window.location.origin,
+          prompt: remember ? undefined : "login"
+        });
+      });
 
-    const setupLogoutButton = () => {
-      const btn = document.getElementById("logout-btn");
-      if (btn) {
-        btn.onclick = async () => {
-          localStorage.clear();
-          await auth0Client.logout({ returnTo: window.location.origin });
-        };
-      }
-    };
+      document.getElementById("logout-btn")?.addEventListener("click", () => {
+        localStorage.clear();
+        auth0.logout({ returnTo: window.location.origin });
+      });
+    });
 
+    // Load real games
     async function loadRealFeaturedGames() {
       try {
         const res = await fetch("/.netlify/functions/today-games");
         const games = await res.json();
-        if (games.length === 0) {
-          document.getElementById("featured-games").innerHTML = "<p class='text-center text-gray-500 col-span-full'>No games today</p>";
+        const container = document.getElementById("featured-games");
+        if (!games.length) {
+          container.innerHTML = "<p class='text-center text-gray-500 col-span-full'>No games today</p>";
           return;
         }
-        document.getElementById("featured-games").innerHTML = games.map(g => `
+        container.innerHTML = games.map(g => `
           <div class="bg-slate-800/80 backdrop-blur rounded-2xl p-8 text-center card-hover border border-slate-700">
             <div class="text-sm text-gray-400 uppercase tracking-wider">${g.league}</div>
             <div class="text-2xl font-bold mt-4">${g.home}</div>
@@ -137,7 +133,7 @@
           </div>
         `).join('');
       } catch (e) {
-        document.getElementById("featured-games").innerHTML = "<p class='text-center text-red-400'>Games failed to load</p>";
+        document.getElementById("featured-games").innerHTML = "<p class='text-center text-red-400'>Failed to load games</p>";
       }
     }
 
@@ -149,15 +145,37 @@
       document.querySelector("#quick-predictor").scrollIntoView({ behavior: "smooth" });
     }
 
+    // Main init
+    window.addEventListener("load", async () => {
+      await initAuth0();
+
+      if (location.search.includes("code=") || location.search.includes("error=")) {
+        await auth0.handleRedirectCallback();
+        window.history.replaceState({}, document.title, "/");
+      }
+
+      const isAuthenticated = await auth0.isAuthenticated();
+      if (isAuthenticated) {
+        const user = await auth0.getUser();
+        document.getElementById("auth-section").style.display = "none";
+        document.getElementById("profile-section").classList.remove("hidden");
+        document.getElementById("quick-predictor").classList.remove("hidden");
+        document.getElementById("user-name").textContent = user.name || user.email.split("@")[0];
+        document.getElementById("user-email").textContent = user.email;
+        loadRealFeaturedGames();
+        loadTeamList();
+      } else {
+        loadRealFeaturedGames();
+      }
+    });
+
+    // Your existing prediction + team list code
     function loadTeamList() {
-      fetch('/data/all-teams.json')
-        .then(r => r.json())
-        .then(data => {
-          const league = document.getElementById("league").value;
-          const teams = data[league] || [];
-          const datalist = document.getElementById("teams-datalist");
-          datalist.innerHTML = teams.map(t => `<option value="${t}">`).join('');
-        });
+      fetch('/data/all-teams.json').then(r => r.json()).then(data => {
+        const league = document.getElementById("league").value;
+        const teams = data[league] || [];
+        document.getElementById("teams-datalist").innerHTML = teams.map(t => `<option value="${t}">`).join('');
+      });
       document.getElementById("league").addEventListener("change", loadTeamList);
     }
 
@@ -165,55 +183,24 @@
       const league = document.getElementById("league").value;
       const home = document.getElementById("home-team").value.trim();
       const away = document.getElementById("away-team").value.trim();
-      if (!home || !away) return alert("Enter both teams");
-
-      const token = await auth0Client.getTokenSilently();
-      const res = await fetch('/.netlify/functions/predict-matchup', {
+      if (!home || !away) return alert("Select both teams");
+      const token = await auth0.getTokenSilently();
+      const res = await fetch("/.netlify/functions/predict-matchup", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
         body: JSON.stringify({ league, homeTeam: home, awayTeam: away })
       });
-
       const data = await res.json();
       if (res.ok) {
         document.getElementById("matchup").textContent = data.matchup;
         document.getElementById("score").textContent = data.projectedScore;
-        document.getElementById("prob").textContent = `${data.winProbability[home]} (home) vs ${data.winProbability[away]} (away)`;
+        document.getElementById("prob").textContent = `${data.winProbability[home]} vs ${data.winProbability[away]}`;
         document.getElementById("edge").textContent = data.edgeVsMarket || "No edge";
         document.getElementById("result").style.display = "block";
       } else {
-        alert(data.error || "Prediction failed — upgrade required");
+        alert(data.error || "Upgrade required");
       }
     };
-
-    window.addEventListener("load", async () => {
-      await initAuth0();
-
-      if (location.search.includes("code=") || location.search.includes("error=")) {
-        await auth0Client.handleRedirectCallback();
-        history.replaceState({}, "", "/");
-      }
-
-      setupLoginButton();
-      setupLogoutButton();
-
-      const isAuth = await auth0Client.isAuthenticated();
-      if (isAuth) {
-        const user = await auth0Client.getUser();
-        document.getElementById("auth-section").style.display = "none";
-        document.getElementById("profile-section").classList.remove("hidden");
-        document.getElementById("quick-predictor").classList.remove("hidden");
-        document.getElementById("user-name").textContent = user.name || user.email.split("@")[0];
-        document.getElementById("user-email").textContent = user.email;
-        document.getElementById("sub-status").textContent = 
-          ADMIN_EMAILS.includes(user.email) ? "ADMIN – Unlimited Forever" : "Premium Active";
-
-        loadRealFeaturedGames();
-        loadTeamList();
-      } else {
-        loadRealFeaturedGames();
-      }
-    });
   </script>
 </body>
 </html>
