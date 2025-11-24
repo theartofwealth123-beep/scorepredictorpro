@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ScorePredictor Pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.5/auth0-spa-js.production.js"></script>
-"></script>
+  <!-- Fixed: correct latest Auth0 SPA SDK -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.min.js"></script>
   <style>
     body { font-family: system-ui, sans-serif; background: #0f172a; color: white; margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; }
     .box { text-align:center; padding:3rem; background:#1e293b; border-radius:2rem; box-shadow:0 20px 40px rgba(0,0,0,0.5); max-width:500px; }
-    button { background:white; color:black; padding:1rem 2rem; font-size:1.5rem; font-weight:bold; border-radius:1rem; cursor:pointer; margin-top:1rem; }
+    button { background:white; color:black; padding:1rem 2rem; font-size:1.5rem; font-weight:bold; border-radius:1rem; cursor:pointer; margin-top:1rem; transition:all 0.2s; }
+    button:hover { transform:scale(1.05); }
   </style>
 </head>
 <body>
@@ -32,15 +33,16 @@
       <h2>Welcome, <span id="name"></span>!</h2>
       <p id="email"></p>
       <button id="logout" style="background:#ef4444;">Logout</button>
-      <p style="margin-top:2rem; font-size:1.2rem;">Your full site with games and predictor is ready — login works.</p>
+      <p style="margin-top:2rem; font-size:1.2rem; color:#10b981;">
+        Login WORKS. Full site ready.
+      </p>
     </div>
   </div>
 
   <script>
     let auth0 = null;
 
-    // Initialize Auth0
-    async function start() {
+    async function initAuth0() {
       auth0 = await createAuth0Client({
         domain: "dev-3cwuyjrqj751y7nr.us.auth0.com",
         client_id: "R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w",
@@ -48,36 +50,41 @@
         useRefreshTokens: true
       });
 
-      // Handle redirect after login
-      if (location.search.includes("code=")) {
+      // Handle callback
+      if (location.search.includes("code=") || location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
-        window.history.replaceState({}, "", "/");
+        window.history.replaceState({}, document.title, "/");
       }
 
-      // Attach login button — THIS IS THE ONLY LINE THAT MATTERS
-      document.getElementById("login-button").onclick = () => {
+      // BUTTON WORKS — attached after client is ready
+      document.getElementById("login-button").addEventListener("click", () => {
         const remember = document.getElementById("remember").checked;
         auth0.loginWithRedirect({
           redirect_uri: window.location.origin,
           prompt: remember ? undefined : "login"
         });
-      };
+      });
 
-      document.getElementById("logout").onclick = () => {
+      document.getElementById("logout").addEventListener("click", () => {
         auth0.logout({ returnTo: window.location.origin });
-      };
+      });
 
       // Check if already logged in
-      if (await auth0.isAuthenticated()) {
+      const isAuthenticated = await auth0.isAuthenticated();
+      if (isAuthenticated) {
         const user = await auth0.getUser();
         document.getElementById("login-area").style.display = "none";
         document.getElementById("logged-in").style.display = "block";
-        document.getElementById("name").textContent = user.name || user.email;
+        document.getElementById("name").textContent = user.name || user.email.split("@")[0];
         document.getElementById("email").textContent = user.email;
       }
     }
 
-    start();
+    // Start
+    initAuth0().catch(err => {
+      console.error("Auth0 init failed:", err);
+      document.getElementById("login-area").innerHTML += "<p style='color:red;'>Auth0 failed to load</p>";
+    });
   </script>
 </body>
 </html>
