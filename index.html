@@ -2,35 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScorePredictor Pro • Redirecting...</title>
+  <meta name="viewport="width=device-width, initial-scale=1">
+  <title>ScorePredictor Pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {font-family:system-ui,sans-serif;background:#0f172a;color:white;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;}
-    .box {text-align:center;padding:4rem;background:#1e293b;border-radius:2rem;box-shadow:0 20px 40px rgba(0,0,0,0.5);max-width:500px;}
+    body {background:#0f172a;color:white;font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;}
+    .box {text-align:center;padding:4rem;background:#1e293b;border-radius:2rem;max-width:600px;width:90%;}
+    h1 {font-size:3.5rem;background:linear-gradient(to right,#60a5fa,#c084fc);-webkit-background-clip:text;color:transparent;}
+    button {background:white;color:black;padding:1.5rem 3rem;font-size:1.8rem;font-weight:bold;border-radius:1.5rem;margin-top:2rem;}
   </style>
 </head>
 <body>
   <div class="box">
-    <h1 style="font-size:3rem;background:linear-gradient(to right,#60a5fa,#c084fc);-webkit-background-clip:text;color:transparent;">
-      ScorePredictor Pro
-    </h1>
-    <p style="font-size:1.5rem;color:#94a3b8;margin:2rem 0;">Redirecting to login...</p>
-    <div class="text-6xl">→</div>
+    <h1>ScorePredictor Pro</h1>
+    <p style="font-size:1.8rem;margin:2rem 0;color:#94a3b8;">AI-powered edge on every game</p>
+    <button onclick="login()">LOGIN NOW</button>
   </div>
 
   <script>
-    // AUTO REDIRECT TO AUTH0 — NO BUTTON, NO SDK, NO ERRORS
-    const params = new URLSearchParams({
-      client_id: "R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w",
-      response_type: "code",
-      redirect_uri: window.location.origin,
-      connection: "", // leave empty = shows GitHub/email/password
-      scope: "openid profile email",
-      state: btoa(JSON.stringify({})) // optional
-    });
+    function login() {
+      const url = "https://dev-3cwuyjrqj751y7nr.us.auth0.com/authorize?" + new URLSearchParams({
+        response_type: "token",
+        client_id: "R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w",
+        redirect_uri: window.location.origin,
+        scope: "openid profile email",
+        state: "static_state_123"
+      });
+      window.location.href = url;
+    }
 
-    window.location.href = `https://dev-3cwuyjrqj751y7nr.us.auth0.com/authorize?${params.toString()}`;
+    // If we came back with #access_token=... in URL
+    if (window.location.hash.includes("access_token")) {
+      const token = new URLSearchParams(window.location.hash.substring(1)).get("access_token");
+      document.cookie = `token=${token};path=/;max-age=604800;secure;samesite=lax`;
+      window.location.href = window.location.origin; // clean URL
+    }
+
+    // If we already have a token cookie → go straight to app
+    if (document.cookie.includes("token=")) {
+      window.location.href = "/app.html";
+    }
   </script>
 </body>
 </html>

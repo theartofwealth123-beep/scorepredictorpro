@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScorePredictor Pro • Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-black text-white min-h-screen">
+  <div class="container max-w-6xl mx-auto p-8 text-center">
+    <h1 class="text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-4">
+      Welcome Back, Admin
+    </h1>
+    <p class="text-2xl mb-12">theartofwealth123@gmail.com — Unlimited Forever</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+      <div class="bg-slate-800 rounded-2xl p-8 shadow-2xl">
+        <h2 class="text-3xl font-bold">Lakers</h2>
+        <p class="text-5xl my-4 text-gray-400">VS</p>
+        <h2 class="text-3xl font-bold">Jazz</h2>
+        <p class="mt-6 text-blue-400 text-xl">8:00 PM ET • ESPN</p>
+      </div>
+      <!-- Add more games here -->
+    </div>
+
+    <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-12 py-6 rounded-2xl text-2xl font-bold">
+      Logout
+    </button>
+  </div>
+
+  <script>
+    function logout() {
+      document.cookie = "token=;max-age=0;path=/";
+      window.location.href = "/";
+    }
+
+    // Optional: verify token still works
+    const token = document.cookie.split("; ").find(row => row.startsWith("token="))?.split("=")[1];
+    if (!token) window.location.href = "/";
+  </script>
+</body>
+</html>
