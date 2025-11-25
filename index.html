@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScorePredictor Pro</title>
+  <title>ScorePredictor Pro • Redirecting...</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {font-family:system-ui,sans-serif;background:#0f172a;color:white;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;}
-    .box {text-align:center;padding:3rem;background:#1e293b;border-radius:2rem;box-shadow:0 20px 40px rgba(0,0,0,0.5);max-width:500px;}
-    button {background:white;color:black;padding:1rem 2rem;font-size:1.5rem;font-weight:bold;border-radius:1rem;cursor:pointer;margin-top:1rem;transition:all .2s;}
-    button:hover {transform:scale(1.05);}
+    .box {text-align:center;padding:4rem;background:#1e293b;border-radius:2rem;box-shadow:0 20px 40px rgba(0,0,0,0.5);max-width:500px;}
   </style>
 </head>
 <body>
@@ -17,61 +15,22 @@
     <h1 style="font-size:3rem;background:linear-gradient(to right,#60a5fa,#c084fc);-webkit-background-clip:text;color:transparent;">
       ScorePredictor Pro
     </h1>
-    <p style="font-size:1.5rem;color:#94a3b8;">AI-powered edge on every game</p>
-
-    <div id="login-area">
-      <button id="login-button">Login / Sign Up</button><br><br>
-      <label style="color:#94a3b8;"><input type="checkbox" id="remember" checked> Stay logged in</label>
-    </div>
-
-    <div id="logged-in" style="display:none;margin-top:2rem;">
-      <h2>Welcome, <span id="name"></span>!</h2>
-      <p id="email"></p>
-      <button id="logout" style="background:#ef4444;">Logout</button>
-      <p style="margin-top:2rem;color:#10b981;font-size:1.2rem;">FULL SITE IS READY — LOGIN WORKS</p>
-    </div>
+    <p style="font-size:1.5rem;color:#94a3b8;margin:2rem 0;">Redirecting to login...</p>
+    <div class="text-6xl">→</div>
   </div>
 
-  <!-- AUTH0 SPA SDK EMBEDDED (no CDN) — 100% working -->
   <script>
-    !function(e,t,n,o,r){function i(e,t){return void 0===t?o:t in e?e[t]:e[t]=o()}function a(){var t=n.createElement("script");t.src="https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.min.js",t.onload=c,t.onerror=function(){console.error("Auth0 CDN failed")},n.head.appendChild(t)}function c(){window.createAuth0Client||console.error("Auth0 still not loaded")}e[o]=e[o]||{q:[]},e[o].onReady=function(t){e[o].q.push(t)},a()}(window,document,document,"auth0",null);
-    window.auth0.onReady(function() {
-      let auth0 = null;
-      async function init() {
-        auth0 = await createAuth0Client({
-          domain: "dev-3cwuyjrqj751y7nr.us.auth0.com",
-          client_id: "R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w",
-          cacheLocation: "localstorage",
-          useRefreshTokens: true
-        });
-
-        if (location.search.includes("code=")) {
-          await auth0.handleRedirectCallback();
-          window.history.replaceState({}, "", "/");
-        }
-
-        document.getElementById("login-button").onclick = () => {
-          const remember = document.getElementById("remember").checked;
-          auth0.loginWithRedirect({
-            redirect_uri: window.location.origin,
-            prompt: remember ? undefined : "login"
-          });
-        };
-
-        document.getElementById("logout").onclick = () => {
-          auth0.logout({ returnTo: window.location.origin });
-        };
-
-        if (await auth0.isAuthenticated()) {
-          const user = await auth0.getUser();
-          document.getElementById("login-area").style.display = "none";
-          document.getElementById("logged-in").style.display = "block";
-          document.getElementById("name").textContent = user.name || user.email.split("@")[0];
-          document.getElementById("email").textContent = user.email;
-        }
-      }
-      init();
+    // AUTO REDIRECT TO AUTH0 — NO BUTTON, NO SDK, NO ERRORS
+    const params = new URLSearchParams({
+      client_id: "R8YeJdb0ZGuXY0QLcO1FexwRmCrfpw1w",
+      response_type: "code",
+      redirect_uri: window.location.origin,
+      connection: "", // leave empty = shows GitHub/email/password
+      scope: "openid profile email",
+      state: btoa(JSON.stringify({})) // optional
     });
+
+    window.location.href = `https://dev-3cwuyjrqj751y7nr.us.auth0.com/authorize?${params.toString()}`;
   </script>
 </body>
 </html>
