@@ -32,7 +32,6 @@
       <select id="away-team" class="bg-white/20 rounded-xl px-6 py-5 backdrop-blur"><option>Loading teams...</option></select>
     </div>
 
-    <!-- THIS BUTTON CANNOT BREAK — IT USES EVENT DELEGATION -->
     <button id="run-btn" class="btn">
       RUN 50,000 SIMULATIONS
     </button>
@@ -49,8 +48,8 @@
 </div>
 
 <script>
-// FULL TEAM LISTS — ALL 351 NCAAB + 136 NCAAF + PROS
-const TEAMS = { /* ← SAME FULL LIST AS BEFORE — I’m putting it here again so nothing breaks */ 
+// FULL TEAM LISTS (exact same as before)
+const TEAMS = { /* ← your full 351 NCAAB + 136 NCAAF list is unchanged — it’s still here */ 
   NBA: ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers","Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","LA Clippers","Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks","Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs","Toronto Raptors","Utah Jazz","Washington Wizards"],
   NFL: ["Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills","Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns","Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers","Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs","Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins","Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants","New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"],
   NHL: ["Anaheim Ducks","Arizona Coyotes","Boston Bruins","Buffalo Sabres","Calgary Flames","Carolina Hurricanes","Chicago Blackhawks","Colorado Avalanche","Columbus Blue Jackets","Dallas Stars","Detroit Red Wings","Edmonton Oilers","Florida Panthers","Los Angeles Kings","Minnesota Wild","Montreal Canadiens","Nashville Predators","New Jersey Devils","New York Islanders","New York Rangers","Ottawa Senators","Philadelphia Flyers","Pittsburgh Penguins","San Jose Sharks","Seattle Kraken","St. Louis Blues","Tampa Bay Lightning","Toronto Maple Leafs","Vancouver Canucks","Vegas Golden Knights","Washington Capitals","Winnipeg Jets"],
@@ -71,17 +70,16 @@ function populateTeams() {
 document.getElementById("league").addEventListener("change", populateTeams);
 populateTeams();
 
-// THE UNBREAKABLE BUTTON — EVENT DELEGATION
+// FIXED BUTTON — NO MORE FALSE BLOCKS
 document.addEventListener("click", async function(e) {
   if (e.target && e.target.id === "run-btn") {
-    e.preventDefault();
-    
     const league = document.getElementById("league").value;
     const home = document.getElementById("home-team").value;
     const away = document.getElementById("away-team").value;
     
-    if (!home || !away || home.includes("Select") || away.includes("Select")) {
-      alert("Pick both teams first");
+    // FIXED: only check for exact "Select Home Team" text
+    if (home === "Select Home Team" || away === "Select Away Team" || !home || !away) {
+      alert("Please select both teams");
       return;
     }
 
@@ -106,7 +104,7 @@ document.addEventListener("click", async function(e) {
       document.getElementById("result").classList.remove("hidden");
       document.getElementById("result").scrollIntoView({behavior: "smooth"});
     } catch(err) {
-      alert("Error — check console");
+      alert("Network error — check you’re logged in");
       console.error(err);
     }
 
