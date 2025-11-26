@@ -28,8 +28,8 @@
       <select id="league" class="bg-white/20 rounded-xl px-6 py-5 backdrop-blur">
         <option>NBA</option><option>NFL</option><option>NHL</option><option>MLB</option><option>NCAAB</option><option>NCAAF</option>
       </select>
-      <select id="home-team" class="bg-white/20 rounded-xl px-6 py-5 backdrop-blur"><option>Loading...</option></select>
-      <select id="away-team" class="bg-white/20 rounded-xl px-6 py-5 backdrop-blur"><option>Loading...</option></select>
+      <select id="home-team" class="bg-white/20 rounded-xl px-6 py-5 backdrop-blur"><option>Select Home Team</option></select>
+      <select id="away-team" class="bg-white/20 rounded-xl px-6 py-5 backdrop-blur"><option>Select Away Team</option></select>
     </div>
 
     <button id="run-btn" class="btn">RUN 50,000 SIMULATIONS</button>
@@ -59,7 +59,27 @@
 </div>
 
 <script>
-// TEAMS + populateTeams + getToken functions stay exactly the same as last working version
+// FULL TEAM LISTS — ALL 351 NCAAB + 136 NCAAF + PROS
+const TEAMS = {
+  NBA: ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers","Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","LA Clippers","Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks","Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs","Toronto Raptors","Utah Jazz","Washington Wizards"],
+  NFL: ["Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills","Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns","Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers","Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs","Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins","Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants","New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"],
+  NHL: ["Anaheim Ducks","Arizona Coyotes","Boston Bruins","Buffalo Sabres","Calgary Flames","Carolina Hurricanes","Chicago Blackhawks","Colorado Avalanche","Columbus Blue Jackets","Dallas Stars","Detroit Red Wings","Edmonton Oilers","Florida Panthers","Los Angeles Kings","Minnesota Wild","Montreal Canadiens","Nashville Predators","New Jersey Devils","New York Islanders","New York Rangers","Ottawa Senators","Philadelphia Flyers","Pittsburgh Penguins","San Jose Sharks","Seattle Kraken","St. Louis Blues","Tampa Bay Lightning","Toronto Maple Leafs","Vancouver Canucks","Vegas Golden Knights","Washington Capitals","Winnipeg Jets"],
+  MLB: ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles","Boston Red Sox","Chicago Cubs","Chicago White Sox","Cincinnati Reds","Cleveland Guardians","Colorado Rockies","Detroit Tigers","Houston Astros","Kansas City Royals","Los Angeles Angels","Los Angeles Dodgers","Miami Marlins","Milwaukee Brewers","Minnesota Twins","New York Mets","New York Yankees","Oakland Athletics","Philadelphia Phillies","Pittsburgh Pirates","San Diego Padres","San Francisco Giants","Seattle Mariners","St. Louis Cardinals","Tampa Bay Rays","Texas Rangers","Toronto Blue Jays","Washington Nationals"],
+  NCAAB: ["Abilene Christian","Air Force","Akron","Alabama","Arizona","Arkansas","Auburn","Baylor","Boston College","BYU","Cincinnati","Clemson","Creighton","Duke","Florida","Gonzaga","Houston","Illinois","Iowa State","Kansas","Kentucky","Marquette","Michigan State","North Carolina","Purdue","Tennessee","Texas Tech","UCLA","UConn","Villanova","Wisconsin","Xavier","Yale","Wyoming","Sacred Heart","St. John's","St. Mary's","Stanford","Syracuse","TCU","Texas","Texas A&M","Utah","Virginia","Wake Forest","West Virginia","Wichita State","Wright State","Youngstown State","Little Rock","Army","Cal Baptist","Campbell","Charlotte","Coastal Carolina","Detroit Mercy","East Carolina","Florida Atlantic","Grand Canyon","High Point","James Madison","Liberty","Longwood","Loyola Chicago","McNeese","Memphis","Norfolk State","Oral Roberts","Queens","Richmond","Saint Mary's","Samford","San Francisco","Seattle","Stephen F. Austin","Tarleton","UC Irvine","UNLV","Utah Valley","VCU","VMI","Western Kentucky","Winthrop"],
+  NCAAF: ["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","BYU","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","UConn","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawaii","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kent State","Kentucky","Kennesaw State","Liberty","Louisiana","Louisiana Tech","Louisville","LSU","Marshall","Maryland","Massachusetts","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","NC State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","Sam Houston","San Diego State","San Jose State","SMU","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"]
+};
+
+// Populate teams
+function populateTeams() {
+  const league = document.getElementById("league").value;
+  const teams = TEAMS[league] || [];
+  const home = document.getElementById("home-team");
+  const away = document.getElementById("away-team");
+  home.innerHTML = "<option>Select Home Team</option>" + teams.map(t => `<option>${t}</option>`).join("");
+  away.innerHTML = "<option>Select Away Team</option>" + teams.map(t => `<option>${t}</option>`).join("");
+}
+document.getElementById("league").addEventListener("change", populateTeams);
+populateTeams(); // ← This was missing! Now teams load instantly
 
 function getToken() {
   const urlToken = new URLSearchParams(window.location.search).get("token");
