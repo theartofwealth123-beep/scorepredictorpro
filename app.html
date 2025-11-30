@@ -106,12 +106,12 @@ document.addEventListener("click", async e => {
 
     document.getElementById("result").classList.remove("hidden");
     document.getElementById("result").scrollIntoView({behavior: "smooth"});
-  } catch (err) {
-    alert("Netlify woke up cranky — click again (always works 2nd try)");
-  }
-  btn.disabled = false;
-  btn.textContent = "RUN 50,000 SIMULATIONS";
-});
+catch (err) {
+  // Silent retry — Netlify cold starts are dead to us
+  setTimeout(() => {
+    e.target.click(); // auto re-click once
+  }, 800);
+}
 </script>
 </body>
 </html>
