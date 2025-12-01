@@ -84,7 +84,7 @@ document.addEventListener("click", async function(e) {
   const home = document.getElementById("home-team").value;
   const away = document.getElementById("away-team").value;
 
-  if (!home || !away || home === "Select Team" || away === "Select Team") {
+  if (!home || !away || home.includes("Select") || away.includes("Select")) {
     alert("Please select both teams");
     return;
   }
@@ -94,26 +94,35 @@ document.addEventListener("click", async function(e) {
   btn.textContent = "Running 500,000 simulations...";
 
   try {
-    const token = getToken();
-const headers = { "Content-Type": "application/json" };
-if (token) headers["Authorization"] = `Bearer ${token}`;
+    const token = getToken?.();
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers["Authorization"] = `Bearer ${token}`;
 
-const res = await fetch("/.netlify/functions/predict", {
-  method: "POST",
-  headers,
-  body: JSON.stringify({ league, homeTeam: home, awayTeam: away })
-});
+    const res = await fetch("/.netlify/functions/predict", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ league, homeTeam: home, awayTeam: away })
+    });
 
-    document.getElementById("matchup").textContent = data.matchup;
-    document.getElementById("score").textContent = data.projectedScore;
-    document.getElementById("winprob").textContent = data.winProbability;
-    document.getElementById("edge").textContent = data.edge;
-    document.getElementById("explanation").textContent = data.explanation;
+    const data = await res.json(); // now always JSON from backend
 
-    document.getElementById("result").classList.remove("hidden");
-    document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+    if (!res.ok || data.error) {
+      alert(data.error || "Server error running simulations");
+    } else {
+      document.getElementById("matchup").textContent = data.matchup;
+      document.getElementById("score").textContent = data.projectedScore;
+      document.getElementById("winprob").textContent = data.winProbability;
+      document.getElementById("edge").textContent = data.edge;
+      document.getElementById("explanation").textContent = data.explanation;
+
+      document.getElementById("result").classList.remove("hidden");
+      document
+        .getElementById("result")
+        .scrollIntoView({ behavior: "smooth" });
+    }
   } catch (err) {
-    alert("Server woke up — click once more (then instant forever)");
+    console.error(err);
+    alert("Something went wrong talking to the server.");
   }
 
   btn.disabled = false;
