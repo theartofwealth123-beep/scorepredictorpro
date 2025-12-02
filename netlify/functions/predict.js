@@ -1,6 +1,6 @@
 // netlify/functions/predict.js
 // 500K simulation with matchup-specific strength, bet recommendation,
-// and explicit home/away scores for ALL leagues.
+// and edges vs market for ML, spread, and total (if market odds provided).
 
 const fs = require('fs');
 const path = require('path');
@@ -14,9 +14,9 @@ const FALLBACK_LEAGUE_STATS = {
   MLB:   { ppg: 4.58,  sd: 3.4,  homeAdv: 0.42 }
 };
 
-// --------- OPTIONAL REAL DATA LOADER (data/nba.json, data/nfl.json, etc.) ---------
+// ------------ OPTIONAL REAL DATA (data/nba.json, data/nfl.json, etc.) ------------
 function loadLeagueData(leagueKey) {
-  const filename = leagueKey.toLowerCase() + '.json'; // nba.json, nfl.json, etc.
+  const filename = leagueKey.toLowerCase() + '.json';
   const filePath = path.join(__dirname, '..', '..', 'data', filename);
   if (!fs.existsSync(filePath)) return null;
 
@@ -29,7 +29,7 @@ function loadLeagueData(leagueKey) {
   }
 }
 
-// --------- RANDOM UTILITIES (FOR SIMS + TEAM STRENGTH) ---------
+// ------------ UTILITIES ------------
 function normalSample(mean, sd) {
   const u1 = Math.random();
   const u2 = Math.random();
@@ -41,19 +41,37 @@ function clamp(x, min, max) {
   return Math.max(min, Math.min(max, x));
 }
 
-// simple deterministic hash so same team always gets same strength
 function hashString(str) {
   let h = 0;
   for (let i = 0; i < str.length; i++) {
     h = (h << 5) - h + str.charCodeAt(i);
-    h |= 0; // keep 32-bit
+    h |= 0;
   }
   return Math.abs(h);
 }
 
-// Create pseudo off/def/pace multipliers per team & league.
-// This makes every team different even without real stats,
-// but still keeps things realistic-ish.
+// Convert American odds to implied probability
+function impliedProbFromAmerican(odds) {
+  if (odds == null) return null;
+  if (odds > 0) {
+    return 100 / (odds + 100);
+  }
+  return -odds / (-odds + 100);
+}
+
+// Convert fair probability to American line
+function fairLineFromProb(prob) {
+  if (!prob || prob <= 0 || prob >= 1) return null;
+  if (prob >= 0.5) {
+    // favorite
+    return -Math.round((prob / (1 - prob)) * 100);
+  } else {
+    // dog
+    return Math.round(((1 - prob) / prob) * 100);
+  }
+}
+
+// Pseudo team strength when we don't have real stats
 function getTeamStrength(teamName, leagueKey) {
   const base = hashString(leagueKey + ':' + teamName);
 
@@ -67,8 +85,7 @@ function getTeamStrength(teamName, leagueKey) {
   }[leagueKey] || { off: 0.15, def: 0.15, pace: 0.10 };
 
   function centeredMultiplier(seed, spread, baseValue = 1) {
-    // map seed → [-spread, +spread] around 1.0
-    const r = (seed % 2000) / 1000 - 1; // [-1, +0.999]
+    const r = (seed % 2000) / 1000 - 1; // [-1, ~+1)
     return baseValue * (1 + r * spread);
   }
 
@@ -76,9 +93,9 @@ function getTeamStrength(teamName, leagueKey) {
   const defSeed  = Math.floor(base / 9973);
   const paceSeed = Math.floor(base / 31337);
 
-  const offense = centeredMultiplier(offSeed, spreads.off);     // ~[0.9, 1.1+] etc.
-  const defense = centeredMultiplier(defSeed, spreads.def);     // >1 = better defense
-  const paceRaw = centeredMultiplier(paceSeed, spreads.pace, 1); // around 1
+  const offense = centeredMultiplier(offSeed, spreads.off);
+  const defense = centeredMultiplier(defSeed, spreads.def);
+  const paceRaw = centeredMultiplier(paceSeed, spreads.pace, 1);
 
   return {
     offense,
@@ -87,8 +104,7 @@ function getTeamStrength(teamName, leagueKey) {
   };
 }
 
-// Compute expected points for a matchup using either real data (if present)
-// or fallback pseudo-ratings based on team names.
+// Expected points for a matchup (real data if present, else pseudo)
 function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData) {
   const fallback = FALLBACK_LEAGUE_STATS[leagueKey] || FALLBACK_LEAGUE_STATS.NBA;
   let basePpg = fallback.ppg;
@@ -99,7 +115,7 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData) {
   let expectedAway = null;
   let sdAdjust = 1.0;
 
-  // --- 1) REAL DATA PATH (if you ever fill data/<league>.json) ---
+  // 1) REAL DATA PATH (if you ever fill data/<league>.json)
   if (leagueData && leagueData.teams) {
     const teams = leagueData.teams;
     const homeStats = teams[homeTeam];
@@ -127,44 +143,38 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData) {
 
       const homePace = homeStats.pace || 100;
       const awayPace = awayStats.pace || 100;
-      const paceFactor = (homePace + awayPace) / (2 * 100); // ~1
+      const paceFactor = (homePace + awayPace) / (2 * 100);
 
-      const homeBoost = 1.04; // ~4% home scoring bump
+      const homeBoost = 1.04;
 
       expectedHome = basePpg * homeOffFactor * awayDefFactor * paceFactor * homeBoost;
       expectedAway = basePpg * awayOffFactor * homeDefFactor * paceFactor;
 
-      // add a little matchup-specific variance
       const spreadGuess = Math.abs(expectedHome - expectedAway);
-      sdAdjust = 0.9 + Math.min(spreadGuess / basePpg, 0.3); // blowout-y games get more variance
+      sdAdjust = 0.9 + Math.min(spreadGuess / basePpg, 0.3);
     }
   }
 
-  // --- 2) FALLBACK PSEUDO-RATING PATH (no real data yet) ---
+  // 2) PSEUDO PATH (no real league data)
   if (expectedHome == null || expectedAway == null) {
     const homeStr = getTeamStrength(homeTeam, leagueKey);
     const awayStr = getTeamStrength(awayTeam, leagueKey);
 
-    // Offense drives scoring up, defense pushes opponent down.
-    // Defense multiplier >1 = better defense → we shrink opp scoring a bit.
     const defFactorHome = 1 - (homeStr.defense - 1) * 0.6;
     const defFactorAway = 1 - (awayStr.defense - 1) * 0.6;
 
-    const paceFactor = (homeStr.pace + awayStr.pace) / 2; // centered around 1
+    const paceFactor = (homeStr.pace + awayStr.pace) / 2;
 
     expectedHome = basePpg * homeStr.offense * defFactorAway * paceFactor + homeAdv;
     expectedAway = basePpg * awayStr.offense * defFactorHome * paceFactor - homeAdv;
 
-    // matchup-dependent volatility: rivalry / crazy pace can juice sd a bit
     const nameMash = hashString(homeTeam + '|' + awayTeam + '|' + leagueKey);
-    const volSeed = (nameMash % 1000) / 1000; // [0,1)
-    sdAdjust = 0.85 + volSeed * 0.4; // between ~0.85 and 1.25
+    const volSeed = (nameMash % 1000) / 1000;
+    sdAdjust = 0.85 + volSeed * 0.4;
   }
 
-  // Final SD for this matchup
   const sd = baseSd * sdAdjust;
 
-  // Clamp expected values to sane ranges
   const maxFactor = {
     NBA: 2.4,
     NCAAB: 2.1,
@@ -178,12 +188,29 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData) {
   expectedHome = clamp(expectedHome, 0, maxScore);
   expectedAway = clamp(expectedAway, 0, maxScore);
 
-  return { expectedHome, expectedAway, sd };
+  return { expectedHome, expectedAway, sd, basePpg };
 }
 
-// --------- MAIN HANDLER ---------
+// Stub – you can wire this to a real odds API later if you want backend-only odds.
+// For now we ONLY use market odds passed via body.market.
+async function getMarketOddsFromAPI(/* leagueKey, homeTeam, awayTeam */) {
+  // Example shape if you wire it:
+  // return {
+  //   homeMoneyline: -180,
+  //   awayMoneyline: +160,
+  //   spread: -4.5,   // home spread
+  //   spreadPriceHome: -110,
+  //   spreadPriceAway: -110,
+  //   total: 229.5,
+  //   overPrice: -110,
+  //   underPrice: -110,
+  //   book: "SomeBook"
+  // };
+  return null;
+}
+
+// ------------ MAIN HANDLER ------------
 exports.handler = async (event) => {
-  // Parse body safely
   let body = {};
   try {
     body = JSON.parse(event.body || '{}');
@@ -208,9 +235,21 @@ exports.handler = async (event) => {
   }
 
   const leagueData = loadLeagueData(leagueKey);
-  const fallback = FALLBACK_LEAGUE_STATS[leagueKey] || FALLBACK_LEAGUE_STATS.NBA;
 
-  const { expectedHome, expectedAway, sd } = computeExpectedPoints(
+  // Market odds can be passed in body.market
+  // {
+  //   homeMoneyline, awayMoneyline,
+  //   spread, spreadPriceHome, spreadPriceAway,
+  //   total, overPrice, underPrice
+  // }
+  let market = body.market || null;
+
+  // If you want backend to auto-pull odds, wire this:
+  if (!market) {
+    market = await getMarketOddsFromAPI(leagueKey, homeTeam, awayTeam);
+  }
+
+  const { expectedHome, expectedAway, sd, basePpg } = computeExpectedPoints(
     leagueKey,
     homeTeam,
     awayTeam,
@@ -222,71 +261,185 @@ exports.handler = async (event) => {
   let homeTotal = 0;
   let awayTotal = 0;
 
+  // For spread / total edges
+  let homeCovers = 0;
+  let awayCovers = 0;
+  let pushesATS = 0;
+
+  let overHits = 0;
+  let underHits = 0;
+  let pushesTotal = 0;
+
+  const fallback = FALLBACK_LEAGUE_STATS[leagueKey] || FALLBACK_LEAGUE_STATS.NBA;
+  const maxScoreClamp = basePpg * 3;
+
+  const hasSpread = market && typeof market.spread === 'number';
+  const hasTotal = market && typeof market.total === 'number';
+
   for (let i = 0; i < SIMS; i++) {
     const rawHome = normalSample(expectedHome, sd);
     const rawAway = normalSample(expectedAway, sd);
 
-    const maxScore = fallback.ppg * 3;
-    const homeScore = Math.round(clamp(rawHome, 0, maxScore));
-    const awayScore = Math.round(clamp(rawAway, 0, maxScore));
+    const homeScore = Math.round(clamp(rawHome, 0, maxScoreClamp));
+    const awayScore = Math.round(clamp(rawAway, 0, maxScoreClamp));
 
     homeTotal += homeScore;
     awayTotal += awayScore;
 
     if (homeScore > awayScore) homeWins++;
+
+    if (hasSpread) {
+      const spreadHome = market.spread; // home -X
+      const margin = homeScore + spreadHome - awayScore;
+      if (margin > 0) homeCovers++;
+      else if (margin < 0) awayCovers++;
+      else pushesATS++;
+    }
+
+    if (hasTotal) {
+      const totalLine = market.total;
+      const pts = homeScore + awayScore;
+      if (pts > totalLine) overHits++;
+      else if (pts < totalLine) underHits++;
+      else pushesTotal++;
+    }
   }
 
   const winPct = (homeWins / SIMS) * 100;
   const projectedHome = Math.round(homeTotal / SIMS);
   const projectedAway = Math.round(awayTotal / SIMS);
 
-  const impliedBreakEven = 52.4; // -110 baseline
-  const numericEdge = winPct - impliedBreakEven;
+  const modelHomeWinProb = homeWins / SIMS;
+  const modelAwayWinProb = 1 - modelHomeWinProb;
 
-  const edgeText =
-    winPct > 56
-      ? `+${numericEdge.toFixed(2)}% EDGE on ${homeTeam.toUpperCase()}`
-      : 'No strong edge vs -110 baseline';
+  // ---------- Calculate edges vs market ----------
+  const edges = {
+    moneyline: null,
+    spread: null,
+    total: null
+  };
 
-  // Build bet recommendation
-  const spread = projectedHome - projectedAway; // home -X
-  let recommendedBet;
+  // Moneyline
+  if (market && market.homeMoneyline != null && market.awayMoneyline != null) {
+    const mHomeImp = impliedProbFromAmerican(market.homeMoneyline);
+    const mAwayImp = impliedProbFromAmerican(market.awayMoneyline);
 
-  if (Math.abs(numericEdge) < 1) {
-    recommendedBet = 'No clear edge — pass or use as lean / live-bet information.';
-  } else if (numericEdge > 0) {
-    // Edge on home side
-    const modelSpread = spread; // home -X
-    const safeSpread = Math.max(0, modelSpread - 1); // conservative ATS range
-    if (modelSpread >= 0) {
-      recommendedBet =
-        `Bet ${homeTeam} to win (moneyline). ` +
-        `Model spread: ${homeTeam} -${modelSpread.toFixed(1)}. ` +
-        `Comfortable betting ${homeTeam} to cover up to -${safeSpread.toFixed(1)}.`;
-    } else {
-      recommendedBet =
-        `Model likes ${homeTeam} long term but projection is weirdly dog-ish. ` +
-        `Stick to small moneyline exposure or pass.`;
+    edges.moneyline = {
+      homeMoneyline: market.homeMoneyline,
+      awayMoneyline: market.awayMoneyline,
+      modelHomeWinProb,
+      modelAwayWinProb,
+      impliedHomeProb: mHomeImp,
+      impliedAwayProb: mAwayImp,
+      homeEdgePct: mHomeImp != null ? (modelHomeWinProb - mHomeImp) * 100 : null,
+      awayEdgePct: mAwayImp != null ? (modelAwayWinProb - mAwayImp) * 100 : null,
+      homeFairLine: fairLineFromProb(modelHomeWinProb),
+      awayFairLine: fairLineFromProb(modelAwayWinProb)
+    };
+  }
+
+  // Spread (assume default -110 unless prices passed)
+  if (hasSpread) {
+    const totalSpreads = homeCovers + awayCovers + pushesATS || 1;
+    const homeCoverProb = homeCovers / totalSpreads;
+    const awayCoverProb = awayCovers / totalSpreads;
+
+    const priceHome = market.spreadPriceHome ?? -110;
+    const priceAway = market.spreadPriceAway ?? -110;
+    const beHome = impliedProbFromAmerican(priceHome) ?? 0.524;
+    const beAway = impliedProbFromAmerican(priceAway) ?? 0.524;
+
+    edges.spread = {
+      spread: market.spread, // home -X
+      homeCoverProb,
+      awayCoverProb,
+      homeEdgePct: (homeCoverProb - beHome) * 100,
+      awayEdgePct: (awayCoverProb - beAway) * 100
+    };
+  }
+
+  // Total (assume -110 unless prices passed)
+  if (hasTotal) {
+    const totalTotals = overHits + underHits + pushesTotal || 1;
+    const overProb = overHits / totalTotals;
+    const underProb = underHits / totalTotals;
+
+    const overPrice = market.overPrice ?? -110;
+    const underPrice = market.underPrice ?? -110;
+    const beOver = impliedProbFromAmerican(overPrice) ?? 0.524;
+    const beUnder = impliedProbFromAmerican(underPrice) ?? 0.524;
+
+    edges.total = {
+      total: market.total,
+      overProb,
+      underProb,
+      overEdgePct: (overProb - beOver) * 100,
+      underEdgePct: (underProb - beUnder) * 100
+    };
+  }
+
+  // ---------- Bet recommendation (picks best edge) ----------
+  const impliedBreakEven = 0.524;
+
+  let bestPlay = 'No clear edge — use as info or live-bet only.';
+  let bestEdgeValue = 0;
+
+  // ML edges
+  if (edges.moneyline) {
+    if (edges.moneyline.homeEdgePct > bestEdgeValue) {
+      bestEdgeValue = edges.moneyline.homeEdgePct;
+      bestPlay =
+        `Moneyline: Bet ${homeTeam} (model ${ (modelHomeWinProb*100).toFixed(1) }% vs ` +
+        `implied ${ (edges.moneyline.impliedHomeProb*100).toFixed(1) }%).`;
     }
-  } else {
-    // Edge against home → value on away
-    const modelSpread = spread; // home -X
-    const dogPoints = -modelSpread; // away +X
-    const safeDog = Math.max(0, dogPoints - 1);
-    if (dogPoints > 0) {
-      recommendedBet =
-        `Market likely overvalues ${homeTeam}. ` +
-        `Lean to ${awayTeam} +points. Model spread: ${homeTeam} -${modelSpread.toFixed(1)}. ` +
-        `Comfortable taking ${awayTeam} at +${safeDog.toFixed(1)} or better.`;
-    } else {
-      recommendedBet = 'No strong dog edge. Pass or treat this as informational only.';
+    if (edges.moneyline.awayEdgePct > bestEdgeValue) {
+      bestEdgeValue = edges.moneyline.awayEdgePct;
+      bestPlay =
+        `Moneyline: Bet ${awayTeam} (model ${ (modelAwayWinProb*100).toFixed(1) }% vs ` +
+        `implied ${ (edges.moneyline.impliedAwayProb*100).toFixed(1) }%).`;
     }
   }
+
+  // Spread edges
+  if (edges.spread) {
+    if (edges.spread.homeEdgePct > bestEdgeValue) {
+      bestEdgeValue = edges.spread.homeEdgePct;
+      bestPlay =
+        `Spread: Bet ${homeTeam} ${edges.spread.spread > 0 ? '+' : ''}${edges.spread.spread.toFixed(1)} ` +
+        `(cover ${ (edges.spread.homeCoverProb*100).toFixed(1) }% vs break-even ${ (impliedBreakEven*100).toFixed(1) }%).`;
+    }
+    if (edges.spread.awayEdgePct > bestEdgeValue) {
+      bestEdgeValue = edges.spread.awayEdgePct;
+      bestPlay =
+        `Spread: Bet ${awayTeam} ${edges.spread.spread > 0 ? '-' : '+'}${Math.abs(edges.spread.spread).toFixed(1)} ` +
+        `(cover ${ (edges.spread.awayCoverProb*100).toFixed(1) }% vs break-even ${ (impliedBreakEven*100).toFixed(1) }%).`;
+    }
+  }
+
+  // Total edges
+  if (edges.total) {
+    if (edges.total.overEdgePct > bestEdgeValue) {
+      bestEdgeValue = edges.total.overEdgePct;
+      bestPlay =
+        `Total: Bet OVER ${edges.total.total.toFixed(1)} (model ${ (edges.total.overProb*100).toFixed(1) }% vs break-even ${(impliedBreakEven*100).toFixed(1)}%).`;
+    }
+    if (edges.total.underEdgePct > bestEdgeValue) {
+      bestEdgeValue = edges.total.underEdgePct;
+      bestPlay =
+        `Total: Bet UNDER ${edges.total.total.toFixed(1)} (model ${ (edges.total.underProb*100).toFixed(1) }% vs break-even ${(impliedBreakEven*100).toFixed(1)}%).`;
+    }
+  }
+
+  const numericEdge = bestEdgeValue;
+  const edgeText =
+    numericEdge > 0.5
+      ? `Best edge: +${numericEdge.toFixed(2)}% (${bestPlay})`
+      : 'No strong edge vs standard -110 pricing.';
 
   const usesRealData =
     !!(leagueData && leagueData.teams && leagueData.teams[homeTeam] && leagueData.teams[awayTeam]);
 
-  const explanation = usesRealData
+  let explanation = usesRealData
     ? `${homeTeam} vs ${awayTeam} is modeled using team offensive/defensive ratings and pace from data/${leagueKey.toLowerCase()}.json, then simulated 500,000 times. ${homeTeam} wins ${winPct.toFixed(
         2
       )}% of sims. Projected final: ${homeTeam} ${projectedHome} – ${awayTeam} ${projectedAway}.`
@@ -294,20 +447,39 @@ exports.handler = async (event) => {
         2
       )}% of sims. Projected final: ${homeTeam} ${projectedHome} – ${awayTeam} ${projectedAway}.`;
 
+  if (edges.moneyline || edges.spread || edges.total) {
+    explanation += '\n\nMarket comparison:';
+    if (edges.moneyline) {
+      explanation += `\n• ML: model ${homeTeam} ${ (modelHomeWinProb*100).toFixed(1) }% / ${awayTeam} ${ (modelAwayWinProb*100).toFixed(1) }% ` +
+                     `vs market lines ${edges.moneyline.homeMoneyline}, ${edges.moneyline.awayMoneyline}.`;
+    }
+    if (edges.spread) {
+      explanation += `\n• Spread: home ${edges.spread.spread.toFixed(1)} (cover ${ (edges.spread.homeCoverProb*100).toFixed(1) }%), ` +
+                     `away cover ${ (edges.spread.awayCoverProb*100).toFixed(1) }%.`;
+    }
+    if (edges.total) {
+      explanation += `\n• Total ${edges.total.total.toFixed(1)}: over ${ (edges.total.overProb*100).toFixed(1) }%, under ${ (edges.total.underProb*100).toFixed(1) }%.`;
+    }
+  }
+
+  const responseBody = {
+    matchup: `${awayTeam} @ ${homeTeam}`,
+    homeTeam,
+    awayTeam,
+    projectedHomeScore: projectedHome,
+    projectedAwayScore: projectedAway,
+    projectedScore: `${projectedHome}–${projectedAway}`,
+    winProbability: winPct.toFixed(2) + '%',
+    edge: edgeText,
+    recommendedBet: bestPlay,
+    explanation,
+    edges,
+    marketUsed: !!market
+  };
+
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      matchup: `${awayTeam} @ ${homeTeam}`,
-      homeTeam,
-      awayTeam,
-      projectedHomeScore: projectedHome,
-      projectedAwayScore: projectedAway,
-      projectedScore: `${projectedHome}–${projectedAway}`,
-      winProbability: winPct.toFixed(2) + '%',
-      edge: edgeText,
-      recommendedBet,
-      explanation
-    })
+    body: JSON.stringify(responseBody)
   };
 };

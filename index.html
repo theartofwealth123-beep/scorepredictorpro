@@ -1,265 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ScorePredictor Pro • 500K Sims</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: #050814;
-      color: white;
+      background: #020617;
+      color: #e5e7eb;
       min-height: 100vh;
-      padding: 1.5rem;
     }
-    .btn {
-      background: linear-gradient(45deg, #7c3aed, #ec4899);
-      padding: 1rem 2.5rem;
-      font-size: 1.2rem;
-      font-weight: 800;
-      border-radius: 9999px;
-      box-shadow: 0 16px 32px rgba(124,58,237,0.45);
-      transition: all 0.2s;
-      cursor: pointer;
+    .gradient-btn {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      box-shadow: 0 12px 30px rgba(88, 28, 135, 0.6);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 24px 40px rgba(124,58,237,0.6);
-    }
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-    .result {
-      background: rgba(10, 12, 30, 0.95);
-      backdrop-filter: blur(16px);
-      border-radius: 1.5rem;
-      padding: 1.75rem;
-      margin-top: 2rem;
-      border: 1px solid rgba(139,92,246,0.35);
-    }
-    .stat-card {
-      background: rgba(15,23,42,0.95);
-      border-radius: 1.25rem;
-      padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(148,163,184,0.3);
+    .gradient-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(88, 28, 135, 0.85);
     }
   </style>
 </head>
 <body class="antialiased">
+  <div class="min-h-screen flex items-center justify-center px-4 py-10">
+    <div class="w-full max-w-6xl space-y-8">
+      <!-- Header -->
+      <header class="text-center space-y-2">
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-sky-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </h1>
+        <p class="text-sm md:text-base text-emerald-400 font-semibold tracking-[0.25em] uppercase">
+          500,000 Simulations • Admin Panel
+        </p>
+      </header>
 
-<div class="max-w-5xl mx-auto">
-  <!-- HEADER -->
-  <header class="text-center mb-10">
-    <h1 class="text-4xl md:text-6xl font-black bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent leading-tight">
-      ScorePredictor Pro
-    </h1>
-    <p class="text-base md:text-xl mt-3 text-green-400 font-semibold tracking-wide">
-      500,000 Monte Carlo Simulations • Admin Console
-    </p>
-  </header>
+      <!-- Main Card -->
+      <main class="bg-slate-900/80 border border-slate-700/70 rounded-3xl shadow-2xl p-6 md:p-8 space-y-8">
+        <!-- League & Teams -->
+        <section class="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div class="space-y-1">
+            <label for="league" class="block text-xs font-semibold uppercase tracking-wide text-slate-400">
+              League
+            </label>
+            <select
+              id="league"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+            >
+              <option value="NBA">NBA</option>
+              <option value="NFL">NFL</option>
+              <option value="NHL">NHL</option>
+              <option value="MLB">MLB</option>
+              <option value="NCAAB">NCAAB</option>
+              <option value="NCAAF">NCAAF</option>
+            </select>
+          </div>
 
-  <!-- INPUT CARD -->
-  <section class="bg-white/5 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-xl">
-    <!-- Opening odds (optional, but makes the edge calculations nasty sharp) -->
-<div class="grid md:grid-cols-4 gap-6 mb-10 text-xl">
-  <input
-    id="home-ml"
-    type="number"
-    class="bg-white/10 rounded-2xl px-6 py-4 backdrop-blur border border-white/20 focus:outline-none focus:border-purple-500 transition"
-    placeholder="Home ML (e.g. -150)"
-  />
-  <input
-    id="away-ml"
-    type="number"
-    class="bg-white/10 rounded-2xl px-6 py-4 backdrop-blur border border-white/20 focus:outline-none focus:border-purple-500 transition"
-    placeholder="Away ML (e.g. +130)"
-  />
-  <input
-    id="spread-line"
-    type="number"
-    step="0.5"
-    class="bg-white/10 rounded-2xl px-6 py-4 backdrop-blur border border-white/20 focus:outline-none focus:border-purple-500 transition"
-    placeholder="Home spread (e.g. -4.5)"
-  />
-  <input
-    id="total-line"
-    type="number"
-    step="0.5"
-    class="bg-white/10 rounded-2xl px-6 py-4 backdrop-blur border border-white/20 focus:outline-none focus:border-purple-500 transition"
-    placeholder="Total (e.g. 229.5)"
-  />
-</div>
+          <div class="space-y-1">
+            <label for="home-team" class="block text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Home Team
+            </label>
+            <select
+              id="home-team"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+            >
+              <option>Select Home Team</option>
+            </select>
+          </div>
 
-    <div class="flex justify-center">
-      <button id="run-btn" class="btn">
-        RUN 500,000 SIMULATIONS
-      </button>
+          <div class="space-y-1">
+            <label for="away-team" class="block text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Away Team
+            </label>
+            <select
+              id="away-team"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+            >
+              <option>Select Away Team</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Odds Inputs -->
+        <section class="grid md:grid-cols-4 gap-4 text-sm md:text-base">
+          <div class="space-y-1">
+            <label for="home-ml" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Home Moneyline
+            </label>
+            <input
+              id="home-ml"
+              type="number"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="-150"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label for="away-ml" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Away Moneyline
+            </label>
+            <input
+              id="away-ml"
+              type="number"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="+130"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label for="spread-line" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Home Spread
+            </label>
+            <input
+              id="spread-line"
+              type="number"
+              step="0.5"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="-4.5"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label for="total-line" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Total (O/U)
+            </label>
+            <input
+              id="total-line"
+              type="number"
+              step="0.5"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="229.5"
+            />
+          </div>
+        </section>
+
+        <!-- Button -->
+        <div class="flex justify-center">
+          <button
+            id="run-btn"
+            class="gradient-btn inline-flex items-center justify-center rounded-2xl px-8 py-3 text-sm md:text-base font-black tracking-wide uppercase"
+          >
+            Run 500,000 Simulations
+          </button>
+        </div>
+
+        <!-- Result Panel -->
+        <section
+          id="result"
+          class="hidden bg-slate-900/70 border border-slate-700 rounded-3xl px-4 py-5 md:px-6 md:py-6 space-y-4"
+        >
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <h3
+              id="matchup"
+              class="text-lg md:text-xl font-extrabold bg-gradient-to-r from-yellow-300 via-pink-400 to-sky-300 bg-clip-text text-transparent"
+            ></h3>
+            <p id="winprob" class="text-sm md:text-base font-semibold text-emerald-400"></p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-3">
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 space-y-1">
+              <p class="text-[0.7rem] font-semibold uppercase tracking-wide text-slate-400">
+                Projected Final Score
+              </p>
+              <p id="score" class="text-base md:text-lg font-bold text-slate-50"></p>
+            </div>
+
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 space-y-1">
+              <p class="text-[0.7rem] font-semibold uppercase tracking-wide text-slate-400">
+                Edge Summary
+              </p>
+              <p id="edge" class="text-base md:text-lg font-bold text-emerald-300"></p>
+            </div>
+
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 space-y-1">
+              <p class="text-[0.7rem] font-semibold uppercase tracking-wide text-slate-400">
+                Best Bet
+              </p>
+              <p id="bet" class="text-base md:text-lg font-semibold text-sky-300"></p>
+            </div>
+          </div>
+
+          <div class="bg-slate-950/50 border border-slate-800 rounded-2xl p-3 md:p-4">
+            <p class="text-[0.7rem] font-semibold uppercase tracking-wide text-slate-400 mb-1">
+              Model Notes
+            </p>
+            <p id="explanation" class="text-xs md:text-sm leading-relaxed text-slate-200 whitespace-pre-line"></p>
+          </div>
+        </section>
+      </main>
     </div>
+  </div>
 
-    <!-- RESULT -->
-    <div id="result" class="result hidden">
-      <h3
-        id="matchup"
-        class="text-2xl md:text-3xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 text-center"
-      ></h3>
+  <script>
+    // ===== TEAM LISTS =====
+    const TEAMS = {
+      NBA: ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers","Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","LA Clippers","Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks","Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs","Toronto Raptors","Utah Jazz","Washington Wizards"],
+      NFL: ["Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills","Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns","Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers","Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs","Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins","Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants","New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"],
+      NHL: ["Anaheim Ducks","Arizona Coyotes","Boston Bruins","Buffalo Sabres","Calgary Flames","Carolina Hurricanes","Chicago Blackhawks","Colorado Avalanche","Columbus Blue Jackets","Dallas Stars","Detroit Red Wings","Edmonton Oilers","Florida Panthers","Los Angeles Kings","Minnesota Wild","Montreal Canadiens","Nashville Predators","New Jersey Devils","New York Islanders","New York Rangers","Ottawa Senators","Philadelphia Flyers","Pittsburgh Penguins","San Jose Sharks","Seattle Kraken","St. Louis Blues","Tampa Bay Lightning","Toronto Maple Leafs","Vancouver Canucks","Vegas Golden Knights","Washington Capitals","Winnipeg Jets"],
+      MLB: ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles","Boston Red Sox","Chicago Cubs","Chicago White Sox","Cincinnati Reds","Cleveland Guardians","Colorado Rockies","Detroit Tigers","Houston Astros","Kansas City Royals","Los Angeles Angels","Los Angeles Dodgers","Miami Marlins","Milwaukee Brewers","Minnesota Twins","New York Mets","New York Yankees","Oakland Athletics","Philadelphia Phillies","Pittsburgh Pirates","San Diego Padres","San Francisco Giants","Seattle Mariners","St. Louis Cardinals","Tampa Bay Rays","Texas Rangers","Toronto Blue Jays","Washington Nationals"],
+      NCAAB: ["Abilene Christian","Air Force","Akron","Alabama","Alabama A&M","Alabama State","Alcorn State","American","App State","Arizona","Arizona State","Arkansas","Little Rock","Arkansas State","Army","Auburn","Austin Peay","Ball State","Baylor","Belmont","Bethune-Cookman","Binghamton","Boise State","Boston College","Boston U","Bowling Green","Bradley","Brown","Bryant","Bucknell","Butler","BYU","Cal","Cal Baptist","Cal Poly","Cal State Bakersfield","Cal State Fullerton","Cal State Northridge","Campbell","Canisius","Central Arkansas","Central Connecticut","Charleston","Charlotte","Chattanooga","Chicago State","Cincinnati","The Citadel","Clemson","Cleveland State","Coastal Carolina","Colgate","Colorado","Colorado State","Columbia","Coppin State","Cornell","Creighton","Dartmouth","Davidson","Dayton","Delaware","Delaware State","Denver","DePaul","Detroit Mercy","Drake","Drexel","Duke","Duquesne","East Carolina","Eastern Illinois","Eastern Kentucky","Eastern Michigan","Eastern Washington","Elon","Evansville","Fairfield","Fairleigh Dickinson","Florida","Florida A&M","Florida Atlantic","Florida Gulf Coast","Florida International","Florida State","Fordham","Fresno State","Furman","Gardner-Webb","George Mason","George Washington","Georgetown","Georgia","Georgia Southern","Georgia State","Georgia Tech","Gonzaga","Grambling","Grand Canyon","Green Bay","Hampton","Harvard","Hawaii","High Point","Hofstra","Holy Cross","Houston","Howard","Idaho","Idaho State","Illinois","Illinois State","Indiana","Indiana State","Iona","Iowa","Iowa State","IUPUI","Jackson State","Jacksonville","Jacksonville State","James Madison","Kansas","Kansas State","Kennesaw State","Kent State","Kentucky","La Salle","Lafayette","Lamar","Lehigh","Liberty","Lindenwood","Lipscomb","Long Beach State","Long Island","Longwood","Louisiana","Louisiana Tech","Louisville","Loyola Chicago","Loyola Marymount","Loyola Maryland","LSU","Maine","Manhattan","Marist","Marquette","Marshall","Maryland","UMass","McNeese","Memphis","Mercer","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Milwaukee","Minnesota","Mississippi State","Missouri","Missouri State","Monmouth","Montana","Montana State","Morehead State","Morgan State","Mount St. Mary's","Murray State","Navy","NC State","Nebraska","Nevada","New Hampshire","New Mexico","New Mexico State","Niagara","Nicholls","Norfolk State","North Alabama","North Carolina","NC A&T","NC Central","North Dakota","North Dakota State","North Florida","Northeastern","Northern Arizona","Northern Colorado","Northern Illinois","Northern Iowa","Northern Kentucky","North Texas","Northwestern","Northwestern State","Notre Dame","Oakland","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Omaha","Oral Roberts","Oregon","Oregon State","Pacific","Penn","Penn State","Pepperdine","Pittsburgh","Portland","Portland State","Prairie View","Presbyterian","Princeton","Providence","Purdue","Queens","Quinnipiac","Radford","Rhode Island","Rice","Richmond","Rider","Robert Morris","Rutgers","Sacramento State","Sacred Heart","Saint Joseph's","Saint Louis","Saint Mary's","Saint Peter's","Samford","Sam Houston","San Diego","San Diego State","San Francisco","San Jose State","Santa Clara","Seattle","Seton Hall","Siena","South Alabama","South Carolina","South Carolina State","South Dakota","South Dakota State","South Florida","Southeast Missouri","Southeastern Louisiana","Southern","Southern Illinois","Southern Miss","Southern Utah","St. Bonaventure","St. Francis (PA)","St. John's","Stanford","Stephen F. Austin","Stetson","Stonehill","Stony Brook","Syracuse","Tarleton","TCU","Temple","Tennessee","Tennessee State","Tennessee Tech","Texas","Texas A&M","Texas A&M-Commerce","Texas Southern","Texas State","Texas Tech","Toledo","Towson","Troy","Tulane","Tulsa","UAB","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","UCF","UCLA","UMass Lowell","UMBC","UNC Asheville","UNC Greensboro","UNC Wilmington","UNLV","USC","UT Arlington","UTEP","UT Martin","UT Rio Grande Valley","UTSA","Utah","Utah State","Utah Tech","Utah Valley","Valparaiso","Vanderbilt","VCU","Vermont","Villanova","Virginia","Virginia Tech","VMI","Wagner","Wake Forest","Washington","Washington State","Weber State","West Virginia","Western Carolina","Western Illinois","Western Kentucky","Western Michigan","Wichita State","William & Mary","Winthrop","Wisconsin","Wofford","Wright State","Wyoming","Xavier","Yale","Youngstown State"],
+      NCAAF: ["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","BYU","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","UConn","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawaii","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kent State","Kentucky","Kennesaw State","Liberty","Louisiana","Louisiana Tech","Louisville","LSU","Marshall","Maryland","Massachusetts","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","NC State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","Sam Houston","San Diego State","San Jose State","SMU","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"]
+    };
 
-      <div class="grid md:grid-cols-3 gap-4 mb-4 text-center">
-        <div class="stat-card">
-          <p class="text-xs md:text-sm uppercase tracking-wide text-slate-400 mb-1">
-            Projected Score
-          </p>
-          <p id="score" class="text-2xl md:text-3xl font-black text-green-400"></p>
-        </div>
-        <div class="stat-card">
-          <p class="text-xs md:text-sm uppercase tracking-wide text-slate-400 mb-1">
-            Home Win Probability
-          </p>
-          <p id="winprob" class="text-2xl md:text-3xl font-black text-yellow-400"></p>
-        </div>
-        <div class="stat-card">
-          <p class="text-xs md:text-sm uppercase tracking-wide text-slate-400 mb-1">
-            Edge vs Market
-          </p>
-          <p id="edge" class="text-2xl md:text-3xl font-black text-emerald-400 leading-tight"></p>
-        </div>
-      </div>
+    function populateTeams() {
+      const league = document.getElementById("league").value;
+      const teams = TEAMS[league] || [];
+      ["home-team", "away-team"].forEach(id => {
+        const select = document.getElementById(id);
+        select.innerHTML =
+          "<option>Select Team</option>" +
+          teams.map(t => `<option>${t}</option>`).join("");
+      });
+    }
 
-      <div
-        class="text-sm md:text-base leading-relaxed font-medium text-gray-200 mt-2"
-        id="explanation"
-      ></div>
-    </div>
-  </section>
-</div>
+    document.getElementById("league").addEventListener("change", populateTeams);
+    populateTeams(); // initial load
 
-<script>
-// TEAM LISTS
-const TEAMS = {
-  NBA: ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers","Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","LA Clippers","Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks","Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs","Toronto Raptors","Utah Jazz","Washington Wizards"],
-  NFL: ["Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills","Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns","Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers","Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs","Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins","Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants","New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"],
-  NHL: ["Anaheim Ducks","Arizona Coyotes","Boston Bruins","Buffalo Sabres","Calgary Flames","Carolina Hurricanes","Chicago Blackhawks","Colorado Avalanche","Columbus Blue Jackets","Dallas Stars","Detroit Red Wings","Edmonton Oilers","Florida Panthers","Los Angeles Kings","Minnesota Wild","Montreal Canadiens","Nashville Predators","New Jersey Devils","New York Islanders","New York Rangers","Ottawa Senators","Philadelphia Flyers","Pittsburgh Penguins","San Jose Sharks","Seattle Kraken","St. Louis Blues","Tampa Bay Lightning","Toronto Maple Leafs","Vancouver Canucks","Vegas Golden Knights","Washington Capitals","Winnipeg Jets"],
-  MLB: ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles","Boston Red Sox","Chicago Cubs","Chicago White Sox","Cincinnati Reds","Cleveland Guardians","Colorado Rockies","Detroit Tigers","Houston Astros","Kansas City Royals","Los Angeles Angels","Los Angeles Dodgers","Miami Marlins","Milwaukee Brewers","Minnesota Twins","New York Mets","New York Yankees","Oakland Athletics","Philadelphia Phillies","Pittsburgh Pirates","San Diego Padres","San Francisco Giants","Seattle Mariners","St. Louis Cardinals","Tampa Bay Rays","Texas Rangers","Toronto Blue Jays","Washington Nationals"],
-  NCAAB: ["Abilene Christian","Air Force","Akron","Alabama","Alabama A&M","Alabama State","Alcorn State","American","App State","Arizona","Arizona State","Arkansas","Little Rock","Arkansas State","Army","Auburn","Austin Peay","Ball State","Baylor","Belmont","Bethune-Cookman","Binghamton","Boise State","Boston College","Boston U","Bowling Green","Bradley","Brown","Bryant","Bucknell","Butler","BYU","Cal","Cal Baptist","Cal Poly","Cal State Bakersfield","Cal State Fullerton","Cal State Northridge","Campbell","Canisius","Central Arkansas","Central Connecticut","Charleston","Charlotte","Chattanooga","Chicago State","Cincinnati","The Citadel","Clemson","Cleveland State","Coastal Carolina","Colgate","Colorado","Colorado State","Columbia","Coppin State","Cornell","Creighton","Dartmouth","Davidson","Dayton","Delaware","Delaware State","Denver","DePaul","Detroit Mercy","Drake","Drexel","Duke","Duquesne","East Carolina","Eastern Illinois","Eastern Kentucky","Eastern Michigan","Eastern Washington","Elon","Evansville","Fairfield","Fairleigh Dickinson","Florida","Florida A&M","Florida Atlantic","Florida Gulf Coast","Florida International","Florida State","Fordham","Fresno State","Furman","Gardner-Webb","George Mason","George Washington","Georgetown","Georgia","Georgia Southern","Georgia State","Georgia Tech","Gonzaga","Grambling","Grand Canyon","Green Bay","Hampton","Harvard","Hawaii","High Point","Hofstra","Holy Cross","Houston","Howard","Idaho","Idaho State","Illinois","Illinois State","Indiana","Indiana State","Iona","Iowa","Iowa State","IUPUI","Jackson State","Jacksonville","Jacksonville State","James Madison","Kansas","Kansas State","Kennesaw State","Kent State","Kentucky","La Salle","Lafayette","Lamar","Lehigh","Liberty","Lindenwood","Lipscomb","Long Beach State","Long Island","Longwood","Louisiana","Louisiana Tech","Louisville","Loyola Chicago","Loyola Marymount","Loyola Maryland","LSU","Maine","Manhattan","Marist","Marquette","Marshall","Maryland","UMass","McNeese","Memphis","Mercer","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Milwaukee","Minnesota","Mississippi State","Missouri","Missouri State","Monmouth","Montana","Montana State","Morehead State","Morgan State","Mount St. Mary's","Murray State","Navy","NC State","Nebraska","Nevada","New Hampshire","New Mexico","New Mexico State","Niagara","Nicholls","Norfolk State","North Alabama","North Carolina","NC A&T","NC Central","North Dakota","North Dakota State","North Florida","Northeastern","Northern Arizona","Northern Colorado","Northern Illinois","Northern Iowa","Northern Kentucky","North Texas","Northwestern","Northwestern State","Notre Dame","Oakland","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Omaha","Oral Roberts","Oregon","Oregon State","Pacific","Penn","Penn State","Pepperdine","Pittsburgh","Portland","Portland State","Prairie View","Presbyterian","Princeton","Providence","Purdue","Queens","Quinnipiac","Radford","Rhode Island","Rice","Richmond","Rider","Robert Morris","Rutgers","Sacramento State","Sacred Heart","Saint Joseph's","Saint Louis","Saint Mary's","Saint Peter's","Samford","Sam Houston","San Diego","San Diego State","San Francisco","San Jose State","Santa Clara","Seattle","Seton Hall","Siena","South Alabama","South Carolina","South Carolina State","South Dakota","South Dakota State","South Florida","Southeast Missouri","Southeastern Louisiana","Southern","Southern Illinois","Southern Miss","Southern Utah","St. Bonaventure","St. Francis (PA)","St. John's","Stanford","Stephen F. Austin","Stetson","Stonehill","Stony Brook","Syracuse","Tarleton","TCU","Temple","Tennessee","Tennessee State","Tennessee Tech","Texas","Texas A&M","Texas A&M-Commerce","Texas Southern","Texas State","Texas Tech","Toledo","Towson","Troy","Tulane","Tulsa","UAB","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","UCF","UCLA","UMass Lowell","UMBC","UNC Asheville","UNC Greensboro","UNC Wilmington","UNLV","USC","UT Arlington","UTEP","UT Martin","UT Rio Grande Valley","UTSA","Utah","Utah State","Utah Tech","Utah Valley","Valparaiso","Vanderbilt","VCU","Vermont","Villanova","Virginia","Virginia Tech","VMI","Wagner","Wake Forest","Washington","Washington State","Weber State","West Virginia","Western Carolina","Western Illinois","Western Kentucky","Western Michigan","Wichita State","William & Mary","Winthrop","Wisconsin","Wofford","Wright State","Wyoming","Xavier","Yale","Youngstown State"],
-  NCAAF: ["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","BYU","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","UConn","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawaii","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kent State","Kentucky","Kennesaw State","Liberty","Louisiana","Louisiana Tech","Louisville","LSU","Marshall","Maryland","Massachusetts","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","NC State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","Sam Houston","San Diego State","San Jose State","SMU","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"]
-};
+    function getToken() {
+      return (
+        new URLSearchParams(location.search).get("token") ||
+        document.cookie
+          .split("; ")
+          .find(c => c.startsWith("token="))
+          ?.split("=")[1]
+      );
+    }
 
-// populate teams
-function populateTeams() {
-  const league = document.getElementById("league").value;
-  const teams = TEAMS[league] || [];
-  ["home-team", "away-team"].forEach(id => {
-    const select = document.getElementById(id);
-    select.innerHTML =
-      "<option>Select Team</option>" +
-      teams.map(t => `<option>${t}</option>`).join("");
-  });
-}
-document.getElementById("league").addEventListener("change", populateTeams);
-populateTeams();
+    document.addEventListener("click", async e => {
+      if (e.target.id !== "run-btn") return;
 
-function getToken() {
-  return new URLSearchParams(location.search).get("token") ||
-         document.cookie.split("; ").find(c => c.startsWith("token="))?.split("=")[1];
-}
+      const league = document.getElementById("league").value;
+      const home = document.getElementById("home-team").value;
+      const away = document.getElementById("away-team").value;
 
-document.addEventListener("click", async function(e) {
-  if (e.target.id !== "run-btn") return;
+      if (!home || !away || home.includes("Select") || away.includes("Select")) {
+        alert("Please select both teams.");
+        return;
+      }
 
-  const league = document.getElementById("league").value;
-  const home = document.getElementById("home-team").value;
-  const away = document.getElementById("away-team").value;
+      // Read odds inputs (optional)
+      const homeMlVal = document.getElementById("home-ml").value.trim();
+      const awayMlVal = document.getElementById("away-ml").value.trim();
+      const spreadVal = document.getElementById("spread-line").value.trim();
+      const totalVal = document.getElementById("total-line").value.trim();
 
-  if (!home || !away || home === "Select Team" || away === "Select Team") {
-    alert("Please select both teams");
-    return;
-  }
+      const homeMl = homeMlVal === "" ? NaN : parseInt(homeMlVal, 10);
+      const awayMl = awayMlVal === "" ? NaN : parseInt(awayMlVal, 10);
+      const spread = spreadVal === "" ? NaN : parseFloat(spreadVal);
+      const total = totalVal === "" ? NaN : parseFloat(totalVal);
 
-  // 🔢 Read odds inputs (all optional)
-  const homeMlVal   = document.getElementById("home-ml").value.trim();
-  const awayMlVal   = document.getElementById("away-ml").value.trim();
-  const spreadVal   = document.getElementById("spread-line").value.trim();
-  const totalVal    = document.getElementById("total-line").value.trim();
+      const payload = { league, homeTeam: home, awayTeam: away };
 
-  const homeMl   = homeMlVal === "" ? NaN : parseInt(homeMlVal, 10);
-  const awayMl   = awayMlVal === "" ? NaN : parseInt(awayMlVal, 10);
-  const spread   = spreadVal === "" ? NaN : parseFloat(spreadVal);
-  const total    = totalVal === "" ? NaN : parseFloat(totalVal);
+      const market = {};
+      let hasMarket = false;
 
-  // Build payload
-  const payload = {
-    league,
-    homeTeam: home,
-    awayTeam: away
-  };
+      if (!isNaN(homeMl) && !isNaN(awayMl)) {
+        market.homeMoneyline = homeMl;
+        market.awayMoneyline = awayMl;
+        hasMarket = true;
+      }
+      if (!isNaN(spread)) {
+        market.spread = spread; // home spread
+        hasMarket = true;
+      }
+      if (!isNaN(total)) {
+        market.total = total;
+        hasMarket = true;
+      }
 
-  // Only add market if at least one thing is filled
-  const market = {};
-  let hasMarket = false;
+      if (hasMarket) payload.market = market;
 
-  if (!isNaN(homeMl) && !isNaN(awayMl)) {
-    market.homeMoneyline = homeMl;
-    market.awayMoneyline = awayMl;
-    hasMarket = true;
-  }
+      const btn = e.target;
+      btn.disabled = true;
+      btn.textContent = "Running 500,000 simulations...";
 
-  if (!isNaN(spread)) {
-    market.spread = spread; // home spread (e.g. -4.5)
-    hasMarket = true;
-  }
+      try {
+        const res = await fetch("/.netlify/functions/predict", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${getToken() || ""}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
 
-  if (!isNaN(total)) {
-    market.total = total;
-    hasMarket = true;
-  }
+        const data = await res.json();
 
-  if (hasMarket) {
-    payload.market = market;
-  }
+        document.getElementById("matchup").textContent = data.matchup || `${away} @ ${home}`;
 
-  const btn = e.target;
-  btn.disabled = true;
-  btn.textContent = "Running 500,000 simulations...";
+        // Explicit home/away score
+        document.getElementById("score").textContent =
+          `${data.homeTeam || home} ${data.projectedHomeScore} – ` +
+          `${data.awayTeam || away} ${data.projectedAwayScore}`;
 
-  try {
-    const res = await fetch("/.netlify/functions/predict", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${getToken()}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
+        document.getElementById("winprob").textContent = data.winProbability || "";
+        document.getElementById("edge").textContent = data.edge || "";
+        document.getElementById("bet").textContent = data.recommendedBet || "";
+
+        document.getElementById("explanation").textContent = data.explanation || "";
+
+        const result = document.getElementById("result");
+        result.classList.remove("hidden");
+        result.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (err) {
+        console.error(err);
+        alert("Server woke up — click once more (then instant forever)");
+      }
+
+      btn.disabled = false;
+      btn.textContent = "Run 500,000 Simulations";
     });
-    const data = await res.json();
-
-    document.getElementById("matchup").textContent = data.matchup;
-
-    // Make score explicit: home vs away
-    document.getElementById("score").textContent =
-      `${data.homeTeam} ${data.projectedHomeScore} – ` +
-      `${data.awayTeam} ${data.projectedAwayScore}`;
-
-    document.getElementById("winprob").textContent = data.winProbability;
-    document.getElementById("edge").textContent = data.edge;
-
-    // Show recommended bet + explanation
-    document.getElementById("explanation").innerHTML =
-      `<strong>Bet:</strong> ${data.recommendedBet}<br><br>` +
-      (data.explanation || "");
-
-    document.getElementById("result").classList.remove("hidden");
-    document.getElementById("result").scrollIntoView({ behavior: "smooth" });
-  } catch (err) {
-    console.error(err);
-    alert("Server woke up — click once more (then instant forever)");
-  }
-
-  btn.disabled = false;
-  btn.textContent = "RUN 500,000 SIMULATIONS";
-});
-</script>
+  </script>
 </body>
 </html>
