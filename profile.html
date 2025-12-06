@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScorePredictor Pro • Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <header class="border-b border-slate-800/70 bg-slate-950/70 backdrop-blur">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center font-black text-xl">
+          S
+        </div>
+        <div>
+          <div class="font-bold text-lg tracking-tight">ScorePredictor Pro</div>
+          <div class="text-xs text-slate-400 uppercase tracking-[0.2em]">Account</div>
+        </div>
+      </div>
+      <nav class="flex items-center gap-4 text-sm">
+        <a href="/" class="text-slate-400 hover:text-slate-100">Calculator</a>
+        <a href="/scores.html" class="text-slate-400 hover:text-slate-100">Scores</a>
+        <a href="/profile.html" class="text-slate-100 font-medium">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pt-8 pb-16">
+    <section class="mb-6">
+      <h1 class="text-2xl md:text-3xl font-black tracking-tight text-slate-50">
+        Your Profile
+      </h1>
+      <p class="mt-2 text-sm text-slate-400 max-w-xl">
+        Manage your login, subscription, and billing for ScorePredictor Pro.
+      </p>
+    </section>
+
+    <section class="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-5 md:p-6 shadow-xl">
+      <div id="not-logged" class="hidden text-sm text-slate-300">
+        You’re not logged in.
+        <button
+          class="underline underline-offset-2 ml-1"
+          onclick="window.location.href='/auth-callback'"
+        >
+          Log in / Start Trial
+        </button>
+      </div>
+
+      <div id="profile-info" class="hidden space-y-4">
+        <div class="flex flex-col gap-1 text-sm">
+          <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Email
+          </div>
+          <div id="prof-email" class="text-slate-100"></div>
+        </div>
+
+        <div class="flex flex-col gap-1 text-sm">
+          <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Subscription
+          </div>
+          <div id="prof-sub" class="text-slate-100"></div>
+          <div id="prof-sub-detail" class="text-xs text-slate-400"></div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-800/80 mt-4 grid md:grid-cols-2 gap-4">
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 mb-2">
+              Security
+            </div>
+            <button
+              id="btn-reset"
+              class="w-full mb-2 inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-xs font-medium hover:bg-slate-800/80"
+            >
+              Change / Forgot Password
+            </button>
+            <button
+              id="btn-logout"
+              class="w-full inline-flex items-center justify-center rounded-xl border border-rose-600/60 bg-rose-600/10 px-3 py-2 text-xs font-medium text-rose-200 hover:bg-rose-600/20"
+            >
+              Logout
+            </button>
+          </div>
+
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 mb-2">
+              Billing
+            </div>
+            <button
+              id="btn-billing"
+              class="w-full inline-flex items-center justify-center rounded-xl border border-emerald-600/60 bg-emerald-600/10 px-3 py-2 text-xs font-medium text-emerald-200 hover:bg-emerald-600/20"
+            >
+              Manage Billing / Cancel Subscription
+            </button>
+            <p class="mt-2 text-[11px] text-slate-500">
+              Opens a secure Stripe portal where you can update payment details or cancel your subscription.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="status-msg" class="mt-4 text-xs text-slate-500"></div>
+    </section>
+  </main>
+
+  <script>
+    function getCookie(name) {
+      const parts = ("; " + document.cookie).split("; " + name + "=");
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+    function getToken() {
+      return getCookie("appSession") || getCookie("token") || null;
+    }
+
+    const notLogged = document.getElementById("not-logged");
+    const profileInfo = document.getElementById("profile-info");
+    const emailEl = document.getElementById("prof-email");
+    const subEl = document.getElementById("prof-sub");
+    const subDetailEl = document.getElementById("prof-sub-detail");
+    const statusMsg = document.getElementById("status-msg");
+
+    const token = getToken();
+
+    async function loadProfile() {
+      if (!token) {
+        notLogged.classList.remove("hidden");
+        return;
+      }
+
+      try {
+        const res = await fetch("/.netlify/functions/get-sub-status", {
+          headers: { Authorization: "Bearer " + token }
+        });
+        if (!res.ok) throw new Error("Failed to load status");
+        const data = await res.json();
+
+        profileInfo.classList.remove("hidden");
+        emailEl.textContent = data.email || "(unknown)";
+
+        const status = data.status || "free";
+        if (status === "active") {
+          subEl.textContent = "Active subscription";
+          subDetailEl.textContent = "You have full access to the 5M-sim calculator and all features.";
+        } else if (status === "trialing") {
+          subEl.textContent = "Trial active";
+          subDetailEl.textContent = "You’re in a trial period — all features are unlocked.";
+        } else if (status === "past_due") {
+          subEl.textContent = "Payment issue (past due)";
+          subDetailEl.textContent = "Your payment method needs attention. Use Manage Billing to update it.";
+        } else if (status === "canceled") {
+          subEl.textContent = "Subscription canceled";
+          subDetailEl.textContent = "You still have access to free tools and scores. Restart anytime.";
+        } else {
+          subEl.textContent = "Free tier";
+          subDetailEl.textContent = "Free access to scores and content. Subscribe to unlock the calculator.";
+        }
+      } catch (err) {
+        statusMsg.textContent = "Error loading profile.";
+      }
+    }
+
+    document.getElementById("btn-reset").addEventListener("click", () => {
+      // Easiest reliable path: send them through Auth0 login where they can hit "Forgot password?"
+      window.location.href = "/auth-callback";
+    });
+
+    document.getElementById("btn-logout").addEventListener("click", () => {
+      document.cookie = "appSession=; Max-Age=0; path=/";
+      document.cookie = "token=; Max-Age=0; path=/";
+      window.location.href = "/";
+    });
+
+    document.getElementById("btn-billing").addEventListener("click", async () => {
+      statusMsg.textContent = "Opening billing portal...";
+      try {
+        const res = await fetch("/.netlify/functions/create-portal", {
+          method: "POST",
+          headers: { Authorization: "Bearer " + (token || "") }
+        });
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error(txt || "Failed to create portal");
+        }
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error("No URL returned");
+        }
+      } catch (err) {
+        statusMsg.textContent = "Billing portal error: " + err.message;
+      }
+    });
+
+    loadProfile();
+  </script>
+</body>
+</html>

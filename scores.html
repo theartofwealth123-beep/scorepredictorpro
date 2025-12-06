@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScorePredictor Pro • Live Scores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Top bar -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="text-base md:text-lg font-black bg-gradient-to-r from-purple-400 via-pink-500 to-sky-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </span>
+        <span class="hidden md:inline text-xs text-slate-400">Live Boards</span>
+      </div>
+      <nav class="flex items-center gap-3 text-xs md:text-sm">
+        <a href="/" class="text-slate-400 hover:text-slate-100 transition">Calculator</a>
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-100 text-xs font-semibold">
+          Live Scores
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="flex-1">
+    <div class="max-w-6xl mx-auto px-4 py-6 md:py-8 grid md:grid-cols-3 gap-6 md:gap-8">
+      <!-- Left: game list -->
+      <section class="md:col-span-2 space-y-4">
+        <!-- Filters / header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <h1 class="text-lg md:text-xl font-bold text-slate-50">Live & Today’s Games</h1>
+            <p class="text-xs md:text-sm text-slate-400">
+              NBA • NFL • NHL — tap a game to open the tracker.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-xs md:text-sm">
+            <label class="text-slate-400">League</label>
+            <select
+              id="league-filter"
+              class="bg-slate-900/80 border border-slate-700 rounded-xl px-3 py-2 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/60"
+            >
+              <option value="ALL">All</option>
+              <option value="NBA">NBA</option>
+              <option value="NFL">NFL</option>
+              <option value="NHL">NHL</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Status / loading -->
+        <div id="games-status" class="text-xs md:text-sm text-slate-400">
+          Loading games for today...
+        </div>
+
+        <!-- Game cards -->
+        <div
+          id="games-list"
+          class="grid sm:grid-cols-2 gap-3 md:gap-4"
+        ></div>
+      </section>
+
+      <!-- Right: tracker panel -->
+      <aside class="space-y-3">
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 md:p-5">
+          <h2 class="text-sm md:text-base font-semibold text-slate-100 flex items-center justify-between">
+            Game Tracker
+            <span class="text-[0.6rem] uppercase tracking-wide text-slate-500">Live view</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">
+            Select a game on the left to see live status and details.
+          </p>
+
+          <div id="tracker-empty" class="mt-4 text-xs text-slate-500">
+            No game selected yet.
+          </div>
+
+          <div id="tracker-loading" class="mt-4 text-xs text-slate-400 hidden">
+            Loading game details...
+          </div>
+
+          <div id="tracker-error" class="mt-4 text-xs text-rose-400 hidden">
+            Couldn’t load details for this game.
+          </div>
+
+          <div id="tracker-card" class="mt-4 hidden space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <p id="tracker-league" class="text-[0.7rem] uppercase tracking-wide text-indigo-300 font-semibold"></p>
+                <p id="tracker-status" class="text-xs text-emerald-400 font-medium"></p>
+              </div>
+              <p id="tracker-venue" class="text-[0.65rem] text-right text-slate-400"></p>
+            </div>
+
+            <div class="bg-slate-950/70 border border-slate-800 rounded-2xl px-3 py-3">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                <span>Matchup</span>
+                <span>Score</span>
+              </div>
+              <div class="space-y-1 text-sm">
+                <div class="flex items-center justify-between">
+                  <span id="tracker-away-team" class="font-medium"></span>
+                  <span id="tracker-away-score" class="font-semibold text-slate-100"></span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span id="tracker-home-team" class="font-medium"></span>
+                  <span id="tracker-home-score" class="font-semibold text-slate-100"></span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-[0.7rem] text-slate-500">
+              Scores & status powered by public ESPN feeds. For model edges, use the Calculator tab.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const gamesListEl = document.getElementById("games-list");
+    const gamesStatusEl = document.getElementById("games-status");
+    const leagueFilterEl = document.getElementById("league-filter");
+
+    const trackerEmptyEl = document.getElementById("tracker-empty");
+    const trackerLoadingEl = document.getElementById("tracker-loading");
+    const trackerErrorEl = document.getElementById("tracker-error");
+    const trackerCardEl = document.getElementById("tracker-card");
+
+    const trackerLeagueEl = document.getElementById("tracker-league");
+    const trackerStatusEl = document.getElementById("tracker-status");
+    const trackerVenueEl = document.getElementById("tracker-venue");
+    const trackerAwayTeamEl = document.getElementById("tracker-away-team");
+    const trackerAwayScoreEl = document.getElementById("tracker-away-score");
+    const trackerHomeTeamEl = document.getElementById("tracker-home-team");
+    const trackerHomeScoreEl = document.getElementById("tracker-home-score");
+
+    let allGames = [];
+    let selectedGameKey = null; // league + eventId combined
+
+    function gameKey(g) {
+      return g.league + "::" + (g.eventId || (g.homeTeam + "@" + g.awayTeam));
+    }
+
+    async function loadGames() {
+      gamesStatusEl.textContent = "Loading games for today...";
+      gamesListEl.innerHTML = "";
+
+      try {
+        const res = await fetch("/.netlify/functions/today-games");
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          gamesStatusEl.textContent = "No games found for today.";
+          return;
+        }
+        allGames = data;
+        gamesStatusEl.textContent = "";
+        renderGames();
+      } catch (err) {
+        console.error(err);
+        gamesStatusEl.textContent = "Error loading games.";
+      }
+    }
+
+    function renderGames() {
+      const leagueFilter = leagueFilterEl.value;
+      let games = allGames.slice();
+
+      if (leagueFilter !== "ALL") {
+        games = games.filter(g => (g.league || "").toUpperCase() === leagueFilter);
+      }
+
+      if (games.length === 0) {
+        gamesListEl.innerHTML = `<p class="text-xs text-slate-400">No games for this league today.</p>`;
+        return;
+      }
+
+      gamesListEl.innerHTML = games.map((g, idx) => {
+        const league = (g.league || "").toUpperCase();
+        const homeTeam = g.homeTeam || g.home;
+        const awayTeam = g.awayTeam || g.away;
+        const homeScore = g.homeScore ?? g.home_score ?? "";
+        const awayScore = g.awayScore ?? g.away_score ?? "";
+        const status = g.displayStatus || g.status || g.time || "";
+        const network = g.network || "";
+
+        const key = gameKey({ league, eventId: g.eventId, homeTeam, awayTeam });
+        const isSelected = key === selectedGameKey;
+
+        return `
+          <button
+            data-index="${idx}"
+            class="group text-left rounded-2xl border ${isSelected ? "border-indigo-500 bg-slate-900" : "border-slate-800 bg-slate-900/60"} px-3 py-3 md:px-4 md:py-4 hover:border-indigo-400 hover:bg-slate-900 transition flex flex-col gap-2"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[0.65rem] uppercase tracking-wide text-slate-400 font-medium">
+                ${league}
+              </span>
+              <span class="text-[0.65rem] text-emerald-400">
+                ${status}
+              </span>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="text-xs md:text-sm text-slate-100">
+                <div>${awayTeam}</div>
+                <div>${homeTeam}</div>
+              </div>
+              <div class="text-right text-sm md:text-base font-semibold text-slate-50">
+                <div>${awayScore || ""}</div>
+                <div>${homeScore || ""}</div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-[0.65rem] text-slate-500 mt-1">
+              <span>${network}</span>
+              <span>${g.startTime || ""}</span>
+            </div>
+          </button>
+        `;
+      }).join("");
+    }
+
+    async function loadTrackerForGame(game) {
+      // Reset panel
+      trackerEmptyEl.classList.add("hidden");
+      trackerErrorEl.classList.add("hidden");
+      trackerCardEl.classList.add("hidden");
+      trackerLoadingEl.classList.remove("hidden");
+
+      if (!game.eventId || !game.league) {
+        trackerLoadingEl.classList.add("hidden");
+        trackerErrorEl.classList.remove("hidden");
+        trackerErrorEl.textContent = "No tracker available for this game.";
+        return;
+      }
+
+      try {
+        const url = `/.netlify/functions/game-tracker?league=${encodeURIComponent(
+          game.league
+        )}&eventId=${encodeURIComponent(game.eventId)}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        trackerLoadingEl.classList.add("hidden");
+        trackerCardEl.classList.remove("hidden");
+
+        const homeTeam = data.homeTeam || game.homeTeam || game.home;
+        const awayTeam = data.awayTeam || game.awayTeam || game.away;
+        const homeScore = data.homeScore ?? game.homeScore ?? "";
+        const awayScore = data.awayScore ?? game.awayScore ?? "";
+
+        trackerLeagueEl.textContent = (game.league || "").toUpperCase();
+        trackerStatusEl.textContent = data.status || game.displayStatus || "";
+        trackerVenueEl.textContent = data.venue
+          ? `${data.venue}${data.city ? " • " + data.city : ""}`
+          : "";
+
+        trackerHomeTeamEl.textContent = homeTeam || "";
+        trackerAwayTeamEl.textContent = awayTeam || "";
+        trackerHomeScoreEl.textContent = homeScore || "";
+        trackerAwayScoreEl.textContent = awayScore || "";
+      } catch (err) {
+        console.error(err);
+        trackerLoadingEl.classList.add("hidden");
+        trackerErrorEl.classList.remove("hidden");
+        trackerErrorEl.textContent = "Couldn’t load details for this game.";
+      }
+    }
+
+    // Event listeners
+    leagueFilterEl.addEventListener("change", () => {
+      renderGames();
+    });
+
+    gamesListEl.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-index]");
+      if (!btn) return;
+      const idx = parseInt(btn.getAttribute("data-index"), 10);
+      const game = (leagueFilterEl.value === "ALL"
+        ? allGames
+        : allGames.filter(g => (g.league || "").toUpperCase() === leagueFilterEl.value)
+      )[idx];
+
+      if (!game) return;
+
+      selectedGameKey = gameKey({
+        league: (game.league || "").toUpperCase(),
+        eventId: game.eventId,
+        homeTeam: game.homeTeam || game.home,
+        awayTeam: game.awayTeam || game.away
+      });
+
+      renderGames();
+      loadTrackerForGame(game);
+    });
+
+    // Initial load
+    loadGames();
+  </script>
+</body>
+</html>
