@@ -1,12 +1,12 @@
 // netlify/functions/today-games.js
-// Returns today's NBA, NFL, NHL games from ESPN's public scoreboard APIs.
+// Returns today's NBA, NFL, NHL, MLB, NCAAF, NCAAB games from ESPN's public scoreboard APIs.
 
 const fetch = require('node-fetch');
 
 exports.handler = async () => {
   const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
-  const urls = [
+  const leagues = [
     {
       league: 'NBA',
       url: `https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${today}`
@@ -18,15 +18,28 @@ exports.handler = async () => {
     {
       league: 'NHL',
       url: `https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=${today}`
+    },
+    {
+      league: 'MLB',
+      url: `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=${today}`
+    },
+    {
+      league: 'NCAAF',
+      url: `https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates=${today}`
+    },
+    {
+      league: 'NCAAB',
+      url: `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${today}`
     }
   ];
 
   const games = [];
 
-  for (const { league, url } of urls) {
+  for (const { league, url } of leagues) {
     try {
       const res = await fetch(url);
       if (!res.ok) continue;
+
       const data = await res.json();
 
       (data.events || []).forEach((e) => {
@@ -42,10 +55,12 @@ exports.handler = async () => {
 
           if (!home || !away) return;
 
-          const time = new Date(e.date).toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit'
-          }) + ' ET';
+          const startTime = new Date(e.date);
+          const timeStr =
+            startTime.toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit'
+            }) + ' ET';
 
           const network =
             (comp.broadcasts &&
@@ -54,19 +69,23 @@ exports.handler = async () => {
               comp.broadcasts[0].names[0]) ||
             'TBD';
 
+          const status = e.status?.type?.name || 'STATUS_SCHEDULED';
+
           games.push({
             league,
             home,
             away,
-            time,
-            network
+            time: timeStr,
+            network,
+            status,
+            shortName: e.shortName || `${away} @ ${home}`
           });
         } catch {
-          // ignore malformed events
+          // ignore malformed event
         }
       });
     } catch {
-      // ignore fetch errors for a given league
+      // ignore single-league fetch errors
     }
   }
 
@@ -74,8 +93,8 @@ exports.handler = async () => {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
-      'Cache-Control': 's-maxage=900' // cache on edge for 15 minutes
+      'Cache-Control': 's-maxage=600' // 10 min
     },
-    body: JSON.stringify(games.slice(0, 50)) // cap list just in case
+    body: JSON.stringify(games)
   };
 };
