@@ -3,226 +3,197 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScorePredictor Pro • 5M Sims</title>
+  <title>ScorePredictor Pro • 500K Sims</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; background: #020617; color: #e5e7eb; }
-    .glass { background: rgba(15,23,42,0.9); backdrop-filter: blur(18px); border-radius: 1.75rem; border: 1px solid rgba(148,163,184,0.4); }
-    .btn-main { background: linear-gradient(135deg,#6366f1,#ec4899); box-shadow: 0 18px 45px rgba(79,70,229,0.65); }
-    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 24px 60px rgba(79,70,229,0.8); }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+    .gradient-btn {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.6);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .gradient-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 35px rgba(79, 70, 229, 0.85);
+    }
   </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 antialiased">
+<body class="antialiased">
+  <div class="min-h-screen flex items-center justify-center px-4 py-8">
+    <div class="w-full max-w-5xl space-y-8">
+      <!-- Header -->
+      <header class="text-center space-y-2">
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-sky-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </h1>
+        <p class="text-xs md:text-sm text-emerald-400 font-semibold tracking-[0.25em] uppercase">
+          500,000 Simulations • Admin
+        </p>
+      </header>
 
-  <!-- NAVBAR -->
-  <header class="border-b border-slate-800/70 bg-slate-950/70 backdrop-blur">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center font-black text-xl">
-          S
-        </div>
-        <div>
-          <div class="font-bold text-lg tracking-tight">ScorePredictor Pro</div>
-          <div class="text-xs text-slate-400 uppercase tracking-[0.2em]">5,000,000 SIMS</div>
-        </div>
-      </div>
-      <nav class="flex items-center gap-4 text-sm">
-        <a href="/" class="text-slate-100 font-medium">Calculator</a>
-        <a href="/scores.html" class="text-slate-400 hover:text-slate-100">Scores</a>
-        <a href="/profile.html" class="text-slate-400 hover:text-slate-100">Profile</a>
-        <button id="logout-btn" class="text-xs text-slate-400 hover:text-slate-100 border border-slate-700/80 rounded-full px-3 py-1">
-          Logout
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- MAIN -->
-  <main class="max-w-6xl mx-auto px-4 pt-8 pb-16">
-    <!-- Status / CTA -->
-    <div id="logged-out" class="hidden mb-4 rounded-xl border border-amber-500/50 bg-amber-500/10 px-4 py-3 text-sm text-amber-100 flex items-center justify-between">
-      <span class="font-medium">You’re not logged in.</span>
-      <button
-        class="underline underline-offset-2"
-        onclick="window.location.href='/auth-callback'"
-      >Log in / Start Trial</button>
-    </div>
-
-    <div id="free-only" class="hidden mb-4 rounded-xl border border-sky-500/50 bg-sky-500/10 px-4 py-3 text-sm text-sky-100">
-      <span class="font-medium">Free tier:</span>
-      You can view live scores and free edges on the Scores page. The 5M-sim calculator is available for subscribers only.
-    </div>
-
-    <!-- HERO -->
-    <section class="mb-8">
-      <h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-50">
-        5,000,000-Simulation Edge Engine
-      </h1>
-      <p class="mt-2 text-sm md:text-base text-slate-400 max-w-2xl">
-        Choose a matchup, toggle injuries / neutral site, optionally plug in market odds — then hit
-        <span class="font-semibold text-slate-200">Get Prediction</span> to see projections and true edges vs the market.
-      </p>
-      <div class="mt-3 inline-flex items-center gap-2 text-xs text-slate-400">
-        <span id="sub-status-pill" class="hidden px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/40 text-[11px] uppercase tracking-[0.17em]"></span>
-      </div>
-    </section>
-
-    <!-- CALCULATOR CARD -->
-    <section id="calculator-card" class="glass p-6 md:p-8 shadow-2xl">
-      <!-- GRID -->
-      <div class="grid md:grid-cols-3 gap-6 mb-6 text-sm md:text-base">
-        <!-- League & teams -->
-        <div class="space-y-4">
-          <label class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 mb-1">League</label>
-          <select id="league" class="w-full rounded-xl bg-slate-900/70 border border-slate-700/80 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-            <option>NBA</option>
-            <option>NFL</option>
-            <option>NHL</option>
-            <option>MLB</option>
-            <option>NCAAB</option>
-            <option>NCAAF</option>
-          </select>
-
-          <label class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 mt-4 mb-1">Home Team</label>
-          <select id="home-team" class="w-full rounded-xl bg-slate-900/70 border border-slate-700/80 px-3 py-2.5 text-sm">
-            <option>Select Home Team</option>
-          </select>
-
-          <label class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 mt-4 mb-1">Away Team</label>
-          <select id="away-team" class="w-full rounded-xl bg-slate-900/70 border border-slate-700/80 px-3 py-2.5 text-sm">
-            <option>Select Away Team</option>
-          </select>
-        </div>
-
-        <!-- Context: neutral / injuries -->
-        <div class="space-y-4">
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">Context</label>
-            <label class="flex items-center gap-2 text-xs text-slate-300">
-              <input id="neutral-site" type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-slate-900/80" />
-              Neutral site (no home-court / home-field advantage)
+      <!-- Main Card -->
+      <main class="bg-slate-900/80 border border-slate-700/70 rounded-3xl shadow-xl p-5 md:p-7 space-y-6">
+        <!-- League & Teams -->
+        <section class="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div class="space-y-1">
+            <label for="league" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              League
             </label>
+            <select
+              id="league"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+            >
+              <option value="NBA">NBA</option>
+              <option value="NFL">NFL</option>
+              <option value="NHL">NHL</option>
+              <option value="MLB">MLB</option>
+              <option value="NCAAB">NCAAB</option>
+              <option value="NCAAF">NCAAF</option>
+            </select>
           </div>
 
-          <div class="mt-4">
-            <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-1">Home injuries</div>
-            <div class="flex flex-col gap-1 text-xs text-slate-300">
-              <label class="inline-flex items-center gap-2">
-                <input id="home-major" type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-slate-900/80" />
-                Major: key star out / serious limitation
-              </label>
-              <label class="inline-flex items-center gap-2">
-                <input id="home-minor" type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-slate-900/80" />
-                Minor: rotation piece out / questionable
-              </label>
-            </div>
+          <div class="space-y-1">
+            <label for="home-team" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Home Team
+            </label>
+            <select
+              id="home-team"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+            >
+              <option>Select Home Team</option>
+            </select>
           </div>
 
-          <div class="mt-4">
-            <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-1">Away injuries</div>
-            <div class="flex flex-col gap-1 text-xs text-slate-300">
-              <label class="inline-flex items-center gap-2">
-                <input id="away-major" type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-slate-900/80" />
-                Major: key star out / serious limitation
-              </label>
-              <label class="inline-flex items-center gap-2">
-                <input id="away-minor" type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-slate-900/80" />
-                Minor: rotation piece out / questionable
-              </label>
-            </div>
+          <div class="space-y-1">
+            <label for="away-team" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Away Team
+            </label>
+            <select
+              id="away-team"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+            >
+              <option>Select Away Team</option>
+            </select>
           </div>
+        </section>
+
+        <!-- Odds Inputs (optional) -->
+        <section class="grid md:grid-cols-4 gap-4 text-sm">
+          <div class="space-y-1">
+            <label for="home-ml" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Home Moneyline
+            </label>
+            <input
+              id="home-ml"
+              type="number"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="-150"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label for="away-ml" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Away Moneyline
+            </label>
+            <input
+              id="away-ml"
+              type="number"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="+130"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label for="spread-line" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Home Spread
+            </label>
+            <input
+              id="spread-line"
+              type="number"
+              step="0.5"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="-4.5"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label for="total-line" class="block text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+              Total (O/U)
+            </label>
+            <input
+              id="total-line"
+              type="number"
+              step="0.5"
+              class="w-full bg-slate-900/70 border border-slate-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              placeholder="229.5"
+            />
+          </div>
+        </section>
+
+        <!-- Button -->
+        <div class="flex justify-center">
+          <button
+            id="run-btn"
+            class="gradient-btn inline-flex items-center justify-center rounded-2xl px-7 py-2.5 text-xs md:text-sm font-black tracking-wide uppercase"
+          >
+            Run 500,000 Simulations
+          </button>
         </div>
 
-        <!-- Market odds -->
-        <div class="space-y-3">
-          <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-            Market odds (optional)
-          </div>
-          <p class="text-[11px] text-slate-500">
-            Plug in current market numbers to calculate true edges on moneyline, spread, and total.
-          </p>
-
-          <div class="grid grid-cols-2 gap-2 mt-1 text-xs">
-            <div>
-              <label class="block text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Home ML
-              </label>
-              <input id="ml-home" type="number" placeholder="-150"
-                class="w-full rounded-lg bg-slate-900/70 border border-slate-700/80 px-2 py-1.5 text-xs" />
-            </div>
-            <div>
-              <label class="block text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Away ML
-              </label>
-              <input id="ml-away" type="number" placeholder="+130"
-                class="w-full rounded-lg bg-slate-900/70 border border-slate-700/80 px-2 py-1.5 text-xs" />
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 mt-2 text-xs">
-            <div>
-              <label class="block text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Spread (home)
-              </label>
-              <input id="spread" type="number" step="0.5" placeholder="-4.5"
-                class="w-full rounded-lg bg-slate-900/70 border border-slate-700/80 px-2 py-1.5 text-xs" />
-            </div>
-            <div>
-              <label class="block text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Total
-              </label>
-              <input id="total" type="number" step="0.5" placeholder="229.5"
-                class="w-full rounded-lg bg-slate-900/70 border border-slate-700/80 px-2 py-1.5 text-xs" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BUTTON -->
-      <div class="flex items-center justify-between gap-4 mt-4 flex-wrap">
-        <button
-          id="run-btn"
-          class="btn-main inline-flex items-center justify-center px-6 py-3 rounded-2xl font-bold text-sm md:text-base tracking-tight transition disabled:opacity-50 disabled:cursor-not-allowed"
+        <!-- Result Panel -->
+        <section
+          id="result"
+          class="hidden bg-slate-900/70 border border-slate-800 rounded-3xl px-4 py-4 md:px-5 md:py-5 space-y-4"
         >
-          Get Prediction
-        </button>
-        <div class="text-[11px] text-slate-500">
-          Engine: 5,000,000 Monte Carlo simulations • uses live team stats when available
-        </div>
-      </div>
-
-      <!-- RESULT -->
-      <div id="result" class="mt-8 hidden">
-        <div class="grid md:grid-cols-3 gap-4 mb-4 text-sm">
-          <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80">
-            <div class="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-2">Matchup</div>
-            <div id="matchup" class="text-base font-semibold text-slate-50"></div>
-            <div id="location-line" class="text-[11px] text-slate-500 mt-1"></div>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <h3
+              id="matchup"
+              class="text-base md:text-lg font-extrabold bg-gradient-to-r from-yellow-300 via-pink-400 to-sky-300 bg-clip-text text-transparent"
+            ></h3>
+            <p id="winprob" class="text-xs md:text-sm font-semibold text-emerald-400"></p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80">
-            <div class="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-2">Projected score</div>
-            <div id="score" class="text-lg font-semibold text-emerald-300"></div>
-            <div id="winprob" class="text-[11px] text-slate-400 mt-1"></div>
+          <div class="grid md:grid-cols-3 gap-3 text-xs md:text-sm">
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 space-y-1">
+              <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+                Projected Final Score
+              </p>
+              <p id="score" class="font-bold text-slate-50"></p>
+            </div>
+
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 space-y-1">
+              <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+                Edge Summary
+              </p>
+              <p id="edge" class="font-semibold text-emerald-300"></p>
+            </div>
+
+            <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 space-y-1">
+              <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+                Best Bet
+              </p>
+              <p id="bet" class="font-semibold text-sky-300"></p>
+            </div>
           </div>
 
-          <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80">
-            <div class="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-2">Edge & bet</div>
-            <div id="edge" class="text-xs font-semibold text-emerald-300"></div>
-            <div id="bet" class="text-[11px] text-slate-400 mt-1"></div>
+          <div class="bg-slate-950/50 border border-slate-800 rounded-2xl p-3 md:p-4">
+            <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400 mb-1">
+              Model Notes
+            </p>
+            <p id="explanation" class="text-xs md:text-sm leading-relaxed text-slate-200 whitespace-pre-line"></p>
           </div>
-        </div>
-
-        <div class="mt-4 p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 text-xs md:text-sm leading-relaxed text-slate-200">
-          <div class="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-2">Model breakdown</div>
-          <div id="explanation" class="whitespace-pre-line"></div>
-        </div>
-      </div>
-    </section>
-  </main>
+        </section>
+      </main>
+    </div>
+  </div>
 
   <script>
-    // ---------- TEAMS ----------
+    // ===== TEAM LISTS =====
     const TEAMS = {
       NBA: ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers","Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","LA Clippers","Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks","Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs","Toronto Raptors","Utah Jazz","Washington Wizards"],
       NFL: ["Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills","Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns","Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers","Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs","Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins","Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants","New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"],
@@ -235,68 +206,26 @@
     function populateTeams() {
       const league = document.getElementById("league").value;
       const teams = TEAMS[league] || [];
-      ["home-team", "away-team"].forEach((id) => {
-        const el = document.getElementById(id);
-        el.innerHTML =
+      ["home-team", "away-team"].forEach(id => {
+        const select = document.getElementById(id);
+        select.innerHTML =
           "<option>Select Team</option>" +
-          teams.map((t) => `<option>${t}</option>`).join("");
+          teams.map(t => `<option>${t}</option>`).join("");
       });
     }
 
     document.getElementById("league").addEventListener("change", populateTeams);
-    populateTeams();
+    populateTeams(); // initial load
 
-    function getCookie(name) {
-      const parts = (`; ${document.cookie}`).split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(";").shift();
-    }
     function getToken() {
-      return getCookie("appSession") || getCookie("token") || null;
+      // Keep this consistent with whatever you had working before
+      return (
+        new URLSearchParams(location.search).get("token") ||
+        document.cookie.split("; ").find(c => c.startsWith("token="))?.split("=")[1]
+      );
     }
 
-    // ---------- SUB / AUTH GATE ----------
-    const loggedOut = document.getElementById("logged-out");
-    const freeOnly = document.getElementById("free-only");
-    const subStatusPill = document.getElementById("sub-status-pill");
-    const runBtn = document.getElementById("run-btn");
-
-    const token = getToken();
-    if (!token) {
-      loggedOut.classList.remove("hidden");
-      runBtn.disabled = true;
-    } else {
-      fetch("/.netlify/functions/get-sub-status", {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-        .then((r) => r.ok ? r.json() : { status: "free" })
-        .then((data) => {
-          const status = data.status || "free";
-          if (status === "active" || status === "trialing") {
-            subStatusPill.classList.remove("hidden");
-            subStatusPill.textContent =
-              status === "trialing" ? "Trial active" : "Subscriber";
-            runBtn.disabled = false;
-          } else {
-            freeOnly.classList.remove("hidden");
-            subStatusPill.classList.remove("hidden");
-            subStatusPill.textContent = "Free tier";
-            runBtn.disabled = true;
-          }
-        })
-        .catch(() => {
-          freeOnly.classList.remove("hidden");
-          runBtn.disabled = true;
-        });
-    }
-
-    document.getElementById("logout-btn").addEventListener("click", () => {
-      document.cookie = "appSession=; Max-Age=0; path=/";
-      document.cookie = "token=; Max-Age=0; path=/";
-      location.reload();
-    });
-
-    // ---------- PREDICTION HANDLER ----------
-    document.addEventListener("click", async (e) => {
+    document.addEventListener("click", async e => {
       if (e.target.id !== "run-btn") return;
 
       const league = document.getElementById("league").value;
@@ -308,73 +237,87 @@
         return;
       }
 
-      const neutralSite = document.getElementById("neutral-site").checked;
-      const homeMajor = document.getElementById("home-major").checked;
-      const homeMinor = document.getElementById("home-minor").checked;
-      const awayMajor = document.getElementById("away-major").checked;
-      const awayMinor = document.getElementById("away-minor").checked;
+      // Optional odds
+      const homeMlVal = document.getElementById("home-ml").value.trim();
+      const awayMlVal = document.getElementById("away-ml").value.trim();
+      const spreadVal = document.getElementById("spread-line").value.trim();
+      const totalVal = document.getElementById("total-line").value.trim();
 
-      const mlHome = document.getElementById("ml-home").value.trim();
-      const mlAway = document.getElementById("ml-away").value.trim();
-      const spread = document.getElementById("spread").value.trim();
-      const total = document.getElementById("total").value.trim();
+      const homeMl = homeMlVal === "" ? NaN : parseInt(homeMlVal, 10);
+      const awayMl = awayMlVal === "" ? NaN : parseInt(awayMlVal, 10);
+      const spread = spreadVal === "" ? NaN : parseFloat(spreadVal);
+      const total = totalVal === "" ? NaN : parseFloat(totalVal);
 
+      const payload = { league, homeTeam: home, awayTeam: away };
       const market = {};
-      if (mlHome && mlAway) {
-        market.homeMoneyline = Number(mlHome);
-        market.awayMoneyline = Number(mlAway);
-      }
-      if (spread) market.spread = Number(spread);
-      if (total) market.total = Number(total);
+      let hasMarket = false;
 
-      const hasMarket =
-        market.homeMoneyline != null ||
-        market.awayMoneyline != null ||
-        market.spread != null ||
-        market.total != null;
+      if (!isNaN(homeMl) && !isNaN(awayMl)) {
+        market.homeMoneyline = homeMl;
+        market.awayMoneyline = awayMl;
+        hasMarket = true;
+      }
+      if (!isNaN(spread)) {
+        market.spread = spread;
+        hasMarket = true;
+      }
+      if (!isNaN(total)) {
+        market.total = total;
+        hasMarket = true;
+      }
+      if (hasMarket) {
+        payload.market = market;
+      }
 
       const btn = e.target;
       btn.disabled = true;
-      btn.textContent = "Running 5,000,000 simulations...";
+      btn.textContent = "Running sims...";
 
       try {
-        const res = await fetch("/.netlify/functions/predict", {
+        const res = await fetch("/.netlify/functions/predict-matchup", {
           method: "POST",
           headers: {
+            "Authorization": `Bearer ${getToken() || ""}`,
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            league,
-            homeTeam: home,
-            awayTeam: away,
-            neutralSite,
-            homeMajorInjury: homeMajor,
-            homeMinorInjury: homeMinor,
-            awayMajorInjury: awayMajor,
-            awayMinorInjury: awayMinor,
-            market: hasMarket ? market : null
-          })
+          body: JSON.stringify(payload)
         });
-
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(text || "Server error");
-        }
 
         const data = await res.json();
 
-        document.getElementById("matchup").textContent = data.matchup;
-        document.getElementById("score").textContent =
-          `${data.homeTeam} ${data.projectedHomeScore} – ${data.awayTeam} ${data.projectedAwayScore}`;
-        document.getElementById("winprob").textContent =
-          `${data.homeTeam} wins ${data.winProbability} of simulations.`;
-        document.getElementById("edge").textContent = data.edge;
-        document.getElementById("bet").textContent = data.recommendedBet || "";
+        // matchup
+        document.getElementById("matchup").textContent =
+          data.matchup || `${away} @ ${home}`;
 
-        document.getElementById("location-line").textContent =
-          data.neutralSite
-            ? "Neutral site"
-            : `Standard home advantage applied for ${data.homeTeam}.`;
+        // scores (works for BOTH: new + old backend)
+        let homeScore = data.projectedHomeScore;
+        let awayScore = data.projectedAwayScore;
+
+        if (
+          (homeScore === undefined || awayScore === undefined) &&
+          typeof data.projectedScore === "string"
+        ) {
+          const parts = data.projectedScore.split(/[-–]/).map(p => p.trim());
+          if (parts.length === 2) {
+            homeScore = parseInt(parts[0], 10);
+            awayScore = parseInt(parts[1], 10);
+          }
+        }
+
+        if (isNaN(homeScore) || isNaN(awayScore)) {
+          document.getElementById("score").textContent =
+            data.projectedScore || "";
+        } else {
+          document.getElementById("score").textContent =
+            `${data.homeTeam || home} ${homeScore} – ` +
+            `${data.awayTeam || away} ${awayScore}`;
+        }
+
+        document.getElementById("winprob").textContent =
+          data.winProbability || "";
+        document.getElementById("edge").textContent = data.edge || "";
+        document.getElementById("bet").textContent =
+          data.recommendedBet || "No clear best bet.";
 
         document.getElementById("explanation").textContent =
           data.explanation || "";
@@ -383,11 +326,12 @@
         result.classList.remove("hidden");
         result.scrollIntoView({ behavior: "smooth", block: "start" });
       } catch (err) {
-        alert("Error: " + err.message);
+        console.error(err);
+        alert("Server woke up — click once more (then instant forever)");
       }
 
       btn.disabled = false;
-      btn.textContent = "Get Prediction";
+      btn.textContent = "Run 500,000 Simulations";
     });
   </script>
 </body>
