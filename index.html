@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScorePredictor Pro • 500K Sims</title>
+  <title>ScorePredictor Pro • 50K Sims</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      background: #020617;
+      /* background set via utility class */
       color: #e5e7eb;
-      min-height: 100vh;
     }
     .gradient-btn {
       background: linear-gradient(135deg, #6366f1, #ec4899);
@@ -23,8 +22,62 @@
     }
   </style>
 </head>
-<body class="antialiased">
-  <div class="min-h-screen flex items-center justify-center px-4 py-8">
+<body class="min-h-screen bg-black flex flex-col">
+  <!-- NAV -->
+  <header class="border-b border-slate-800/60 bg-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-xl font-black tracking-tight bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-400">
+        <a href="/" class="px-3 py-1.5 rounded-full bg-slate-800 text-slate-100 transition-colors">Calculator</a>
+        <a href="/games.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Live Games</a>
+        <a href="/freepicks.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Free Picks</a>
+        <a href="/news.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">News</a>
+        <a href="/profile.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Profile</a>
+      </nav>
+      <!-- Mobile Menu -->
+      <nav class="md:hidden flex gap-3 text-xs font-semibold text-slate-400">
+        <a href="/games.html">Games</a>
+        <a href="/freepicks.html">Picks</a>
+        <a href="/news.html">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ACCESS GATE OVERLAY -->
+  <div
+    id="access-gate"
+    class="hidden fixed inset-0 z-[99] bg-black/80 backdrop-blur-sm flex items-center justify-center px-4"
+  >
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-lg w-full p-6 space-y-4 text-center">
+      <p id="gate-title" class="text-xl font-black text-white">Login required</p>
+      <p id="gate-message" class="text-sm text-slate-300">
+        Sign in with your admin account or an active subscription to unlock the simulator.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button
+          id="gate-login"
+          class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-500 transition"
+        >
+          Log In
+        </button>
+        <button
+          id="gate-subscribe"
+          class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-purple-400/60 text-purple-100 font-semibold hover:bg-purple-500/20 transition hidden"
+        >
+          Start Subscription
+        </button>
+      </div>
+      <p id="gate-footnote" class="text-[11px] text-slate-500">
+        Access is limited to admins or paid members.
+      </p>
+    </div>
+  </div>
+
+  <div class="flex-grow flex items-center justify-center px-4 py-8">
     <div class="w-full max-w-5xl space-y-8">
       <!-- Header -->
       <header class="text-center space-y-2">
@@ -135,6 +188,98 @@
           </div>
         </section>
 
+        <!-- Match Context (Injuries / Neutral) -->
+        <section class="bg-slate-950/40 border border-slate-800 rounded-2xl p-4 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <p class="text-[0.7rem] font-semibold uppercase tracking-wide text-slate-300">
+              Context & Injury Adjustments
+            </p>
+            <p class="text-[0.7rem] text-slate-400">
+              Position-level injuries are available for NBA & NFL. Others use the quick toggles.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <!-- Neutral Site Toggle -->
+            <div class="flex items-center justify-center md:justify-start">
+              <label class="inline-flex items-center cursor-pointer group">
+                <input id="neutral-site" type="checkbox" class="sr-only peer">
+                <div class="relative w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                <span class="ms-3 text-sm font-medium text-slate-300 group-hover:text-white transition-colors">Neutral Site</span>
+              </label>
+            </div>
+
+            <!-- Home Injuries (generic) -->
+            <div id="generic-injuries-home" class="space-y-2">
+              <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400 text-center md:text-left">
+                Home Injuries (Quick)
+              </p>
+              <div class="flex items-center justify-center md:justify-start gap-4">
+                <label class="inline-flex items-center cursor-pointer space-x-2">
+                  <input id="home-major" type="checkbox" class="w-4 h-4 text-rose-600 bg-slate-800 border-slate-600 rounded focus:ring-rose-500 focus:ring-2">
+                  <span class="text-xs text-slate-300">Major</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer space-x-2">
+                  <input id="home-minor" type="checkbox" class="w-4 h-4 text-amber-500 bg-slate-800 border-slate-600 rounded focus:ring-amber-500 focus:ring-2">
+                  <span class="text-xs text-slate-300">Minor</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Away Injuries (generic) -->
+            <div id="generic-injuries-away" class="space-y-2">
+              <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400 text-center md:text-left">
+                Away Injuries (Quick)
+              </p>
+              <div class="flex items-center justify-center md:justify-start gap-4">
+                <label class="inline-flex items-center cursor-pointer space-x-2">
+                  <input id="away-major" type="checkbox" class="w-4 h-4 text-rose-600 bg-slate-800 border-slate-600 rounded focus:ring-rose-500 focus:ring-2">
+                  <span class="text-xs text-slate-300">Major</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer space-x-2">
+                  <input id="away-minor" type="checkbox" class="w-4 h-4 text-amber-500 bg-slate-800 border-slate-600 rounded focus:ring-amber-500 focus:ring-2">
+                  <span class="text-xs text-slate-300">Minor</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Position-specific injuries for NBA / NFL -->
+          <div id="pos-injuries" class="hidden pt-4 border-t border-slate-800">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+                    Home Positional Injuries
+                  </p>
+                  <span class="text-[0.65rem] text-slate-500">NBA: PG/SG/SF/PF/C • NFL: QB/WR/TE/RB</span>
+                </div>
+                <div id="home-pos-fields" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+                <textarea
+                  id="home-injured-players"
+                  class="w-full bg-slate-900/70 border border-slate-800 rounded-2xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+                  placeholder="Optional: list injured home players (comma-separated)"
+                ></textarea>
+              </div>
+
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">
+                    Away Positional Injuries
+                  </p>
+                  <span class="text-[0.65rem] text-slate-500">NBA & NFL only</span>
+                </div>
+                <div id="away-pos-fields" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+                <textarea
+                  id="away-injured-players"
+                  class="w-full bg-slate-900/70 border border-slate-800 rounded-2xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+                  placeholder="Optional: list injured away players (comma-separated)"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Button -->
         <div class="flex justify-center">
           <button
@@ -203,6 +348,11 @@
       NCAAF: ["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","BYU","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","UConn","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawaii","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kent State","Kentucky","Kennesaw State","Liberty","Louisiana","Louisiana Tech","Louisville","LSU","Marshall","Maryland","Massachusetts","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","NC State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","Sam Houston","San Diego State","San Jose State","SMU","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"]
     };
 
+    const POSITION_SETS = {
+      NBA: ["PG", "SG", "SF", "PF", "C"],
+      NFL: ["QB", "WR", "TE", "RB"]
+    };
+
     function populateTeams() {
       const league = document.getElementById("league").value;
       const teams = TEAMS[league] || [];
@@ -214,19 +364,221 @@
       });
     }
 
-    document.getElementById("league").addEventListener("change", populateTeams);
-    populateTeams(); // initial load
+    function renderPositionInputs() {
+      const league = document.getElementById("league").value;
+      const positions = POSITION_SETS[league];
+      const posSection = document.getElementById("pos-injuries");
+      const genericHome = document.getElementById("generic-injuries-home");
+      const genericAway = document.getElementById("generic-injuries-away");
+
+      if (!positions) {
+        posSection.classList.add("hidden");
+        genericHome.classList.remove("hidden");
+        genericAway.classList.remove("hidden");
+        document.getElementById("home-pos-fields").innerHTML = "";
+        document.getElementById("away-pos-fields").innerHTML = "";
+        document.getElementById("home-injured-players").value = "";
+        document.getElementById("away-injured-players").value = "";
+        return;
+      }
+
+      posSection.classList.remove("hidden");
+      genericHome.classList.add("hidden");
+      genericAway.classList.add("hidden");
+
+      const build = (containerId, prefix) => {
+        const container = document.getElementById(containerId);
+        container.innerHTML = positions
+          .map(pos => `
+            <label class="block text-xs text-slate-200 space-y-1">
+              <span class="text-[0.7rem] font-semibold text-slate-400">${pos}</span>
+              <select
+                id="${prefix}-pos-${pos}"
+                class="w-full bg-slate-900/70 border border-slate-800 rounded-xl px-2 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+              >
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="major">Major</option>
+              </select>
+            </label>
+          `)
+          .join("");
+      };
+
+      build("home-pos-fields", "home");
+      build("away-pos-fields", "away");
+    }
+
+    function onLeagueChange() {
+      populateTeams();
+      renderPositionInputs();
+    }
+
+    document.getElementById("league").addEventListener("change", onLeagueChange);
+    onLeagueChange(); // initial load
+
+    function updateNav() {
+      const t = getToken();
+      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
+      navLinks.forEach(l => {
+        if (!t) {
+          l.textContent = "Log In";
+          l.href = "/auth-callback.html";
+          l.classList.add("text-emerald-400");
+        }
+      });
+    }
+    updateNav();
+    ensureAccess();
+
+    function collectPositionInjuries(prefix, positions) {
+      const pos = {};
+      positions.forEach(p => {
+        const el = document.getElementById(`${prefix}-pos-${p}`);
+        if (el) pos[p] = el.value;
+      });
+      const playerEl = document.getElementById(`${prefix}-injured-players`);
+      const players =
+        playerEl && playerEl.value
+          ? playerEl.value
+              .split(",")
+              .map(v => v.trim())
+              .filter(Boolean)
+          : [];
+      return { positions: pos, players };
+    }
 
     function getToken() {
+      const getCookie = (name) => {
+        const parts = ("; " + document.cookie).split("; " + name + "=");
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      };
       // Keep this consistent with whatever you had working before
       return (
         new URLSearchParams(location.search).get("token") ||
-        document.cookie.split("; ").find(c => c.startsWith("token="))?.split("=")[1]
+        getCookie("appSession") ||
+        getCookie("token")
       );
+    }
+
+    // ---------- ACCESS CONTROL ----------
+    let accessAllowed = false;
+    let cachedToken = null;
+
+    const gateEl = document.getElementById("access-gate");
+    const gateTitle = document.getElementById("gate-title");
+    const gateMessage = document.getElementById("gate-message");
+    const gateFootnote = document.getElementById("gate-footnote");
+    const gateLogin = document.getElementById("gate-login");
+    const gateSubscribe = document.getElementById("gate-subscribe");
+
+    function showGate({ title, message, showSubscribe = false, footnote = "" }) {
+      gateTitle.textContent = title;
+      gateMessage.textContent = message;
+      gateFootnote.textContent = footnote || "Access is limited to admins or paid members.";
+      gateSubscribe.classList.toggle("hidden", !showSubscribe);
+      gateEl.classList.remove("hidden");
+      const btn = document.getElementById("run-btn");
+      if (btn) btn.disabled = true;
+    }
+
+    function hideGate() {
+      gateEl.classList.add("hidden");
+    }
+
+    gateLogin.addEventListener("click", () => {
+      window.location.href = "/auth-callback.html";
+    });
+
+    gateSubscribe.addEventListener("click", async () => {
+      if (!cachedToken) {
+        showGate({
+          title: "Login required",
+          message: "Please log in before starting a subscription.",
+          showSubscribe: false
+        });
+        return;
+      }
+      gateSubscribe.disabled = true;
+      gateSubscribe.textContent = "Opening checkout...";
+      try {
+        const res = await fetch("/.netlify/functions/create-checkout", {
+          method: "POST",
+          headers: { Authorization: "Bearer " + cachedToken }
+        });
+        const data = await res.json();
+        if (data?.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error("No checkout URL");
+        }
+      } catch (err) {
+        gateSubscribe.textContent = "Start Subscription";
+        gateSubscribe.disabled = false;
+        gateFootnote.textContent = "Checkout failed. Please try again.";
+      }
+    });
+
+    async function ensureAccess() {
+      const btn = document.getElementById("run-btn");
+      if (btn) btn.disabled = true;
+
+      const token = getToken();
+      cachedToken = token || null;
+
+      if (!token) {
+        accessAllowed = false;
+        showGate({
+          title: "Login required",
+          message: "Sign in to use the simulator.",
+          showSubscribe: false
+        });
+        return;
+      }
+
+      try {
+        const res = await fetch("/.netlify/functions/get-sub-status", {
+          headers: { Authorization: "Bearer " + token }
+        });
+        if (!res.ok) throw new Error("status");
+        const data = await res.json();
+        const allowed = data.admin || data.status === "active" || data.status === "trialing";
+
+        if (allowed) {
+          accessAllowed = true;
+          hideGate();
+          if (btn) btn.disabled = false;
+        } else {
+          accessAllowed = false;
+          showGate({
+            title: "Subscription required",
+            message: "An active subscription is needed to run simulations.",
+            showSubscribe: true,
+            footnote: data.status ? `Current status: ${data.status}` : ""
+          });
+        }
+      } catch (err) {
+        accessAllowed = false;
+        showGate({
+          title: "Session expired",
+          message: "Please log in again to continue.",
+          showSubscribe: false
+        });
+      }
     }
 
     document.addEventListener("click", async e => {
       if (e.target.id !== "run-btn") return;
+
+      if (!accessAllowed) {
+        alert("Please log in with an active subscription or admin access to use the calculator.");
+        showGate({
+          title: "Subscription required",
+          message: "Log in as admin or start a subscription to run simulations.",
+          showSubscribe: true
+        });
+        return;
+      }
 
       const league = document.getElementById("league").value;
       const home = document.getElementById("home-team").value;
@@ -269,12 +621,34 @@
         payload.market = market;
       }
 
+      // Context inputs
+      payload.neutralSite = document.getElementById("neutral-site").checked;
+      const posList = POSITION_SETS[league];
+      if (posList) {
+        const homePos = collectPositionInjuries("home", posList);
+        const awayPos = collectPositionInjuries("away", posList);
+        payload.homePositionInjuries = homePos.positions;
+        payload.awayPositionInjuries = awayPos.positions;
+        if (homePos.players.length) payload.homeInjuredPlayers = homePos.players;
+        if (awayPos.players.length) payload.awayInjuredPlayers = awayPos.players;
+        // legacy flags off when using positional inputs
+        payload.homeMajorInjury = false;
+        payload.homeMinorInjury = false;
+        payload.awayMajorInjury = false;
+        payload.awayMinorInjury = false;
+      } else {
+        payload.homeMajorInjury = document.getElementById("home-major").checked;
+        payload.homeMinorInjury = document.getElementById("home-minor").checked;
+        payload.awayMajorInjury = document.getElementById("away-major").checked;
+        payload.awayMinorInjury = document.getElementById("away-minor").checked;
+      }
+
       const btn = e.target;
       btn.disabled = true;
       btn.textContent = "Running sims...";
 
       try {
-        const res = await fetch("/.netlify/functions/predict-matchup", {
+        const res = await fetch("/.netlify/functions/predict", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${getToken() || ""}`,
@@ -327,7 +701,7 @@
         result.scrollIntoView({ behavior: "smooth", block: "start" });
       } catch (err) {
         console.error(err);
-        alert("Server woke up — click once more (then instant forever)");
+        alert("Simulation request failed or timed out. Please try again.");
       }
 
       btn.disabled = false;

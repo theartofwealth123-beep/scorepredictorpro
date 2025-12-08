@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ScorePredictor Pro • News</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #020617; color: #e5e7eb; font-family: system-ui, -apple-system, sans-serif; }
+    .glass {
+      background: radial-gradient(circle at top, rgba(56,189,248,0.08), transparent 40%),
+                  radial-gradient(circle at bottom, rgba(139,92,246,0.08), transparent 40%);
+    }
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black flex flex-col">
+  <!-- NAV -->
+  <header class="border-b border-slate-800/60 bg-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-xl font-black tracking-tight bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-400">
+        <a href="/" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Calculator</a>
+        <a href="/games.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Live Games</a>
+        <a href="/freepicks.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Free Picks</a>
+        <a href="/news.html" class="px-3 py-1.5 rounded-full bg-slate-800 text-slate-100 transition-colors">News</a>
+        <a href="/profile.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Profile</a>
+      </nav>
+      <!-- Mobile Menu -->
+      <nav class="md:hidden flex gap-3 text-xs font-semibold text-slate-400">
+        <a href="/games.html">Games</a>
+        <a href="/freepicks.html">Picks</a>
+        <a href="/news.html" class="text-white">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-2">Sports Headlines</h1>
+      <p class="text-slate-400">Latest updates from around the leagues.</p>
+    </header>
+
+    <div id="loading" class="text-center py-12 text-slate-500 animate-pulse">
+      Fetching latest news...
+    </div>
+
+    <div id="news-grid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 hidden">
+      <!-- News injected here -->
+    </div>
+  </main>
+
+  <script>
+    async function loadNews() {
+      const grid = document.getElementById('news-grid');
+      const loader = document.getElementById('loading');
+
+      try {
+        const res = await fetch('/.netlify/functions/sports-news');
+        const news = await res.json();
+
+        loader.classList.add('hidden');
+        grid.classList.remove('hidden');
+
+        if (!news || news.length === 0) {
+          grid.innerHTML = '<div class="col-span-full text-center text-slate-500">No news available at the moment.</div>';
+          return;
+        }
+
+        grid.innerHTML = news.map(item => `
+          <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="group flex flex-col bg-slate-900/40 border border-slate-800 rounded-2xl overflow-hidden transition-all hover:bg-slate-900 hover:border-slate-700 hover:shadow-xl hover:shadow-slate-900/50">
+            ${item.image ? `<div class="h-48 bg-slate-950 overflow-hidden"><img src="${item.image}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"></div>` : ''}
+            
+            <div class="p-5 flex flex-col flex-grow">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-slate-500 bg-slate-950 px-2 py-1 rounded border border-slate-800">
+                  ${item.league}
+                </span>
+                <span class="text-xs text-slate-500">
+                  ${new Date(item.published).toLocaleDateString()}
+                </span>
+              </div>
+              
+              <h3 class="text-lg font-bold text-slate-200 mb-2 leading-tight group-hover:text-sky-400 transition-colors">
+                ${item.headline}
+              </h3>
+              
+              <p class="text-sm text-slate-400 line-clamp-3 mb-4 flex-grow">
+                ${item.description || ''}
+              </p>
+              
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1 group-hover:text-slate-300 transition-colors">
+                Read Article &rarr;
+              </div>
+            </div>
+          </a>
+        `).join('');
+
+      } catch (err) {
+        console.error(err);
+        loader.textContent = "Failed to load news.";
+      }
+    }
+
+    function getToken() {
+      return (
+        new URLSearchParams(location.search).get("token") ||
+        document.cookie.split("; ").find(c => c.startsWith("token="))?.split("=")[1]
+      );
+    }
+
+    function updateNav() {
+      const t = getToken();
+      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
+      navLinks.forEach(l => {
+        if (!t) {
+          l.textContent = "Log In";
+          l.href = "/auth-callback.html";
+          l.classList.add("text-emerald-400");
+        }
+      });
+    }
+
+    loadNews();
+    updateNav();
+  </script>
+</body>
+</html>

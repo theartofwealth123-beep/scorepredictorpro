@@ -19,6 +19,3 @@ exports.handler = async () => {
 
 // Every 12 hours UTC
 exports.schedule = "0 */12 * * *";
-
-// Runs at 00:00 and 12:00 UTC daily
-exports.schedule = '0 */12 * * *';

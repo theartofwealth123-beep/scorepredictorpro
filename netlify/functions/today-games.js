@@ -4,7 +4,10 @@
 const fetch = require('node-fetch');
 
 exports.handler = async () => {
-  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  // Use US Eastern date (YYYYMMDD) to ensure "today" matches the US sports schedule.
+  // ESPN API expects YYYYMMDD (no hyphens).
+  const todayRaw = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+  const today = todayRaw.replace(/-/g, '');
 
   const leagues = [
     {
@@ -35,10 +38,10 @@ exports.handler = async () => {
 
   const games = [];
 
-  for (const { league, url } of leagues) {
+  const fetchPromises = leagues.map(async ({ league, url }) => {
     try {
       const res = await fetch(url);
-      if (!res.ok) continue;
+      if (!res.ok) return;
 
       const data = await res.json();
 
@@ -59,7 +62,8 @@ exports.handler = async () => {
           const timeStr =
             startTime.toLocaleTimeString('en-US', {
               hour: 'numeric',
-              minute: '2-digit'
+              minute: '2-digit',
+              timeZone: 'America/New_York'
             }) + ' ET';
 
           const network =
@@ -78,7 +82,8 @@ exports.handler = async () => {
             time: timeStr,
             network,
             status,
-            shortName: e.shortName || `${away} @ ${home}`
+            shortName: e.shortName || `${away} @ ${home}`,
+            id: e.id
           });
         } catch {
           // ignore malformed event
@@ -87,7 +92,9 @@ exports.handler = async () => {
     } catch {
       // ignore single-league fetch errors
     }
-  }
+  });
+
+  await Promise.all(fetchPromises);
 
   return {
     statusCode: 200,

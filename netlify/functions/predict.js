@@ -4,6 +4,11 @@
 
 const fs = require("fs");
 const path = require("path");
+const fetch = require("node-fetch");
+
+const auth0Domain = process.env.AUTH0_DOMAIN || "dev-3cwuyjrqj751y7nr.us.auth0.com";
+const managementToken = process.env.AUTH0_MANAGEMENT_TOKEN;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 // ------------ LEAGUE FALLBACKS ------------
 const FALLBACK_LEAGUE_STATS = {
@@ -98,6 +103,47 @@ function getTeamStrength(teamName, leagueKey) {
   return { offense, defense, pace: paceRaw };
 }
 
+// ------------ INJURY MODEL ------------
+const POSITION_INJURY_WEIGHTS = {
+  NFL: {
+    QB: { major: 0.25, minor: 0.12 },
+    WR: { major: 0.12, minor: 0.06 },
+    TE: { major: 0.08, minor: 0.04 },
+    RB: { major: 0.10, minor: 0.05 }
+  },
+  NBA: {
+    PG: { major: 0.14, minor: 0.07 },
+    SG: { major: 0.11, minor: 0.05 },
+    SF: { major: 0.10, minor: 0.05 },
+    PF: { major: 0.10, minor: 0.05 },
+    C:  { major: 0.12, minor: 0.06 }
+  }
+};
+
+function computeInjuryImpact(leagueKey, positionMap = {}, majorFlag = 0, minorFlag = 0, playerList = []) {
+  const weights = POSITION_INJURY_WEIGHTS[leagueKey] || {};
+
+  let impact = 0;
+  for (const [pos, sevRaw] of Object.entries(positionMap || {})) {
+    const sev = (sevRaw || "none").toLowerCase();
+    const w = weights[pos];
+    if (!w) continue;
+    if (sev === "major") impact += w.major;
+    else if (sev === "minor") impact += w.minor;
+  }
+
+  // Legacy sliders still supported for non-NBA/NFL or as overrides
+  impact += majorFlag * 0.15 + minorFlag * 0.06;
+
+  const playerCount = Array.isArray(playerList) ? playerList.length : 0;
+  impact += Math.min(playerCount * 0.01, 0.05); // small bump per explicitly flagged player
+
+  impact = clamp(impact, 0, 0.6);
+  const volatility = impact * 0.6 + Math.min(playerCount * 0.005, 0.03); // higher injury burden -> wider outcomes
+
+  return { impact, volatility };
+}
+
 // ------------ PSEUDO EXPECTED POINTS (FALLBACK) ------------
 function computeExpectedPointsPseudo(leagueKey, homeTeam, awayTeam, fallback, opts) {
   let basePpg = fallback.ppg;
@@ -107,9 +153,8 @@ function computeExpectedPointsPseudo(leagueKey, homeTeam, awayTeam, fallback, op
   const {
     neutralSite,
     homeMajorInjury,
-    awayMajorInjury,
-    homeMinorInjury,
-    awayMinorInjury
+    injuryHome,
+    injuryAway
   } = opts;
 
   const homeStr = getTeamStrength(homeTeam, leagueKey);
@@ -130,13 +175,14 @@ function computeExpectedPointsPseudo(leagueKey, homeTeam, awayTeam, fallback, op
   let sdAdjust = 0.85 + volSeed * 0.4;
 
   // Injuries: major + minor
-  const homeInjuryFactor = 1 - (homeMajorInjury * 0.15 + homeMinorInjury * 0.06);
-  const awayInjuryFactor = 1 - (awayMajorInjury * 0.15 + awayMinorInjury * 0.06);
+  const homeInjuryFactor = 1 - injuryHome.impact;
+  const awayInjuryFactor = 1 - injuryAway.impact;
 
   expectedHome *= homeInjuryFactor;
   expectedAway *= awayInjuryFactor;
 
   sdAdjust *= paceFactor > 1 ? 1.1 : 0.95;
+  sdAdjust *= 1 + (injuryHome.volatility + injuryAway.volatility) / 2;
 
   return { expectedHome, expectedAway, baseSd, sdAdjust };
 }
@@ -151,10 +197,14 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
   const baseHomeAdv = fallback.homeAdv;
 
   const neutralSite = !!options.neutralSite;
-  const homeMajorInjury = options.homeMajorInjury || 0; // 0–1
+
+  const homeMajorInjury = options.homeMajorInjury || 0; // legacy support
   const awayMajorInjury = options.awayMajorInjury || 0;
   const homeMinorInjury = options.homeMinorInjury || 0;
   const awayMinorInjury = options.awayMinorInjury || 0;
+
+  const injuryHome = options.injuryHome || computeInjuryImpact(leagueKey, null, homeMajorInjury, homeMinorInjury);
+  const injuryAway = options.injuryAway || computeInjuryImpact(leagueKey, null, awayMajorInjury, awayMinorInjury);
 
   let expectedHome = null;
   let expectedAway = null;
@@ -168,34 +218,85 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
   if (homeStats && awayStats) {
     const teamKeys = Object.keys(teams);
     let sumOff = 0, sumDef = 0, countOff = 0, countDef = 0;
+    
+    // New stat accumulators for league averages
+    let sumFG = 0, sum3P = 0, sumReb = 0, sumTO = 0;
+    let countFG = 0, count3P = 0, countReb = 0, countTO = 0;
 
     for (const k of teamKeys) {
       const t = teams[k];
+      // Existing ratings
       if (t.offRating) { sumOff += t.offRating; countOff++; }
       if (t.defRating) { sumDef += t.defRating; countDef++; }
+      
+      // New stats
+      if (t.fieldGoalPct) { sumFG += t.fieldGoalPct; countFG++; }
+      if (t.threePointPct) { sum3P += t.threePointPct; count3P++; }
+      if (t.avgRebounds) { sumReb += t.avgRebounds; countReb++; }
+      if (t.avgTurnovers) { sumTO += t.avgTurnovers; countTO++; }
     }
 
     const leagueAvgOff = countOff ? sumOff / countOff : 110;
     const leagueAvgDef = countDef ? sumDef / countDef : 110;
+    
+    const leagueAvgFG = countFG ? sumFG / countFG : 45;
+    const leagueAvg3P = count3P ? sum3P / count3P : 35;
+    const leagueAvgReb = countReb ? sumReb / countReb : 42;
+    const leagueAvgTO = countTO ? sumTO / countTO : 14;
 
     function blendedOff(t) {
-      const off = t.offRating || leagueAvgOff;
+      const off = t.offRating || t.ppgFor || leagueAvgOff;
       const recent = t.last10Off || off;
       return off * 0.7 + recent * 0.3;
     }
+    
+    // Improved defensive rating using ppgAgainst if available
     function blendedDef(t) {
-      const def = t.defRating || leagueAvgDef;
+      const def = t.ppgAgainst || t.defRating || leagueAvgDef;
       const recent = t.last10Def || def;
       return def * 0.7 + recent * 0.3;
+    }
+
+    // Calculate advanced stat multipliers
+    function getStatMultiifiers(t) {
+      let mult = 1.0;
+      
+      // Shooting efficiency boost
+      if (t.fieldGoalPct && leagueAvgFG > 0) {
+        mult += (t.fieldGoalPct - leagueAvgFG) / leagueAvgFG * 0.5; // Weight 0.5
+      }
+      if (t.threePointPct && leagueAvg3P > 0) {
+        mult += (t.threePointPct - leagueAvg3P) / leagueAvg3P * 0.2; // Weight 0.2
+      }
+      
+      // Possession control (Rebounds and Turnovers)
+      // More rebounds = slightly more possessions/second chances
+      if (t.avgRebounds && leagueAvgReb > 0) {
+         mult += (t.avgRebounds - leagueAvgReb) / leagueAvgReb * 0.2;
+      }
+      // Fewer turnovers = better
+      if (t.avgTurnovers && leagueAvgTO > 0) {
+         mult += (leagueAvgTO - t.avgTurnovers) / leagueAvgTO * 0.2;
+      }
+      
+      return Math.max(0.8, Math.min(1.2, mult)); // Clamp multiplier between 0.8 and 1.2
     }
 
     const homeOff = blendedOff(homeStats);
     const homeDef = blendedDef(homeStats);
     const awayOff = blendedOff(awayStats);
     const awayDef = blendedDef(awayStats);
+    
+    // Apply advanced stat adjustments
+    const homeAdvStatsFactor = getStatMultiifiers(homeStats);
+    const awayAdvStatsFactor = getStatMultiifiers(awayStats);
 
-    const homeOffFactor = homeOff / leagueAvgOff;
-    const awayOffFactor = awayOff / leagueAvgOff;
+    // Adjusted ratings
+    const adjHomeOff = homeOff * homeAdvStatsFactor;
+    const adjAwayOff = awayOff * awayAdvStatsFactor;
+
+    const homeOffFactor = adjHomeOff / leagueAvgOff;
+    const awayOffFactor = adjAwayOff / leagueAvgOff;
 
     const homeDefFactor = leagueAvgDef / homeDef;
     const awayDefFactor = leagueAvgDef / awayDef;
@@ -219,15 +320,17 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
         ? (awayStats.ppgFor + (awayStats.awayPpgFor || awayStats.ppgFor)) / 2
         : awayStats.awayPpgFor || awayStats.ppgFor;
 
-      rawHome = rawHome * 0.6 + homeSplit * 0.4;
-      rawAway = rawAway * 0.6 + awaySplit * 0.4;
+      // Blend pure stats-based prediction with raw PPG averages
+      // We give slightly more weight to the advanced model now (0.7 vs 0.3)
+      rawHome = rawHome * 0.7 + homeSplit * 0.3;
+      rawAway = rawAway * 0.7 + awaySplit * 0.3;
     }
 
     rawHome += homeAdv;
     rawAway -= homeAdv;
 
-    const homeInjuryFactor = 1 - (homeMajorInjury * 0.15 + homeMinorInjury * 0.06);
-    const awayInjuryFactor = 1 - (awayMajorInjury * 0.15 + awayMinorInjury * 0.06);
+    const homeInjuryFactor = 1 - injuryHome.impact;
+    const awayInjuryFactor = 1 - injuryAway.impact;
 
     expectedHome = rawHome * homeInjuryFactor;
     expectedAway = rawAway * awayInjuryFactor;
@@ -236,16 +339,15 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
     const spreadRatio = spreadGuess / basePpg;
     sdAdjust = 0.85 + Math.min(spreadRatio * 0.7, 0.4);
     sdAdjust *= paceFactor > 1 ? 1.1 : 0.95;
+    sdAdjust *= 1 + (injuryHome.volatility + injuryAway.volatility) / 2;
   }
 
   // 2) PSEUDO PATH (fallback)
   if (expectedHome == null || expectedAway == null) {
     const fallbackResult = computeExpectedPointsPseudo(leagueKey, homeTeam, awayTeam, fallback, {
       neutralSite,
-      homeMajorInjury,
-      awayMajorInjury,
-      homeMinorInjury,
-      awayMinorInjury
+      injuryHome,
+      injuryAway
     });
     expectedHome = fallbackResult.expectedHome;
     expectedAway = fallbackResult.expectedAway;
@@ -277,8 +379,73 @@ async function getMarketOddsFromAPI() {
   return null;
 }
 
+// ------------ ACCESS CONTROL (Auth0 + subscription) ------------
+async function authorizeRequest(headers = {}) {
+  if (!auth0Domain) {
+    return { allowed: false, code: 500, message: "Auth not configured" };
+  }
+  const authHeader = headers.authorization || headers.Authorization;
+  const token = authHeader?.split(" ")[1];
+
+  if (!token) {
+    return { allowed: false, code: 401, message: "Login required" };
+  }
+
+  try {
+    const uiRes = await fetch(`https://${auth0Domain}/userinfo`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!uiRes.ok) {
+      return { allowed: false, code: 401, message: "Invalid session" };
+    }
+    const user = await uiRes.json();
+
+    if (ADMIN_EMAIL && user.email === ADMIN_EMAIL) {
+      return { allowed: true, user, status: "admin" };
+    }
+
+    if (!managementToken) {
+      return { allowed: false, code: 403, message: "Subscription required" };
+    }
+
+    const fullRes = await fetch(
+      `https://${auth0Domain}/api/v2/users/${encodeURIComponent(user.sub)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${managementToken}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    if (!fullRes.ok) {
+      return { allowed: false, code: 403, message: "Subscription required" };
+    }
+
+    const fullUser = await fullRes.json();
+    const status = fullUser.app_metadata?.subStatus;
+    const allowed = status === "active" || status === "trialing";
+
+    return allowed
+      ? { allowed: true, user, status }
+      : { allowed: false, code: 403, message: "Subscription required" };
+  } catch (err) {
+    console.error("Auth check failed:", err.message);
+    return { allowed: false, code: 401, message: "Authentication failed" };
+  }
+}
+
 // ------------ MAIN HANDLER ------------
 exports.handler = async (event) => {
+  const auth = await authorizeRequest(event.headers || {});
+  if (!auth.allowed) {
+    return {
+      statusCode: auth.code || 401,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: auth.message })
+    };
+  }
+
   let body = {};
   try {
     body = JSON.parse(event.body || "{}");
@@ -309,6 +476,29 @@ exports.handler = async (event) => {
   const awayMajorInjury = body.awayMajorInjury ? 1 : 0;
   const awayMinorInjury = body.awayMinorInjury ? 1 : 0;
 
+  const homePositionInjuries =
+    body.homePositionInjuries && typeof body.homePositionInjuries === "object"
+      ? body.homePositionInjuries
+      : {};
+  const awayPositionInjuries =
+    body.awayPositionInjuries && typeof body.awayPositionInjuries === "object"
+      ? body.awayPositionInjuries
+      : {};
+
+  const homeInjuredPlayers = Array.isArray(body.homeInjuredPlayers)
+    ? body.homeInjuredPlayers
+    : typeof body.homeInjuredPlayers === "string"
+      ? body.homeInjuredPlayers.split(",").map(s => s.trim()).filter(Boolean)
+      : [];
+  const awayInjuredPlayers = Array.isArray(body.awayInjuredPlayers)
+    ? body.awayInjuredPlayers
+    : typeof body.awayInjuredPlayers === "string"
+      ? body.awayInjuredPlayers.split(",").map(s => s.trim()).filter(Boolean)
+      : [];
+
+  const injuryHome = computeInjuryImpact(leagueKey, homePositionInjuries, homeMajorInjury, homeMinorInjury, homeInjuredPlayers);
+  const injuryAway = computeInjuryImpact(leagueKey, awayPositionInjuries, awayMajorInjury, awayMinorInjury, awayInjuredPlayers);
+
   let market = body.market || null;
   if (!market) {
     market = await getMarketOddsFromAPI(leagueKey, homeTeam, awayTeam);
@@ -326,11 +516,13 @@ exports.handler = async (event) => {
       homeMajorInjury,
       awayMajorInjury,
       homeMinorInjury,
-      awayMinorInjury
+      awayMinorInjury,
+      injuryHome,
+      injuryAway
     }
   );
 
-  const SIMS = 5000000; // 5 MILLION
+  const SIMS = 500000; // 500k simulations
   let homeWins = 0;
   let homeTotal = 0;
   let awayTotal = 0;
@@ -455,6 +647,17 @@ exports.handler = async (event) => {
   let bestPlay = "No clear edge — use as info or live-bet only.";
   let bestEdgeValue = 0;
 
+  // We'll calculate the raw lean now so we can use it as a fallback:
+  const favorite = modelHomeWinProb >= 0.5 ? homeTeam : awayTeam;
+  const favProb = Math.max(modelHomeWinProb, modelAwayWinProb);
+  const confidence = favProb > 0.65 ? "Strong lean" : favProb > 0.55 ? "Lean" : "Slight lean";
+  const rawLean = `${confidence}: ${favorite} to win (${(favProb * 100).toFixed(1)}%)`;
+
+  // If no market odds provided, give a raw model lean
+  if (!market) {
+    bestPlay = rawLean;
+  }
+
   // ML edges
   if (edges.moneyline) {
     if (edges.moneyline.homeEdgePct > bestEdgeValue) {
@@ -503,11 +706,17 @@ exports.handler = async (event) => {
     }
   }
 
+  // FORCE PREDICTION: If we have market odds but NO strong edge found (bestEdgeValue <= 0),
+  // fallback to the raw model lean so the user still gets a "prediction".
+  if (market && bestEdgeValue <= 0) {
+    bestPlay = `(No strong market edge) ${rawLean}`;
+  }
+
   const numericEdge = bestEdgeValue;
   const edgeText =
     numericEdge > 0.5
       ? `Best edge: +${numericEdge.toFixed(2)}% (${bestPlay})`
-      : "No strong edge vs standard -110 pricing.";
+      : "No strong edge vs standard pricing.";
 
   const usesRealData =
     !!(leagueData &&
@@ -516,7 +725,7 @@ exports.handler = async (event) => {
       leagueData.teams[awayTeam]);
 
   let explanation =
-    `${homeTeam} vs ${awayTeam} was simulated 5,000,000 times using ` +
+    `${homeTeam} vs ${awayTeam} was simulated 500,000 times using ` +
     (usesRealData
       ? "live team offensive/defensive efficiency, pace, and scoring splits from data files, "
       : "league averages plus team-strength profiles derived from their names, ") +
@@ -561,7 +770,11 @@ exports.handler = async (event) => {
       homeMajorInjury,
       homeMinorInjury,
       awayMajorInjury,
-      awayMinorInjury
+      awayMinorInjury,
+      homePositionInjuries,
+      awayPositionInjuries,
+      homeInjuredPlayers,
+      awayInjuredPlayers
     }
   };
 
@@ -571,3 +784,8 @@ exports.handler = async (event) => {
     body: JSON.stringify(responseBody)
   };
 };
+
+// Named exports for reuse in other functions (free picks, schedulers)
+exports.computeExpectedPoints = computeExpectedPoints;
+exports.loadLeagueData = loadLeagueData;
+exports.computeInjuryImpact = computeInjuryImpact;

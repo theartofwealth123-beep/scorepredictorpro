@@ -1,15 +1,9 @@
 // netlify/functions/today-edges.js
 // Lightweight "today's best edges" generator.
-// Uses ESPN scoreboard + pseudo team strength + 100K sims per game.
+// Now aligned with the main calculator's advanced model for consistency.
 
 const fetch = require('node-fetch');
-
-// Baseline league scoring profiles (lighter than main 5M-sim engine)
-const FALLBACK_LEAGUE_STATS = {
-  NBA: { ppg: 117.2, sd: 13.5, homeAdv: 3.4 },
-  NFL: { ppg: 23.4, sd: 11.8, homeAdv: 2.7 },
-  NHL: { ppg: 3.08, sd: 2.1, homeAdv: 0.38 }
-};
+const { computeExpectedPoints, loadLeagueData } = require('./predict');
 
 function normalSample(mean, sd) {
   const u1 = Math.random();
@@ -22,85 +16,9 @@ function clamp(x, min, max) {
   return Math.max(min, Math.min(max, x));
 }
 
-function hashString(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) {
-    h = (h << 5) - h + str.charCodeAt(i);
-    h |= 0;
-  }
-  return Math.abs(h);
-}
-
-// Pseudo team strength (offense/defense/pace) based on name hash
-function getTeamStrength(teamName, leagueKey) {
-  const base = hashString(leagueKey + ':' + teamName);
-
-  const spreads =
-    {
-      NBA: { off: 0.12, def: 0.10, pace: 0.10 },
-      NFL: { off: 0.18, def: 0.16, pace: 0.12 },
-      NHL: { off: 0.10, def: 0.10, pace: 0.08 }
-    }[leagueKey] || { off: 0.15, def: 0.15, pace: 0.10 };
-
-  function centeredMultiplier(seed, spread, baseValue = 1) {
-    const r = (seed % 2000) / 1000 - 1; // [-1, ~+1)
-    return baseValue * (1 + r * spread);
-  }
-
-  const offSeed = base;
-  const defSeed = Math.floor(base / 9973);
-  const paceSeed = Math.floor(base / 31337);
-
-  const offense = centeredMultiplier(offSeed, spreads.off);
-  const defense = centeredMultiplier(defSeed, spreads.def);
-  const paceRaw = centeredMultiplier(paceSeed, spreads.pace, 1);
-
-  return {
-    offense,
-    defense,
-    pace: paceRaw
-  };
-}
-
-function computeExpectedPoints(leagueKey, homeTeam, awayTeam) {
-  const fallback = FALLBACK_LEAGUE_STATS[leagueKey] || FALLBACK_LEAGUE_STATS.NBA;
-  let basePpg = fallback.ppg;
-  let baseSd = fallback.sd;
-  const homeAdv = fallback.homeAdv;
-
-  const homeStr = getTeamStrength(homeTeam, leagueKey);
-  const awayStr = getTeamStrength(awayTeam, leagueKey);
-
-  const defFactorHome = 1 - (homeStr.defense - 1) * 0.6;
-  const defFactorAway = 1 - (awayStr.defense - 1) * 0.6;
-
-  const paceFactor = (homeStr.pace + awayStr.pace) / 2;
-
-  let expectedHome = basePpg * homeStr.offense * defFactorAway * paceFactor + homeAdv;
-  let expectedAway = basePpg * awayStr.offense * defFactorHome * paceFactor - homeAdv;
-
-  const nameMash = hashString(homeTeam + '|' + awayTeam + '|' + leagueKey);
-  const volSeed = (nameMash % 1000) / 1000;
-  const sdAdjust = 0.85 + volSeed * 0.4;
-
-  const sd = baseSd * sdAdjust;
-
-  const maxFactor =
-    {
-      NBA: 2.4,
-      NFL: 2.2,
-      NHL: 3.0
-    }[leagueKey] || 2.2;
-
-  const maxScore = basePpg * maxFactor;
-  expectedHome = clamp(expectedHome, 0, maxScore);
-  expectedAway = clamp(expectedAway, 0, maxScore);
-
-  return { expectedHome, expectedAway, sd, basePpg };
-}
-
 async function fetchTodayGames() {
-  const today = new Date().toISOString().slice(0, 10);
+  const todayRaw = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+  const today = todayRaw.replace(/-/g, '');
 
   const defs = [
     {
@@ -114,6 +32,18 @@ async function fetchTodayGames() {
     {
       league: 'NHL',
       url: `https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=${today}`
+    },
+    {
+      league: 'MLB',
+      url: `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=${today}`
+    },
+    {
+      league: 'NCAAF',
+      url: `https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates=${today}`
+    },
+    {
+      league: 'NCAAB',
+      url: `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${today}`
     }
   ];
 
@@ -167,17 +97,25 @@ exports.handler = async () => {
       };
     }
 
-    const SIMS = 100000; // lighter than 5M but still strong
+    const SIMS = 5000; // 5k sims per game = fast edge finding (100k total for 20 games)
     const impliedBreakEven = 0.524; // -110
 
     const results = [];
 
+    // Limit to 20 games to ensure we don't timeout
     for (const g of games.slice(0, 20)) {
       const leagueKey = g.league.toUpperCase();
+      const leagueData = loadLeagueData(leagueKey);
       const { expectedHome, expectedAway, sd, basePpg } = computeExpectedPoints(
         leagueKey,
         g.homeTeam,
-        g.awayTeam
+        g.awayTeam,
+        leagueData,
+        {
+          neutralSite: false,
+          injuryHome: { impact: 0, volatility: 0 },
+          injuryAway: { impact: 0, volatility: 0 }
+        }
       );
 
       let homeWins = 0;

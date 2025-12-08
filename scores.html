@@ -11,11 +11,38 @@
       background: radial-gradient(circle at top left, rgba(96,165,250,0.12), transparent 55%),
                   radial-gradient(circle at bottom right, rgba(244,114,182,0.12), transparent 55%);
     }
+    /* Modal transitions */
+    #tracker-modal { transition: opacity 0.2s ease-in-out, visibility 0.2s; }
+    #tracker-modal.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #tracker-modal:not(.hidden) { opacity: 1; visibility: visible; pointer-events: auto; }
+
+    .possession-track {
+      position: relative;
+      height: 10px;
+      background: linear-gradient(90deg, rgba(14,165,233,0.18), rgba(99,102,241,0.28));
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .possession-ball {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f59e0b, #d97706 55%);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+      transition: transform 250ms ease-in-out;
+      font-size: 12px;
+    }
   </style>
 </head>
-<body class="min-h-screen glass">
+<body class="min-h-screen bg-black flex flex-col">
   <!-- NAV -->
-  <header class="border-b border-slate-800/60 bg-black/60 backdrop-blur">
+  <header class="border-b border-slate-800/60 bg-black/80 backdrop-blur sticky top-0 z-40">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
       <div class="flex items-center gap-2">
         <span class="text-xl font-black tracking-tight bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -34,7 +61,7 @@
   </header>
 
   <main class="max-w-6xl mx-auto px-4 py-8">
-    <section class="mb-6 flex items-center justify-between gap-4">
+    <section class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div>
         <h1 class="text-3xl md:text-4xl font-black tracking-tight">
           Today’s Games & Live Board
@@ -64,24 +91,62 @@
       </p>
     </section>
 
-    <!-- Games grid -->
+    <!-- Games List -->
     <section>
-      <h2 class="text-sm font-semibold text-slate-300 tracking-[0.18em] uppercase mb-3">
-        Full Board
-      </h2>
-      <div id="games" class="grid gap-3 md:grid-cols-2 lg:grid-cols-3"></div>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-slate-300 tracking-[0.18em] uppercase">
+          Full Board
+        </h2>
+        <!-- Search Bar -->
+        <div class="relative">
+          <input 
+            type="text" 
+            id="game-search" 
+            placeholder="Search team or league..." 
+            class="bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-full px-4 py-1.5 focus:outline-none focus:border-sky-500 w-48 md:w-64"
+          >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute right-3 top-2 text-slate-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+      
+      <div id="games" class="flex flex-col gap-2"></div>
       <p id="games-empty" class="text-sm text-slate-500 mt-1 hidden">
-        No games found for today. It might be an off day or the feeds haven’t updated yet.
+        No games found for today.
       </p>
     </section>
   </main>
 
+  <!-- Game Tracker Modal -->
+  <div id="tracker-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl relative">
+      <!-- Close Button -->
+      <button onclick="closeTracker()" class="absolute top-3 right-3 p-1 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      
+      <div id="modal-content" class="p-6 text-center">
+        <div class="animate-pulse flex flex-col items-center">
+          <div class="h-4 bg-slate-800 rounded w-1/3 mb-4"></div>
+          <div class="h-10 bg-slate-800 rounded w-1/2 mb-4"></div>
+          <div class="h-32 bg-slate-800 rounded w-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    let allGames = [];
+    let trackerInterval = null;
+
     async function loadGames() {
       const gamesEl = document.getElementById('games');
       const emptyEl = document.getElementById('games-empty');
 
-      gamesEl.innerHTML = '<div class="col-span-full text-sm text-slate-400">Loading today\'s board…</div>';
+      gamesEl.innerHTML = '<div class="text-sm text-slate-400 py-4 text-center">Loading today\'s board…</div>';
 
       try {
         const res = await fetch('/.netlify/functions/today-games');
@@ -106,41 +171,202 @@
           return li - lj;
         });
 
-        gamesEl.innerHTML = games.map(g => {
-          const live = g.status && g.status !== 'STATUS_SCHEDULED';
-          return `
-            <article class="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-3 text-xs md:text-sm flex flex-col gap-2">
-              <div class="flex items-center justify-between gap-2">
-                <span class="px-2 py-0.5 rounded-full border border-slate-700/80 text-[0.65rem] tracking-[0.16em] uppercase text-slate-300">
-                  ${g.league}
-                </span>
-                <span class="text-[0.7rem] ${live ? 'text-emerald-400' : 'text-slate-400'} font-semibold">
-                  ${live ? 'LIVE / IN-GAME' : 'SCHEDULED'}
-                </span>
-              </div>
-              <div class="font-semibold">
-                <div>${g.away}</div>
-                <div class="text-slate-400 text-[0.75rem]">at</div>
-                <div>${g.home}</div>
-              </div>
-              <div class="flex items-center justify-between text-[0.7rem] text-slate-400">
-                <span>${g.time}</span>
-                <span>${g.network}</span>
-              </div>
-            </article>
-          `;
-        }).join('');
+        allGames = games;
+        renderGames(allGames);
       } catch (err) {
         console.error('today-games error', err);
-        gamesEl.innerHTML = '<div class="col-span-full text-sm text-red-400">Failed to load games.</div>';
+        gamesEl.innerHTML = '<div class="text-sm text-red-400 py-4 text-center">Failed to load games.</div>';
       }
     }
 
+    function renderGames(games) {
+      const gamesEl = document.getElementById('games');
+      
+      if (games.length === 0) {
+        gamesEl.innerHTML = '<div class="text-sm text-slate-500 py-4 text-center">No games match your search.</div>';
+        return;
+      }
+
+      gamesEl.innerHTML = games.map(g => {
+        const live = g.status && g.status !== 'STATUS_SCHEDULED';
+        return `
+          <article onclick="openTracker('${g.league}', '${g.id}')" 
+            class="group cursor-pointer rounded-xl border border-slate-800/80 bg-slate-950/60 hover:bg-slate-900/80 p-3 flex items-center justify-between gap-4 transition-colors">
+            
+            <div class="flex items-center gap-3 flex-1">
+              <span class="w-12 text-center px-1.5 py-0.5 rounded-full border border-slate-700/80 text-[0.6rem] font-bold tracking-wider uppercase text-slate-400 group-hover:border-slate-600 transition-colors">
+                ${g.league}
+              </span>
+              
+              <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 font-semibold text-sm md:text-base text-slate-200">
+                <div class="flex items-center gap-2">
+                  <span>${g.away}</span>
+                  <span class="text-slate-500 text-xs font-normal">@</span>
+                  <span>${g.home}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-right flex flex-col items-end gap-0.5">
+               <span class="text-[0.7rem] uppercase font-bold tracking-wide ${live ? 'text-emerald-400 animate-pulse' : 'text-slate-500'}">
+                  ${live ? 'LIVE' : g.time}
+                </span>
+                <span class="text-[0.65rem] text-slate-500">
+                  ${g.network || ''}
+                </span>
+            </div>
+            
+            <div class="hidden md:block text-slate-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Search / Filter
+    document.getElementById('game-search').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = allGames.filter(g => 
+        g.home.toLowerCase().includes(term) || 
+        g.away.toLowerCase().includes(term) ||
+        g.league.toLowerCase().includes(term)
+      );
+      renderGames(filtered);
+    });
+
+    // Tracker Modal Logic
+    async function openTracker(league, eventId) {
+      const modal = document.getElementById('tracker-modal');
+      const content = document.getElementById('modal-content');
+
+      modal.classList.remove('hidden');
+
+      if (trackerInterval) {
+        clearInterval(trackerInterval);
+        trackerInterval = null;
+      }
+
+      const renderLoading = () => {
+        content.innerHTML = `
+          <div class="flex flex-col items-center justify-center py-12">
+             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500 mb-4"></div>
+             <div class="text-slate-400 text-sm">Loading Game Tracker...</div>
+          </div>
+        `;
+      };
+
+      const renderError = () => {
+        content.innerHTML = `
+           <div class="text-center py-8">
+             <div class="text-red-400 mb-2">Unable to load game details.</div>
+             <button onclick="closeTracker()" class="text-xs bg-slate-800 px-3 py-1 rounded text-slate-300">Close</button>
+           </div>`;
+      };
+
+      const fetchAndRender = async () => {
+        renderLoading();
+        try {
+          const res = await fetch(`/.netlify/functions/game-tracker?league=${league}&eventId=${eventId}`);
+          if (!res.ok) throw new Error('Failed to fetch');
+          const data = await res.json();
+
+          const isLive = data.gameState === 'in';
+          const possessionShift = data.possession === 'home' ? 'translateX(72px)' : data.possession === 'away' ? 'translateX(-72px)' : 'translateX(0)';
+
+          const maxPeriods = Math.max(...(data.scoring || []).map(s => s.linescores?.length || 0), 0);
+          const periodLabels = Array.from({ length: maxPeriods }, (_, i) => i + 1);
+
+          const boxScoreHtml = maxPeriods > 0 ? `
+            <div class="mt-6">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="text-xs uppercase tracking-widest text-slate-500">Box Score</h4>
+                <span class="text-[0.65rem] text-slate-500">Per period</span>
+              </div>
+              <div class="overflow-auto text-xs">
+                <table class="min-w-full text-left border-separate border-spacing-y-1">
+                  <thead class="text-slate-400">
+                    <tr>
+                      <th class="px-2 py-1">Team</th>
+                      ${periodLabels.map(p => `<th class="px-2 py-1 text-center">${p}</th>`).join('')}
+                      <th class="px-2 py-1 text-center">T</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${(data.scoring || []).map(row => `
+                      <tr class="bg-slate-900/60">
+                        <td class="px-2 py-1 font-semibold text-slate-100 whitespace-nowrap">${row.abbreviation || row.team}</td>
+                        ${periodLabels.map((pIdx, i) => `<td class="px-2 py-1 text-center text-slate-200">${row.linescores?.[i]?.value ?? '-'}</td>`).join('')}
+                        <td class="px-2 py-1 text-center font-bold text-white">${row.total ?? '-'}</td>
+                      </tr>`).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>` : '';
+
+          // ... (rest of stats logic)
+
+          // Only show possession for basketball/football where applicable and if LIVE
+          const showPossession = (isLive || data.possession) && ['NBA', 'NCAAB', 'NFL', 'NCAAF'].includes(league);
+          
+          content.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded text-[0.65rem] border border-slate-600 text-slate-400 font-mono">${league}</span>
+              <span class="text-xs font-bold ${isLive ? 'text-emerald-400' : 'text-slate-400'}">${data.status || 'Scheduled'}</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-3 py-4">
+               <div class="grid grid-cols-3 items-center gap-3 w-full">
+                  <div class="text-center">
+                    <h3 class="text-xl md:text-2xl font-black text-white">${data.awayTeam}</h3>
+                    <div class="text-3xl md:text-4xl font-bold mt-1 ${isLive ? 'text-white' : 'text-slate-500'}">${data.awayScore || '-'}</div>
+                  </div>
+                  <div class="text-center flex flex-col items-center">
+                    ${showPossession ? `
+                    <div class="possession-track mx-auto w-36">
+                      <div class="possession-ball" style="transform:${possessionShift}">🏀</div>
+                    </div>
+                    <p class="text-[0.65rem] text-slate-500 mt-1">Possession indicator</p>
+                    ` : ''}
+                    <div class="text-xs text-slate-400 mt-1 max-w-[150px] leading-tight">${data.lastPlayText || ''}</div>
+                  </div>
+                  <div class="text-center">
+                    <h3 class="text-xl md:text-2xl font-black text-white">${data.homeTeam}</h3>
+                    <div class="text-3xl md:text-4xl font-bold mt-1 ${isLive ? 'text-white' : 'text-slate-500'}">${data.homeScore || '-'}</div>
+                  </div>
+               </div>
+            </div>
+
+        } catch (err) {
+          console.error(err);
+          renderError();
+        }
+      };
+
+      fetchAndRender();
+      trackerInterval = setInterval(fetchAndRender, 15000);
+    }
+
+    function closeTracker() {
+      if (trackerInterval) {
+        clearInterval(trackerInterval);
+        trackerInterval = null;
+      }
+      document.getElementById('tracker-modal').classList.add('hidden');
+    }
+    // Close on click outside
+    document.getElementById('tracker-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'tracker-modal') closeTracker();
+    });
+
+    // Edges (Existing logic preserved)
     async function loadEdges() {
       const edgesEl = document.getElementById('edges');
       const emptyEl = document.getElementById('edges-empty');
 
-      edgesEl.innerHTML = '<div class="col-span-full text-sm text-slate-400">Scanning for edges…</div>';
+      edgesEl.innerHTML = '<div class="col-span-full text-sm text-slate-400 text-center">Scanning for edges…</div>';
 
       try {
         const res = await fetch('/.netlify/functions/today-edges');
@@ -185,7 +411,7 @@
         `).join('');
       } catch (err) {
         console.error('today-edges error', err);
-        edgesEl.innerHTML = '<div class="col-span-full text-sm text-red-400">Failed to load edges.</div>';
+        edgesEl.innerHTML = '<div class="col-span-full text-sm text-red-400 text-center">Failed to load edges.</div>';
       }
     }
 

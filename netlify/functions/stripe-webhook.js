@@ -2,7 +2,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const fetch = require("node-fetch");
 
-const auth0Domain = process.env.AUTH0_DOMAIN;
+const auth0Domain = process.env.AUTH0_DOMAIN || "dev-3cwuyjrqj751y7nr.us.auth0.com";
 const managementToken = process.env.AUTH0_MANAGEMENT_TOKEN;
 
 exports.handler = async (event) => {
@@ -31,7 +31,7 @@ exports.handler = async (event) => {
         const auth0UserId =
           session.client_reference_id || sub.metadata?.auth0_user_id;
         if (auth0UserId) {
-          await fetch(
+          const res = await fetch(
             `https://${auth0Domain}/api/v2/users/${encodeURIComponent(
               auth0UserId
             )}`,
@@ -48,9 +48,10 @@ exports.handler = async (event) => {
                 }
               })
             }
-          ).catch((e) =>
-            console.error("Auth0 metadata update failed:", e.message)
           );
+          if (!res.ok) {
+            throw new Error(`Auth0 update failed: ${res.statusText}`);
+          }
         }
       }
     }
@@ -63,7 +64,7 @@ exports.handler = async (event) => {
       const sub = stripeEvent.data.object;
       const auth0UserId = sub.metadata?.auth0_user_id;
       if (auth0UserId) {
-        await fetch(
+        const res = await fetch(
           `https://${auth0Domain}/api/v2/users/${encodeURIComponent(
             auth0UserId
           )}`,
@@ -82,13 +83,15 @@ exports.handler = async (event) => {
               }
             })
           }
-        ).catch((e) =>
-          console.error("Auth0 cancel/past_due update failed:", e.message)
         );
+        if (!res.ok) {
+           throw new Error(`Auth0 update failed: ${res.statusText}`);
+        }
       }
     }
   } catch (e) {
     console.error("stripe-webhook handler error:", e.message);
+    return { statusCode: 500, body: `Webhook Error: ${e.message}` };
   }
 
   return { statusCode: 200, body: "OK" };

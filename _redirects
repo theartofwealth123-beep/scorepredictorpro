@@ -1,1 +1,3 @@
-/ /scores.html 200
+# Redirects file
+# / /scores.html 200 (Removed to allow index.html to be served at root)
+/auth-callback /auth-callback.html 200

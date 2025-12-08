@@ -2,7 +2,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const fetch = require("node-fetch");
 
-const auth0Domain = process.env.AUTH0_DOMAIN;
+const auth0Domain = process.env.AUTH0_DOMAIN || "dev-3cwuyjrqj751y7nr.us.auth0.com";
 const managementToken = process.env.AUTH0_MANAGEMENT_TOKEN;
 
 exports.handler = async (event) => {
@@ -48,7 +48,7 @@ exports.handler = async (event) => {
 
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: process.env.SITE_URL || "https://example.com"
+      return_url: process.env.SITE_URL || "https://scorepredictor.pro"
     });
 
     return {

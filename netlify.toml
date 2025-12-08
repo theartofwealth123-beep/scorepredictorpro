@@ -6,3 +6,4 @@
 # optional: use esbuild to bundle functions
 [functions]
   node_bundler = "esbuild"
+  included_files = ["data/*.json"]

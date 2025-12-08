@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ScorePredictor Pro • Live Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #020617; color: #e5e7eb; font-family: system-ui, -apple-system, sans-serif; }
+    .glass {
+      background: radial-gradient(circle at top left, rgba(96,165,250,0.08), transparent 40%),
+                  radial-gradient(circle at bottom right, rgba(244,114,182,0.08), transparent 40%);
+    }
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+    }
+    /* Hide scrollbar for clean modal */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black flex flex-col">
+  <!-- NAV -->
+  <header class="border-b border-slate-800/60 bg-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-xl font-black tracking-tight bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-400">
+        <a href="/" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Calculator</a>
+        <a href="/games.html" class="px-3 py-1.5 rounded-full bg-slate-800 text-slate-100 transition-colors">Live Games</a>
+        <a href="/freepicks.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Free Picks</a>
+        <a href="/news.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">News</a>
+        <a href="/profile.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Profile</a>
+      </nav>
+      <!-- Mobile Menu -->
+      <nav class="md:hidden flex gap-3 text-xs font-semibold text-slate-400">
+        <a href="/games.html" class="text-white">Games</a>
+        <a href="/freepicks.html">Picks</a>
+        <a href="/news.html">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+    <section class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-2">Live Games & Scores</h1>
+        <p class="text-slate-400">Real-time updates, box scores, and schedules for all major leagues.</p>
+      </div>
+      
+      <!-- Search Bar -->
+      <div class="relative">
+        <input 
+          type="text" 
+          id="game-search" 
+          placeholder="Search team or league..." 
+          class="bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-full px-4 py-2 focus:outline-none focus:border-sky-500 w-full md:w-64"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute right-3 top-3 text-slate-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Games List -->
+    <div id="games-container" class="flex flex-col gap-2 min-h-[200px]">
+      <div id="loading" class="text-center py-12 text-slate-500 animate-pulse">
+        Loading today's board...
+      </div>
+    </div>
+    
+    <div id="empty-state" class="hidden text-center py-12 text-slate-500">
+      No games scheduled for today.
+    </div>
+  </main>
+
+  <!-- GAME TRACKER MODAL -->
+  <div id="tracker-modal" class="fixed inset-0 z-[100] modal-backdrop hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-2xl max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col relative">
+      <!-- Modal Header -->
+      <div class="bg-slate-950/50 border-b border-slate-800 p-4 flex items-center justify-between">
+        <h3 class="text-lg font-bold text-slate-200 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Live Tracker
+        </h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      
+      <!-- Modal Content -->
+      <div id="tracker-content" class="p-6 overflow-y-auto no-scrollbar flex-grow">
+        <div class="text-center py-8 text-slate-500">Loading game data...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allGames = [];
+
+    async function loadGames() {
+      const container = document.getElementById('games-container');
+      const loader = document.getElementById('loading');
+      const empty = document.getElementById('empty-state');
+
+      try {
+        const res = await fetch('/.netlify/functions/today-games');
+        const games = await res.json();
+
+        // Clear loading state
+        if (loader) loader.remove();
+        
+        if (!games || games.length === 0) {
+          empty.classList.remove('hidden');
+          return;
+        }
+
+        // Sort: Live first, then time, then league
+        const leagueOrder = ['NBA', 'NCAAB', 'NFL', 'NCAAF', 'MLB', 'NHL'];
+        games.sort((a, b) => {
+           // Live Check
+           const aLive = a.status && !a.status.includes('SCHEDULED') && !a.status.includes('FINAL');
+           const bLive = b.status && !b.status.includes('SCHEDULED') && !b.status.includes('FINAL');
+           if (aLive && !bLive) return -1;
+           if (!aLive && bLive) return 1;
+
+           // League Order
+           const li = leagueOrder.indexOf(a.league);
+           const lj = leagueOrder.indexOf(b.league);
+           if (li !== lj) {
+             if (li === -1) return 1;
+             if (lj === -1) return -1;
+             return li - lj;
+           }
+           
+           // Time
+           return a.time.localeCompare(b.time);
+        });
+
+        allGames = games;
+        renderGames(allGames);
+
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<div class="text-center py-12 text-red-400">Failed to load games. Please refresh.</div>';
+      }
+    }
+
+    function renderGames(games) {
+      const container = document.getElementById('games-container');
+      
+      if (games.length === 0) {
+        container.innerHTML = '<div class="text-center py-12 text-slate-500">No games match your search.</div>';
+        return;
+      }
+
+      container.innerHTML = games.map(g => {
+        const isLive = g.status && !g.status.includes('SCHEDULED') && !g.status.includes('FINAL');
+        const statusColor = isLive ? 'text-emerald-400' : 'text-slate-400';
+        const statusText = isLive ? 'LIVE' : g.time;
+
+        return `
+          <article 
+            onclick="openTracker('${g.league}', '${g.id}')"
+            class="group cursor-pointer rounded-xl border border-slate-800/80 bg-slate-950/60 hover:bg-slate-900/80 p-4 flex items-center justify-between gap-4 transition-all hover:border-purple-500/30"
+          >
+            <div class="flex items-center gap-4 flex-1">
+              <span class="w-14 text-center px-2 py-1 rounded-md border border-slate-700/80 text-[0.65rem] font-bold tracking-wider uppercase text-slate-400 group-hover:border-slate-600 transition-colors bg-slate-900">
+                ${g.league}
+              </span>
+              
+              <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-6 font-semibold text-base md:text-lg text-slate-200">
+                <div class="flex items-center gap-3">
+                  <span class="text-slate-300">${g.away}</span>
+                  <span class="text-slate-600 text-xs font-normal">@</span>
+                  <span class="text-white">${g.home}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-right flex flex-col items-end gap-1">
+               <span class="text-[0.75rem] uppercase font-bold tracking-wide ${isLive ? 'text-emerald-400 animate-pulse' : 'text-slate-400'} flex items-center gap-1.5">
+                  ${isLive ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>' : ''}
+                  ${statusText}
+                </span>
+                <span class="text-[0.65rem] text-slate-600 hidden md:inline-block">
+                  ${g.network !== 'TBD' ? g.network : ''}
+                </span>
+            </div>
+            
+            <div class="hidden md:block text-slate-600 group-hover:text-purple-400 transition-colors pl-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Search Logic
+    document.getElementById('game-search').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = allGames.filter(g => 
+        g.home.toLowerCase().includes(term) || 
+        g.away.toLowerCase().includes(term) ||
+        g.league.toLowerCase().includes(term)
+      );
+      renderGames(filtered);
+    });
+
+    let trackerInterval;
+
+    async function openTracker(league, eventId) {
+      if (!eventId) return;
+      
+      const modal = document.getElementById('tracker-modal');
+      const content = document.getElementById('tracker-content');
+      
+      modal.classList.remove('hidden');
+      
+      // Initial Loading State
+      content.innerHTML = '<div class="text-center py-12"><div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div><p class="mt-2 text-slate-400 text-sm">Fetching live data...</p></div>';
+
+      const fetchAndRender = async () => {
+        try {
+          const res = await fetch(`/.netlify/functions/game-tracker?league=${league}&eventId=${eventId}`);
+          const data = await res.json();
+
+          const homeScore = data.homeScore || '0';
+          const awayScore = data.awayScore || '0';
+          // Use 'in' for live, 'post' for final.
+          const isLive = data.gameState === 'in';
+          const isFinal = data.gameState === 'post';
+          
+          const possessionSpot = data.possession === 'home'
+            ? 'calc(100% - 24px)'
+            : data.possession === 'away'
+            ? '0px'
+            : '50%';
+            
+          const possessionLabel = data.possession
+            ? `Possession: ${data.possession === 'home' ? 'Home' : 'Away'}`
+            : isLive ? 'Possession data unavailable' : '—';
+          
+          let leadersHtml = '';
+          if (Array.isArray(data.leaders) && data.leaders.length > 0) {
+            leadersHtml = `
+              <div class="mt-8 border-t border-slate-800 pt-6">
+                <h4 class="text-xs uppercase tracking-widest text-slate-500 mb-4 font-bold">Leaders</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  ${data.leaders.slice(0, 4).map(cat => `
+                    <div class="bg-slate-800/40 p-3 rounded-lg border border-slate-800">
+                      <div class="text-[0.7rem] uppercase tracking-wide text-slate-400 mb-1">${cat.displayName || cat.shortName}</div>
+                      ${(cat.leaders || []).slice(0,2).map(p => `
+                        <div class="flex justify-between items-center">
+                          <span class="text-slate-200 font-semibold">${p.name || '—'}</span>
+                          <span class="text-xs text-slate-400 font-mono">${p.stat || p.value || ''}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          } else if (data.statistics && data.statistics.length > 0) {
+            leadersHtml = `
+              <div class="mt-8 border-t border-slate-800 pt-6">
+                 <h4 class="text-xs uppercase tracking-widest text-slate-500 mb-4 font-bold">Top Performers</h4>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    ${data.statistics.slice(0, 6).map(p => 
+                      `<div class="bg-slate-800/40 p-3 rounded-lg flex justify-between items-center border border-slate-800">
+                        <span class="font-bold text-slate-200">${p.displayName || 'Unknown'}</span>
+                        <span class="text-slate-400 text-xs font-mono">${p.displayValue || ''}</span>
+                      </div>`
+                    ).join('')}
+                 </div>
+              </div>
+            `;
+          }
+
+          let courtHtml = '';
+          if (['NBA', 'NCAAB', 'WNBA'].includes(league)) {
+             const isHomePossession = data.possession === 'home';
+             const isAwayPossession = data.possession === 'away';
+             const lpText = data.lastPlayText || 'Waiting for play...';
+
+             courtHtml = `
+               <div class="w-full mt-6 mb-2">
+                 <div class="relative w-full aspect-[2/1] max-w-sm mx-auto bg-[#eab308]/5 border border-[#eab308]/20 rounded-lg overflow-hidden shadow-[0_0_15px_rgba(234,179,8,0.1)]">
+                    <!-- Court Lines (SVG) -->
+                    <svg viewBox="0 0 500 280" class="w-full h-full opacity-80">
+                       <!-- Floor -->
+                       <rect width="500" height="280" fill="transparent" />
+                       <line x1="250" y1="0" x2="250" y2="280" stroke="#fbbf24" stroke-width="2" opacity="0.3"/>
+                       <circle cx="250" cy="140" r="40" stroke="#fbbf24" stroke-width="2" fill="none" opacity="0.3"/>
+
+                       <!-- Left (Away) Side -->
+                       <path d="M 0 100 L 0 180 L 100 180 L 100 100 Z" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.3" />
+                       <path d="M 0 40 A 100 100 0 0 1 0 240" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.2" />
+                       
+                       <!-- Right (Home) Side -->
+                       <path d="M 500 100 L 500 180 L 400 180 L 400 100 Z" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.3" />
+                       <path d="M 500 40 A 100 100 0 0 0 500 240" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.2" />
+                       
+                       <!-- Possession Indicator (Ball) -->
+                       ${isAwayPossession ? '<circle cx="40" cy="140" r="12" fill="#ef4444" class="animate-pulse" /><text x="40" y="145" text-anchor="middle" font-size="10" fill="white" font-weight="bold">BALL</text>' : ''}
+                       ${isHomePossession ? '<circle cx="460" cy="140" r="12" fill="#ef4444" class="animate-pulse" /><text x="460" y="145" text-anchor="middle" font-size="10" fill="white" font-weight="bold">BALL</text>' : ''}
+                    </svg>
+
+                    <!-- Last Play Text Overlay -->
+                    <div class="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-2 border-t border-slate-800 flex items-center justify-center min-h-[40px]">
+                      <p class="text-xs text-center text-slate-200 font-medium truncate leading-tight px-2">
+                        ${lpText}
+                      </p>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+
+          // Linescore / box score by period
+          let linescoreHtml = '';
+          const scoring = Array.isArray(data.scoring) ? data.scoring : [];
+          const periods = Array.from(new Set(scoring.flatMap(t => (t.linescores || []).map(ls => ls.period)))).sort((a,b) => a - b);
+          if (scoring.length && periods.length) {
+            const renderRow = (team) => {
+              const cells = periods.map(p => {
+                const ls = (team.linescores || []).find(l => l.period === p);
+                return `<td class="py-2 text-center">${ls?.value || ls?.displayValue || "-"}</td>`;
+              }).join('');
+              return `
+                <tr class="border-t border-slate-800">
+                  <td class="py-2 font-semibold text-slate-200 text-left">${team.team || team.abbreviation || ''}</td>
+                  ${cells}
+                  <td class="py-2 font-bold text-center">${team.total ?? ''}</td>
+                </tr>
+              `;
+            };
+
+            linescoreHtml = `
+              <div class="mt-6">
+                <h4 class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-bold">Box Score</h4>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full text-xs text-slate-200">
+                    <thead>
+                      <tr class="text-slate-400">
+                        <th class="py-2 text-left font-semibold">Team</th>
+                        ${periods.map(p => `<th class="py-2 text-center font-semibold">P${p}</th>`).join('')}
+                        <th class="py-2 text-center font-semibold">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${renderRow(scoring.find(t => t.homeAway === 'away') || scoring[0])}
+                      ${renderRow(scoring.find(t => t.homeAway === 'home') || scoring[1] || scoring[0])}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          }
+
+          // Team stats comparison
+          let teamStatsHtml = '';
+          const ts = Array.isArray(data.teamStats) ? data.teamStats : [];
+          if (ts.length >= 2) {
+            const homeStats = ts.find(t => t.homeAway === 'home') || ts[0];
+            const awayStats = ts.find(t => t.homeAway === 'away') || ts[1] || ts[0];
+            const statKeys = [
+              ...(homeStats?.stats || []).map(s => s.label || s.abbreviation),
+              ...(awayStats?.stats || []).map(s => s.label || s.abbreviation)
+            ].filter(Boolean);
+            const uniqueKeys = Array.from(new Set(statKeys)).slice(0, 14);
+
+            const statRows = uniqueKeys.map(key => {
+              const h = (homeStats?.stats || []).find(s => s.label === key || s.abbreviation === key);
+              const a = (awayStats?.stats || []).find(s => s.label === key || s.abbreviation === key);
+              return `
+                <tr class="border-t border-slate-800">
+                  <td class="py-1.5 text-left">${key}</td>
+                  <td class="py-1.5 text-center font-mono text-slate-200">${a?.displayValue || '—'}</td>
+                  <td class="py-1.5 text-center font-mono text-slate-200">${h?.displayValue || '—'}</td>
+                </tr>
+              `;
+            }).join('');
+
+            teamStatsHtml = `
+              <div class="mt-6">
+                <h4 class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-bold">Team Stats</h4>
+                <div class="overflow-hidden rounded-xl border border-slate-800 bg-slate-950/40">
+                  <table class="min-w-full text-xs text-slate-200">
+                    <thead class="bg-slate-900/60 text-slate-400">
+                      <tr>
+                        <th class="py-2 px-2 text-left">Stat</th>
+                        <th class="py-2 px-2 text-center">${awayStats.team || 'Away'}</th>
+                        <th class="py-2 px-2 text-center">${homeStats.team || 'Home'}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${statRows}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          }
+
+          // Recent plays / live ticker
+          let playsHtml = '';
+          if (Array.isArray(data.plays) && data.plays.length) {
+            playsHtml = `
+              <div class="mt-6">
+                <h4 class="text-xs uppercase tracking-widest text-slate-500 mb-3 font-bold">Live Play-by-Play</h4>
+                <div class="max-h-64 overflow-y-auto space-y-2 pr-1">
+                  ${data.plays.slice().reverse().map(p => `
+                    <div class="border border-slate-800/80 bg-slate-900/60 rounded-lg p-2 text-xs flex justify-between gap-2">
+                      <div>
+                        <div class="font-semibold text-slate-200">${p.text || '—'}</div>
+                        <div class="text-[0.65rem] text-slate-500">P${p.period || '-'} • ${p.clock || ''}</div>
+                      </div>
+                      <div class="text-right text-[0.75rem] font-mono text-slate-300">
+                        ${p.awayScore ?? '-'} - ${p.homeScore ?? '-'}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          content.innerHTML = `
+                          <div class="flex flex-col items-center gap-6">
+                          <div class="w-full grid grid-cols-3 items-center text-center">
+                            <div class="flex flex-col items-center gap-2">
+                              <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Away</span>
+                              <span class="text-lg md:text-xl font-black text-white">${data.awayTeam}</span>
+                              <span class="text-4xl md:text-5xl font-black ${isLive ? 'text-white' : 'text-slate-400'}">${awayScore}</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center gap-1">
+                              <span class="text-xs font-bold text-slate-500 tracking-widest uppercase">vs</span>
+                              <span class="text-xs ${isLive ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' : 'text-slate-400 bg-slate-800 border-slate-700'} font-mono border px-2 py-0.5 rounded">
+                                ${data.status || 'LIVE'}
+                              </span>
+                              <span class="text-[0.65rem] text-slate-500 mt-2">${data.venue || ''}</span>
+                              <span class="text-[0.65rem] text-slate-500">${data.city || ''}</span>
+                            </div>
+            
+                            <div class="flex flex-col items-center gap-2">
+                              <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Home</span>
+                              <span class="text-lg md:text-xl font-black text-white">${data.homeTeam}</span>
+                              <span class="text-4xl md:text-5xl font-black ${isLive ? 'text-white' : 'text-slate-400'}">${homeScore}</span>
+                            </div>
+                          </div>
+            
+                          ${ (isLive || data.possession) ? `
+                          <div class="w-full max-w-md mx-auto">
+                            <div class="relative h-3 bg-slate-800/80 rounded-full overflow-hidden shadow-inner">
+                              <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-sky-500/10 to-purple-500/10 animate-pulse"></div>
+                              <div class="absolute top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-amber-400 shadow-lg shadow-amber-500/40 animate-bounce transition-all duration-500"
+                                style="left:${possessionSpot}; transform: translateY(-50%);">
+                              </div>
+                            </div>
+                            <p class="text-[0.7rem] text-center text-slate-400 mt-1">${possessionLabel}</p>
+                          </div>
+                          ` : '' }
+            
+                          ${courtHtml}
+              ${linescoreHtml}
+              ${teamStatsHtml}
+              ${leadersHtml}
+              ${playsHtml}
+
+              <div class="mt-4 text-[0.6rem] text-slate-600">
+                 Auto-updates every 30s
+              </div>
+            </div>
+          `;
+        } catch (err) {
+          console.error(err);
+          content.innerHTML = '<div class="text-center text-red-400 py-8">Failed to load tracker data.</div>';
+        }
+      };
+
+      await fetchAndRender();
+      
+      if (trackerInterval) clearInterval(trackerInterval);
+      trackerInterval = setInterval(fetchAndRender, 30000);
+    }
+
+    function closeModal() {
+      document.getElementById('tracker-modal').classList.add('hidden');
+      if (trackerInterval) clearInterval(trackerInterval);
+    }
+
+    document.getElementById('tracker-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'tracker-modal') closeModal();
+    });
+
+    function getToken() {
+      return (
+        new URLSearchParams(location.search).get("token") ||
+        document.cookie.split("; ").find(c => c.startsWith("token="))?.split("=")[1]
+      );
+    }
+
+    function updateNav() {
+      const t = getToken();
+      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
+      navLinks.forEach(l => {
+        if (!t) {
+          l.textContent = "Log In";
+          l.href = "/auth-callback.html";
+          l.classList.add("text-emerald-400");
+        }
+      });
+    }
+
+    loadGames();
+    updateNav();
+  </script>
+</body>
+</html>
