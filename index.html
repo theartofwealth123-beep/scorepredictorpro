@@ -23,8 +23,24 @@
     }
   </style>
 </head>
-<body class="antialiased">
-  <div class="min-h-screen flex items-center justify-center px-4 py-8">
+<body class="antialiased flex flex-col min-h-screen">
+  <!-- Navigation Tabs -->
+  <header class="sticky top-0 z-50 border-b border-slate-800/60 bg-[#020617]/90 backdrop-blur">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="text-xl font-black tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-sky-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </span>
+      </div>
+      <nav class="flex items-center gap-3 text-sm font-medium">
+        <a href="/scores.html" class="px-3 py-1 rounded-full text-slate-400 hover:bg-slate-800/70 hover:text-slate-200 transition-colors">Scores</a>
+        <a href="/" class="px-3 py-1 rounded-full bg-slate-800 text-slate-100">Calculator</a>
+        <a href="/profile.html" class="px-3 py-1 rounded-full text-slate-400 hover:bg-slate-800/70 hover:text-slate-200 transition-colors">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="flex-grow flex items-center justify-center px-4 py-8">
     <div class="w-full max-w-5xl space-y-8">
       <!-- Header -->
       <header class="text-center space-y-2">
