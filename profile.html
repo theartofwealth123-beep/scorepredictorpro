@@ -6,22 +6,26 @@
   <title>ScorePredictor Pro • Profile</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
-  <header class="border-b border-slate-800/70 bg-slate-950/70 backdrop-blur">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+<body class="min-h-screen bg-black text-slate-100 antialiased">
+  <header class="border-b border-slate-800/60 bg-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
       <div class="flex items-center gap-2">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center font-black text-xl">
-          S
-        </div>
-        <div>
-          <div class="font-bold text-lg tracking-tight">ScorePredictor Pro</div>
-          <div class="text-xs text-slate-400 uppercase tracking-[0.2em]">Account</div>
-        </div>
+        <a href="/" class="text-xl font-black tracking-tight bg-gradient-to-r from-sky-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          ScorePredictor Pro
+        </a>
       </div>
-      <nav class="flex items-center gap-4 text-sm">
-        <a href="/" class="text-slate-400 hover:text-slate-100">Calculator</a>
-        <a href="/scores.html" class="text-slate-400 hover:text-slate-100">Scores</a>
-        <a href="/profile.html" class="text-slate-100 font-medium">Profile</a>
+      <nav class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-400">
+        <a href="/" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Calculator</a>
+        <a href="/games.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Live Games</a>
+        <a href="/freepicks.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">Free Picks</a>
+        <a href="/news.html" class="px-3 py-1.5 rounded-full hover:bg-slate-800/50 hover:text-slate-200 transition-colors">News</a>
+        <a href="/profile.html" class="px-3 py-1.5 rounded-full bg-slate-800 text-slate-100 transition-colors">Profile</a>
+      </nav>
+      <!-- Mobile Menu -->
+      <nav class="md:hidden flex gap-3 text-xs font-semibold text-slate-400">
+        <a href="/games.html">Games</a>
+        <a href="/freepicks.html">Picks</a>
+        <a href="/news.html">News</a>
       </nav>
     </div>
   </header>
@@ -41,7 +45,7 @@
         You’re not logged in.
         <button
           class="underline underline-offset-2 ml-1"
-          onclick="window.location.href='/auth-callback'"
+          onclick="window.location.href='/auth-callback.html'"
         >
           Log in / Start Trial
         </button>
@@ -112,6 +116,19 @@
       return getCookie("appSession") || getCookie("token") || null;
     }
 
+    function updateNav() {
+      const t = getToken();
+      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
+      navLinks.forEach(l => {
+        if (!t) {
+          l.textContent = "Log In";
+          l.href = "/auth-callback.html";
+          l.classList.add("text-emerald-400");
+        }
+      });
+    }
+    updateNav();
+
     const notLogged = document.getElementById("not-logged");
     const profileInfo = document.getElementById("profile-info");
     const emailEl = document.getElementById("prof-email");
@@ -155,13 +172,19 @@
           subDetailEl.textContent = "Free access to scores and content. Subscribe to unlock the calculator.";
         }
       } catch (err) {
-        statusMsg.textContent = "Error loading profile.";
+        // Treat any failure as an expired session so the user can re-auth quickly
+        document.cookie = "appSession=; Max-Age=0; path=/";
+        document.cookie = "token=; Max-Age=0; path=/";
+        notLogged.classList.remove("hidden");
+        profileInfo.classList.add("hidden");
+        updateNav();
+        statusMsg.textContent = "Session expired. Please log in again.";
       }
     }
 
     document.getElementById("btn-reset").addEventListener("click", () => {
       // Easiest reliable path: send them through Auth0 login where they can hit "Forgot password?"
-      window.location.href = "/auth-callback";
+      window.location.href = "/auth-callback.html";
     });
 
     document.getElementById("btn-logout").addEventListener("click", () => {

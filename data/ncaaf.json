@@ -1,0 +1,5405 @@
+{
+  "league": "NCAAF",
+  "season": 2025,
+  "updatedAt": "2025-12-07T15:37:05.690Z",
+  "avgPoints": 26.66700378787881,
+  "stdDevPoints": 7.003693533161593,
+  "teams": {
+    "Abilene Christian Wildcats": {
+      "id": "2000",
+      "ppgFor": 29.429,
+      "pace": null,
+      "fieldGoalPct": 93.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Adams State Grizzlies": {
+      "id": "2001"
+    },
+    "Adrian Bulldogs": {
+      "id": "2003"
+    },
+    "Adrian Saints": {
+      "id": "2562"
+    },
+    "Air Force Falcons": {
+      "id": "2005",
+      "ppgFor": 30,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 66.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -6
+    },
+    "Akron Zips": {
+      "id": "2006",
+      "ppgFor": 22.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 69.565,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -62
+    },
+    "Alabama A&M Bulldogs": {
+      "id": "2010",
+      "ppgFor": 23.833,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Alabama Crimson Tide": {
+      "id": "333",
+      "ppgFor": 31.231,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 65,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 180
+    },
+    "Alabama State Hornets": {
+      "id": "2011",
+      "ppgFor": 41.917,
+      "pace": null,
+      "fieldGoalPct": 93.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Albany State GA Golden Rams": {
+      "id": "2013"
+    },
+    "Albion Britons": {
+      "id": "2790"
+    },
+    "Albright Lions": {
+      "id": "2015"
+    },
+    "Alcorn State Braves": {
+      "id": "2016",
+      "ppgFor": 25.5,
+      "pace": null,
+      "fieldGoalPct": 77.778,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Alfred State Pioneers": {
+      "id": "3162"
+    },
+    "Alfred University Saxons": {
+      "id": "365"
+    },
+    "Allegheny Gators": {
+      "id": "2018"
+    },
+    "Allen Yellow Jackets": {
+      "id": "2019"
+    },
+    "Alma Scots": {
+      "id": "2800"
+    },
+    "American International Yellow Jackets": {
+      "id": "2022"
+    },
+    "Amherst Mammoths": {
+      "id": "7"
+    },
+    "Anderson (IN) Ravens": {
+      "id": "2023"
+    },
+    "Anderson (Sc) Trojans": {
+      "id": "129469"
+    },
+    "Angelo State Rams": {
+      "id": "2025"
+    },
+    "Anna Maria College Amcats": {
+      "id": "15"
+    },
+    "App State Mountaineers": {
+      "id": "2026",
+      "ppgFor": 25.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -54
+    },
+    "Apprentice School Builders": {
+      "id": "3111"
+    },
+    "Arizona State Sun Devils": {
+      "id": "9",
+      "ppgFor": 24.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 72.414,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 20
+    },
+    "Arizona Wildcats": {
+      "id": "12",
+      "ppgFor": 32.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 59.375,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 164
+    },
+    "Arkansas Razorbacks": {
+      "id": "8",
+      "ppgFor": 32.917,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 77.778,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -11
+    },
+    "Arkansas State Red Wolves": {
+      "id": "2032",
+      "ppgFor": 24.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 79.167,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -35
+    },
+    "Arkansas Tech Wonder Boys": {
+      "id": "2033"
+    },
+    "Arkansas-Monticello Boll Weevils": {
+      "id": "2028"
+    },
+    "Arkansas-Pine Bluff Golden Lions": {
+      "id": "2029",
+      "ppgFor": 19.545,
+      "pace": null,
+      "fieldGoalPct": 70,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Army Black Knights": {
+      "id": "349",
+      "ppgFor": 23,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 70.588,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 5
+    },
+    "Ashland Eagles": {
+      "id": "308"
+    },
+    "Assumption Greyhounds": {
+      "id": "2038"
+    },
+    "Auburn Tigers": {
+      "id": "2",
+      "ppgFor": 26.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 73
+    },
+    "Augsburg Auggies": {
+      "id": "124"
+    },
+    "Augustana (IL) Vikings": {
+      "id": "2042"
+    },
+    "Aurora Spartans": {
+      "id": "2044"
+    },
+    "Austin 'Roos": {
+      "id": "2045"
+    },
+    "Austin Peay Governors": {
+      "id": "2046",
+      "ppgFor": 34.917,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Ave Maria University Gyrenes": {
+      "id": "3178"
+    },
+    "Averett Cougars": {
+      "id": "2047"
+    },
+    "Avila University Eagles": {
+      "id": "2048"
+    },
+    "BLUEFIELD Ramblin' Rams": {
+      "id": "495"
+    },
+    "BYU Cougars": {
+      "id": "252",
+      "ppgFor": 31.923,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75.862,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 168
+    },
+    "Baker University Baker": {
+      "id": "488"
+    },
+    "Baldwin Wallace Yellow Jackets": {
+      "id": "188"
+    },
+    "Ball State Cardinals": {
+      "id": "2050",
+      "ppgFor": 15.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 56.25,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -168
+    },
+    "Barton Bulldogs": {
+      "id": "122666"
+    },
+    "Bates Bobcats": {
+      "id": "121"
+    },
+    "Baylor Bears": {
+      "id": "239",
+      "ppgFor": 31.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 81.818,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -18
+    },
+    "Belhaven Blazers": {
+      "id": "2056"
+    },
+    "Beloit Buccaneers": {
+      "id": "266"
+    },
+    "Benedict College Tigers": {
+      "id": "490"
+    },
+    "Benedictine College Ravens": {
+      "id": "16111"
+    },
+    "Benedictine University Eagles": {
+      "id": "2283"
+    },
+    "Bentley Falcons": {
+      "id": "2060"
+    },
+    "Berry College Vikings": {
+      "id": "2757"
+    },
+    "Bethany (KS) Bethany (Ks)": {
+      "id": "492"
+    },
+    "Bethany (WV) Bison": {
+      "id": "2062"
+    },
+    "Bethel (MN) Royals": {
+      "id": "2802"
+    },
+    "Bethel University Tennessee Wildcats": {
+      "id": "2064"
+    },
+    "Bethune-Cookman Wildcats": {
+      "id": "2065",
+      "ppgFor": 29.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Biddeford Nor'easters": {
+      "id": "111675"
+    },
+    "Black Hills State Yellow Jackets": {
+      "id": "2069"
+    },
+    "Bloomsburg Huskies": {
+      "id": "2071"
+    },
+    "Bluefield State Big Blue": {
+      "id": "124180"
+    },
+    "Bluffton Beavers": {
+      "id": "2074"
+    },
+    "Boise State Broncos": {
+      "id": "68",
+      "ppgFor": 31.385,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 68.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 109
+    },
+    "Boston College Eagles": {
+      "id": "103",
+      "ppgFor": 25.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 94.118,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -88
+    },
+    "Bowdoin Polar Bears": {
+      "id": "340"
+    },
+    "Bowie State Bulldogs": {
+      "id": "2075"
+    },
+    "Bowling Green Falcons": {
+      "id": "189",
+      "ppgFor": 20.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 86.364,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -45
+    },
+    "Brevard College Tornados": {
+      "id": "2913"
+    },
+    "Bridgewater (VA) Eagles": {
+      "id": "2079"
+    },
+    "Bridgewater State Bears": {
+      "id": "18"
+    },
+    "British Columbia British Col": {
+      "id": "2080"
+    },
+    "Brockport Golden Eagles": {
+      "id": "2781"
+    },
+    "Brown Bears": {
+      "id": "225",
+      "ppgFor": 26.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Bryant Bulldogs": {
+      "id": "2803",
+      "ppgFor": 22.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Bucknell Bison": {
+      "id": "2083",
+      "ppgFor": 26.083,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Buena Vista Beavers": {
+      "id": "63"
+    },
+    "Buffalo Bulls": {
+      "id": "2084",
+      "ppgFor": 24,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 82.353,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 6
+    },
+    "Buffalo State Bengals": {
+      "id": "2085"
+    },
+    "Butler Bulldogs": {
+      "id": "2086",
+      "ppgFor": 22.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "CSU Pueblo Thunderwolves": {
+      "id": "2570"
+    },
+    "Cal Poly Mustangs": {
+      "id": "13",
+      "ppgFor": 27.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "California (PA) Vulcans": {
+      "id": "2858"
+    },
+    "California Golden Bears": {
+      "id": "25",
+      "ppgFor": 24.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.471,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -20
+    },
+    "California Lutheran University Kingsmen": {
+      "id": "2094"
+    },
+    "Calvin University Knights": {
+      "id": "129738"
+    },
+    "Campbell Fighting Camels": {
+      "id": "2097",
+      "ppgFor": 24.083,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Campbellsville University Tigers": {
+      "id": "2098"
+    },
+    "Capital Comets": {
+      "id": "424"
+    },
+    "Carleton Knights": {
+      "id": "2101"
+    },
+    "Carnegie Mellon Tartans": {
+      "id": "2102"
+    },
+    "Carroll University (WI) Pioneers": {
+      "id": "32"
+    },
+    "Carson-Newman College Eagles": {
+      "id": "2105"
+    },
+    "Carthage Firebirds": {
+      "id": "2106"
+    },
+    "Case Western Reserve Spartans": {
+      "id": "2963"
+    },
+    "Castleton Spartans": {
+      "id": "293"
+    },
+    "Catawba Indians": {
+      "id": "2107"
+    },
+    "Catholic Cardinals": {
+      "id": "2108"
+    },
+    "Centenary Gentlemen": {
+      "id": "101442"
+    },
+    "Central Arkansas Bears": {
+      "id": "2110",
+      "ppgFor": 24.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Central College Dutch": {
+      "id": "2964"
+    },
+    "Central Connecticut Blue Devils": {
+      "id": "2115",
+      "ppgFor": 26.692,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Central Methodist Eagles": {
+      "id": "2860"
+    },
+    "Central Michigan Chippewas": {
+      "id": "2117",
+      "ppgFor": 23.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 87.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 14
+    },
+    "Central Missouri Mules": {
+      "id": "2118"
+    },
+    "Central Oklahoma Bronchos": {
+      "id": "2122"
+    },
+    "Central State (OH) Marauders": {
+      "id": "2119"
+    },
+    "Central Washington Wildcats": {
+      "id": "2120"
+    },
+    "Centre College Kentucky Colonels": {
+      "id": "2121"
+    },
+    "Chadron St Eagles": {
+      "id": "2123"
+    },
+    "Chapman Panthers": {
+      "id": "411"
+    },
+    "Charleston Southern Buccaneers": {
+      "id": "2127",
+      "ppgFor": 16.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Charlotte 49ers": {
+      "id": "2429",
+      "ppgFor": 14.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -264
+    },
+    "Charlotte Saints": {
+      "id": "3253"
+    },
+    "Chattanooga Mocs": {
+      "id": "236",
+      "ppgFor": 28.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Chicago Maroons": {
+      "id": "80"
+    },
+    "Chowan Hawks": {
+      "id": "2804"
+    },
+    "Christopher Newport Captains": {
+      "id": "3112"
+    },
+    "Cincinnati Bearcats": {
+      "id": "2132",
+      "ppgFor": 31.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.471,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 83
+    },
+    "Claremont-Mudd-Scripps College Stags/Athenas": {
+      "id": "17"
+    },
+    "Clarion Golden Eagles": {
+      "id": "2134"
+    },
+    "Clark Atlanta Panthers": {
+      "id": "2805"
+    },
+    "Clemson Tigers": {
+      "id": "228",
+      "ppgFor": 28.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 84.211,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 99
+    },
+    "Coast Guard Bears": {
+      "id": "2557"
+    },
+    "Coastal Carolina Chanticleers": {
+      "id": "324",
+      "ppgFor": 22.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80.952,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -133
+    },
+    "Coe College Kohawks": {
+      "id": "2141"
+    },
+    "Colby College White Mules": {
+      "id": "33"
+    },
+    "Cole College Jaguars": {
+      "id": "3210"
+    },
+    "Colgate Raiders": {
+      "id": "2142",
+      "ppgFor": 28.333,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "College Of New Jersey Lions": {
+      "id": "2442"
+    },
+    "College of Idaho Yotes": {
+      "id": "108382"
+    },
+    "Colorado Buffaloes": {
+      "id": "38",
+      "ppgFor": 20.917,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -115
+    },
+    "Colorado Mesa Mavericks": {
+      "id": "11"
+    },
+    "Colorado School Of Mines Orediggers": {
+      "id": "2146"
+    },
+    "Colorado State Rams": {
+      "id": "36",
+      "ppgFor": 18.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 50,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -148
+    },
+    "Columbia Lions": {
+      "id": "171",
+      "ppgFor": 15.4,
+      "pace": null,
+      "fieldGoalPct": 83.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Concord University Mountain Lions": {
+      "id": "2148"
+    },
+    "Concordia Moorhead Cobbers": {
+      "id": "2152"
+    },
+    "Concordia University Chicago Cougars": {
+      "id": "2151"
+    },
+    "Concordia University Nebraska Clippers": {
+      "id": "507"
+    },
+    "Concordia-Michigan Cardinals": {
+      "id": "2985"
+    },
+    "Concordia-Wisconsin Falcons": {
+      "id": "409"
+    },
+    "Cornell Big Red": {
+      "id": "172",
+      "ppgFor": 21,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Cornell College (IA) Rams": {
+      "id": "2155"
+    },
+    "Cortland Red Dragons": {
+      "id": "2782"
+    },
+    "Crown College Polars": {
+      "id": "509"
+    },
+    "Culver-Stockton College Wildcats": {
+      "id": "510"
+    },
+    "Cumberland (KY) Indians": {
+      "id": "511"
+    },
+    "Cumberland (TN) Bulldogs": {
+      "id": "2161"
+    },
+    "Curry College Colonels": {
+      "id": "40"
+    },
+    "DEAN Bulldogs": {
+      "id": "110438"
+    },
+    "Dakota State University Trojans": {
+      "id": "512"
+    },
+    "Dakota Wesleyan Tigers": {
+      "id": "513"
+    },
+    "Dartmouth Big Green": {
+      "id": "159",
+      "ppgFor": 26.2,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Davidson Wildcats": {
+      "id": "2166",
+      "ppgFor": 18.333,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Dayton Flyers": {
+      "id": "2168",
+      "ppgFor": 27.818,
+      "pace": null,
+      "fieldGoalPct": 60,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Defiance College Yellow Jackets": {
+      "id": "190"
+    },
+    "Delaware Blue Hens": {
+      "id": "48",
+      "ppgFor": 29.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.19,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -33
+    },
+    "Delaware State Hornets": {
+      "id": "2169",
+      "ppgFor": 32.083,
+      "pace": null,
+      "fieldGoalPct": 90,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Delaware Valley Aggies": {
+      "id": "2808"
+    },
+    "Delta State Statesmen": {
+      "id": "2170"
+    },
+    "Denison University Big Red": {
+      "id": "2171"
+    },
+    "Depauw Tigers": {
+      "id": "83"
+    },
+    "Des Moines Vikings": {
+      "id": "2254"
+    },
+    "Dickinson (PA) Red Devils": {
+      "id": "2175"
+    },
+    "Dickinson State University Blue Hawks": {
+      "id": "316"
+    },
+    "Drake Bulldogs": {
+      "id": "2181",
+      "ppgFor": 25.333,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Dubuque Spartans": {
+      "id": "49"
+    },
+    "Duke Blue Devils": {
+      "id": "150",
+      "ppgFor": 34,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 73.684,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 69
+    },
+    "Duquesne Dukes": {
+      "id": "2184",
+      "ppgFor": 28.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "East Carolina Pirates": {
+      "id": "151",
+      "ppgFor": 33.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 86.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 158
+    },
+    "East Central (OK) Tigers": {
+      "id": "2191"
+    },
+    "East Stroudsburg University Warriors": {
+      "id": "2188"
+    },
+    "East Tennessee State Buccaneers": {
+      "id": "2193",
+      "ppgFor": 33,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "East Texas A&M Lions": {
+      "id": "2837",
+      "ppgFor": 25.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "East Texas Baptist University Tigers": {
+      "id": "2194"
+    },
+    "Eastern Illinois Panthers": {
+      "id": "2197",
+      "ppgFor": 17.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Eastern Kentucky Colonels": {
+      "id": "2198",
+      "ppgFor": 19.333,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Eastern Michigan Eagles": {
+      "id": "2199",
+      "ppgFor": 24.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 73.913,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -68
+    },
+    "Eastern New Mexico Greyhounds": {
+      "id": "2201"
+    },
+    "Eastern Oregon": {
+      "id": "2202"
+    },
+    "Eastern University Eagles": {
+      "id": "127954"
+    },
+    "Eastern Washington Eagles": {
+      "id": "331",
+      "ppgFor": 23.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Edinboro University Fighting Scots": {
+      "id": "2205"
+    },
+    "Edward Waters Tigers": {
+      "id": "2206"
+    },
+    "Elgin Eagles": {
+      "id": "122775"
+    },
+    "Elizabeth City State Vikings": {
+      "id": "2207"
+    },
+    "Elmhurst Bluejays": {
+      "id": "72"
+    },
+    "Elon Phoenix": {
+      "id": "2210",
+      "ppgFor": 28.75,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Emory & Henry College Wasps": {
+      "id": "2213"
+    },
+    "Emporia State University Hornets": {
+      "id": "2214"
+    },
+    "Endicott College Gulls": {
+      "id": "452"
+    },
+    "Erie Kats": {
+      "id": "3236"
+    },
+    "Erskine Flying Fleet": {
+      "id": "101784"
+    },
+    "Eureka College Red Devils": {
+      "id": "101"
+    },
+    "Evangel University Crusaders": {
+      "id": "2865"
+    },
+    "FDU-Florham Devils": {
+      "id": "2221"
+    },
+    "Fairmont State Falcons": {
+      "id": "2986"
+    },
+    "Faulkner University Eagles": {
+      "id": "2219"
+    },
+    "Fayetteville State Broncos": {
+      "id": "2220"
+    },
+    "Ferris State Bulldogs": {
+      "id": "2222"
+    },
+    "Ferrum Panthers": {
+      "id": "366"
+    },
+    "Findlay Oilers": {
+      "id": "2224"
+    },
+    "Fitchburg State Falcons": {
+      "id": "114"
+    },
+    "Florida A&M Rattlers": {
+      "id": "50",
+      "ppgFor": 24.417,
+      "pace": null,
+      "fieldGoalPct": 94.444,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Florida Atlantic Owls": {
+      "id": "2226",
+      "ppgFor": 29.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 84.211,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -82
+    },
+    "Florida Gators": {
+      "id": "57",
+      "ppgFor": 21.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 81.818,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -29
+    },
+    "Florida International Panthers": {
+      "id": "2229",
+      "ppgFor": 29.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.19,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 18
+    },
+    "Florida Memorial University Lions": {
+      "id": "125762"
+    },
+    "Florida State Seminoles": {
+      "id": "52",
+      "ppgFor": 33,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 63.158,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 132
+    },
+    "Fordham Rams": {
+      "id": "2230",
+      "ppgFor": 15.917,
+      "pace": null,
+      "fieldGoalPct": 72.727,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Fort Hays State Tigers": {
+      "id": "2231"
+    },
+    "Fort Lewis Skyhawks": {
+      "id": "2237"
+    },
+    "Fort Valley State Wildcats": {
+      "id": "2232"
+    },
+    "Framingham State Rams": {
+      "id": "2967"
+    },
+    "Franklin & Marshall Diplomats": {
+      "id": "2234"
+    },
+    "Franklin Grizzlies": {
+      "id": "2233"
+    },
+    "Franklin Pierce Ravens": {
+      "id": "112334"
+    },
+    "Fresno State Bulldogs": {
+      "id": "278",
+      "ppgFor": 26.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 77.273,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 76
+    },
+    "Friends University Friends": {
+      "id": "527"
+    },
+    "Frostburg State Bobcats": {
+      "id": "341"
+    },
+    "Furman Paladins": {
+      "id": "231",
+      "ppgFor": 23.75,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Gallaudet Bison": {
+      "id": "417"
+    },
+    "Gannon Golden Knights": {
+      "id": "367"
+    },
+    "Gardner-Webb Runnin' Bulldogs": {
+      "id": "2241",
+      "ppgFor": 27.5,
+      "pace": null,
+      "fieldGoalPct": 93.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Geneva Golden Tornadoes": {
+      "id": "2242"
+    },
+    "George Mason University Patriots": {
+      "id": "2244"
+    },
+    "Georgetown College Kentucky Tigers": {
+      "id": "2245"
+    },
+    "Georgetown Hoyas": {
+      "id": "46",
+      "ppgFor": 20.833,
+      "pace": null,
+      "fieldGoalPct": 85.714,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Georgia Bulldogs": {
+      "id": "61",
+      "ppgFor": 31.923,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 93.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 208
+    },
+    "Georgia Southern Eagles": {
+      "id": "290",
+      "ppgFor": 27.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 82.353,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -76
+    },
+    "Georgia State Panthers": {
+      "id": "2247",
+      "ppgFor": 19.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 43.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -217
+    },
+    "Georgia Tech Yellow Jackets": {
+      "id": "59",
+      "ppgFor": 33.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 89.286,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 97
+    },
+    "Gettysburg Bullets": {
+      "id": "2248"
+    },
+    "Glenville State Pioneers": {
+      "id": "2249"
+    },
+    "Graceland University Graceland": {
+      "id": "530"
+    },
+    "Grambling Tigers": {
+      "id": "2755",
+      "ppgFor": 24.083,
+      "pace": null,
+      "fieldGoalPct": 93.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Grand Valley State University Lakers": {
+      "id": "125"
+    },
+    "Greeneville Pioneers": {
+      "id": "2839"
+    },
+    "Greensboro College Pride": {
+      "id": "2256"
+    },
+    "Greenville Panthers": {
+      "id": "2257"
+    },
+    "Grinnell Pioneers": {
+      "id": "65"
+    },
+    "Grove City College Wolverines": {
+      "id": "146"
+    },
+    "Guilford College Quakers": {
+      "id": "2258"
+    },
+    "Gustavus Adolphus Golden Gusties": {
+      "id": "2968"
+    },
+    "Hamilton Continentals": {
+      "id": "348"
+    },
+    "Hamline University Pipers": {
+      "id": "162"
+    },
+    "Hampden-Sydney Tigers": {
+      "id": "297"
+    },
+    "Hampton Pirates": {
+      "id": "2261",
+      "ppgFor": 17.917,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Hanover College Panthers": {
+      "id": "2262"
+    },
+    "Hardin-Simmons Cowboys": {
+      "id": "2810"
+    },
+    "Harding University Bisons": {
+      "id": "2264"
+    },
+    "Hartwick Hawks": {
+      "id": "173"
+    },
+    "Harvard Crimson": {
+      "id": "108",
+      "ppgFor": 36.273,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Haskell Indian Nations Univ Jayhawks": {
+      "id": "535"
+    },
+    "Hawai'i Rainbow Warriors": {
+      "id": "62",
+      "ppgFor": 28.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 96.154,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 60
+    },
+    "Heidelberg Student Princes": {
+      "id": "191"
+    },
+    "Henderson State Reddies": {
+      "id": "2271"
+    },
+    "Hendrix College Warriors": {
+      "id": "418"
+    },
+    "Hilbert College Hawks": {
+      "id": "125974"
+    },
+    "Hillsdale Chargers": {
+      "id": "2273"
+    },
+    "Hiram College Terriers": {
+      "id": "2274"
+    },
+    "Hobart College Statesmen": {
+      "id": "174"
+    },
+    "Holland College Hurricanes": {
+      "id": "108354"
+    },
+    "Holy Cross Crusaders": {
+      "id": "107",
+      "ppgFor": 21,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Hope College Flying Dutchmen": {
+      "id": "2812"
+    },
+    "Houston Christian Huskies": {
+      "id": "2277",
+      "ppgFor": 17.333,
+      "pace": null,
+      "fieldGoalPct": 85.714,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Houston Cougars": {
+      "id": "248",
+      "ppgFor": 28.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 78
+    },
+    "Howard Bison": {
+      "id": "47",
+      "ppgFor": 19.833,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Howard Payne Yellow Jackets": {
+      "id": "2758"
+    },
+    "Huntingdon College (AL) Hawks": {
+      "id": "2938"
+    },
+    "Husson Eagles": {
+      "id": "2280"
+    },
+    "Idaho State Bengals": {
+      "id": "304",
+      "ppgFor": 36,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Idaho Vandals": {
+      "id": "70",
+      "ppgFor": 24.5,
+      "pace": null,
+      "fieldGoalPct": 84.615,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Illinois College Blueboys": {
+      "id": "2286"
+    },
+    "Illinois Fighting Illini": {
+      "id": "356",
+      "ppgFor": 29.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 85,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 73
+    },
+    "Illinois State Redbirds": {
+      "id": "2287",
+      "ppgFor": 29.786,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Illinois Wesleyan Titans": {
+      "id": "306"
+    },
+    "Incarnate Word Cardinals": {
+      "id": "2916",
+      "ppgFor": 25.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Indiana Hoosiers": {
+      "id": "84",
+      "ppgFor": 41.923,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 84.211,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 404
+    },
+    "Indiana State Sycamores": {
+      "id": "282",
+      "ppgFor": 22.333,
+      "pace": null,
+      "fieldGoalPct": 87.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Indiana Wesleyan Wildcats": {
+      "id": "111756"
+    },
+    "Indiana-Pennsylvania Crimson Hawks": {
+      "id": "2291"
+    },
+    "Indianapolis Greyhounds": {
+      "id": "2292"
+    },
+    "Iowa Hawkeyes": {
+      "id": "2294",
+      "ppgFor": 28.917,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 165
+    },
+    "Iowa State Cyclones": {
+      "id": "66",
+      "ppgFor": 27.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.19,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 87
+    },
+    "Ithaca College Bombers": {
+      "id": "175"
+    },
+    "Jackson State Tigers": {
+      "id": "2296",
+      "ppgFor": 32.833,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Jacksonville State Gamecocks": {
+      "id": "55",
+      "ppgFor": 29,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 74.074,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 37
+    },
+    "James Madison Dukes": {
+      "id": "256",
+      "ppgFor": 37.308,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 279
+    },
+    "John Carroll University Blue Streaks": {
+      "id": "2302"
+    },
+    "Johns Hopkins University Blue Jays": {
+      "id": "118"
+    },
+    "Johnson C Smith Golden Bulls": {
+      "id": "2304"
+    },
+    "Juniata College Eagles": {
+      "id": "246"
+    },
+    "Kalamazoo Hornets": {
+      "id": "126"
+    },
+    "Kansas Jayhawks": {
+      "id": "2305",
+      "ppgFor": 28.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 82.353,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 16
+    },
+    "Kansas State Wildcats": {
+      "id": "2306",
+      "ppgFor": 29.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 86.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 33
+    },
+    "Kansas Wesleyan Ks Wesleyan": {
+      "id": "547"
+    },
+    "Kean Cougars": {
+      "id": "2871"
+    },
+    "Keiser University Keiser": {
+      "id": "126110"
+    },
+    "Kennesaw State Owls": {
+      "id": "338",
+      "ppgFor": 28.308,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 68.421,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 52
+    },
+    "Kent State Golden Flashes": {
+      "id": "2309",
+      "ppgFor": 21.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 72.727,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -148
+    },
+    "Kentucky Christian Knights": {
+      "id": "3077"
+    },
+    "Kentucky State Thorobreds": {
+      "id": "2310"
+    },
+    "Kentucky Wesleyan Panthers": {
+      "id": "2316"
+    },
+    "Kentucky Wildcats": {
+      "id": "96",
+      "ppgFor": 23,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.471,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -41
+    },
+    "Kenyon Owls": {
+      "id": "352"
+    },
+    "King's College (PA) Monarchs": {
+      "id": "247"
+    },
+    "Knox College Prairie Fire": {
+      "id": "255"
+    },
+    "Kutztown University Golden Bears": {
+      "id": "2315"
+    },
+    "LA PLUME Giants": {
+      "id": "122774"
+    },
+    "LAKELAND Fires": {
+      "id": "267"
+    },
+    "LSU Tigers": {
+      "id": "99",
+      "ppgFor": 21.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 85.714,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 42
+    },
+    "LYONCOLL Scots": {
+      "id": "101161"
+    },
+    "La Verne Leopards": {
+      "id": "2318"
+    },
+    "Lafayette Leopards": {
+      "id": "322",
+      "ppgFor": 33.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Lagrange College Panthers": {
+      "id": "548"
+    },
+    "Lake Erie Storm": {
+      "id": "437"
+    },
+    "Lake Forest College Foresters": {
+      "id": "262"
+    },
+    "Lakeland Muskies": {
+      "id": "6353"
+    },
+    "Lamar Cardinals": {
+      "id": "2320",
+      "ppgFor": 22.462,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Lane College Dragons": {
+      "id": "2323"
+    },
+    "Langston University Lions": {
+      "id": "2324"
+    },
+    "Laurinburg Knights": {
+      "id": "111610"
+    },
+    "Lawrence University Vikings": {
+      "id": "268"
+    },
+    "Lebanon Valley Flying Dutchmen": {
+      "id": "388"
+    },
+    "Lehigh Mountain Hawks": {
+      "id": "2329",
+      "ppgFor": 31.769,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Lenoir-Rhyne Bears": {
+      "id": "2331"
+    },
+    "Lewis & Clark College Pioneers": {
+      "id": "2333"
+    },
+    "Liberty Flames": {
+      "id": "2335",
+      "ppgFor": 25.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 72.727,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -11
+    },
+    "Lincoln (CA) Oaklanders": {
+      "id": "124179"
+    },
+    "Lincoln (MO) Blue Tigers": {
+      "id": "2876"
+    },
+    "Lincoln (PA) Lions": {
+      "id": "2339"
+    },
+    "Lindenwood Belleville Lynx": {
+      "id": "3209"
+    },
+    "Lindenwood Lions": {
+      "id": "2815",
+      "ppgFor": 24.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Lindsey Wilson College Lindsey": {
+      "id": "2877"
+    },
+    "Linfield College Wildcats": {
+      "id": "203"
+    },
+    "Little Rock Buffaloes": {
+      "id": "124386"
+    },
+    "Livingstone Blue Bears": {
+      "id": "2940"
+    },
+    "Lock Haven University Bald Eagles": {
+      "id": "209"
+    },
+    "Long Island University Sharks": {
+      "id": "2341",
+      "ppgFor": 16.417,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Loras College Duhawks": {
+      "id": "263"
+    },
+    "Louisiana College Wildcats": {
+      "id": "2347"
+    },
+    "Louisiana Ragin' Cajuns": {
+      "id": "309",
+      "ppgFor": 27.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 72,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -35
+    },
+    "Louisiana Tech Bulldogs": {
+      "id": "2348",
+      "ppgFor": 27.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 52.941,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 76
+    },
+    "Louisville Cardinals": {
+      "id": "97",
+      "ppgFor": 30.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 82.143,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 109
+    },
+    "Luther Norse": {
+      "id": "67"
+    },
+    "Lycoming Warriors": {
+      "id": "2354"
+    },
+    "MANITOBA Manitoba": {
+      "id": "2770"
+    },
+    "MIT Engineers": {
+      "id": "109"
+    },
+    "Macalester Scots": {
+      "id": "2359"
+    },
+    "Madonna University Madonna": {
+      "id": "126146"
+    },
+    "Maine Black Bears": {
+      "id": "311",
+      "ppgFor": 24.167,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Maine Maritime Mariners": {
+      "id": "274"
+    },
+    "Manchester Spartans": {
+      "id": "2362"
+    },
+    "Mansfield University Mountaineers": {
+      "id": "2365"
+    },
+    "Marian College Marian": {
+      "id": "2366"
+    },
+    "Marietta Pioneers": {
+      "id": "317"
+    },
+    "Marist Red Foxes": {
+      "id": "2368",
+      "ppgFor": 22.833,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Mars Hill Lions": {
+      "id": "2369"
+    },
+    "Marshall Thundering Herd": {
+      "id": "276",
+      "ppgFor": 30.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80.769,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 6
+    },
+    "Martin Luther Knights": {
+      "id": "446"
+    },
+    "Mary Hardin-Baylor Crusaders": {
+      "id": "2371"
+    },
+    "Maryland Terrapins": {
+      "id": "120",
+      "ppgFor": 23.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 87.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -36
+    },
+    "Maryville College (TN) Scots": {
+      "id": "2373"
+    },
+    "Mass Maritime Buccaneers": {
+      "id": "110"
+    },
+    "Massachusetts Minutemen": {
+      "id": "113",
+      "ppgFor": 11.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 62.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -330
+    },
+    "Mayville State Comets": {
+      "id": "561"
+    },
+    "McDaniel College Green Terror": {
+      "id": "2700"
+    },
+    "McKendree Bearcats": {
+      "id": "2816"
+    },
+    "McMurry War Hawks": {
+      "id": "241"
+    },
+    "McNeese Cowboys": {
+      "id": "2377",
+      "ppgFor": 24.833,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Memphis Tigers": {
+      "id": "235",
+      "ppgFor": 34.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 78.947,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 145
+    },
+    "Mercer Bears": {
+      "id": "2382",
+      "ppgFor": 36.167,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Merchant Marine Academy Mariners": {
+      "id": "2383"
+    },
+    "Mercyhurst Lakers": {
+      "id": "2385",
+      "ppgFor": 18.417,
+      "pace": null,
+      "fieldGoalPct": 85.714,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Merrimack Warriors": {
+      "id": "2771",
+      "ppgFor": 20.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Methodist Monarchs": {
+      "id": "291"
+    },
+    "Miami (OH) RedHawks": {
+      "id": "193",
+      "ppgFor": 25.231,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 86.364,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 40
+    },
+    "Miami Hurricanes": {
+      "id": "2390",
+      "ppgFor": 34.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 88.235,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 243
+    },
+    "Michigan State Spartans": {
+      "id": "127",
+      "ppgFor": 24.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 70.588,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -64
+    },
+    "Michigan Tech Huskies": {
+      "id": "2392"
+    },
+    "Michigan Wolverines": {
+      "id": "130",
+      "ppgFor": 27.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 68.182,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 107
+    },
+    "Middle Tennessee Blue Raiders": {
+      "id": "2393",
+      "ppgFor": 22.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 78.571,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -102
+    },
+    "Middlebury Panthers": {
+      "id": "2394"
+    },
+    "Midland Lutheran College Midland Lutheran": {
+      "id": "565"
+    },
+    "Midwestern State Mustangs": {
+      "id": "2395"
+    },
+    "Miles College Golden Bears": {
+      "id": "2396"
+    },
+    "Millersville Marauders": {
+      "id": "210"
+    },
+    "Millikin Big Blue": {
+      "id": "74"
+    },
+    "Millsaps Majors": {
+      "id": "2398"
+    },
+    "Minnesota Golden Gophers": {
+      "id": "135",
+      "ppgFor": 23.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 66.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -2
+    },
+    "Minnesota Morris Cougars": {
+      "id": "2399"
+    },
+    "Misericordia Cougars": {
+      "id": "2969"
+    },
+    "Mississippi State Bulldogs": {
+      "id": "344",
+      "ppgFor": 30.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 81.25,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 16
+    },
+    "Mississippi Valley State Delta Devils": {
+      "id": "2400",
+      "ppgFor": 18.5,
+      "pace": null,
+      "fieldGoalPct": 93.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Missouri S&T Miners": {
+      "id": "2402"
+    },
+    "Missouri Southern State Lions": {
+      "id": "2403"
+    },
+    "Missouri State Bears": {
+      "id": "2623",
+      "ppgFor": 25.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 63.636,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -35
+    },
+    "Missouri Tigers": {
+      "id": "142",
+      "ppgFor": 32.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 153
+    },
+    "Missouri Western Griffons": {
+      "id": "137"
+    },
+    "Monmouth (IL) Fighting Scots": {
+      "id": "2919"
+    },
+    "Monmouth Hawks": {
+      "id": "2405",
+      "ppgFor": 40,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Montana Grizzlies": {
+      "id": "149",
+      "ppgFor": 41.385,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Montana State Bobcats": {
+      "id": "147",
+      "ppgFor": 36.846,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Montana-Western Bulldogs": {
+      "id": "2701"
+    },
+    "Montclair State Red Hawks": {
+      "id": "2818"
+    },
+    "Monterrey Tech Borregos": {
+      "id": "3100"
+    },
+    "Moravian Greyhounds": {
+      "id": "323"
+    },
+    "Morehead State Eagles": {
+      "id": "2413",
+      "ppgFor": 21.167,
+      "pace": null,
+      "fieldGoalPct": 90.909,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Morehouse College Maroon Tigers": {
+      "id": "60"
+    },
+    "Morgan State Bears": {
+      "id": "2415",
+      "ppgFor": 22.333,
+      "pace": null,
+      "fieldGoalPct": 85.714,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Morningside College Chiefs": {
+      "id": "2416"
+    },
+    "Mount St. Joseph Lions": {
+      "id": "2419"
+    },
+    "Muhlenberg Mules": {
+      "id": "2422"
+    },
+    "Murray State Racers": {
+      "id": "93",
+      "ppgFor": 19,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Muskingum University Fighting Muskies": {
+      "id": "332"
+    },
+    "NC State Wolfpack": {
+      "id": "152",
+      "ppgFor": 30.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 62.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 16
+    },
+    "NEWBERG Bruins": {
+      "id": "415"
+    },
+    "Navy Midshipmen": {
+      "id": "2426",
+      "ppgFor": 32.455,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 90,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 61
+    },
+    "Nebraska Cornhuskers": {
+      "id": "158",
+      "ppgFor": 29.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 84.211,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 75
+    },
+    "Nebraska Wesleyan Prairie Wolves": {
+      "id": "6845"
+    },
+    "Nebraska-Kearney Lopers": {
+      "id": "2438"
+    },
+    "Nelson University Lions": {
+      "id": "2904"
+    },
+    "Nevada Wolf Pack": {
+      "id": "2440",
+      "ppgFor": 17.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -119
+    },
+    "New Hampshire Wildcats": {
+      "id": "160",
+      "ppgFor": 24.846,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "New Haven Chargers": {
+      "id": "2441",
+      "ppgFor": 30.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "New Mexico Highlands Cowboys": {
+      "id": "2424"
+    },
+    "New Mexico Lobos": {
+      "id": "167",
+      "ppgFor": 27.917,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 93.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 65
+    },
+    "New Mexico State Aggies": {
+      "id": "166",
+      "ppgFor": 21.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -72
+    },
+    "Newberry Wolves": {
+      "id": "2444"
+    },
+    "Nicholls Colonels": {
+      "id": "2447",
+      "ppgFor": 18.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Nichols College Bison": {
+      "id": "2884"
+    },
+    "Norfolk State Spartans": {
+      "id": "2450",
+      "ppgFor": 20.75,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "North Alabama Lions": {
+      "id": "2453",
+      "ppgFor": 25.083,
+      "pace": null,
+      "fieldGoalPct": 66.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "North American University Stallions": {
+      "id": "123086"
+    },
+    "North Carolina A&T Aggies": {
+      "id": "2448",
+      "ppgFor": 20.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "North Carolina Central Eagles": {
+      "id": "2428",
+      "ppgFor": 33.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "North Carolina Tar Heels": {
+      "id": "153",
+      "ppgFor": 19.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 82.609,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -63
+    },
+    "North Carolina Wesleyan Battling Bishops": {
+      "id": "286"
+    },
+    "North Central College Cardinals": {
+      "id": "3071"
+    },
+    "North Dakota Fighting Hawks": {
+      "id": "155",
+      "ppgFor": 32.786,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "North Dakota State Bison": {
+      "id": "2449",
+      "ppgFor": 40.769,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "North Greenville Crusaders": {
+      "id": "2822"
+    },
+    "North Park Vikings": {
+      "id": "75"
+    },
+    "North Texas Mean Green": {
+      "id": "249",
+      "ppgFor": 44.769,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 92.308,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 258
+    },
+    "Northeastern State RiverHawks": {
+      "id": "196"
+    },
+    "Northern Arizona Lumberjacks": {
+      "id": "2464",
+      "ppgFor": 31.833,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Northern Colorado Bears": {
+      "id": "2458",
+      "ppgFor": 20.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Northern Illinois Huskies": {
+      "id": "2459",
+      "ppgFor": 17.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 78.571,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -87
+    },
+    "Northern Iowa Panthers": {
+      "id": "2460",
+      "ppgFor": 17.083,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Northern Michigan Wildcats": {
+      "id": "128"
+    },
+    "Northwest Missouri St Bearcats": {
+      "id": "138"
+    },
+    "Northwestern (MN) Eagles": {
+      "id": "583"
+    },
+    "Northwestern Oklahoma State Rangers": {
+      "id": "2823"
+    },
+    "Northwestern State Demons": {
+      "id": "2466",
+      "ppgFor": 10.5,
+      "pace": null,
+      "fieldGoalPct": 62.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Northwestern Wildcats": {
+      "id": "77",
+      "ppgFor": 22.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 91.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 19
+    },
+    "Northwood (MI) Timberwolves": {
+      "id": "2886"
+    },
+    "Norwich Cadets": {
+      "id": "2467"
+    },
+    "Notre Dame Fighting Irish": {
+      "id": "87",
+      "ppgFor": 42,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 55.556,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 293
+    },
+    "Oberlin Yeomen": {
+      "id": "391"
+    },
+    "Ohio Bobcats": {
+      "id": "195",
+      "ppgFor": 28.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 54.545,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 69
+    },
+    "Ohio Northern Polar Bears": {
+      "id": "427"
+    },
+    "Ohio State Buckeyes": {
+      "id": "194",
+      "ppgFor": 34.923,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 84.211,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 348
+    },
+    "Ohio State Newark Titans": {
+      "id": "3161"
+    },
+    "Ohio Wesleyan Battling Bishops": {
+      "id": "2980"
+    },
+    "Oklahoma Baptist Bison": {
+      "id": "319"
+    },
+    "Oklahoma Panhandle St Ok Panhandle St": {
+      "id": "2824"
+    },
+    "Oklahoma Sooners": {
+      "id": "201",
+      "ppgFor": 26.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 92,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 150
+    },
+    "Oklahoma State Cowboys": {
+      "id": "197",
+      "ppgFor": 14.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -230
+    },
+    "Old Dominion Monarchs": {
+      "id": "295",
+      "ppgFor": 32.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 60.87,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 161
+    },
+    "Ole Miss Rebels": {
+      "id": "145",
+      "ppgFor": 37.25,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 88,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 206
+    },
+    "Olivet Comets": {
+      "id": "354"
+    },
+    "Oregon Ducks": {
+      "id": "2483",
+      "ppgFor": 38.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 78.947,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 280
+    },
+    "Oregon State Beavers": {
+      "id": "204",
+      "ppgFor": 18.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 42.857,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -135
+    },
+    "Otterbein Cardinals": {
+      "id": "359"
+    },
+    "Ouachita Baptist Tigers": {
+      "id": "2888"
+    },
+    "Pace Setters": {
+      "id": "2487"
+    },
+    "Pacific (OR) Boxers": {
+      "id": "205"
+    },
+    "Pacific Lutheran Lutes": {
+      "id": "2486"
+    },
+    "Penn State Nittany Lions": {
+      "id": "213",
+      "ppgFor": 31.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 93.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 124
+    },
+    "Pennsylvania Quakers": {
+      "id": "219",
+      "ppgFor": 27.1,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Pensacola Argonauts": {
+      "id": "110242"
+    },
+    "Phoenix Firestorm": {
+      "id": "108358"
+    },
+    "Pikeville Bears": {
+      "id": "95"
+    },
+    "Pittsburg St Gorillas": {
+      "id": "90"
+    },
+    "Pittsburgh Panthers": {
+      "id": "221",
+      "ppgFor": 35.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 122
+    },
+    "Plymouth State Panthers": {
+      "id": "2972"
+    },
+    "Point University Skyhawks": {
+      "id": "3179"
+    },
+    "Pomona Pitzer Sagehens": {
+      "id": "2923"
+    },
+    "Portland State Vikings": {
+      "id": "2502",
+      "ppgFor": 16.167,
+      "pace": null,
+      "fieldGoalPct": 82.353,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Post University Eagles": {
+      "id": "126086"
+    },
+    "Prairie View A&M Panthers": {
+      "id": "2504",
+      "ppgFor": 32,
+      "pace": null,
+      "fieldGoalPct": 73.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Presbyterian Blue Hose": {
+      "id": "2506",
+      "ppgFor": 38.75,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Princeton Tigers": {
+      "id": "163",
+      "ppgFor": 20.6,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Puget Sound Loggers": {
+      "id": "2508"
+    },
+    "Purdue Boilermakers": {
+      "id": "2509",
+      "ppgFor": 18.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 88.235,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -157
+    },
+    "Quincy Hawks": {
+      "id": "2825"
+    },
+    "Randolph-Macon Yellow Jackets": {
+      "id": "2516"
+    },
+    "Reading Golden Wolves": {
+      "id": "111674"
+    },
+    "Redlands Bulldogs": {
+      "id": "29"
+    },
+    "Reinhardt University Eagles": {
+      "id": "2890"
+    },
+    "Rensselaer Engineers": {
+      "id": "2528"
+    },
+    "Rhode Island Rams": {
+      "id": "227",
+      "ppgFor": 31.286,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Rhodes College Lynx": {
+      "id": "2519"
+    },
+    "Rice Owls": {
+      "id": "242",
+      "ppgFor": 19.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.923,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -149
+    },
+    "Richmond Spiders": {
+      "id": "257",
+      "ppgFor": 21.917,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Ripon Red Hawks": {
+      "id": "2891"
+    },
+    "Robert Morris Colonials": {
+      "id": "2523",
+      "ppgFor": 15.167,
+      "pace": null,
+      "fieldGoalPct": 83.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Robert Morris University-Illinois Lakers": {
+      "id": "599"
+    },
+    "Rockford Regents": {
+      "id": "2524"
+    },
+    "Roosevelt Lakers": {
+      "id": "127991"
+    },
+    "Rose-Hulman Fightin' Engineers": {
+      "id": "86"
+    },
+    "Rowan Profs": {
+      "id": "2827"
+    },
+    "Rutgers Scarlet Knights": {
+      "id": "164",
+      "ppgFor": 28.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 68.421,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -38
+    },
+    "SE Louisiana Lions": {
+      "id": "2545",
+      "ppgFor": 31,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "SMU Mustangs": {
+      "id": "2567",
+      "ppgFor": 32.917,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 63.636,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 147
+    },
+    "SUNY Maritime Privateers": {
+      "id": "2951"
+    },
+    "SUNY Morrisville Mustangs": {
+      "id": "3110"
+    },
+    "Sacramento State Hornets": {
+      "id": "16",
+      "ppgFor": 33.75,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Sacred Heart Pioneers": {
+      "id": "2529",
+      "ppgFor": 28.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Saginaw Valley State Cardinals": {
+      "id": "129"
+    },
+    "Saint Francis Red Flash": {
+      "id": "2598",
+      "ppgFor": 10.455,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Saint John's (MN) Johnnies": {
+      "id": "2600"
+    },
+    "Saint Vincent Bearcats": {
+      "id": "2614"
+    },
+    "Salisbury Sea Gulls": {
+      "id": "2532"
+    },
+    "Salve Regina Seahawks": {
+      "id": "2776"
+    },
+    "Sam Houston Bearkats": {
+      "id": "2534",
+      "ppgFor": 17.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 61.111,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -241
+    },
+    "Samford Bulldogs": {
+      "id": "2535",
+      "ppgFor": 14.583,
+      "pace": null,
+      "fieldGoalPct": 84.615,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "San Diego State Aztecs": {
+      "id": "21",
+      "ppgFor": 24.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 86.364,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 145
+    },
+    "San Diego Toreros": {
+      "id": "301",
+      "ppgFor": 28.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "San José State Spartans": {
+      "id": "23",
+      "ppgFor": 21.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 52.174,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -133
+    },
+    "Savannah State Tigers": {
+      "id": "2542"
+    },
+    "Seton Hill Griffins": {
+      "id": "611"
+    },
+    "Sewanee Tigers": {
+      "id": "2553"
+    },
+    "Shaw Bears": {
+      "id": "2551"
+    },
+    "Shenandoah Hornets": {
+      "id": "2828"
+    },
+    "Shepherd Rams": {
+      "id": "2974"
+    },
+    "Shippensburg Raiders": {
+      "id": "2559"
+    },
+    "Shorter Hawks": {
+      "id": "2560"
+    },
+    "Simpson College (IA) Storm": {
+      "id": "2564"
+    },
+    "Simpson University (Ca) Simpuca": {
+      "id": "129758"
+    },
+    "Slippery Rock The Rock": {
+      "id": "215"
+    },
+    "South Alabama Jaguars": {
+      "id": "6",
+      "ppgFor": 26.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 70,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -47
+    },
+    "South Carolina Gamecocks": {
+      "id": "2579",
+      "ppgFor": 22.667,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 7
+    },
+    "South Carolina State Bulldogs": {
+      "id": "2569",
+      "ppgFor": 31.25,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "South Dakota Coyotes": {
+      "id": "233",
+      "ppgFor": 27.214,
+      "pace": null,
+      "fieldGoalPct": 90,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "South Dakota Mines Hardrockers": {
+      "id": "613"
+    },
+    "South Dakota State Jackrabbits": {
+      "id": "2571",
+      "ppgFor": 29.143,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "South Florida Bulls": {
+      "id": "58",
+      "ppgFor": 43,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80.952,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 236
+    },
+    "Southeast Missouri State Redhawks": {
+      "id": "2546",
+      "ppgFor": 23.167,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Southeastern Oklahoma State Savage Storm": {
+      "id": "199"
+    },
+    "Southern Arkansas Muleriders": {
+      "id": "2568"
+    },
+    "Southern Connecticut State Owls": {
+      "id": "2583"
+    },
+    "Southern Illinois Salukis": {
+      "id": "79",
+      "ppgFor": 36.417,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Southern Jaguars": {
+      "id": "2582",
+      "ppgFor": 18.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Southern Miss Golden Eagles": {
+      "id": "2572",
+      "ppgFor": 29.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 61.111,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 29
+    },
+    "Southern Nazarene Crimson Storm": {
+      "id": "200"
+    },
+    "Southern Oregon Raiders": {
+      "id": "2584"
+    },
+    "Southern Utah Thunderbirds": {
+      "id": "253",
+      "ppgFor": 33.417,
+      "pace": null,
+      "fieldGoalPct": 92.857,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Southern Virginia Knights": {
+      "id": "2896"
+    },
+    "Southwest Baptist Bearcats": {
+      "id": "2586"
+    },
+    "Southwestern College Moundbuilders": {
+      "id": "616"
+    },
+    "Southwestern Oklahoma State Bulldogs": {
+      "id": "2927"
+    },
+    "Southwestern University Pirates": {
+      "id": "2588"
+    },
+    "Springfield Pride": {
+      "id": "81"
+    },
+    "St Ambrose University  Iowa Fighting Bees": {
+      "id": "2591"
+    },
+    "St Francis Illinois Fighting Saints": {
+      "id": "2595"
+    },
+    "St John Fisher University Cardinals": {
+      "id": "374"
+    },
+    "St. Anselm Hawks": {
+      "id": "2830"
+    },
+    "St. Lawrence Saints": {
+      "id": "2779"
+    },
+    "St. Louis Spartans": {
+      "id": "2880"
+    },
+    "St. Norbert Green Knights": {
+      "id": "2832"
+    },
+    "St. Olaf Oles": {
+      "id": "133"
+    },
+    "St. Petersburg Glory Eagles": {
+      "id": "3254"
+    },
+    "St. Scholastica Saints": {
+      "id": "375"
+    },
+    "St. Thomas-Minnesota Tommies": {
+      "id": "2900",
+      "ppgFor": 30.917,
+      "pace": null,
+      "fieldGoalPct": 90.909,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "St. Xavier IL Cougars": {
+      "id": "2615"
+    },
+    "Stanford Cardinal": {
+      "id": "24",
+      "ppgFor": 19,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.19,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -124
+    },
+    "Stephen F. Austin Lumberjacks": {
+      "id": "2617",
+      "ppgFor": 36,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Sterling College Sterling Ks": {
+      "id": "618"
+    },
+    "Stetson Hatters": {
+      "id": "56",
+      "ppgFor": 18.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Stevenson Mustangs": {
+      "id": "471"
+    },
+    "Stonehill Skyhawks": {
+      "id": "284",
+      "ppgFor": 15.083,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Stony Brook Seawolves": {
+      "id": "2619",
+      "ppgFor": 28,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Sul Ross State Lobos": {
+      "id": "2834"
+    },
+    "Susquehanna River Hawks": {
+      "id": "216"
+    },
+    "Syracuse Orange": {
+      "id": "183",
+      "ppgFor": 20.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 85.714,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -177
+    },
+    "TCU Horned Frogs": {
+      "id": "2628",
+      "ppgFor": 30.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 78.571,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 67
+    },
+    "Tarleton State Texans": {
+      "id": "2627",
+      "ppgFor": 43.923,
+      "pace": null,
+      "fieldGoalPct": 89.474,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Taylor Trojans": {
+      "id": "620"
+    },
+    "Temple Owls": {
+      "id": "218",
+      "ppgFor": 27.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 78.571,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -22
+    },
+    "Tennessee State Tigers": {
+      "id": "2634",
+      "ppgFor": 12.917,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Tennessee Tech Golden Eagles": {
+      "id": "2635",
+      "ppgFor": 37.538,
+      "pace": null,
+      "fieldGoalPct": 90.909,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Tennessee Volunteers": {
+      "id": "2633",
+      "ppgFor": 40.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 77.778,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 144
+    },
+    "Texas A&M Aggies": {
+      "id": "245",
+      "ppgFor": 36.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 62.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 173
+    },
+    "Texas A&M-Kingsville Javelinas": {
+      "id": "2658"
+    },
+    "Texas College Steers": {
+      "id": "2637"
+    },
+    "Texas Longhorns": {
+      "id": "251",
+      "ppgFor": 29.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 81.818,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 118
+    },
+    "Texas Lutheran Bulldogs": {
+      "id": "2639"
+    },
+    "Texas Southern Tigers": {
+      "id": "2640",
+      "ppgFor": 25.818,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Texas State Bobcats": {
+      "id": "326",
+      "ppgFor": 36.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 90.476,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 66
+    },
+    "Texas Tech Red Raiders": {
+      "id": "2641",
+      "ppgFor": 42.462,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 84.848,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 410
+    },
+    "The Citadel Bulldogs": {
+      "id": "2643",
+      "ppgFor": 20.5,
+      "pace": null,
+      "fieldGoalPct": 66.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Thiel Tomcats": {
+      "id": "2644"
+    },
+    "Thomas More College Saints": {
+      "id": "2646"
+    },
+    "Tiffin Dragons": {
+      "id": "2838"
+    },
+    "Toledo Rockets": {
+      "id": "2649",
+      "ppgFor": 31.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 72.727,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 233
+    },
+    "Towson Tigers": {
+      "id": "119",
+      "ppgFor": 26.75,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Trine University Thunder": {
+      "id": "2651"
+    },
+    "Trinity (CT) Bantams": {
+      "id": "2977"
+    },
+    "Trinity Bible College Lions": {
+      "id": "3214"
+    },
+    "Trinity University TX Tigers": {
+      "id": "386"
+    },
+    "Troy Trojans": {
+      "id": "2653",
+      "ppgFor": 24.308,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 66.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -2
+    },
+    "Troy Vikings": {
+      "id": "3237"
+    },
+    "Truman State Bulldogs": {
+      "id": "2654"
+    },
+    "Tufts Jumbos": {
+      "id": "112"
+    },
+    "Tulane Green Wave": {
+      "id": "2655",
+      "ppgFor": 29.077,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 88.889,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 84
+    },
+    "Tulsa Golden Hurricane": {
+      "id": "202",
+      "ppgFor": 23.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80.952,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -69
+    },
+    "Tuskegee Golden Tigers": {
+      "id": "2657"
+    },
+    "UAB Blazers": {
+      "id": "5",
+      "ppgFor": 26.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 71.429,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -142
+    },
+    "UAlbany Great Danes": {
+      "id": "399",
+      "ppgFor": 16.25,
+      "pace": null,
+      "fieldGoalPct": 90,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "UC Davis Aggies": {
+      "id": "302",
+      "ppgFor": 32.167,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "UCF Knights": {
+      "id": "2116",
+      "ppgFor": 24.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 88.235,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 9
+    },
+    "UCLA Bruins": {
+      "id": "26",
+      "ppgFor": 18.167,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -183
+    },
+    "UConn Huskies": {
+      "id": "41",
+      "ppgFor": 36.917,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 88,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 133
+    },
+    "UL Monroe Warhawks": {
+      "id": "2433",
+      "ppgFor": 16.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 28.571,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -184
+    },
+    "UMass Dartmouth Corsairs": {
+      "id": "379"
+    },
+    "UNC Pembroke Braves": {
+      "id": "2882"
+    },
+    "UNLV Rebels": {
+      "id": "2439",
+      "ppgFor": 35.923,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 73.684,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 92
+    },
+    "USC Trojans": {
+      "id": "30",
+      "ppgFor": 36.5,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80.952,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 169
+    },
+    "UT Martin Skyhawks": {
+      "id": "2630",
+      "ppgFor": 20.667,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "UT Permian Basin Falcons": {
+      "id": "110243"
+    },
+    "UTEP Miners": {
+      "id": "2638",
+      "ppgFor": 23.333,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 64.286,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -85
+    },
+    "UTSA Roadrunners": {
+      "id": "2636",
+      "ppgFor": 33.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 83.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 50
+    },
+    "UVA Wise Cavaliers": {
+      "id": "2842"
+    },
+    "Union Garnet Chargers": {
+      "id": "237"
+    },
+    "University Of Charleston (WV) Golden Eagles": {
+      "id": "2128"
+    },
+    "University Of Mexico Mexico U": {
+      "id": "3212"
+    },
+    "University Of St Francis IN Cougars": {
+      "id": "2831"
+    },
+    "University of Mount Union Raiders": {
+      "id": "426"
+    },
+    "University of Rochester (NY) Yellow Jackets": {
+      "id": "184"
+    },
+    "Upper Iowa University Peacocks": {
+      "id": "389"
+    },
+    "Ursinus Bears": {
+      "id": "2667"
+    },
+    "Utah State Aggies": {
+      "id": "328",
+      "ppgFor": 31.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 76.471,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 42
+    },
+    "Utah Tech Trailblazers": {
+      "id": "3101",
+      "ppgFor": 16,
+      "pace": null,
+      "fieldGoalPct": 93.75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Utah Utes": {
+      "id": "254",
+      "ppgFor": 41.083,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 71.429,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 269
+    },
+    "Utica Pioneers": {
+      "id": "390"
+    },
+    "VMI Keydets": {
+      "id": "2678",
+      "ppgFor": 17.417,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Valdosta State Blazers": {
+      "id": "2673"
+    },
+    "Valley City State Valley City St": {
+      "id": "628"
+    },
+    "Valparaiso Beacons": {
+      "id": "2674",
+      "ppgFor": 20.333,
+      "pace": null,
+      "fieldGoalPct": 83.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Vanderbilt Commodores": {
+      "id": "238",
+      "ppgFor": 39.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 91.667,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 210
+    },
+    "Villanova Wildcats": {
+      "id": "222",
+      "ppgFor": 31,
+      "pace": null,
+      "fieldGoalPct": 92.857,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Virginia Cavaliers": {
+      "id": "258",
+      "ppgFor": 32.154,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 81.481,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 151
+    },
+    "Virginia St Trojans": {
+      "id": "330"
+    },
+    "Virginia Tech Hokies": {
+      "id": "259",
+      "ppgFor": 21.417,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -105
+    },
+    "Virginia Union Panthers": {
+      "id": "2676"
+    },
+    "Virginia University Of Lynchburg Dragons": {
+      "id": "2355"
+    },
+    "Wabash College Little Giants": {
+      "id": "89"
+    },
+    "Wagner Seahawks": {
+      "id": "2681",
+      "ppgFor": 16.417,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Wake Forest Demon Deacons": {
+      "id": "154",
+      "ppgFor": 26.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 81.818,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 64
+    },
+    "Waldorf College Warriors": {
+      "id": "3080"
+    },
+    "Walsh Cavaliers": {
+      "id": "2682"
+    },
+    "Warner University Royals": {
+      "id": "2683"
+    },
+    "Wartburg Knights": {
+      "id": "2685"
+    },
+    "Washburn Ichabods": {
+      "id": "2687"
+    },
+    "Washington & Jefferson Presidents": {
+      "id": "2686"
+    },
+    "Washington Huskies": {
+      "id": "264",
+      "ppgFor": 33.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 75,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 172
+    },
+    "Washington State Cougars": {
+      "id": "265",
+      "ppgFor": 21.583,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 87.5,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 17
+    },
+    "Washington University (St. Louis) Bears": {
+      "id": "143"
+    },
+    "Washington and Lee Generals": {
+      "id": "2688"
+    },
+    "Wayland Baptist Pioneers": {
+      "id": "630"
+    },
+    "Wayne State (MI) Warriors": {
+      "id": "131"
+    },
+    "Waynesburg Yellow Jackets": {
+      "id": "2845"
+    },
+    "Webber International Warriors": {
+      "id": "2691"
+    },
+    "Weber State Wildcats": {
+      "id": "2692",
+      "ppgFor": 23.083,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Wesleyan University (CT) Cardinals": {
+      "id": "336"
+    },
+    "West Alabama Tigers": {
+      "id": "2695"
+    },
+    "West Chester Golden Rams": {
+      "id": "223"
+    },
+    "West Georgia Wolves": {
+      "id": "2698",
+      "ppgFor": 25.545,
+      "pace": null,
+      "fieldGoalPct": 85,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "West Liberty Hilltoppers": {
+      "id": "2699"
+    },
+    "West Memphis Crusaders": {
+      "id": "3211"
+    },
+    "West Texas A&M Buffaloes": {
+      "id": "2704"
+    },
+    "West Virginia Institute Of Tech Golden Bears": {
+      "id": "2706"
+    },
+    "West Virginia Mountaineers": {
+      "id": "277",
+      "ppgFor": 21.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 83.333,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -109
+    },
+    "West Virginia State Yellow Jackets": {
+      "id": "2707"
+    },
+    "West Virginia Wesleyan Bobcats": {
+      "id": "455"
+    },
+    "Western Carolina Catamounts": {
+      "id": "2717",
+      "ppgFor": 38.583,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Western Colorado Mountaineers": {
+      "id": "2714"
+    },
+    "Western Connecticut St Wolves": {
+      "id": "2843"
+    },
+    "Western Illinois Leathernecks": {
+      "id": "2710",
+      "ppgFor": 22.917,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Western Kentucky Hilltoppers": {
+      "id": "98",
+      "ppgFor": 29.75,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 80,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 76
+    },
+    "Western Michigan Broncos": {
+      "id": "2711",
+      "ppgFor": 23.615,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 70,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": 70
+    },
+    "Western New England Golden Bears": {
+      "id": "2702"
+    },
+    "Western New Mexico Mustangs": {
+      "id": "2703"
+    },
+    "Western Oregon Wolves": {
+      "id": "2848"
+    },
+    "Westfield State Owls": {
+      "id": "2909"
+    },
+    "Westminster (PA) Titans": {
+      "id": "2849"
+    },
+    "Westminster College (MO) Blue Jays": {
+      "id": "433"
+    },
+    "Wheaton Thunder": {
+      "id": "396"
+    },
+    "Wheeling Cardinals": {
+      "id": "112335"
+    },
+    "Whitworth Pirates": {
+      "id": "2721"
+    },
+    "Widener Pride": {
+      "id": "2725"
+    },
+    "Wilkes Colonels": {
+      "id": "398"
+    },
+    "Willamette Bearcats": {
+      "id": "2930"
+    },
+    "William & Mary Tribe": {
+      "id": "2729",
+      "ppgFor": 29.5,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "William Jewell Cardinals": {
+      "id": "2911"
+    },
+    "William Paterson Pioneers": {
+      "id": "2970"
+    },
+    "William Penn Statesmen": {
+      "id": "2912"
+    },
+    "Williams Ephs": {
+      "id": "2731"
+    },
+    "Williamson Trade School Mechanics": {
+      "id": "3130"
+    },
+    "Wilmington (OH) Fightin' Quakers": {
+      "id": "2733"
+    },
+    "Wingate Bulldogs": {
+      "id": "351"
+    },
+    "Winston-Salem Rams": {
+      "id": "2736"
+    },
+    "Wisconsin Badgers": {
+      "id": "275",
+      "ppgFor": 12.833,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 63.636,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -105
+    },
+    "Wisconsin-Eau Claire Blugolds": {
+      "id": "2738"
+    },
+    "Wisconsin-La Crosse Eagles": {
+      "id": "2740"
+    },
+    "Wisconsin-Lutheran Warriors": {
+      "id": "2741"
+    },
+    "Wisconsin-Oshkosh Titans": {
+      "id": "271"
+    },
+    "Wisconsin-Platteville Pioneers": {
+      "id": "272"
+    },
+    "Wisconsin-River Falls Falcons": {
+      "id": "2723"
+    },
+    "Wisconsin-Stevens Pt Pointers": {
+      "id": "2743"
+    },
+    "Wisconsin-Stout Blue Devils": {
+      "id": "2744"
+    },
+    "Wisconsin-Whitewater Warhawks": {
+      "id": "2745"
+    },
+    "Wittenberg Tigers": {
+      "id": "2746"
+    },
+    "Wofford Terriers": {
+      "id": "2747",
+      "ppgFor": 23,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Wooster Fighting Scots": {
+      "id": "2748"
+    },
+    "Worcester Polytechnic Institute Engineers": {
+      "id": "2749"
+    },
+    "Worcester St Lancers": {
+      "id": "402"
+    },
+    "Wyoming Cowboys": {
+      "id": "2751",
+      "ppgFor": 16,
+      "ppgAgainst": null,
+      "pace": null,
+      "fieldGoalPct": 50,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null,
+      "avgDiff": -54
+    },
+    "Yale Bulldogs": {
+      "id": "43",
+      "ppgFor": 29.167,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    },
+    "Youngstown State Penguins": {
+      "id": "2754",
+      "ppgFor": 36.462,
+      "pace": null,
+      "fieldGoalPct": 100,
+      "threePointPct": null,
+      "freeThrowPct": null,
+      "avgRebounds": null,
+      "avgAssists": null,
+      "avgTurnovers": null,
+      "avgSteals": null,
+      "avgBlocks": null,
+      "avgDefRebounds": null
+    }
+  }
+}

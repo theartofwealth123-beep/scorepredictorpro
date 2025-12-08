@@ -3,9 +3,9 @@
 
 const fetch = require("node-fetch");
 
-const auth0Domain = process.env.AUTH0_DOMAIN;
+const auth0Domain = process.env.AUTH0_DOMAIN || "dev-3cwuyjrqj751y7nr.us.auth0.com";
 const managementToken = process.env.AUTH0_MANAGEMENT_TOKEN;
-const ADMIN_EMAIL = "theartofwealth123@gmail.com";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 exports.handler = async (event) => {
   const authHeader = event.headers.authorization || event.headers.Authorization;
