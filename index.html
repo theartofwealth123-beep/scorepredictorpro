@@ -309,32 +309,53 @@
 
   <script>
     // ===== TEAM LISTS =====
-    const TEAMS = {
-      NBA: ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers","Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","LA Clippers","Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks","Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs","Toronto Raptors","Utah Jazz","Washington Wizards"],
-      NFL: ["Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills","Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns","Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers","Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs","Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins","Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants","New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"],
-      NHL: ["Anaheim Ducks","Arizona Coyotes","Boston Bruins","Buffalo Sabres","Calgary Flames","Carolina Hurricanes","Chicago Blackhawks","Colorado Avalanche","Columbus Blue Jackets","Dallas Stars","Detroit Red Wings","Edmonton Oilers","Florida Panthers","Los Angeles Kings","Minnesota Wild","Montreal Canadiens","Nashville Predators","New Jersey Devils","New York Islanders","New York Rangers","Ottawa Senators","Philadelphia Flyers","Pittsburgh Penguins","San Jose Sharks","Seattle Kraken","St. Louis Blues","Tampa Bay Lightning","Toronto Maple Leafs","Vancouver Canucks","Vegas Golden Knights","Washington Capitals","Winnipeg Jets"],
-      MLB: ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles","Boston Red Sox","Chicago Cubs","Chicago White Sox","Cincinnati Reds","Cleveland Guardians","Colorado Rockies","Detroit Tigers","Houston Astros","Kansas City Royals","Los Angeles Angels","Los Angeles Dodgers","Miami Marlins","Milwaukee Brewers","Minnesota Twins","New York Mets","New York Yankees","Oakland Athletics","Philadelphia Phillies","Pittsburgh Pirates","San Diego Padres","San Francisco Giants","Seattle Mariners","St. Louis Cardinals","Tampa Bay Rays","Texas Rangers","Toronto Blue Jays","Washington Nationals"],
-      NCAAB: ["Abilene Christian","Air Force","Akron","Alabama","Alabama A&M","Alabama State","Alcorn State","American","App State","Arizona","Arizona State","Arkansas","Little Rock","Arkansas State","Army","Auburn","Austin Peay","Ball State","Baylor","Belmont","Bethune-Cookman","Binghamton","Boise State","Boston College","Boston U","Bowling Green","Bradley","Brown","Bryant","Bucknell","Butler","BYU","Cal","Cal Baptist","Cal Poly","Cal State Bakersfield","Cal State Fullerton","Cal State Northridge","Campbell","Canisius","Central Arkansas","Central Connecticut","Charleston","Charlotte","Chattanooga","Chicago State","Cincinnati","The Citadel","Clemson","Cleveland State","Coastal Carolina","Colgate","Colorado","Colorado State","Columbia","Coppin State","Cornell","Creighton","Dartmouth","Davidson","Dayton","Delaware","Delaware State","Denver","DePaul","Detroit Mercy","Drake","Drexel","Duke","Duquesne","East Carolina","Eastern Illinois","Eastern Kentucky","Eastern Michigan","Eastern Washington","Elon","Evansville","Fairfield","Fairleigh Dickinson","Florida","Florida A&M","Florida Atlantic","Florida Gulf Coast","Florida International","Florida State","Fordham","Fresno State","Furman","Gardner-Webb","George Mason","George Washington","Georgetown","Georgia","Georgia Southern","Georgia State","Georgia Tech","Gonzaga","Grambling","Grand Canyon","Green Bay","Hampton","Harvard","Hawaii","High Point","Hofstra","Holy Cross","Houston","Howard","Idaho","Idaho State","Illinois","Illinois State","Indiana","Indiana State","Iona","Iowa","Iowa State","IUPUI","Jackson State","Jacksonville","Jacksonville State","James Madison","Kansas","Kansas State","Kennesaw State","Kent State","Kentucky","La Salle","Lafayette","Lamar","Lehigh","Liberty","Lindenwood","Lipscomb","Long Beach State","Long Island","Longwood","Louisiana","Louisiana Tech","Louisville","Loyola Chicago","Loyola Marymount","Loyola Maryland","LSU","Maine","Manhattan","Marist","Marquette","Marshall","Maryland","UMass","McNeese","Memphis","Mercer","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Milwaukee","Minnesota","Mississippi State","Missouri","Missouri State","Monmouth","Montana","Montana State","Morehead State","Morgan State","Mount St. Mary's","Murray State","Navy","NC State","Nebraska","Nevada","New Hampshire","New Mexico","New Mexico State","Niagara","Nicholls","Norfolk State","North Alabama","North Carolina","NC A&T","NC Central","North Dakota","North Dakota State","North Florida","Northeastern","Northern Arizona","Northern Colorado","Northern Illinois","Northern Iowa","Northern Kentucky","North Texas","Northwestern","Northwestern State","Notre Dame","Oakland","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Omaha","Oral Roberts","Oregon","Oregon State","Pacific","Penn","Penn State","Pepperdine","Pittsburgh","Portland","Portland State","Prairie View","Presbyterian","Princeton","Providence","Purdue","Queens","Quinnipiac","Radford","Rhode Island","Rice","Richmond","Rider","Robert Morris","Rutgers","Sacramento State","Sacred Heart","Saint Joseph's","Saint Louis","Saint Mary's","Saint Peter's","Samford","Sam Houston","San Diego","San Diego State","San Francisco","San Jose State","Santa Clara","Seattle","Seton Hall","Siena","South Alabama","South Carolina","South Carolina State","South Dakota","South Dakota State","South Florida","Southeast Missouri","Southeastern Louisiana","Southern","Southern Illinois","Southern Miss","Southern Utah","St. Bonaventure","St. Francis (PA)","St. John's","Stanford","Stephen F. Austin","Stetson","Stonehill","Stony Brook","Syracuse","Tarleton","TCU","Temple","Tennessee","Tennessee State","Tennessee Tech","Texas","Texas A&M","Texas A&M-Commerce","Texas Southern","Texas State","Texas Tech","Toledo","Towson","Troy","Tulane","Tulsa","UAB","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","UCF","UCLA","UMass Lowell","UMBC","UNC Asheville","UNC Greensboro","UNC Wilmington","UNLV","USC","UT Arlington","UTEP","UT Martin","UT Rio Grande Valley","UTSA","Utah","Utah State","Utah Tech","Utah Valley","Valparaiso","Vanderbilt","VCU","Vermont","Villanova","Virginia","Virginia Tech","VMI","Wagner","Wake Forest","Washington","Washington State","Weber State","West Virginia","Western Carolina","Western Illinois","Western Kentucky","Western Michigan","Wichita State","William & Mary","Winthrop","Wisconsin","Wofford","Wright State","Wyoming","Xavier","Yale","Youngstown State"],
-      NCAAF: ["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","BYU","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","UConn","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawaii","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kent State","Kentucky","Kennesaw State","Liberty","Louisiana","Louisiana Tech","Louisville","LSU","Marshall","Maryland","Massachusetts","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","NC State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","Sam Houston","San Diego State","San Jose State","SMU","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"]
-    };
+    
+    const teamCache = {};
 
-    const POSITION_SETS = {
+    async function getTeamsForLeague(league) {
+      if (teamCache[league]) return teamCache[league];
+      
+      try {
+        const res = await fetch(`/data/${league.toLowerCase()}.json`);
+        if (!res.ok) throw new Error("Failed to load league data");
+        const data = await res.json();
+        if (data.teams) {
+          const teams = Object.keys(data.teams).sort();
+          teamCache[league] = teams;
+          return teams;
+        }
+      } catch (e) {
+        console.error("Error fetching teams for", league, e);
+      }
+      return []; 
+    }
+const POSITION_SETS = {
       NBA: ["PG", "SG", "SF", "PF", "C"],
       NFL: ["QB", "WR", "TE", "RB"]
     };
 
-    function populateTeams() {
+    
+    async function populateTeams() {
       const league = document.getElementById("league").value;
-      const teams = TEAMS[league] || [];
-      ["home-team", "away-team"].forEach(id => {
-        const select = document.getElementById(id);
-        select.innerHTML =
-          "<option>Select Team</option>" +
+      const selectHome = document.getElementById("home-team");
+      const selectAway = document.getElementById("away-team");
+      
+      // Show loading state if not cached
+      if (!teamCache[league]) {
+          const loading = "<option>Loading...</option>";
+          selectHome.innerHTML = loading;
+          selectAway.innerHTML = loading;
+      }
+      
+      const teams = await getTeamsForLeague(league);
+      
+      const options = "<option>Select Team</option>" +
           teams.map(t => `<option>${t}</option>`).join("");
-      });
+          
+      selectHome.innerHTML = options;
+      selectAway.innerHTML = options;
     }
-
-    function renderPositionInputs() {
+function renderPositionInputs() {
       const league = document.getElementById("league").value;
       const positions = POSITION_SETS[league];
       const posSection = document.getElementById("pos-injuries");
