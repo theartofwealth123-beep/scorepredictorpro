@@ -381,63 +381,8 @@ async function getMarketOddsFromAPI() {
 
 // ------------ ACCESS CONTROL (Auth0 + subscription) ------------
 async function authorizeRequest(headers = {}) {
-  // TEMPORARY BYPASS: Allow all requests
+  // TEMPORARY BYPASS: Allow all requests regardless of auth
   return { allowed: true, user: { sub: "bypassed" }, status: "admin" };
-
-  /*
-  if (!auth0Domain) {
-    return { allowed: false, code: 500, message: "Auth not configured" };
-  }
-  const authHeader = headers.authorization || headers.Authorization;
-  const token = authHeader?.split(" ")[1];
-
-  if (!token) {
-    return { allowed: false, code: 401, message: "Login required" };
-  }
-
-  try {
-    const uiRes = await fetch(`https://${auth0Domain}/userinfo`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    if (!uiRes.ok) {
-      return { allowed: false, code: 401, message: "Invalid session" };
-    }
-    const user = await uiRes.json();
-
-    if (ADMIN_EMAIL && user.email === ADMIN_EMAIL) {
-      return { allowed: true, user, status: "admin" };
-    }
-
-    if (!managementToken) {
-      return { allowed: false, code: 403, message: "Subscription required" };
-    }
-
-    const fullRes = await fetch(
-      `https://${auth0Domain}/api/v2/users/${encodeURIComponent(user.sub)}`,
-      {
-        headers: {
-          Authorization: `Bearer ${managementToken}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
-    if (!fullRes.ok) {
-      return { allowed: false, code: 403, message: "Subscription required" };
-    }
-
-    const fullUser = await fullRes.json();
-    const status = fullUser.app_metadata?.subStatus;
-    const allowed = status === "active" || status === "trialing";
-
-    return allowed
-      ? { allowed: true, user, status }
-      : { allowed: false, code: 403, message: "Subscription required" };
-  } catch (err) {
-    console.error("Auth check failed:", err.message);
-    return { allowed: false, code: 401, message: "Authentication failed" };
-  }
-  */
 }
 
 // ------------ MAIN HANDLER ------------

@@ -36,186 +36,34 @@
         Your Profile
       </h1>
       <p class="mt-2 text-sm text-slate-400 max-w-xl">
-        Manage your login, subscription, and billing for ScorePredictor Pro.
+        Authentication is temporarily disabled. You already have full access without logging in.
       </p>
     </section>
 
     <section class="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-5 md:p-6 shadow-xl">
-      <div id="not-logged" class="hidden text-sm text-slate-300">
-        You’re not logged in.
-        <button
-          class="underline underline-offset-2 ml-1"
-          onclick="window.location.href='/auth-callback.html'"
-        >
-          Log in / Start Trial
-        </button>
-      </div>
-
-      <div id="profile-info" class="hidden space-y-4">
-        <div class="flex flex-col gap-1 text-sm">
-          <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Email
-          </div>
-          <div id="prof-email" class="text-slate-100"></div>
-        </div>
-
-        <div class="flex flex-col gap-1 text-sm">
-          <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Subscription
-          </div>
-          <div id="prof-sub" class="text-slate-100"></div>
-          <div id="prof-sub-detail" class="text-xs text-slate-400"></div>
-        </div>
-
-        <div class="pt-2 border-t border-slate-800/80 mt-4 grid md:grid-cols-2 gap-4">
-          <div>
-            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 mb-2">
-              Security
-            </div>
-            <button
-              id="btn-reset"
-              class="w-full mb-2 inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-xs font-medium hover:bg-slate-800/80"
-            >
-              Change / Forgot Password
-            </button>
-            <button
-              id="btn-logout"
-              class="w-full inline-flex items-center justify-center rounded-xl border border-rose-600/60 bg-rose-600/10 px-3 py-2 text-xs font-medium text-rose-200 hover:bg-rose-600/20"
-            >
-              Logout
-            </button>
-          </div>
-
-          <div>
-            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 mb-2">
-              Billing
-            </div>
-            <button
-              id="btn-billing"
-              class="w-full inline-flex items-center justify-center rounded-xl border border-emerald-600/60 bg-emerald-600/10 px-3 py-2 text-xs font-medium text-emerald-200 hover:bg-emerald-600/20"
-            >
-              Manage Billing / Cancel Subscription
-            </button>
-            <p class="mt-2 text-[11px] text-slate-500">
-              Opens a secure Stripe portal where you can update payment details or cancel your subscription.
-            </p>
-          </div>
+      <div class="space-y-3 text-sm text-slate-200">
+        <p>
+          Login, trials, and subscription checks are paused. The simulator and picks load without any account step.
+        </p>
+        <p class="text-slate-400">
+          Any previous session cookies are cleared on this page so you always start fresh.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="/" class="inline-flex items-center justify-center rounded-xl bg-emerald-600 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-500 transition">
+            Go to Calculator
+          </a>
+          <a href="/freepicks.html" class="inline-flex items-center justify-center rounded-xl border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-100 hover:border-slate-500 transition">
+            See Free Picks
+          </a>
         </div>
       </div>
-
-      <div id="status-msg" class="mt-4 text-xs text-slate-500"></div>
     </section>
   </main>
 
   <script>
-    function getCookie(name) {
-      const parts = ("; " + document.cookie).split("; " + name + "=");
-      if (parts.length === 2) return parts.pop().split(";").shift();
-    }
-    function getToken() {
-      return getCookie("appSession") || getCookie("token") || null;
-    }
-
-    function updateNav() {
-      const t = getToken();
-      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
-      navLinks.forEach(l => {
-        if (!t) {
-          l.textContent = "Log In";
-          l.href = "/auth-callback.html";
-          l.classList.add("text-emerald-400");
-        }
-      });
-    }
-    updateNav();
-
-    const notLogged = document.getElementById("not-logged");
-    const profileInfo = document.getElementById("profile-info");
-    const emailEl = document.getElementById("prof-email");
-    const subEl = document.getElementById("prof-sub");
-    const subDetailEl = document.getElementById("prof-sub-detail");
-    const statusMsg = document.getElementById("status-msg");
-
-    const token = getToken();
-
-    async function loadProfile() {
-      if (!token) {
-        notLogged.classList.remove("hidden");
-        return;
-      }
-
-      try {
-        const res = await fetch("/.netlify/functions/get-sub-status", {
-          headers: { Authorization: "Bearer " + token }
-        });
-        if (!res.ok) throw new Error("Failed to load status");
-        const data = await res.json();
-
-        profileInfo.classList.remove("hidden");
-        emailEl.textContent = data.email || "(unknown)";
-
-        const status = data.status || "free";
-        if (status === "active") {
-          subEl.textContent = "Active subscription";
-          subDetailEl.textContent = "You have full access to the 5M-sim calculator and all features.";
-        } else if (status === "trialing") {
-          subEl.textContent = "Trial active";
-          subDetailEl.textContent = "You’re in a trial period — all features are unlocked.";
-        } else if (status === "past_due") {
-          subEl.textContent = "Payment issue (past due)";
-          subDetailEl.textContent = "Your payment method needs attention. Use Manage Billing to update it.";
-        } else if (status === "canceled") {
-          subEl.textContent = "Subscription canceled";
-          subDetailEl.textContent = "You still have access to free tools and scores. Restart anytime.";
-        } else {
-          subEl.textContent = "Free tier";
-          subDetailEl.textContent = "Free access to scores and content. Subscribe to unlock the calculator.";
-        }
-      } catch (err) {
-        // Treat any failure as an expired session so the user can re-auth quickly
-        document.cookie = "appSession=; Max-Age=0; path=/";
-        document.cookie = "token=; Max-Age=0; path=/";
-        notLogged.classList.remove("hidden");
-        profileInfo.classList.add("hidden");
-        updateNav();
-        statusMsg.textContent = "Session expired. Please log in again.";
-      }
-    }
-
-    document.getElementById("btn-reset").addEventListener("click", () => {
-      // Easiest reliable path: send them through Auth0 login where they can hit "Forgot password?"
-      window.location.href = "/auth-callback.html";
+    ["appSession", "token"].forEach(name => {
+      document.cookie = `${name}=; Max-Age=0; path=/`;
     });
-
-    document.getElementById("btn-logout").addEventListener("click", () => {
-      document.cookie = "appSession=; Max-Age=0; path=/";
-      document.cookie = "token=; Max-Age=0; path=/";
-      window.location.href = "/";
-    });
-
-    document.getElementById("btn-billing").addEventListener("click", async () => {
-      statusMsg.textContent = "Opening billing portal...";
-      try {
-        const res = await fetch("/.netlify/functions/create-portal", {
-          method: "POST",
-          headers: { Authorization: "Bearer " + (token || "") }
-        });
-        if (!res.ok) {
-          const txt = await res.text();
-          throw new Error(txt || "Failed to create portal");
-        }
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error("No URL returned");
-        }
-      } catch (err) {
-        statusMsg.textContent = "Billing portal error: " + err.message;
-      }
-    });
-
-    loadProfile();
   </script>
 </body>
 </html>

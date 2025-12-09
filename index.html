@@ -47,36 +47,6 @@
     </div>
   </header>
 
-  <!-- ACCESS GATE OVERLAY -->
-  <div
-    id="access-gate"
-    class="hidden fixed inset-0 z-[99] bg-black/80 backdrop-blur-sm flex items-center justify-center px-4"
-  >
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-lg w-full p-6 space-y-4 text-center">
-      <p id="gate-title" class="text-xl font-black text-white">Login required</p>
-      <p id="gate-message" class="text-sm text-slate-300">
-        Sign in with your admin account or an active subscription to unlock the simulator.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button
-          id="gate-login"
-          class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-500 transition"
-        >
-          Log In
-        </button>
-        <button
-          id="gate-subscribe"
-          class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-purple-400/60 text-purple-100 font-semibold hover:bg-purple-500/20 transition hidden"
-        >
-          Start Subscription
-        </button>
-      </div>
-      <p id="gate-footnote" class="text-[11px] text-slate-500">
-        Access is limited to admins or paid members.
-      </p>
-    </div>
-  </div>
-
   <div class="flex-grow flex items-center justify-center px-4 py-8">
     <div class="w-full max-w-5xl space-y-8">
       <!-- Header -->
@@ -417,20 +387,6 @@
     document.getElementById("league").addEventListener("change", onLeagueChange);
     onLeagueChange(); // initial load
 
-    function updateNav() {
-      const t = getToken();
-      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
-      navLinks.forEach(l => {
-        if (!t) {
-          l.textContent = "Log In";
-          l.href = "/auth-callback.html";
-          l.classList.add("text-emerald-400");
-        }
-      });
-    }
-    updateNav();
-    ensureAccess();
-
     function collectPositionInjuries(prefix, positions) {
       const pos = {};
       positions.forEach(p => {
@@ -448,146 +404,8 @@
       return { positions: pos, players };
     }
 
-    function getToken() {
-      const getCookie = (name) => {
-        const parts = ("; " + document.cookie).split("; " + name + "=");
-        if (parts.length === 2) return parts.pop().split(";").shift();
-      };
-      // Keep this consistent with whatever you had working before
-      return (
-        new URLSearchParams(location.search).get("token") ||
-        getCookie("appSession") ||
-        getCookie("token")
-      );
-    }
-
-    // ---------- ACCESS CONTROL ----------
-    let accessAllowed = false;
-    let cachedToken = null;
-
-    const gateEl = document.getElementById("access-gate");
-    const gateTitle = document.getElementById("gate-title");
-    const gateMessage = document.getElementById("gate-message");
-    const gateFootnote = document.getElementById("gate-footnote");
-    const gateLogin = document.getElementById("gate-login");
-    const gateSubscribe = document.getElementById("gate-subscribe");
-
-    function showGate({ title, message, showSubscribe = false, footnote = "" }) {
-      gateTitle.textContent = title;
-      gateMessage.textContent = message;
-      gateFootnote.textContent = footnote || "Access is limited to admins or paid members.";
-      gateSubscribe.classList.toggle("hidden", !showSubscribe);
-      gateEl.classList.remove("hidden");
-      const btn = document.getElementById("run-btn");
-      if (btn) btn.disabled = true;
-    }
-
-    function hideGate() {
-      gateEl.classList.add("hidden");
-    }
-
-    gateLogin.addEventListener("click", () => {
-      window.location.href = "/auth-callback.html";
-    });
-
-    gateSubscribe.addEventListener("click", async () => {
-      if (!cachedToken) {
-        showGate({
-          title: "Login required",
-          message: "Please log in before starting a subscription.",
-          showSubscribe: false
-        });
-        return;
-      }
-      gateSubscribe.disabled = true;
-      gateSubscribe.textContent = "Opening checkout...";
-      try {
-        const res = await fetch("/.netlify/functions/create-checkout", {
-          method: "POST",
-          headers: { Authorization: "Bearer " + cachedToken }
-        });
-        const data = await res.json();
-        if (data?.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error("No checkout URL");
-        }
-      } catch (err) {
-        gateSubscribe.textContent = "Start Subscription";
-        gateSubscribe.disabled = false;
-        gateFootnote.textContent = "Checkout failed. Please try again.";
-      }
-    });
-
-    async function ensureAccess() {
-      // TEMPORARY BYPASS: Force access allowed so user can run calculator
-      accessAllowed = true;
-      hideGate();
-      const btn = document.getElementById("run-btn");
-      if (btn) btn.disabled = false;
-      return; 
-
-      /*
-      const btn = document.getElementById("run-btn");
-      if (btn) btn.disabled = true;
-
-      const token = getToken();
-      cachedToken = token || null;
-
-      if (!token) {
-        accessAllowed = false;
-        showGate({
-          title: "Login required",
-          message: "Sign in to use the simulator.",
-          showSubscribe: false
-        });
-        return;
-      }
-
-      try {
-        const res = await fetch("/.netlify/functions/get-sub-status", {
-          headers: { Authorization: "Bearer " + token }
-        });
-        if (!res.ok) throw new Error("status");
-        const data = await res.json();
-        const allowed = data.admin || data.status === "active" || data.status === "trialing";
-
-        if (allowed) {
-          accessAllowed = true;
-          hideGate();
-          if (btn) btn.disabled = false;
-        } else {
-          accessAllowed = false;
-          showGate({
-            title: "Subscription required",
-            message: "An active subscription is needed to run simulations.",
-            showSubscribe: true,
-            footnote: data.status ? `Current status: ${data.status}` : ""
-          });
-        }
-      } catch (err) {
-        accessAllowed = false;
-        showGate({
-          title: "Session expired",
-          message: "Please log in again to continue.",
-          showSubscribe: false
-        });
-      }
-      */
-    }
-
     document.addEventListener("click", async e => {
       if (e.target.id !== "run-btn") return;
-
-      if (!accessAllowed) {
-        alert("Please log in with an active subscription or admin access to use the calculator.");
-        showGate({
-          title: "Subscription required",
-          message: "Log in as admin or start a subscription to run simulations.",
-          showSubscribe: true
-        });
-        return;
-      }
 
       const league = document.getElementById("league").value;
       const home = document.getElementById("home-team").value;
@@ -660,7 +478,6 @@
         const res = await fetch("/.netlify/functions/predict", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${getToken() || ""}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(payload)

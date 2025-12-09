@@ -504,28 +504,7 @@
     document.getElementById('tracker-modal').addEventListener('click', (e) => {
       if (e.target.id === 'tracker-modal') closeModal();
     });
-
-    function getToken() {
-      return (
-        new URLSearchParams(location.search).get("token") ||
-        document.cookie.split("; ").find(c => c.startsWith("token="))?.split("=")[1]
-      );
-    }
-
-    function updateNav() {
-      const t = getToken();
-      const navLinks = document.querySelectorAll('nav a[href="/profile.html"]');
-      navLinks.forEach(l => {
-        if (!t) {
-          l.textContent = "Log In";
-          l.href = "/auth-callback.html";
-          l.classList.add("text-emerald-400");
-        }
-      });
-    }
-
     loadGames();
-    updateNav();
   </script>
 </body>
 </html>

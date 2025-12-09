@@ -11,48 +11,15 @@
 </head>
 <body>
   <div class="text-center">
-    <h2 class="text-xl font-bold animate-pulse">Authenticating...</h2>
-    <p class="text-slate-400 text-sm mt-2">Please wait while we log you in.</p>
+    <h2 class="text-xl font-bold animate-pulse">Login disabled</h2>
+    <p class="text-slate-400 text-sm mt-2">Authentication is turned off. Redirecting you to the app.</p>
   </div>
 
   <script>
-    const hash = window.location.hash;
-    const params = new URLSearchParams(hash.replace(/^#/, ''));
-    const token = params.get('access_token');
-
-    if (token) {
-      // 1. Token found in URL hash (Callback from Auth0)
-      // Save to cookie (valid for 7 days)
-      const d = new Date();
-      d.setTime(d.getTime() + (7*24*60*60*1000));
-      const expires = "expires=" + d.toUTCString();
-      
-      document.cookie = `appSession=${token}; ${expires}; path=/`;
-      document.cookie = `token=${token}; ${expires}; path=/`; 
-      
-      // Redirect to the main app
-      window.location.replace("/");
-    } else {
-      // 2. No token found -> Initiate Login Flow
-      // (Even if cookie exists, we force a refresh/check if they landed here)
-      const auth0Domain = "dev-x9y8z7.us.auth0.com";
-      const clientId = "3k9JmPqR8sT2uV4wXyZ6aBcDeFgHiJkL";
-      
-      let redirectUri = window.location.origin + "/auth-callback.html";
-      if (window.location.hostname.includes("scorepredictor.pro")) {
-        redirectUri = "https://scorepredictor.pro/auth-callback.html";
-      }
-      
-      window.location.href = 
-        `https://${auth0Domain}/authorize?` +
-        new URLSearchParams({
-          client_id: clientId,
-          response_type: "token",
-          redirect_uri: redirectUri,
-          scope: "openid profile email",
-          state: "xyz"
-        });
-    }
+    ["appSession", "token"].forEach(name => {
+      document.cookie = `${name}=; Max-Age=0; path=/`;
+    });
+    window.location.replace("/");
   </script>
 </body>
 </html>
