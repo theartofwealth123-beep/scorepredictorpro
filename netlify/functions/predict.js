@@ -236,8 +236,12 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
       if (t.avgTurnovers) { sumTO += t.avgTurnovers; countTO++; }
     }
 
-    const leagueAvgOff = countOff ? sumOff / countOff : 110;
-    const leagueAvgDef = countDef ? sumDef / countDef : 110;
+    // If the data files don't have advanced ratings (common for NFL/NCAAF exports),
+    // fall back to the league's actual scoring baseline instead of the old 110
+    // basketball default. The previous fallback massively deflated football scores
+    // because ppgFor (~23–30) was being divided by 110.
+    const leagueAvgOff = countOff ? sumOff / countOff : basePpg;
+    const leagueAvgDef = countDef ? sumDef / countDef : basePpg;
     
     const leagueAvgFG = countFG ? sumFG / countFG : 45;
     const leagueAvg3P = count3P ? sum3P / count3P : 35;
