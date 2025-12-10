@@ -20,6 +20,17 @@ const FALLBACK_LEAGUE_STATS = {
   MLB:   { ppg: 4.58,  sd: 3.4,  homeAdv: 0.42 }
 };
 
+// League-specific modeling parameters so each sport keeps its own baseline logic
+const LEAGUE_MODEL_CONFIG = {
+  NBA:   { paceBaseline: 100, paceWeight: 0.60, homeBoost: 1.04, advType: "basketball", maxFactor: 2.4 },
+  NCAAB: { paceBaseline: 70,  paceWeight: 0.55, homeBoost: 1.04, advType: "basketball", maxFactor: 2.1 },
+  NFL:   { paceBaseline: 60,  paceWeight: 0.35, homeBoost: 1.03, advType: "football",    maxFactor: 2.2 },
+  NCAAF: { paceBaseline: 70,  paceWeight: 0.35, homeBoost: 1.03, advType: "football",    maxFactor: 2.4 },
+  MLB:   { paceBaseline: 9,   paceWeight: 0.00, homeBoost: 1.01, advType: "baseball",    maxFactor: 3.0 },
+  NHL:   { paceBaseline: 60,  paceWeight: 0.20, homeBoost: 1.02, advType: "hockey",      maxFactor: 3.0 },
+  DEFAULT: { paceBaseline: 100, paceWeight: 0.40, homeBoost: 1.03, advType: "generic", maxFactor: 2.2 }
+};
+
 // ------------ LOAD LEAGUE DATA (data/nba.json, data/nfl.json, etc.) ------------
 function loadLeagueData(leagueKey) {
   const filename = leagueKey.toLowerCase() + ".json";
@@ -190,6 +201,7 @@ function computeExpectedPointsPseudo(leagueKey, homeTeam, awayTeam, fallback, op
 // ------------ REAL EXPECTED POINTS (REAL STATS IF AVAILABLE) ------------
 function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, options = {}) {
   const fallback = FALLBACK_LEAGUE_STATS[leagueKey] || FALLBACK_LEAGUE_STATS.NBA;
+  const modelConfig = LEAGUE_MODEL_CONFIG[leagueKey] || LEAGUE_MODEL_CONFIG.DEFAULT;
 
   // league baselines
   let basePpg = leagueData?.avgPoints || fallback.ppg;
@@ -305,12 +317,16 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
     const homeDefFactor = leagueAvgDef / homeDef;
     const awayDefFactor = leagueAvgDef / awayDef;
 
-    const homePace = homeStats.pace || 100;
-    const awayPace = awayStats.pace || 100;
-    const paceFactor = (homePace + awayPace) / (2 * 100);
+    const paceBaseline = modelConfig.paceBaseline || 100;
+    const homePace = homeStats.pace || paceBaseline;
+    const awayPace = awayStats.pace || paceBaseline;
+    const paceFactor =
+      modelConfig.paceWeight > 0
+        ? (homePace + awayPace) / (2 * paceBaseline)
+        : 1; // baseball/hockey where pace not used
 
     const homeAdv = neutralSite ? 0 : baseHomeAdv;
-    const homeBoost = neutralSite ? 1.0 : 1.04;
+    const homeBoost = neutralSite ? 1.0 : modelConfig.homeBoost || 1.03;
 
     let rawHome = basePpg * homeOffFactor * awayDefFactor * paceFactor * homeBoost;
     let rawAway = basePpg * awayOffFactor * homeDefFactor * paceFactor;
@@ -342,7 +358,9 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
     const spreadGuess = Math.abs(expectedHome - expectedAway);
     const spreadRatio = spreadGuess / basePpg;
     sdAdjust = 0.85 + Math.min(spreadRatio * 0.7, 0.4);
-    sdAdjust *= paceFactor > 1 ? 1.1 : 0.95;
+    sdAdjust *= modelConfig.paceWeight > 0
+      ? (paceFactor > 1 ? 1.1 : 0.95)
+      : 1;
     sdAdjust *= 1 + (injuryHome.volatility + injuryAway.volatility) / 2;
   }
 
@@ -361,14 +379,7 @@ function computeExpectedPoints(leagueKey, homeTeam, awayTeam, leagueData, option
 
   const sd = baseSd * sdAdjust;
 
-  const maxFactor = {
-    NBA: 2.4,
-    NCAAB: 2.1,
-    NFL: 2.2,
-    NCAAF: 2.4,
-    NHL: 3.0,
-    MLB: 3.0
-  }[leagueKey] || 2.2;
+  const maxFactor = modelConfig.maxFactor || 2.2;
 
   const maxScore = basePpg * maxFactor;
   expectedHome = clamp(expectedHome, 0, maxScore);
